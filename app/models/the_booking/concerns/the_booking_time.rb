@@ -41,9 +41,9 @@ module TheBookingTime
       return start_at
     end
     if self.once?
-      self.start_at.to_s(:db)
+      self.start_at
     else
-      self.next_start_at.to_s(:db)
+      self.next_start_at
     end
   end
 
@@ -52,9 +52,9 @@ module TheBookingTime
       return finish_at
     end
     if self.once?
-      self.finish_at.to_s(:db)
+      self.finish_at
     else
-      self.next_finish_at.to_s(:db)
+      self.next_finish_at
     end
   end
 
