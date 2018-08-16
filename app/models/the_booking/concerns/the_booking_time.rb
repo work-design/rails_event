@@ -7,7 +7,7 @@ module TheBookingTime
     #attribute :start_at, :datetime
     #attribute :finish_at, :datetime
 
-    unless connection.is_a? ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+    unless defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
       serialize :repeat_days, Array
     end
 

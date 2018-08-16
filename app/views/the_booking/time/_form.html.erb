@@ -1,0 +1,14 @@
+<%= f.select :repeat_type, options_for_select(f.object.class.options_i18n(:repeat_type), f.object.repeat_type || 'once'), {}, { data: { booking_type: f.object.class.base_class.name } } %>
+<% if f.object.repeat_type == 'month' %>
+  <%= render partial: 'the_booking/time/month_checkboxes', locals: { f: f } %>
+<% elsif f.object.repeat_type == 'week' %>
+  <%= render partial: 'the_booking/time/week_checkboxes', locals: { f: f } %>
+<% else %>
+  <div id="booking_repeat_days_wrapper"></div>
+<% end %>
+<% if ['once', nil].include? f.object.repeat_type %>
+  <%= f.datetime_local_field :start_at %>
+<% else %>
+  <%= f.time_field :start_at %>
+<% end %>
+<%= f.submit %>

@@ -1,5 +1,5 @@
-module TheBooking
-  class ApplicationController < ActionController::Base
-    protect_from_forgery with: :exception
-  end
+class TheBooking::BaseController < ApplicationController
+
+
+
 end
