@@ -14,8 +14,7 @@ module TheBookingTime
     enum repeat_type: {
       once: 'once',
       week: 'week',
-      month: 'month',
-      year: 'year'
+      month: 'month'
     }
 
     validate :validate_finish_at
