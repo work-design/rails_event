@@ -1,1 +1,1 @@
-<%= f.datetime_local_field :finish_at %>
+<%= f.datetime_local_field :finish_at if f.object.respond_to?(:finish_at) %>
