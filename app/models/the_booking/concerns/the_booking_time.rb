@@ -7,7 +7,9 @@ module TheBookingTime
     #attribute :start_at, :datetime
     #attribute :finish_at, :datetime
 
-    serialize :repeat_days, Array
+    unless connection.is_a? ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+      serialize :repeat_days, Array
+    end
 
     enum repeat_type: {
       once: 'once',
