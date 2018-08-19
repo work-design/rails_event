@@ -23,6 +23,7 @@ module TheBookingTime
   end
 
   def validate_finish_at
+    return unless self.respond_to?('finish_at')
     return if finish_at.nil? && start_at.nil?
     unless finish_at > start_at
       self.errors.add :finish_at, 'Finish At Should large then Start at time!'
