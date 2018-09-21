@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_booking (0.1.0)
+    rails_booking (0.1.1)
       rails (>= 5.0, <= 6.0)
 
 GEM
