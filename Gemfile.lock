@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_booking (0.1.0)
-      rails
+      rails (>= 5.0, <= 6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -121,8 +121,8 @@ PLATFORMS
 
 DEPENDENCIES
   rails (>= 5.2.0)
-  sqlite3
   rails_booking!
+  sqlite3 (~> 1.3)
 
 BUNDLED WITH
    1.16.3
