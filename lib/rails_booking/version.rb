@@ -1,3 +1,3 @@
-module TheBooking
+module RailsBooking
   VERSION = '0.1.0'
 end

@@ -1,4 +1,4 @@
-# TheBooking
+# RailsBooking
 Short description and motivation.
 
 ## Usage
@@ -8,7 +8,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'the_booking'
+gem 'rails_booking'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install the_booking
+$ gem install rails_booking
 ```
 
 ## Contributing

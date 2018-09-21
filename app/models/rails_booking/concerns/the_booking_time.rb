@@ -1,4 +1,4 @@
-module TheBookingTime
+module RailsBookingTime
   extend ActiveSupport::Concern
 
   included do

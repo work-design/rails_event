@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    the_booking (0.1.0)
+    rails_booking (0.1.0)
       rails
 
 GEM
@@ -122,7 +122,7 @@ PLATFORMS
 DEPENDENCIES
   rails (>= 5.2.0)
   sqlite3
-  the_booking!
+  rails_booking!
 
 BUNDLED WITH
    1.16.3

@@ -1,4 +1,4 @@
-module TheBooking
+module RailsBooking
   module ApplicationHelper
   end
 end
