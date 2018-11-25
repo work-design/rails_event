@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = RailsBooking::VERSION
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
-  s.homepage = 'https://github.com/yougexiangfa/rails_booking'
+  s.homepage = 'https://github.com/work-design/rails_booking'
   s.summary     = 'Summary of RailsBooking.'
   s.description = 'Description of RailsBooking.'
   s.license = 'LGPL-3.0'
