@@ -15,6 +15,10 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
+    create_table :timetables do |t|
+
+    end
+
   end
 
 end

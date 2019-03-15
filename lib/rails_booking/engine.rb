@@ -1,3 +1,4 @@
+require 'rails_com'
 module RailsBooking
   class Engine < ::Rails::Engine
 
