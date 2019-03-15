@@ -2,11 +2,8 @@ module RailsBookingLocate
   extend ActiveSupport::Concern
 
   included do
-    #attribute :import_price, :decimal, default: 0
-
-    def self.extra
-      {}
-    end
+    belongs_to :location, optional: true
+    belongs_to :room, optional: true
   end
 
   def extra

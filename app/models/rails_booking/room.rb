@@ -1,4 +1,4 @@
-class Locate < ApplicationRecord
+class Room < ApplicationRecord
 
 
 

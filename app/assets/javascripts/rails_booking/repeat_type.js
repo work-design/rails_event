@@ -1,4 +1,3 @@
-//= require rails_com/fetch_xhr_script
 
 $('[data-title="repeat_type"]').dropdown({
 
