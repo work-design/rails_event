@@ -1,5 +1,2 @@
-require "rails_booking/engine"
-
-module RailsBooking
-  # Your code goes here...
-end
+require_relative 'rails_booking/config'
+require_relative 'rails_booking/engine'
