@@ -13,8 +13,8 @@ module RailsBookingTime
 
     enum repeat_type: {
       once: 'once',
-      week: 'week',
-      month: 'month'
+      weekly: 'weekly',
+      monthly: 'monthly'
     }
 
     validate :validate_finish_at
