@@ -7,6 +7,7 @@ module RailsBooking #:nodoc:
     config.app_class = 'ApplicationController'
     config.my_class = 'MyController'
     config.admin_class = 'AdminController'
+    config.panel_class = 'PanelController'
     config.disabled_models = [
       'AlipayUser',
       'WechatUser'

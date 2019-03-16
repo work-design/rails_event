@@ -2,10 +2,10 @@ module RailsBookingTime
   extend ActiveSupport::Concern
 
   included do
-    #attribute :repeat_type, :string, default: ''
-    #attribute :repeat_days, :integer, array: true
-    #attribute :start_at, :datetime
-    #attribute :finish_at, :datetime
+    attribute :repeat_type, :string, default: ''
+    attribute :repeat_days, :integer, array: true
+    attribute :start_at, :datetime
+    attribute :finish_at, :datetime
 
     unless defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
       serialize :repeat_days, Array

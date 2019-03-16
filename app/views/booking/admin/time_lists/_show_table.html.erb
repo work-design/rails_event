@@ -1,0 +1,20 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_booking_admin_time_list_path(@time_list), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= TimeList.human_attribute_name(:name) %></td>
+      <td><%= @time_list.name %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= TimeList.human_attribute_name(:code) %></td>
+      <td><%= @time_list.code %></td>
+    </tr>
+  </tbody>
+</table>

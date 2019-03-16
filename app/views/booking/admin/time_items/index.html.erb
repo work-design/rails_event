@@ -1,0 +1,42 @@
+<div class="ui top attached borderless menu">
+  <div class="header item">Booking Admin Time Items</div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to 'New Booking Admin Time Item', new_admin_time_list_time_item_path(@time_list), class: 'ui teal button', remote: true %>
+    </div>
+  </div>
+</div>
+
+<%= render 'filter' %>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= TimeItem.human_attribute_name(:id) %></th>
+      <th><%= TimeItem.human_attribute_name(:start_at) %></th>
+      <th><%= TimeItem.human_attribute_name(:finish_at) %></th>
+      <th><%= TimeItem.human_attribute_name(:position) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @time_items.each do |time_item| %>
+    <tr>
+      <td><%= time_item.id %></td>
+      <td><%= time_item.start_at %></td>
+      <td><%= time_item.finish_at %></td>
+      <td><%= time_item.position %></td>
+      <td class="ui labels">
+        <%= link_to edit_admin_time_list_time_item_path(@time_list, time_item), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button', remote: true do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_time_list_time_item_path(@time_list, time_item), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @time_items %>

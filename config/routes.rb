@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   end
 
   scope :admin, module: 'booking/admin', as: :admin do
-
+    resources :time_lists do
+      resources :time_items
+    end
+    resources :time_plans
   end
 
 

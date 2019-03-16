@@ -2,7 +2,8 @@ class Booking::Admin::TimetablesController < Booking::Admin::BaseController
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
 
   def index
-    @timetables = Timetable.page(params[:page])
+    q_params = default_params
+    @timetables = Timetable.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -62,11 +63,12 @@ class Booking::Admin::TimetablesController < Booking::Admin::BaseController
   end
 
   def timetable_params
-    params.fetch(:timetable, {}).permit(
+    f = params.fetch(:timetable, {}).permit(
       :kind,
       :start_at,
       :finish_at
     )
+    f.merge! default_params
   end
 
 end

@@ -1,0 +1,6 @@
+<%= form_with model: [:admin, @time_list] do |f| %>
+  <%= render 'shared/error_messages', target: @time_list %>
+  <%= f.text_field :name %>
+  <%= f.text_field :code %>
+  <%= f.submit %>
+<% end %>
