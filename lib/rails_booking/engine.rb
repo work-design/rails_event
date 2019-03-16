@@ -12,7 +12,8 @@ module RailsBooking
       g.rails = {
         assets: false,
         stylesheets: false,
-        helper: false
+        helper: false,
+        jbuilder: true
       }
       g.test_unit = {
         fixture: true,
