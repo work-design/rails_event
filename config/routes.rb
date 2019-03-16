@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     scope ':plan_type/:plan_id' do
       resources :time_plans
     end
+    resources :time_items, only: [:index]
   end
 
   scope :admin, module: 'booking/admin', as: :admin do

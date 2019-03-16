@@ -1,7 +1,14 @@
 <%= form_with model: @time_plan do |f| %>
   <%= render 'shared/error_messages', target: @time_plan %>
   <%= f.text_field :room_id %>
-  <%= render partial: 'booking/time/form', locals: { f: f } %>
+  <%= f.select :repeat_type, options_for_select(f.object.class.options_i18n(:repeat_type), f.object.repeat_type || 'once'), {}, { data: { booking_type: f.object.class.base_class.name, title: 'repeat_type' } } %>
+  <% if f.object.repeat_type == 'month' %>
+    <%= render partial: 'booking/time/month_checkboxes', locals: { f: f } %>
+  <% elsif f.object.repeat_type == 'week' %>
+    <%= render partial: 'booking/time/week_checkboxes', locals: { f: f } %>
+  <% else %>
+    <div id="<%= f.object.class.base_class.name.underscore %>_repeat_days_wrapper"></div>
+  <% end %>
   <%= f.collection_select :time_list_id, @time_lists, :id, :name %>
   <%= f.text_field :time_item_id %>
   <%= f.submit %>

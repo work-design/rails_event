@@ -1,7 +1,6 @@
 //= require rails_booking/repeat_type
 
 $('#time_plan_time_list_id').dropdown({
-
   onChange: function(value, text, $selectedItem){
     var repeat_url = new URL(window.location.origin);
     repeat_url.pathname = 'repeat_form';
@@ -9,5 +8,4 @@ $('#time_plan_time_list_id').dropdown({
 
     Rails.ajax({url: repeat_url, type: 'GET', dataType: 'script'});
   }
-
 });
