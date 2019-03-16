@@ -1,6 +1,0 @@
-<%= form_with model: [:admin, @timetable] do |f| %>
-  <%= render 'shared/error_messages', target: @timetable %>
-  <%= f.text_field :kind %>
-  <%= render partial: 'booking/time/form', locals: { f: f } %>
-  <%= f.submit %>
-<% end %>

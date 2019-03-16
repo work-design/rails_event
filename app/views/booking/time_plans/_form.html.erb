@@ -1,0 +1,8 @@
+<%= form_with model: @time_plan do |f| %>
+  <%= render 'shared/error_messages', target: @time_plan %>
+  <%= f.text_field :room_id %>
+  <%= render partial: 'booking/time/form', locals: { f: f } %>
+  <%= f.collection_select :time_list_id, @time_lists, :id, :name %>
+  <%= f.text_field :time_item_id %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,49 @@
+<div class="ui top attached borderless menu">
+  <div class="header item">Booking Time Plans</div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to 'New Booking Time Plan', new_time_plan_path(params[:plan_type], params[:plan_id]), class: 'ui teal button', remote: true %>
+    </div>
+  </div>
+</div>
+
+<%= render 'filter' %>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= TimePlan.human_attribute_name(:id) %></th>
+      <th><%= TimePlan.human_attribute_name(:time_list_id) %></th>
+      <th><%= TimePlan.human_attribute_name(:time_item_id) %></th>
+      <th><%= TimePlan.human_attribute_name(:room_id) %></th>
+      <th><%= TimePlan.human_attribute_name(:repeat_type) %></th>
+      <th><%= TimePlan.human_attribute_name(:repeat_days) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @time_plans.each do |time_plan| %>
+    <tr>
+      <td><%= time_plan.id %></td>
+      <td><%= time_plan.time_list_id %></td>
+      <td><%= time_plan.time_item_id %></td>
+      <td><%= time_plan.room_id %></td>
+      <td><%= time_plan.repeat_type %></td>
+      <td><%= time_plan.repeat_days %></td>
+      <td class="ui labels">
+        <%= link_to booking_time_plan_path(time_plan), data: { tooltip: t('.show') }, class: 'ui blue mini icon button', remote: true do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_booking_time_plan_path(time_plan), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button', remote: true do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to booking_time_plan_path(time_plan), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @time_plans %>

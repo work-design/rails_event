@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
 
 
-  scope module: :booking, controller: :time do
-    get 'repeat_form', action: 'repeat_form'
+  scope module: :booking do
+    controller :time do
+      get 'repeat_form', action: 'repeat_form'
+    end
+    scope ':plan_type/:plan_id' do
+      resources :time_plans
+    end
   end
 
   scope :admin, module: 'booking/admin', as: :admin do
     resources :time_lists do
       resources :time_items
     end
-    resources :time_plans
   end
 
 
