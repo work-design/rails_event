@@ -6,7 +6,7 @@ $('[data-title="repeat_type"]').dropdown({
     repeat_url.pathname = 'repeat_form';
     repeat_url.search = $.param({booking_type: this.dataset['bookingType'], repeat_type: value});
 
-    fetch_xhr_script(repeat_url)
+    Rails.ajax({url: repeat_url, type: 'GET', dataType: 'script'});
   }
 
 });
