@@ -1,0 +1,3 @@
+<% form_object = default_form_object(@time_plan) %>
+
+$('#time_plan_time_item_id').html('<%= j(render partial: 'time_items_options', locals: { f: form_object }) %>');

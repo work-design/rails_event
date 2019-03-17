@@ -10,6 +10,6 @@
     <div id="<%= f.object.class.base_class.name.underscore %>_repeat_days_wrapper"></div>
   <% end %>
   <%= f.collection_select :time_list_id, @time_lists, :id, :name %>
-  <%= f.text_field :time_item_id %>
+  <%= f.select :time_item_id, options_for_select([]) %>
   <%= f.submit %>
 <% end %>

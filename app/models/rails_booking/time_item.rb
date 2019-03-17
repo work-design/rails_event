@@ -7,4 +7,8 @@ class TimeItem < ApplicationRecord
   belongs_to :time_list
 
 
+  def name
+    "#{start_at} ~ #{finish_at}"
+  end
+
 end

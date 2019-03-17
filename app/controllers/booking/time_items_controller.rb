@@ -1,8 +1,24 @@
 class Booking::TimeItemsController < Booking::BaseController
   before_action :set_time_list
+  skip_before_action :verify_authenticity_token, only: [:select]
 
   def index
-    @time_items = @time_list.time_items.page(params[:page])
+    @time_items = @time_list.time_items
+  end
+
+  def select
+    @time_items = @time_list.time_items
+
+    if @time_items
+      @results = @time_items.map { |x| { value: x.id, text: x.name, name: x.name } }
+    end
+
+    @time_plan = TimePlan.new
+
+    respond_to do |format|
+      format.js
+      format.json { render json: { values: @results } }
+    end
   end
 
   private
