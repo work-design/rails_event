@@ -29,8 +29,8 @@
   <% @time_items.each do |time_item| %>
     <tr>
       <td><%= time_item.id %></td>
-      <td><%= time_item.start_at %></td>
-      <td><%= time_item.finish_at %></td>
+      <td><%= time_item.start_at.to_s(:time) %></td>
+      <td><%= time_item.finish_at.to_s(:time) %></td>
       <td><%= time_item.position %></td>
       <td class="ui labels">
         <%= link_to edit_admin_time_list_time_item_path(@time_list, time_item), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button', remote: true do %>

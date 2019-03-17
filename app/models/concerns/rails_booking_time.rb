@@ -3,11 +3,9 @@ module RailsBookingTime
 
   included do
     attribute :repeat_type, :string, default: ''
-    attribute :repeat_days, :integer, array: true
-    attribute :start_at, :datetime
-    attribute :finish_at, :datetime
-
-    unless defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+    if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+      attribute :repeat_days, :integer, array: true
+    else
       serialize :repeat_days, Array
     end
 
@@ -23,7 +21,6 @@ module RailsBookingTime
   end
 
   def validate_finish_at
-    return unless self.respond_to?('finish_at')
     return if finish_at.nil? && start_at.nil?
     unless finish_at > start_at
       self.errors.add :finish_at, 'Finish At Should large then Start at time!'
@@ -32,10 +29,6 @@ module RailsBookingTime
 
   def deal_repeat_days
     self.repeat_days = self.repeat_days.map(&:to_i)
-  end
-
-  def extra
-    {}
   end
 
   def next_start_time
@@ -76,7 +69,7 @@ module RailsBookingTime
     start_at_date = self.start_at.change(year: datetime.year, month: datetime.month, day: datetime.day)
 
     if start_at_date > datetime
-      if self.repeat_type == 'week'
+      if self.repeat_type == 'weekly'
         next_days = self.repeat_days.select { |day| day >= datetime.days_to_week_start }
       else #if self.repeat_type == 'month'
         next_days = self.repeat_days.select { |day| day >= datetime.day }
@@ -86,7 +79,7 @@ module RailsBookingTime
     end
 
     if next_days.size > 0
-      if self.repeat_type == 'week'
+      if self.repeat_type == 'weekly'
         days_span = next_days[0] - datetime.days_to_week_start
         day = datetime.beginning_of_week.days_since(days_span)
         month = day.month
@@ -98,7 +91,7 @@ module RailsBookingTime
 
       next_day = datetime.change(month: month, day: min)
     else
-      if self.repeat_type == 'week'
+      if self.repeat_type == 'weekly'
         str = Date::DAYS_INTO_WEEK.key(self.repeat_days.min)
         day = datetime.next_week(str)
         month = day.month

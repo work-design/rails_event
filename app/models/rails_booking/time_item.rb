@@ -1,8 +1,8 @@
 class TimeItem < ApplicationRecord
   acts_as_list scope: :time_list_id
 
-  attribute :start_at, :string
-  attribute :finish_at, :string
+  attribute :start_at, :time
+  attribute :finish_at, :time
 
   belongs_to :time_list
 

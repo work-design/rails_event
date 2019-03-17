@@ -1,7 +1,7 @@
 <%= form_with model: [:admin, @time_list, @time_item] do |f| %>
   <%= render 'shared/error_messages', target: @time_item %>
-  <%= f.time_field :start_at %>
-  <%= f.time_field :finish_at %>
+  <%= f.time_select :start_at %>
+  <%= f.time_select :finish_at %>
   <%= f.text_field :position %>
   <%= f.submit %>
 <% end %>

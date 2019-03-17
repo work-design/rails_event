@@ -18,13 +18,13 @@ class Booking::TimePlansController < Booking::BaseController
     respond_to do |format|
       if @time_plan.save
         format.html.phone
-        format.html { redirect_to booking_time_plans_url, notice: 'Time plan was successfully created.' }
-        format.js { redirect_back fallback_location: booking_time_plans_url }
+        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
+        format.js { redirect_back fallback_location: time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: booking_time_plans_url }
+        format.js { redirect_back fallback_location: time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       end
     end
@@ -33,30 +33,9 @@ class Booking::TimePlansController < Booking::BaseController
   def show
   end
 
-  def edit
-  end
-
-  def update
-    @time_plan.assign_attributes(time_plan_params)
-
-    respond_to do |format|
-      if @time_plan.save
-        format.html.phone
-        format.html { redirect_to booking_time_plans_url, notice: 'Time plan was successfully updated.' }
-        format.js { redirect_back fallback_location: booking_time_plans_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: booking_time_plans_url }
-        format.json { render :show }
-      end
-    end
-  end
-
   def destroy
     @time_plan.destroy
-    redirect_to booking_time_plans_url, notice: 'Time plan was successfully destroyed.'
+    redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully destroyed.'
   end
 
   private
@@ -82,7 +61,7 @@ class Booking::TimePlansController < Booking::BaseController
       :time_item_id,
       :room_id,
       :repeat_type,
-      :repeat_days
+      repeat_days: []
     )
     p.merge! plan_params
   end
