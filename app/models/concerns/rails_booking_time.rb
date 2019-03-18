@@ -55,55 +55,64 @@ module RailsBookingTime
 
   def next_start_at
     return if start_at.nil?
-    _next_day = self.next_day(Time.now)
+    _next_day = self.next_day
     _next_day.change(hour: start_at.hour, min: start_at.min, sec: start_at.sec)
   end
 
   def next_finish_at
     return if finish_at.nil?
-    _next_day = self.next_day(Time.now)
+    _next_day = self.next_day
     _next_day.change(hour: finish_at.hour, min: finish_at.min, sec: finish_at.sec)
   end
 
-  def next_day(datetime)
+  def next_day(datetime = Time.now)
+    if self.repeat_type == 'weekly'
+      next_weekly_day(datetime)
+    elsif self.repeat_type == 'monthly'
+      next_monthly_day(datetime)
+    else
+      datetime
+    end
+  end
+
+  def next_weekly_day(datetime = Time.now)
     start_at_date = self.start_at.change(year: datetime.year, month: datetime.month, day: datetime.day)
 
     if start_at_date > datetime
-      if self.repeat_type == 'weekly'
-        next_days = self.repeat_days.select { |day| day >= datetime.days_to_week_start }
-      else #if self.repeat_type == 'month'
-        next_days = self.repeat_days.select { |day| day >= datetime.day }
-      end
+      next_days = self.repeat_days.select { |day| day >= datetime.days_to_week_start(:sunday) }
+    else
+      next_days = self.repeat_days.select { |day| day > datetime.days_to_week_start(:sunday) }
+    end
+
+    if next_days.size > 0
+      next_day = next_days.min
+    else
+      next_day = self.repeat_days.min
+    end
+
+    str = Date::DAYS_INTO_WEEK.key(next_day)
+    day = datetime.next_occurring(str)
+    datetime.change(month: day.month, day: day.day)
+  end
+
+  def next_monthly_day(datetime = Time.now)
+    start_at_date = self.start_at.change(year: datetime.year, month: datetime.month, day: datetime.day)
+
+    if start_at_date > datetime
+      next_days = self.repeat_days.select { |day| day >= datetime.day }
     else
       next_days = self.repeat_days.select { |day| day > datetime.day }
     end
 
     if next_days.size > 0
-      if self.repeat_type == 'weekly'
-        days_span = next_days[0] - datetime.days_to_week_start
-        day = datetime.beginning_of_week.days_since(days_span)
-        month = day.month
-        min = day.day
-      else
-        month = datetime.month
-        min = next_days[0]
-      end
-
-      next_day = datetime.change(month: month, day: min)
+      next_day = next_days.min
+      month = datetime.month
     else
-      if self.repeat_type == 'weekly'
-        str = Date::DAYS_INTO_WEEK.key(self.repeat_days.min)
-        day = datetime.next_week(str)
-        month = day.month
-        min = day.day
-      else
-        month = datetime.next_month.month
-        min = self.repeat_days.min
-      end
-
-      next_day = datetime.change(month: month, day: min)
+      next_day = self.repeat_days.min
+      month = datetime.next_month.month
     end
-    next_day
+
+    datetime.change(month: month, day: next_day)
   end
 
 end
