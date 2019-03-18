@@ -8,7 +8,7 @@ class TimePlan < ApplicationRecord
   belongs_to :plan, polymorphic: true
   belongs_to :time_item
   belongs_to :time_list
-  delegate :start_at, :finish_at, to: :time_item
+  delegate :start_at, :finish_at, to: :time_item, allow_nil: true
 
 
 end

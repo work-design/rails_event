@@ -2,12 +2,11 @@ module RailsBookingLocate
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :location, optional: true
-    belongs_to :room, optional: true
+    attribute :time_plans_count, :integer, default: 0
+
+    has_many :time_plans
+    TimePlan.belongs_to :room, class_name: self.name, foreign_key: :room_id, counter_cache: true
   end
 
-  def extra
-    {}
-  end
 
 end

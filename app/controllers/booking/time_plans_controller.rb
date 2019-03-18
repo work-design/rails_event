@@ -48,7 +48,9 @@ class Booking::TimePlansController < Booking::BaseController
   end
 
   def set_time_lists
-    @time_lists = super || TimeList.none
+    return super if super
+    @rooms = Room.none
+    @time_lists = TimeList.none
   end
 
   def plan_params

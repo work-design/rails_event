@@ -2,19 +2,6 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
 
   def change
 
-    create_table :locations do |t|
-      t.references :area
-      t.string :address
-      t.timestamps
-    end
-
-    create_table :rooms do |t|
-      t.references :area
-      t.references :location
-      t.string :room_number
-      t.timestamps
-    end
-
     create_table :time_lists do |t|
       t.string :name
       t.string :code
@@ -30,6 +17,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :time_plans do |t|
+      t.references :room
       t.references :time_list
       t.references :time_item
       t.references :plan, polymorphic: true

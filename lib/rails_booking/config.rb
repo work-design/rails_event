@@ -8,15 +8,7 @@ module RailsBooking #:nodoc:
     config.my_class = 'MyController'
     config.admin_class = 'AdminController'
     config.panel_class = 'PanelController'
-    config.disabled_models = [
-      'AlipayUser',
-      'WechatUser'
-    ]
-    config.default_return_path = '/'
-    config.ignore_return_paths = [
-      'login',
-      'join'
-    ]
+    config.disabled_models = []
   end
 
 end

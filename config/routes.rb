@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :time_lists do
       resources :time_items
     end
+    resources :rooms
   end
 
 
