@@ -8,7 +8,7 @@ class TimeItem < ApplicationRecord
 
 
   def name
-    "#{start_at} ~ #{finish_at}"
+    "#{start_at.to_s(:time)} ~ #{finish_at.to_s(:time)}"
   end
 
 end
