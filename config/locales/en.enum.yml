@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    enum:
+      time_plan/repeat_type:
+        once: Once
+        weekly: Weekly
+        monthly: Monthly
