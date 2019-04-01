@@ -1,14 +1,11 @@
 class Booking::TimePlansController < Booking::BaseController
   before_action :set_time_lists
-  before_action :set_time_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_plan, only: [:show, :destroy]
 
   def index
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:plan_type, :plan_id)
-    @time_plans = TimePlan.default_where(q_params).page(params[:page])
-  end
-
-  def new
+    @time_plans = TimePlan.default_where(q_params)
     @time_plan = TimePlan.new(plan_params)
   end
 
