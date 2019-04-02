@@ -59,6 +59,8 @@ class Booking::TimePlansController < Booking::BaseController
       :time_list_id,
       :time_item_id,
       :room_id,
+      :begin_on,
+      :end_on,
       :repeat_type,
       repeat_days: []
     )
