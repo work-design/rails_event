@@ -2,6 +2,7 @@ class TimeList < ApplicationRecord
 
   attribute :kind, :string
   attribute :item_minutes, :integer, default: 45
+  attribute :interval_minutes, :integer, default: 15
 
   belongs_to :organ, optional: true
   has_many :time_items, -> { order(start_at: :asc) }
@@ -9,6 +10,10 @@ class TimeList < ApplicationRecord
 
   def set_default
     self.class.where.not(id: self.id).where(organ_id: self.organ_id).update_all(default: false)
+  end
+
+  def gcd
+    item_minutes.gcd(interval_minutes)
   end
 
 end
