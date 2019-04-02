@@ -5,6 +5,9 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :time_lists do |t|
       t.string :name
       t.string :code
+      t.integer :interval_minutes, default: 0
+      t.integer :item_minutes, default: 45
+      t.boolean :default
       t.timestamps
     end
 

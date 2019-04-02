@@ -13,8 +13,14 @@
   <thead>
     <tr>
       <th><%= TimeList.human_attribute_name(:id) %></th>
-      <th><%= TimeList.human_attribute_name(:name) %></th>
-      <th><%= TimeList.human_attribute_name(:code) %></th>
+      <th>
+        <%= TimeList.human_attribute_name(:name) %>(<%= TimeList.human_attribute_name(:code) %>)
+      </th>
+      <th>
+        <p><%= TimeList.human_attribute_name(:item_minutes) %></p>
+        <p><%= TimeList.human_attribute_name(:interval_minutes) %></p>
+      </th>
+      <th><%= TimeList.human_attribute_name(:time_items) %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,8 +28,14 @@
   <% @time_lists.each do |time_list| %>
     <tr>
       <td><%= time_list.id %></td>
-      <td><%= time_list.name %></td>
-      <td><%= time_list.code %></td>
+      <td><%= time_list.name %>(<%= time_list.code %>)</td>
+      <td>
+        <p><%= time_list.item_minutes %></p>
+        <p><%= time_list.interval_minutes %></p>
+      </td>
+      <td>
+        <%= render partial: 'time_items', locals: { time_list: time_list } %>
+      </td>
       <td class="ui labels">
         <%= link_to admin_time_list_time_items_path(time_list), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

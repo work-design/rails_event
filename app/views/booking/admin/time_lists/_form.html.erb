@@ -2,5 +2,7 @@
   <%= render 'shared/error_messages', target: @time_list %>
   <%= f.text_field :name %>
   <%= f.text_field :code %>
+  <%= f.number_field :item_minutes, step: 1 %>
+  <%= f.number_field :interval_minutes, step: 1 %>
   <%= f.submit %>
 <% end %>

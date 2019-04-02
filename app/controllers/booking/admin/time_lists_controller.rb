@@ -65,7 +65,9 @@ class Booking::Admin::TimeListsController < Booking::Admin::BaseController
   def time_list_params
     p = params.fetch(:time_list, {}).permit(
       :name,
-      :code
+      :code,
+      :interval_minutes,
+      :default
     )
     p.merge! default_params
   end
