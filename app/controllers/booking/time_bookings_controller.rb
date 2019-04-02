@@ -61,13 +61,18 @@ class Booking::TimeBookingsController < Booking::BaseController
     @time_booking = TimeBooking.find(params[:id])
   end
 
+  def booking_params
+    params.permit(:booking_type, :booking_id)
+  end
+
   def time_booking_params
-    params.fetch(:time_booking, {}).permit(
+    p = params.fetch(:time_booking, {}).permit(
       :time_list_id,
       :time_item_id,
       :room_id,
       :booking_on
     )
+    p.merge! booking_params
   end
 
 end
