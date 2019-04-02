@@ -3,7 +3,7 @@ class Booking::Admin::TimeListsController < Booking::Admin::BaseController
 
   def index
     q_params = default_params
-    @time_lists = TimeList.default_where(q_params).page(params[:page])
+    @time_lists = TimeList.default_where(q_params).order(id: :asc).page(params[:page])
   end
 
   def new

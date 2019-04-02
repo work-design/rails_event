@@ -20,6 +20,7 @@
         <p><%= TimeList.human_attribute_name(:item_minutes) %></p>
         <p><%= TimeList.human_attribute_name(:interval_minutes) %></p>
       </th>
+      <th><%= TimeList.human_attribute_name(:default) %></th>
       <th><%= TimeList.human_attribute_name(:time_items) %></th>
       <th>Actions</th>
     </tr>
@@ -32,6 +33,11 @@
       <td>
         <p><%= time_list.item_minutes %></p>
         <p><%= time_list.interval_minutes %></p>
+      </td>
+      <td>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '[time_list]default', nil, time_list.default, data: { method: :patch, remote: true, url: admin_time_list_path(time_list), submit: true }, id: nil %>
+        </div>
       </td>
       <td>
         <%= render partial: 'time_items', locals: { time_list: time_list } %>
