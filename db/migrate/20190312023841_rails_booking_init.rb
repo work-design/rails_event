@@ -26,6 +26,15 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
+    create_table :time_bookings do |t|
+      t.references :room
+      t.references :booking, polymorphic: true
+      t.references :time_item
+      t.references :time_list
+      t.date :booking_on
+      t.timestamps
+    end
+
   end
 
 end
