@@ -4,3 +4,4 @@
 //= require @fullcalendar/resource-common
 //= require @fullcalendar/resource-daygrid
 //= require @fullcalendar/resource-timegrid
+//= require @fullcalendar/interaction
