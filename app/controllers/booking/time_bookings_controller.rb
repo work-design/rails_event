@@ -62,7 +62,7 @@ class Booking::TimeBookingsController < Booking::BaseController
   end
 
   def booking_params
-    params.permit(:booking_type, :booking_id)
+    params.permit(:booker_type, :booker_id)
   end
 
   def time_booking_params

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     scope ':plan_type/:plan_id' do
       resources :time_plans
     end
-    scope ':booking_type/:booking_id' do
+    scope ':booker_type/:booker_id' do
       resources :time_bookings
     end
     resources :time_items, only: [:index] do

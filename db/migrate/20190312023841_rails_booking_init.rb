@@ -33,7 +33,8 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
 
     create_table :time_bookings do |t|
       t.references :room
-      t.references :booking, polymorphic: true
+      t.references :booker, polymorphic: true
+      t.references :entity, polymorphic: true
       t.references :time_item
       t.references :time_list
       t.date :booking_on
