@@ -9,4 +9,14 @@ class Booking::TimeController < Booking::BaseController
     end
   end
 
+  def calendar
+    @settings = {
+      dayCount: 7
+    }
+    if params[:repeat_type] == 'monthly'
+      @settings.merge! dayCount: 30
+    end
+  end
+
+
 end

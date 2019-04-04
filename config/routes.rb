@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope module: :booking do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
+      get :calendar
     end
     scope ':plan_type/:plan_id' do
       resources :time_plans

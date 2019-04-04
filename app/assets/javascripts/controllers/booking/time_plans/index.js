@@ -1,4 +1,4 @@
-//= require rails_booking/repeat_type
+//= require rails_booking/calendar
 //= require ./calendar
 
 $('#time_plan_room_id').dropdown();
