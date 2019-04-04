@@ -25,7 +25,7 @@ class Booking::TimeItemsController < Booking::BaseController
     @settings = {
       minTime: @time_list.min_time,
       maxTime: @time_list.max_time,
-      slotDuration: @time_list.slot_label_interval,
+      slotDuration: @time_list.slot_duration,
       slotLabelInterval: @time_list.slot_label_interval,
     }
     @events = @time_list.events(day_count)
