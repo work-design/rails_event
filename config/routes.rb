@@ -13,7 +13,10 @@ Rails.application.routes.draw do
       resources :time_bookings
     end
     resources :time_items, only: [:index] do
-      get :select, on: :collection
+      collection do
+        get :select
+        get :add_event
+      end
     end
   end
 

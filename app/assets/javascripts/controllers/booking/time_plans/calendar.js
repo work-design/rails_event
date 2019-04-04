@@ -22,15 +22,8 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     omitZeroMinute: true,
     hour12: false
   },
-  events: [
-    {
-      start: '2001-01-01T10:00:00',
-      end: '2001-01-01T10:40:00',
-      rendering: 'background',
-      color: '#ff9f89'
-    }
-  ],
-    eventClick: function(info) {
+  events: [],
+  eventClick: function(info) {
     alert('Event: ' + info.event.title);
     alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
     alert('View: ' + info.view.type);

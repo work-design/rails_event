@@ -1,6 +1,6 @@
 class Booking::TimeItemsController < Booking::BaseController
   before_action :set_time_list
-  skip_before_action :verify_authenticity_token, only: [:select]
+  skip_before_action :verify_authenticity_token, only: [:select, :add_event]
 
   def index
     @time_items = @time_list.time_items
@@ -18,6 +18,19 @@ class Booking::TimeItemsController < Booking::BaseController
     respond_to do |format|
       format.js
       format.json { render json: { values: @results } }
+    end
+  end
+
+  def add_event
+    @time_items = @time_list.time_items
+
+    if @time_items
+      @event = [{
+        start: '2001-01-01T10:00:00',
+        end: '2001-01-01T10:40:00',
+        rendering: 'background',
+        color: '#ff9f89'
+      }]
     end
   end
 
