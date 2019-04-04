@@ -28,4 +28,14 @@ class TimeItem < ApplicationRecord
     end
   end
 
+  def event(span = 0)
+    date = time_list.default_date + span
+    {
+      start: start_at.change(date.parts).strftime('%FT%T'),
+      end: finish_at.change(date.parts).strftime('%FT%T'),
+      rendering: 'background',
+      color: '#ff9f89'
+    }
+  end
+
 end

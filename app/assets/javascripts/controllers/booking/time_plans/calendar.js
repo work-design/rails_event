@@ -1,5 +1,4 @@
 var calendarEl = document.getElementById('calendar');
-var DateTime = luxon.DateTime;
 var calendar = new FullCalendar.Calendar(calendarEl, {
   schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
   plugins: [ 'dayGrid', 'timeGrid', 'resourceDayGrid', 'resourceTimeGrid' ],
@@ -22,7 +21,6 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     omitZeroMinute: true,
     hour12: false
   },
-  events: [],
   eventClick: function(info) {
     alert('Event: ' + info.event.title);
     alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);

@@ -2,8 +2,9 @@ require 'rails_com'
 module RailsBooking
   class Engine < ::Rails::Engine
 
-    config.eager_load_paths += Dir[
-      "#{config.root}/app/models/rails_booking"
+    config.autoload_paths += Dir[
+      "#{config.root}/app/models/rails_booking",
+      "#{config.root}/app/models/rails_booking/concerns"
     ]
 
     config.factory_bot.definition_file_paths += Dir["#{config.root}/test/factories"] if defined?(FactoryBotRails)

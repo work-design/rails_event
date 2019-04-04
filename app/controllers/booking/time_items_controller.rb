@@ -22,23 +22,13 @@ class Booking::TimeItemsController < Booking::BaseController
   end
 
   def add_event
-    @time_items = @time_list.time_items
-
     @settings = {
-      minTime: @time_list.start_at,
-      maxTime: @time_list.finish_at,
-      slotDuration: @time_list.gcd,
-      slotLabelInterval: @time_list.total
+      minTime: @time_list.min_time,
+      maxTime: @time_list.max_time,
+      slotDuration: @time_list.slot_label_interval,
+      slotLabelInterval: @time_list.slot_label_interval,
     }
-
-    if @time_items
-      @event = [{
-        start: '2001-01-01T10:00:00',
-        end: '2001-01-01T10:40:00',
-        rendering: 'background',
-        color: '#ff9f89'
-      }]
-    end
+    @events = @time_list.events(day_count)
   end
 
   private

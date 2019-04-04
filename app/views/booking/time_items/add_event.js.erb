@@ -1,4 +1,5 @@
 <% @settings.each do |key, value| %>
 calendar.setOption('<%= key %>', '<%= value %>')
 <% end %>
-calendar.addEventSource(<%= raw @event.to_json %>)
+calendar.gotoDate('<%= @time_list.default_date %>')
+calendar.addEventSource(<%= raw @events.to_json %>)
