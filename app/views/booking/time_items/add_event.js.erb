@@ -1,1 +1,4 @@
+<% @settings.each do |key, value| %>
+calendar.setOption('<%= key %>', '<%= value %>')
+<% end %>
 calendar.addEventSource(<%= raw @event.to_json %>)

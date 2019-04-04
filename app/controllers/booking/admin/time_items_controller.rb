@@ -54,7 +54,7 @@ class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
 
   def destroy
     @time_item.destroy
-    redirect_to admin_time_list_time_items_url(@time_list), notice: 'Time item was successfully destroyed.'
+    redirect_to admin_time_lists_url, notice: 'Time item was successfully destroyed.'
   end
 
   private

@@ -14,10 +14,10 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   allDaySlot: false,
   minTime: '07:30:00',
   maxTime: '18:30:00',
-  slotDuration: '00:10:00',
-  slotLabelInterval: '00:10:00',
+  slotDuration: '00:10',
+  slotLabelInterval: '1:00',
   slotLabelFormat: {
-  hour: 'numeric',
+    hour: 'numeric',
     minute: '2-digit',
     omitZeroMinute: true,
     hour12: false

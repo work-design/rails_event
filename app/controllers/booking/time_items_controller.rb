@@ -24,6 +24,13 @@ class Booking::TimeItemsController < Booking::BaseController
   def add_event
     @time_items = @time_list.time_items
 
+    @settings = {
+      minTime: @time_list.start_at,
+      maxTime: @time_list.finish_at,
+      slotDuration: @time_list.gcd,
+      slotLabelInterval: @time_list.total
+    }
+
     if @time_items
       @event = [{
         start: '2001-01-01T10:00:00',
