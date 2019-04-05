@@ -11,7 +11,8 @@ class Booking::TimeController < Booking::BaseController
 
   def calendar
     @settings = {
-      dayCount: day_count
+      dayCount: repeat_settings[:day_count],
+      columnHeaderFormat: repeat_settings[:columnHeaderFormat].to_json
     }
   end
 

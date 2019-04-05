@@ -1,3 +1,3 @@
 <% @settings.each do |key, value| %>
-calendar.setOption('<%= key %>', '<%= value %>')
+calendar.setOption('<%= key %>', <%= raw value %>)
 <% end %>

@@ -9,6 +9,9 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   },
   defaultView: 'timeGrid',
   defaultDate: '2001-01-01',
+  columnHeaderFormat: {
+    weekday: 'short'
+  },
   dayCount: 7,
   allDaySlot: false,
   minTime: '07:30:00',
