@@ -4,6 +4,7 @@ class TimePlan < ApplicationRecord
   attribute :room_id, :integer
   attribute :begin_on, :date, default: -> { Date.today }
   attribute :end_on, :date
+  attribute :time_item_ids, :integer, array: true, default: []
 
   belongs_to :room, optional: true
   belongs_to :plan, polymorphic: true

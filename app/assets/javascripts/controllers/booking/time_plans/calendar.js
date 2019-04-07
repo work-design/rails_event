@@ -25,12 +25,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     hour12: false
   },
   eventClick: function(info) {
-    alert('Event: ' + info.event.title);
-    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-    alert('View: ' + info.view.type);
+    var url = new URL(window.location);
+    var data = new FormData(document.getElementById('time_plan_form'));
+    data.set('time_item_id', info.event.id);
+    data.set('time_item_start', info.event.start.toISOString());
 
-    // change the border color just for fun
-    info.el.style.borderColor = 'red';
+    Rails.ajax({url: url, type: 'POST', data: data, dataType: 'script'});
   }
 });
 

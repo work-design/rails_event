@@ -1,4 +1,4 @@
-<%= form_with model: @time_plan do |f| %>
+<%= form_with model: @time_plan, url: time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do |f| %>
   <%= render 'shared/error_messages', target: @time_plan %>
   <%= f.select :room_id, options_from_collection_for_select(@rooms, :id, :name) %>
   <%= f.select :repeat_type, options_for_select(f.object.class.options_i18n(:repeat_type), f.object.repeat_type || 'once'), {}, { data: { booking_type: f.object.class.base_class.name, title: 'repeat_type' } } %>

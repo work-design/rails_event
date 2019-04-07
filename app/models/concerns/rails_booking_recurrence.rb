@@ -4,7 +4,7 @@ module RailsBookingRecurrence
   included do
     attribute :repeat_type, :string, default: ''
     if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
-      attribute :repeat_days, :integer, array: true
+      attribute :repeat_days, :integer, array: true, default: []
     else
       serialize :repeat_days, Array
     end

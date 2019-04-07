@@ -6,11 +6,21 @@ class Booking::TimePlansController < Booking::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:plan_type, :plan_id)
     @time_plans = TimePlan.default_where(q_params)
-    @time_plan = TimePlan.find_or_initliaze_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
+    @time_plan = TimePlan.find_or_initialize_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
   end
 
   def create
-    @time_plan = TimePlan.find_or_initliaze_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
+    @time_plan = TimePlan.find_or_initialize_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :begin_on, :end_on))
+    @time_plan.assign_attributes time_plan_params
+    @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
+    dt = params[:time_item_start].to_s.to_datetime
+    if dt
+      if time_plan_params[:repeat_type] == 'weekly'
+        @time_plan.repeat_days << dt.wday
+      elsif time_plan_params[:repeat_type] == 'monthly'
+        @time_plan.repeat_days << dt.day
+      end
+    end
 
     respond_to do |format|
       if @time_plan.save
