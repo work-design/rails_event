@@ -6,11 +6,11 @@ class Booking::TimePlansController < Booking::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:plan_type, :plan_id)
     @time_plans = TimePlan.default_where(q_params)
-    @time_plan = TimePlan.find_or_initialize_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
+    @time_plan = TimePlan.find_or_initialize_by(init_time_plan_params)
   end
 
   def create
-    @time_plan = TimePlan.find_or_initialize_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :begin_on, :end_on))
+    @time_plan = TimePlan.find_or_initialize_by(init_time_plan_params)
     @time_plan.assign_attributes time_plan_params
     @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
     dt = params[:time_item_start].to_s.to_datetime
@@ -62,6 +62,16 @@ class Booking::TimePlansController < Booking::BaseController
 
   def plan_params
     params.permit(:plan_type, :plan_id)
+  end
+
+  def init_time_plan_params
+    time_plan_params.slice(
+      :plan_type,
+      :plan_id,
+      :room_id,
+      :begin_on,
+      :end_on
+    ).transform_values(&:presence)
   end
 
   def time_plan_params
