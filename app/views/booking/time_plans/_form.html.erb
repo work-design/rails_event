@@ -3,4 +3,6 @@
   <%= f.select :room_id, options_from_collection_for_select(@rooms, :id, :name) %>
   <%= f.select :repeat_type, options_for_select(f.object.class.options_i18n(:repeat_type), f.object.repeat_type || 'once'), {}, { data: { booking_type: f.object.class.base_class.name, title: 'repeat_type' } } %>
   <%= f.collection_select :time_list_id, @time_lists, :id, :name %>
+  <%= f.date_field :begin_on %>
+  <%= f.date_field :end_on %>
 <% end %>

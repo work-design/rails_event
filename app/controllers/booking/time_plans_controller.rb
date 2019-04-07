@@ -6,22 +6,22 @@ class Booking::TimePlansController < Booking::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:plan_type, :plan_id)
     @time_plans = TimePlan.default_where(q_params)
-    @time_plan = TimePlan.new(plan_params)
+    @time_plan = TimePlan.find_or_initliaze_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
   end
 
   def create
-    @time_plan = TimePlan.new(time_plan_params)
+    @time_plan = TimePlan.find_or_initliaze_by(time_plan_params.slice(:plan_type, :plan_id, :room_id, :end_on))
 
     respond_to do |format|
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
-        format.js { redirect_back fallback_location: time_plans_url(params[:plan_type], params[:plan_id]) }
+        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: time_plans_url(params[:plan_type], params[:plan_id]) }
+        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       end
     end
@@ -57,12 +57,12 @@ class Booking::TimePlansController < Booking::BaseController
   def time_plan_params
     p = params.fetch(:time_plan, {}).permit(
       :time_list_id,
-      :time_item_id,
       :room_id,
       :begin_on,
       :end_on,
       :repeat_type,
-      repeat_days: []
+      repeat_days: [],
+      time_items_ids: []
     )
     p.merge! plan_params
   end

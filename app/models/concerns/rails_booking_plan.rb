@@ -6,4 +6,12 @@ module RailsBookingPlan
   end
 
 
+  def default_time_plan(params)
+    time_plans.find_or_initilaze_by(
+      room_id: params[:room_id],
+      begin_on: params[:begin_on],
+      end_on: params[:end_on]
+    )
+  end
+
 end
