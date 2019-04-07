@@ -22,12 +22,12 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :time_plans do |t|
       t.references :room
       t.references :time_list
-      t.references :time_item
       t.references :plan, polymorphic: true
       t.date :begin_on
       t.date :end_on
       t.string :repeat_type
       t.integer :repeat_days, array: true
+      t.integer :time_item_ids, array: true
       t.timestamps
     end
 
