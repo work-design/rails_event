@@ -1,5 +1,9 @@
-<div class="ui top attached borderless menu">
-  <div class="header item">Booking Time Plans</div>
+<div class="ui top attached secondary pointing menu">
+  <% @time_plans.each do |time_plan| %>
+    <div class="item active">
+      <%= time_plan.begin_on %>~<%= time_plan.end_on %>
+    </div>
+  <% end %>
   <div class="right menu">
     <div class="item">
       <%= link_to 'Time Plan', new_time_plan_path(params[:plan_type], params[:plan_id]), class: 'ui teal button' %>
@@ -7,12 +11,15 @@
   </div>
 </div>
 
-<div class="ui side">
-  <div class="content">
-    <%= render 'form' %>
-    <div id="calendar"></div>
-  </div>
-  <div class="sidebar">
-    <%= render 'table' %>
-  </div>
+<div class="ui bottom attached segment">
+  <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
+  
+  <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form' %>
+  <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form' %>
+  <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form' %>
+  <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form', data: { title: 'repeat_type' } } %>
+  <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name), form: 'time_plan_form' %>
+ 
+  
+  <div id="calendar"></div>
 </div>
