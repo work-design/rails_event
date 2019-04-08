@@ -4,10 +4,16 @@
   <thead>
     <tr>
       <th>
-        <%= TimeList.human_attribute_name(:id) %>
-        <%= link_to new_admin_time_list_path, class: 'ui red icon button', remote: true do %>
-          <i class="plus icon"></i>
+        <%= link_to new_admin_time_list_path, class: 'ui green icon button', remote: true do %>
+          <i class="plus icon"></i>添加
         <% end %>
+      </th>
+      <th colspan="4"></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <%= TimeList.human_attribute_name(:id) %>
       </th>
       <th>
         <%= TimeList.human_attribute_name(:name) %>(<%= TimeList.human_attribute_name(:code) %>)

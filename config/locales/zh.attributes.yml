@@ -4,3 +4,10 @@ zh:
       time_plan:
         begin_on: 开始日期
         end_on: 截止日期
+      time_list:
+        name: 名称
+        code: 代码
+        item_minutes: 节次时间（分钟）
+        interval_minutes: 课间时间（分钟）
+        default: 默认选择
+        time_items: 明细
