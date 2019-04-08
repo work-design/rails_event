@@ -13,8 +13,6 @@ class Booking::TimeItemsController < Booking::BaseController
       @results = @time_items.map { |x| { value: x.id, text: x.name, name: x.name } }
     end
 
-    @time_plan = TimePlan.new
-
     respond_to do |format|
       format.js
       format.json { render json: { values: @results } }

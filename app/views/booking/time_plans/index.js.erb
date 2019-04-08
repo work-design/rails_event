@@ -24,6 +24,9 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     omitZeroMinute: true,
     hour12: false
   },
+  eventSources: [
+  
+  ],
   eventClick: function(info) {
     var url = new URL(window.location);
     var data = new FormData(document.getElementById('time_plan_form'));

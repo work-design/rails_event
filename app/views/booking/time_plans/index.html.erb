@@ -11,11 +11,11 @@
 <div class="ui bottom attached segment">
   <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
   <div class="ui left icon input">
-    <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form' %>
+    <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
     <i class="hourglass start icon"></i>
   </div>
   <div class="ui left icon input">
-    <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form' %>
+    <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
     <i class="hourglass end icon"></i>
   </div>
   <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form' %>
