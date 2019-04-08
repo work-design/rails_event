@@ -11,6 +11,7 @@ class TimePlan < ApplicationRecord
   belongs_to :time_item, optional: true
   belongs_to :time_list, optional: true
 
+  default_scope -> { order(begin_on: :asc) }
 
   validate :validate_end_on
 
@@ -58,6 +59,21 @@ class TimePlan < ApplicationRecord
 
   def finish_at
 
+  end
+
+  def self.init_time_plan(params)
+    q = params.slice(
+      :plan_type,
+      :plan_id,
+      :room_id,
+      :begin_on,
+      :end_on
+    ).transform_values(&:presence)
+
+    self.where(plan_type: q[:plan_type], plan_id: q[:plan_id], room_id: q[:room_id])
+
+
+    self.find_or_initialize_by(q)
   end
 
 end

@@ -1,7 +1,7 @@
 module TimeListCalendar
 
   def default_date
-    Date.today
+    Date.today.beginning_of_month
   end
 
   def slot_duration
