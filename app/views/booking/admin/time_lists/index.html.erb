@@ -45,8 +45,8 @@
         <%= link_to edit_admin_time_list_path(time_list), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
           <i class="pencil alternate icon"></i>
         <% end %>
-        <%= link_to admin_time_list_path(time_list), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
-          <i class="times icon"></i>
+        <%= link_to admin_time_list_path(time_list), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui mini circular icon button' do %>
+          <i class="trash alternate icon"></i>
         <% end %>
       </td>
     </tr>
