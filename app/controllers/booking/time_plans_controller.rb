@@ -1,12 +1,11 @@
 class Booking::TimePlansController < Booking::BaseController
-  before_action :set_time_lists
+  before_action :set_plan, :set_time_lists
   before_action :set_default_time_plan, only: [:index, :create]
   before_action :set_time_plan, only: [:show, :destroy]
 
   def index
     q_params = {}.with_indifferent_access
-    q_params.merge! params.permit(:plan_type, :plan_id)
-    @time_plans = TimePlan.default_where(q_params)
+    @time_plans = @plan.time_plans
 
     respond_to do |format|
       format.html
@@ -78,13 +77,30 @@ class Booking::TimePlansController < Booking::BaseController
 
   def set_default_time_plan
     q = time_plan_params.slice(
-      :plan_type,
-      :plan_id,
       :room_id,
       :begin_on,
       :end_on
     ).transform_values(&:presence)
-    @time_plan = TimePlan.find_or_initialize_by(q)
+    @time_plan = @plan.time_plans.find_or_initialize_by(q)
+    @time_plan.time_list = @time_lists.default
+
+    if @time_plan.time_list
+      @settings = {
+        defaultDate: @time_plan.time_list.default_date,
+        minTime: @time_plan.time_list.min_time,
+        maxTime: @time_plan.time_list.max_time,
+        slotDuration: @time_plan.time_list.slot_duration,
+        slotLabelInterval: @time_plan.time_list.slot_label_interval
+      }
+    else
+      @settings = {
+        defaultDate: '2000-01-01',
+        minTime: '07:30:00',
+        maxTime: '18:30:00',
+        slotDuration: '00:10',
+        slotLabelInterval: '1:00'
+      }
+    end
   end
 
   def time_plan_params

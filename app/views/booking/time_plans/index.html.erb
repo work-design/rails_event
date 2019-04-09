@@ -1,9 +1,17 @@
 <div class="ui top attached mini steps">
   <% @time_plans.each do |time_plan| %>
-    <%= link_to time_plan_path(params[:plan_type], params[:plan_id], time_plan.id), class: 'active step' do %>
-      <div class="content">
-        <%= time_plan.begin_on %>~<%= time_plan.end_on %>
-      </div>
+    <% if time_plan.id %>
+      <%= link_to time_plan_path(params[:plan_type], params[:plan_id], time_plan.id), class: 'active step' do %>
+        <div class="content">
+          <%= time_plan.begin_on %>~<%= time_plan.end_on %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to time_plans_path(params[:plan_type], params[:plan_id]), class: 'active step' do %>
+        <div class="content">
+          <%= time_plan.begin_on %>~<%= time_plan.end_on %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

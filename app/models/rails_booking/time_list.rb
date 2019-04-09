@@ -12,6 +12,8 @@ class TimeList < ApplicationRecord
     self.class.where.not(id: self.id).where(organ_id: self.organ_id).update_all(default: false)
   end
 
-
+  def self.default
+    self.find_by(default: true)
+  end
 
 end
