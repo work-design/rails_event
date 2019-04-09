@@ -13,6 +13,7 @@ class TimePlan < ApplicationRecord
 
   default_scope -> { order(begin_on: :asc) }
 
+  validates :begin_on, presence: true
   validate :validate_end_on
 
   def validate_end_on
