@@ -11,15 +11,15 @@
       <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
       <i class="hourglass end icon"></i>
     </div>
-    <div class="ui simple dropdown">
-      <i class="dropdown icon"></i>
-      <div class="left menu">
-        <% @time_plans.each do |time_plan| %>
-          <%= link_to time_plan_path(params[:plan_type], params[:plan_id], time_plan.id), class: active_assert(time_plan.id == @time_plan.id) do %>
-            <span><%= time_plan.begin_on %>~<%= time_plan.end_on %></span>
-          <% end %>
+  </div>
+  <div class="ui simple dropdown item">
+    <i class="dropdown icon"></i>
+    <div class="left menu">
+      <% @time_plans.each do |time_plan| %>
+        <%= link_to time_plan_path(params[:plan_type], params[:plan_id], time_plan.id), class: active_assert(time_plan.id == @time_plan.id) do %>
+          <span><%= time_plan.begin_on %>~<%= time_plan.end_on %></span>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
   <%= link_to time_plans_path(params[:plan_type], params[:plan_id]), class: 'icon item' do %>
