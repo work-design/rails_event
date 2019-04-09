@@ -7,7 +7,6 @@ class TimeItem < ApplicationRecord
   belongs_to :time_list
   has_one :last_item, -> { order(finish_at: :desc) }, class_name: self.name, foreign_key: :time_list_id, primary_key: :time_list_id
 
-
   def name
     "#{start_at.to_s(:time)} ~ #{finish_at.to_s(:time)}"
   end

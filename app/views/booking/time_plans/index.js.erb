@@ -24,7 +24,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     omitZeroMinute: true,
     hour12: false
   },
-  events: <%= raw @time_plan.time_list.events(7).to_json %>,
+  events: <%= raw @time_plan.time_list&.events(7).to_json %>,
   eventClick: function(info) {
     var url = new URL(window.location);
     var data = new FormData(document.getElementById('time_plan_form'));

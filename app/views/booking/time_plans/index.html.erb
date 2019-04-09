@@ -1,30 +1,35 @@
 <div class="ui top attached menu">
+  <%= link_to time_plans_path(params[:plan_type], params[:plan_id]), class: 'icon item' do %>
+    <i class="caret left icon"></i>
+  <% end %>
   <div class="item">
-    <%= render 'label' %>
+    <div class="ui left icon input">
+      <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
+      <i class="hourglass start icon"></i>
+    </div>
+    <div class="ui left icon input">
+      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
+      <i class="hourglass end icon"></i>
+    </div>
     <div class="ui simple dropdown">
       <i class="dropdown icon"></i>
       <div class="left menu">
         <% @time_plans.each do |time_plan| %>
           <%= link_to time_plan_path(params[:plan_type], params[:plan_id], time_plan.id), class: active_assert(time_plan.id == @time_plan.id) do %>
-            <span>ssssssssssssssss<%= time_plan.begin_on %>~<%= time_plan.end_on %></span>
+            <span><%= time_plan.begin_on %>~<%= time_plan.end_on %></span>
           <% end %>
         <% end %>
       </div>
     </div>
   </div>
-  
+  <%= link_to time_plans_path(params[:plan_type], params[:plan_id]), class: 'icon item' do %>
+    <i class="caret right icon"></i>
+  <% end %>
 </div>
 
 <div class="ui bottom attached segment">
   <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
-  <div class="ui left icon input">
-    <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
-    <i class="hourglass start icon"></i>
-  </div>
-  <div class="ui left icon input">
-    <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
-    <i class="hourglass end icon"></i>
-  </div>
+  
   <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form' %>
   <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form', data: { title: 'repeat_type' } } %>
   <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name), form: 'time_plan_form' %>
