@@ -21,17 +21,8 @@ class Booking::TimePlansController < Booking::BaseController
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
     set_default_time_plan
-
+    set_repeat_days
     @time_plan.assign_attributes time_plan_params
-    @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
-    dt = params[:time_item_start].to_s.to_datetime
-    if dt
-      if time_plan_params[:repeat_type] == 'weekly'
-        @time_plan.repeat_days << dt.wday
-      elsif time_plan_params[:repeat_type] == 'monthly'
-        @time_plan.repeat_days << dt.day
-      end
-    end
 
     respond_to do |format|
       if @time_plan.save
@@ -51,17 +42,8 @@ class Booking::TimePlansController < Booking::BaseController
   def update
     @time_plan = @plan.time_plans.find params[:id]
     set_default_time_plan
-
+    set_repeat_days
     @time_plan.assign_attributes time_plan_params
-    @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
-    dt = params[:time_item_start].to_s.to_datetime
-    if dt
-      if time_plan_params[:repeat_type] == 'weekly'
-        @time_plan.repeat_days << dt.wday
-      elsif time_plan_params[:repeat_type] == 'monthly'
-        @time_plan.repeat_days << dt.day
-      end
-    end
 
     respond_to do |format|
       if @time_plan.save
@@ -130,6 +112,19 @@ class Booking::TimePlansController < Booking::BaseController
         slotDuration: '00:10',
         slotLabelInterval: '1:00'
       }
+    end
+  end
+
+  def set_repeat_days
+    dt = params[:time_item_start].to_s.to_datetime
+    if dt
+      if time_plan_params[:repeat_type] == 'weekly'
+        @time_plan.repeat_days.merge! dt.wday => params[:time_item_id]
+      elsif time_plan_params[:repeat_type] == 'monthly'
+        @time_plan.repeat_days.merge! dt.day => params[:time_item_id]
+      elsif time_plan_params[:repeat_type] == 'once'
+        @time_plan.repeat_days.merge! dt.to_s(:date) => params[:time_item_id]
+      end
     end
   end
 

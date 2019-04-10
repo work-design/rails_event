@@ -1,12 +1,12 @@
-module RailsBookingRecurrence
+module TimePlanRecurrence
   extend ActiveSupport::Concern
 
   included do
     attribute :repeat_type, :string, default: ''
     if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
-      attribute :repeat_days, :integer, array: true, default: []
+      attribute :repeat_days, :json, default: {}
     else
-      serialize :repeat_days, Array
+      serialize :repeat_days, Hash
     end
 
     enum repeat_type: {
@@ -14,25 +14,6 @@ module RailsBookingRecurrence
       weekly: 'weekly',
       monthly: 'monthly'
     }
-
-    before_save :deal_repeat_days, if: -> { repeat_days_changed? }
-  end
-
-  def deal_repeat_days
-    self.repeat_days = self.repeat_days.map(&:to_i)
-  end
-
-
-  def next_start_at
-    return if start_at.nil?
-    _next_day = self.next_day
-    _next_day.change(hour: start_at.hour, min: start_at.min, sec: start_at.sec)
-  end
-
-  def next_finish_at
-    return if finish_at.nil?
-    _next_day = self.next_day
-    _next_day.change(hour: finish_at.hour, min: finish_at.min, sec: finish_at.sec)
   end
 
   def next_day(datetime = Time.now)

@@ -27,7 +27,6 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.date :end_on
       t.string :repeat_type
       t.integer :repeat_days, array: true
-      t.integer :time_item_ids, array: true
       t.timestamps
     end
 

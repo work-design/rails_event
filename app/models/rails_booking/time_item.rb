@@ -6,6 +6,14 @@ class TimeItem < ApplicationRecord
 
   belongs_to :time_list
   has_one :last_item, -> { order(finish_at: :desc) }, class_name: self.name, foreign_key: :time_list_id, primary_key: :time_list_id
+  validate :validate_finish_at
+
+  def validate_finish_at
+    return if finish_at.nil? && start_at.nil?
+    unless finish_at > start_at
+      self.errors.add :finish_at, 'Finish At Should large then Start at time!'
+    end
+  end
 
   def name
     "#{start_at.to_s(:time)} ~ #{finish_at.to_s(:time)}"
