@@ -8,7 +8,6 @@ class TimePlan < ApplicationRecord
 
   belongs_to :room, optional: true
   belongs_to :plan, polymorphic: true
-  belongs_to :time_item, optional: true
   belongs_to :time_list, optional: true
 
   default_scope -> { order(begin_on: :asc) }
@@ -60,6 +59,16 @@ class TimePlan < ApplicationRecord
 
   def finish_at
 
+  end
+
+  def time_items
+    TimeItem.find Array(self.time_item_ids)
+  end
+
+  def item_events
+    time_items.map do |time_item|
+      time_item.selected_event(date)
+    end
   end
 
   def self.init_time_plan(params = {})

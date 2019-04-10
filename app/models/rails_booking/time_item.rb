@@ -38,4 +38,14 @@ class TimeItem < ApplicationRecord
     }
   end
 
+  def selected_event(date)
+    {
+      id: id,
+      start: start_at.change(date.parts).strftime('%FT%T'),
+      end: finish_at.change(date.parts).strftime('%FT%T'),
+      rendering: 'background',
+      color: '#2A92CA'
+    }
+  end
+
 end

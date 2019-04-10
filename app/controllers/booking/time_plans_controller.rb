@@ -20,6 +20,7 @@ class Booking::TimePlansController < Booking::BaseController
   def create
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
+    set_default_time_plan
 
     @time_plan.assign_attributes time_plan_params
     @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
@@ -49,6 +50,7 @@ class Booking::TimePlansController < Booking::BaseController
 
   def update
     @time_plan = @plan.time_plans.find params[:id]
+    set_default_time_plan
 
     @time_plan.assign_attributes time_plan_params
     @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
