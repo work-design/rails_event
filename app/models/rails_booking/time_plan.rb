@@ -62,19 +62,21 @@ class TimePlan < ApplicationRecord
 
   end
 
-  def self.init_time_plan(params)
+  def self.init_time_plan(params = {})
     q = params.slice(
       :plan_type,
       :plan_id,
       :room_id,
       :begin_on,
       :end_on
-    ).transform_values(&:presence)
+    )
 
-    self.where(plan_type: q[:plan_type], plan_id: q[:plan_id], room_id: q[:room_id])
-
-
-    self.find_or_initialize_by(q)
+    same_scopes = self.where(plan_type: q[:plan_type], plan_id: q[:plan_id], room_id: q[:room_id])
+    same_scopes.default_where('begin_on-lte': q[:begin_on], 'end_on-gte': q[:begin_on]).or(same_scopes.where(end_on: nil))
   end
 
 end
+
+# note
+# 如果已经存在 A ~ B 日期范围内的数据；
+# begin_on 位于 [A, B]之间, end_on

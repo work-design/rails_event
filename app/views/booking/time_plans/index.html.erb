@@ -9,7 +9,7 @@
       <div class="ui label">
         <i class="arrow circle right icon"></i>
       </div>
-      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
+      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, max: '2019-04-20', form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
     </div>
   </div>
   <div class="ui simple dropdown item">
@@ -28,7 +28,11 @@
 </div>
 
 <div class="ui bottom attached segment">
-  <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
+  <% if @time_plan.id %>
+    <%= form_tag time_plan_path(params[:plan_type], params[:plan_id], @time_plan), method: :patch, id: 'time_plan_form' do %><% end %>
+  <% else %>
+    <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
+  <% end %>
   
   <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form' %>
   <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form', data: { title: 'repeat_type' } } %>

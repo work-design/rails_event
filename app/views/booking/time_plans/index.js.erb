@@ -26,12 +26,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   },
   events: <%= raw @time_plan.time_list&.events(7).to_json %>,
   eventClick: function(info) {
-    var url = new URL(window.location);
-    var data = new FormData(document.getElementById('time_plan_form'));
+    var form = document.getElementById('time_plan_form')
+    var data = new FormData(form);
     data.set('time_item_id', info.event.id);
     data.set('time_item_start', info.event.start.toISOString());
 
-    Rails.ajax({url: url, type: 'POST', data: data, dataType: 'script'});
+    Rails.ajax({url: form.action, type: 'POST', data: data, dataType: 'script'});
   }
 });
 

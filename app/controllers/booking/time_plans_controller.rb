@@ -1,11 +1,15 @@
 class Booking::TimePlansController < Booking::BaseController
   before_action :set_plan, :set_time_lists
-  before_action :set_default_time_plan, only: [:index, :create]
   before_action :set_time_plan, only: [:show, :destroy]
 
   def index
     q_params = {}.with_indifferent_access
+    q_params.merge! time_plan_params.permit(:room_id)
     @time_plans = @plan.time_plans.default_where(q_params)
+
+    @time_plan = @plan.time_plans.find_or_initialize_by(q_params.slice(:room_id))
+    @time_plan.time_list ||= @time_lists.default
+    set_default_time_plan
 
     respond_to do |format|
       format.html
@@ -14,6 +18,9 @@ class Booking::TimePlansController < Booking::BaseController
   end
 
   def create
+    @time_plan = @plan.time_plans.build
+    @time_plan.time_list ||= @time_lists.default
+
     @time_plan.assign_attributes time_plan_params
     @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
     dt = params[:time_item_start].to_s.to_datetime
@@ -29,12 +36,41 @@ class Booking::TimePlansController < Booking::BaseController
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
-        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
+        format.js { render :index }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
+        format.js { render :index }
+        format.json { render :show }
+      end
+    end
+  end
+
+  def update
+    @time_plan = @plan.time_plans.find params[:id]
+
+    @time_plan.assign_attributes time_plan_params
+    @time_plan.time_item_ids << params[:time_item_id] if params[:time_item_id]
+    dt = params[:time_item_start].to_s.to_datetime
+    if dt
+      if time_plan_params[:repeat_type] == 'weekly'
+        @time_plan.repeat_days << dt.wday
+      elsif time_plan_params[:repeat_type] == 'monthly'
+        @time_plan.repeat_days << dt.day
+      end
+    end
+
+    respond_to do |format|
+      if @time_plan.save
+        format.html.phone
+        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
+        format.js { render :index }
+        format.json { render :show }
+      else
+        format.html.phone { render :new }
+        format.html { render :new }
+        format.js { render :index }
         format.json { render :show }
       end
     end
@@ -76,14 +112,6 @@ class Booking::TimePlansController < Booking::BaseController
   end
 
   def set_default_time_plan
-    q = time_plan_params.slice(
-      :room_id,
-      :begin_on,
-      :end_on
-    ).transform_values(&:presence)
-    @time_plan = @plan.time_plans.find_or_initialize_by(q)
-    @time_plan.time_list = @time_lists.default
-
     if @time_plan.time_list
       @settings = {
         defaultDate: @time_plan.time_list.default_date,
