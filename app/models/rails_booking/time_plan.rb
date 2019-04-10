@@ -1,10 +1,14 @@
 class TimePlan < ApplicationRecord
   include TimePlanRecurrence
+  REPEAT = {
+    'once' => 3,
+    'weekly' => 7,
+    'monthly' => 30
+  }
 
   attribute :room_id, :integer
   attribute :begin_on, :date, default: -> { Date.today }
   attribute :end_on, :date
-  attribute :time_item_ids, :integer, array: true, default: []
 
   belongs_to :room, optional: true
   belongs_to :plan, polymorphic: true
@@ -39,10 +43,11 @@ class TimePlan < ApplicationRecord
     )
   end
 
-  def item_events
-    time_items.map do |time_item|
-      time_item.selected_event(date)
-    end
+  def events
+    day_count = REPEAT[self.repeat_type]
+    day_count.times.map do |count|
+      time_list.item_events(count, selected_ids: Array(self.repeat_days[count.to_s]))
+    end.flatten
   end
 
 end
