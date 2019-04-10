@@ -46,7 +46,8 @@ class TimeItem < ApplicationRecord
     }
   end
 
-  def selected_event(date)
+  def selected_event(span)
+    date = time_list.default_date + span
     {
       id: id,
       start: start_at.change(date.parts).strftime('%FT%T'),
