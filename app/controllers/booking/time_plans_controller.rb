@@ -14,6 +14,7 @@ class Booking::TimePlansController < Booking::BaseController
     respond_to do |format|
       format.html
       format.js
+      format.json
     end
   end
 
@@ -34,7 +35,7 @@ class Booking::TimePlansController < Booking::BaseController
         format.html.phone { render :new }
         format.html { render :new }
         format.js { render :index }
-        format.json { render :show }
+        format.json { process_errors(@time_plan) }
       end
     end
   end
@@ -55,7 +56,7 @@ class Booking::TimePlansController < Booking::BaseController
         format.html.phone { render :new }
         format.html { render :new }
         format.js { render :index }
-        format.json { render :show }
+        format.json { process_errors(@time_plan) }
       end
     end
   end

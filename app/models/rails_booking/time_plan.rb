@@ -25,7 +25,7 @@ class TimePlan < ApplicationRecord
     r2 = same_scopes.default_where('begin_on-lte': self.end_on, 'end_on-gte': self.end_on).exists?
     r3 = same_scopes.where(end_on: nil).exists?
     if r1 || r2 || r3
-      self.errors.add :end_on, 'date range is not valid'
+      self.errors.add :end_on, "date range is not valid, r1: #{r1}, r2: #{r2}, r3:#{r3}"
     end
     unless end_on > begin_on
       self.errors.add :end_on, 'Finish At Should large then Start at time!'
@@ -33,7 +33,7 @@ class TimePlan < ApplicationRecord
   end
 
   def same_scopes
-    self.class.default_where(
+    self.class.where.not(id: self.id).default_where(
       {
         plan_type: self.plan_type,
         plan_id: self.plan_id,
