@@ -5,7 +5,7 @@ class Booking::TimePlansController < Booking::BaseController
 
   def index
     q_params = {}.with_indifferent_access
-    @time_plans = @plan.time_plans
+    @time_plans = @plan.time_plans.default_where(q_params)
 
     respond_to do |format|
       format.html

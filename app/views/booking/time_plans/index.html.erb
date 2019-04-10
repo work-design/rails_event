@@ -1,15 +1,15 @@
-<div class="ui top attached fluid menu">
+<div class="ui top attached fluid borderless menu">
   <%= link_to time_plans_path(params[:plan_type], params[:plan_id]), class: 'icon item' do %>
     <i class="caret left icon"></i>
   <% end %>
   <div class="item">
-    <div class="ui left icon input">
-      <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
+    <div class="ui left icon right labeled left labeled input">
       <i class="hourglass start icon"></i>
-    </div>
-    <div class="ui left icon input">
+      <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
+      <div class="ui label">
+        <i class="arrow circle right icon"></i>
+      </div>
       <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]), filter: true } %>
-      <i class="hourglass end icon"></i>
     </div>
   </div>
   <div class="ui simple dropdown item">
