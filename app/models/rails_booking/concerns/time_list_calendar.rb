@@ -30,9 +30,9 @@ module TimeListCalendar
     end
   end
 
-  def events(day_count)
-    day_count.times.map do |count|
-      item_events(count)
+  def events(day_count = 7)
+    (default_date .. default_date + day_count).map do |date|
+      item_events(date)
     end.flatten
   end
 

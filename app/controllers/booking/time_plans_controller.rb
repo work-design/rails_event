@@ -18,6 +18,13 @@ class Booking::TimePlansController < Booking::BaseController
     end
   end
 
+  def calendar
+    @time_list = TimeList.find params[:time_list_id]
+    set_settings
+    @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
+    @events = @time_list.events(@settings[:dayCount])
+  end
+
   def create
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
@@ -77,11 +84,6 @@ class Booking::TimePlansController < Booking::BaseController
     redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully destroyed.'
   end
 
-  def calendar
-    @time_list = TimeList.find params[:time_list_id]
-    @events = @time_list.events(repeat_settings[:day_count])
-  end
-
   private
   def set_plan
     @plan = params[:plan_type].constantize.find params[:plan_id]
@@ -105,6 +107,8 @@ class Booking::TimePlansController < Booking::BaseController
     @time_list ||= @time_plan.time_list
     if @time_list
       @settings = {
+        defaultDate: @time_list.default_date,
+        dayCount: 7,
         minTime: @time_list.min_time,
         maxTime: @time_list.max_time,
         slotDuration: @time_list.slot_duration,
@@ -113,6 +117,7 @@ class Booking::TimePlansController < Booking::BaseController
     else
       @settings = {
         defaultDate: '2000-01-01',
+        dayCount: 7,
         minTime: '07:30:00',
         maxTime: '18:30:00',
         slotDuration: '00:10',
@@ -120,7 +125,7 @@ class Booking::TimePlansController < Booking::BaseController
       }
     end
     if @time_plan
-      @setttings.merge!(
+      @settings.merge!(
         defaultDate: @time_plan.default_date.to_s(:date)
       )
       repeat_settings = FullCalendarHelper.repeat_settings(repeat_type: @time_plan.repeat_type)
