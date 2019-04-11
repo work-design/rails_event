@@ -1,2 +1,12 @@
-$('#modal').replaceWith('<%= j(render 'show') %>');
-$('#modal').modal('show');
+<% @settings.except(:defaultDate).each do |key, value| %>
+<% if value.is_a?(Hash) %>
+calendar.setOption('<%= key %>', <%= raw value.to_json %>)
+<% elsif value.is_a?(String) %>
+calendar.setOption('<%= key %>', '<%= value %>')
+<% else %>
+calendar.setOption('<%= key %>', <%= value %>)
+<% end %>
+<% end %>
+calendar.changeView('timeGrid', '<%= @settings[:defaultDate] %>')
+calendar.removeAllEvents()
+calendar.addEventSource(<%= raw @time_plan.events.to_json %>)
