@@ -120,6 +120,9 @@ class Booking::TimePlansController < Booking::BaseController
 
   def set_repeat_days
     dt = params[:time_item_start].to_s.to_datetime
+    if @time_plan.repeat_type_changed?
+      @time_plan.repeat_days = {}
+    end
     if dt
       case @time_plan.repeat_type
       when 'weekly'
