@@ -1,6 +1,7 @@
 //= require moment/moment
 //= require moment-timezone/builds/moment-timezone-with-data
 //= require @fullcalendar/core
+//= require @fullcalendar/core/locales/zh-cn
 //= require @fullcalendar/daygrid
 //= require @fullcalendar/timegrid
 //= require @fullcalendar/resource-common

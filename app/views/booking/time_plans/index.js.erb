@@ -1,6 +1,7 @@
 var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
   schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+  locale: 'zh-cn',
   plugins: [ 'dayGrid', 'timeGrid', 'resourceDayGrid', 'resourceTimeGrid' ],
   header: {
     left: 'prev,next',
