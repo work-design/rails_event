@@ -59,7 +59,7 @@ class TimePlan < ApplicationRecord
     when 'monthly'
       Array(self.repeat_days[(index + 1).to_s])
     when 'weekly'
-      Array(self.repeat_days[index.to_s])
+      Array(self.repeat_days[(index + 1).to_s])
     end
   end
 
