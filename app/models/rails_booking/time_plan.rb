@@ -53,11 +53,12 @@ class TimePlan < ApplicationRecord
   end
 
   def selected_ids(date, index)
-    if self.repeat_type == 'once'
+    case repeat_type
+    when 'once'
       Array(self.repeat_days[date.to_s])
-    elsif repeat_type == 'monthly'
+    when 'monthly'
       Array(self.repeat_days[(index + 1).to_s])
-    elsif repeat_type == 'weekly'
+    when 'weekly'
       Array(self.repeat_days[index.to_s])
     end
   end
