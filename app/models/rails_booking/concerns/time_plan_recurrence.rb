@@ -2,7 +2,7 @@ module TimePlanRecurrence
   extend ActiveSupport::Concern
 
   included do
-    attribute :repeat_type, :string, default: ''
+    attribute :repeat_type, :string, default: 'weekly'
     if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
       attribute :repeat_days, :json, default: {}
     else
