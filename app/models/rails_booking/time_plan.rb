@@ -3,7 +3,7 @@ class TimePlan < ApplicationRecord
   REPEAT = {
     'once' => 7,
     'weekly' => 7,
-    'monthly' => 30
+    'monthly' => 31
   }
 
   attribute :room_id, :integer
@@ -51,10 +51,20 @@ class TimePlan < ApplicationRecord
     )
   end
 
+  def selected_ids(date, index)
+    if self.repeat_type == 'once'
+      Array(self.repeat_days[date.to_s])
+    elsif repeat_type == 'monthly'
+      Array(self.repeat_days[(index + 1).to_s])
+    elsif repeat_type == 'weekly'
+      Array(self.repeat_days[index.to_s])
+    end
+  end
+
   def events
     day_count = REPEAT[self.repeat_type]
-    day_count.times.map do |count|
-      time_list.item_events(count, selected_ids: Array(self.repeat_days[count.to_s]))
+    (default_date .. default_date + day_count).map.with_index do |date, index|
+      time_list.item_events(date, selected_ids: selected_ids(date, index))
     end.flatten
   end
 

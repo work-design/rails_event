@@ -3,7 +3,6 @@ module FullCalendarHelper
 
   def repeat_settings(options = {})
     settings = {
-      defaultDate: Date.today.to_s,
       dayCount: 7,
       columnHeaderFormat: {
         year: 'numeric',
@@ -15,7 +14,7 @@ module FullCalendarHelper
     if options[:repeat_type] == 'monthly'
       settings.merge!(
         defaultDate: Date.today.beginning_of_month.to_s,
-        dayCount: 30,
+        dayCount: 31,
         columnHeaderFormat: { day: 'numeric' }
       )
     elsif options[:repeat_type] == 'weekly'

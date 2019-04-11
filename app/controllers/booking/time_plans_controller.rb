@@ -9,7 +9,7 @@ class Booking::TimePlansController < Booking::BaseController
 
     @time_plan = @plan.time_plans.find_or_initialize_by(q_params.slice(:room_id))
     @time_plan.time_list ||= @time_lists.default
-    set_default_time_plan
+    set_settings
 
     respond_to do |format|
       format.html
@@ -21,9 +21,9 @@ class Booking::TimePlansController < Booking::BaseController
   def create
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
-    set_default_time_plan
-    set_repeat_days
     @time_plan.assign_attributes time_plan_params
+    set_repeat_days
+    set_settings
 
     respond_to do |format|
       if @time_plan.save
@@ -42,9 +42,9 @@ class Booking::TimePlansController < Booking::BaseController
 
   def update
     @time_plan = @plan.time_plans.find params[:id]
-    set_default_time_plan
-    set_repeat_days
     @time_plan.assign_attributes time_plan_params
+    set_repeat_days
+    set_settings
 
     respond_to do |format|
       if @time_plan.save
@@ -96,7 +96,7 @@ class Booking::TimePlansController < Booking::BaseController
     params.permit(:plan_type, :plan_id)
   end
 
-  def set_default_time_plan
+  def set_settings
     if @time_plan.time_list
       @settings = {
         defaultDate: @time_plan.default_date.to_s(:date),
@@ -121,11 +121,12 @@ class Booking::TimePlansController < Booking::BaseController
   def set_repeat_days
     dt = params[:time_item_start].to_s.to_datetime
     if dt
-      if time_plan_params[:repeat_type] == 'weekly'
+      case @time_plan.repeat_type
+      when 'weekly'
         @time_plan.repeat_days.combine_merge! dt.wday => params[:time_item_id].to_i
-      elsif time_plan_params[:repeat_type] == 'monthly'
+      when 'monthly'
         @time_plan.repeat_days.combine_merge! dt.day => params[:time_item_id].to_i
-      elsif time_plan_params[:repeat_type] == 'once'
+      when 'once'
         @time_plan.repeat_days.combine_merge! dt.to_s(:date) => params[:time_item_id].to_i
       end
     end

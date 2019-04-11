@@ -35,26 +35,19 @@ class TimeItem < ApplicationRecord
     end
   end
 
-  def event(span = 0)
-    date = time_list.default_date + span
-    {
+  def event(date, selected: false)
+    r = {
       id: id,
       start: start_at.change(date.parts).strftime('%FT%T'),
       end: finish_at.change(date.parts).strftime('%FT%T'),
       rendering: 'background',
       color: '#ff9f89'
     }
-  end
-
-  def selected_event(span)
-    date = time_list.default_date + span
-    {
-      id: id,
-      start: start_at.change(date.parts).strftime('%FT%T'),
-      end: finish_at.change(date.parts).strftime('%FT%T'),
-      rendering: 'background',
-      color: '#2A92CA'
-    }
+    if selected
+      r.merge! color: '#2A92CA'
+    else
+      r
+    end
   end
 
 end
