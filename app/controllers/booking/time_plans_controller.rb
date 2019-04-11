@@ -123,11 +123,11 @@ class Booking::TimePlansController < Booking::BaseController
     if dt
       case @time_plan.repeat_type
       when 'weekly'
-        @time_plan.repeat_days.combine_merge! dt.wday => params[:time_item_id].to_i
+        @time_plan.repeat_days.toggle! dt.wday => params[:time_item_id].to_i
       when 'monthly'
-        @time_plan.repeat_days.combine_merge! dt.day => params[:time_item_id].to_i
+        @time_plan.repeat_days.toggle! dt.day => params[:time_item_id].to_i
       when 'once'
-        @time_plan.repeat_days.combine_merge! dt.to_s(:date) => params[:time_item_id].to_i
+        @time_plan.repeat_days.toggle! dt.to_s(:date) => params[:time_item_id].to_i
       end
     end
   end
