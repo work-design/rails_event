@@ -10,11 +10,7 @@ class Booking::TimeController < Booking::BaseController
   end
 
   def calendar
-    @settings = {
-      dayCount: repeat_settings[:day_count],
-      columnHeaderFormat: repeat_settings[:columnHeaderFormat].to_json
-    }
+    @settings = FullCalendarHelper.repeat_settings(params.permit(:repeat_type))
   end
-
 
 end

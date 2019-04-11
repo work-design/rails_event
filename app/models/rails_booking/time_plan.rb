@@ -1,7 +1,7 @@
 class TimePlan < ApplicationRecord
   include TimePlanRecurrence
   REPEAT = {
-    'once' => 3,
+    'once' => 7,
     'weekly' => 7,
     'monthly' => 30
   }
@@ -29,6 +29,14 @@ class TimePlan < ApplicationRecord
     end
     unless end_on > begin_on
       self.errors.add :end_on, 'Finish At Should large then Start at time!'
+    end
+  end
+
+  def default_date
+    if self.repeat_type == 'once'
+      self.begin_on
+    else
+      time_list.default_date
     end
   end
 

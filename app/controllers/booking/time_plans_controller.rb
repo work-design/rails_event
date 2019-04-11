@@ -99,7 +99,7 @@ class Booking::TimePlansController < Booking::BaseController
   def set_default_time_plan
     if @time_plan.time_list
       @settings = {
-        defaultDate: @time_plan.time_list.default_date,
+        defaultDate: @time_plan.default_date.to_s(:date),
         minTime: @time_plan.time_list.min_time,
         maxTime: @time_plan.time_list.max_time,
         slotDuration: @time_plan.time_list.slot_duration,
@@ -114,6 +114,8 @@ class Booking::TimePlansController < Booking::BaseController
         slotLabelInterval: '1:00'
       }
     end
+    repeat_settings = FullCalendarHelper.repeat_settings(repeat_type: @time_plan.repeat_type)
+    @settings.merge! repeat_settings
   end
 
   def set_repeat_days
