@@ -9,11 +9,4 @@ class Booking::TimeController < Booking::BaseController
     end
   end
 
-  def calendar
-    @settings =  {
-      defaultDate: Date.today.to_s
-    }
-    @settings.merge! FullCalendarHelper.repeat_settings(params.permit(:repeat_type))
-  end
-
 end

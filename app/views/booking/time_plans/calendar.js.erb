@@ -7,4 +7,6 @@ calendar.setOption('<%= key %>', '<%= value %>')
 calendar.setOption('<%= key %>', <%= value %>)
 <% end %>
 <% end %>
-calendar.gotoDate('<%= @settings[:defaultDate] %>')
+calendar.changeView('timeGrid', '<%= @settings[:defaultDate] %>')
+calendar.removeAllEvents()
+calendar.addEventSource(<%= raw @events.to_json %>)

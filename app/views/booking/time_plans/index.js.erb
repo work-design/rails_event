@@ -2,13 +2,13 @@ var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
   schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
   locale: 'zh-cn',
-  plugins: [ 'dayGrid', 'timeGrid', 'resourceDayGrid', 'resourceTimeGrid' ],
+  plugins: [ 'timeGrid' ],
   header: {
     left: 'prev,next',
     center: '',
     right: ''
   },
-  defaultView: 'timeGridWeek',
+  defaultView: 'timeGrid',
   defaultDate: '<%= @settings[:defaultDate] %>',
   columnHeaderFormat: <%= raw @settings[:columnHeaderFormat].to_json %>,
   dayCount: <%= @settings[:dayCount] %>,

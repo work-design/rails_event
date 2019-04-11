@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   scope module: :booking do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
-      get :calendar
     end
     scope ':plan_type/:plan_id' do
-      resources :time_plans
+      resources :time_plans do
+        get :calendar, on: :collection
+      end
     end
     scope ':booker_type/:booker_id' do
       resources :time_bookings
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
     resources :time_items, only: [:index] do
       collection do
         get :select
-        get :add_event
       end
     end
   end

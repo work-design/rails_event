@@ -19,16 +19,6 @@ class Booking::TimeItemsController < Booking::BaseController
     end
   end
 
-  def add_event
-    @settings = {
-      minTime: @time_list.min_time,
-      maxTime: @time_list.max_time,
-      slotDuration: @time_list.slot_duration,
-      slotLabelInterval: @time_list.slot_label_interval
-    }
-    @events = @time_list.events(repeat_settings[:day_count])
-  end
-
   private
   def set_time_list
     @time_list = TimeList.find params[:time_list_id]
