@@ -3,24 +3,27 @@ module FullCalendarHelper
 
   def repeat_settings(repeat_type: 'once')
     settings = {
-      dayCount: 7,
-      columnHeaderFormat: {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        weekday: 'short'
-      }
+      defaultDate: default_date(repeat_type: repeat_type).to_s
     }
+
     case repeat_type
+    when 'once'
+      settings.merge!(
+        dayCount: 7,
+        columnHeaderFormat: {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          weekday: 'short'
+        }
+      )
     when 'monthly'
       settings.merge!(
-        defaultDate: default_date(repeat_type: repeat_type).to_s,
         dayCount: 31,
         columnHeaderFormat: { day: 'numeric' }
       )
     when 'weekly'
       settings.merge!(
-        defaultDate: default_date(repeat_type: repeat_type).to_s,
         dayCount: 7,
         columnHeaderFormat: { weekday: 'short' }
       )

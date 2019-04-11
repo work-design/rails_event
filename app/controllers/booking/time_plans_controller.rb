@@ -22,7 +22,7 @@ class Booking::TimePlansController < Booking::BaseController
     @time_list = TimeList.find params[:time_list_id]
     set_settings
     @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
-    @events = @time_list.events(@settings[:dayCount])
+    @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
 
   def create
@@ -107,8 +107,6 @@ class Booking::TimePlansController < Booking::BaseController
     @time_list ||= @time_plan.time_list
     if @time_list
       @settings = {
-        defaultDate: @time_list.default_date,
-        dayCount: 7,
         minTime: @time_list.min_time,
         maxTime: @time_list.max_time,
         slotDuration: @time_list.slot_duration,

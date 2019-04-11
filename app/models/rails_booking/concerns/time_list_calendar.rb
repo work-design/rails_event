@@ -1,9 +1,5 @@
 module TimeListCalendar
 
-  def default_date
-    Date.today.beginning_of_month
-  end
-
   def slot_duration
     g = item_minutes.gcd(interval_minutes)
     (Time.current.beginning_of_day + g.minutes).to_s(:time)
@@ -30,7 +26,8 @@ module TimeListCalendar
     end
   end
 
-  def events(day_count = 7)
+  def events(date, day_count = 7)
+    default_date = date.to_date
     (default_date .. default_date + day_count).map do |date|
       item_events(date)
     end.flatten
