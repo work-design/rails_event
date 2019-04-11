@@ -33,10 +33,11 @@ class TimePlan < ApplicationRecord
   end
 
   def default_date
-    if self.repeat_type == 'once'
+    case self.repeat_type
+    when 'once'
       self.begin_on
-    else
-      time_list.default_date
+    when 'weekly', 'monthly'
+      FullCalendarHelper.default_date(repeat_type: repeat_type)
     end
   end
 

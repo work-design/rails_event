@@ -1,7 +1,7 @@
 module FullCalendarHelper
   extend self
 
-  def repeat_settings(options = {})
+  def repeat_settings(repeat_type: 'once')
     settings = {
       dayCount: 7,
       columnHeaderFormat: {
@@ -11,20 +11,32 @@ module FullCalendarHelper
         weekday: 'short'
       }
     }
-    if options[:repeat_type] == 'monthly'
+    case repeat_type
+    when 'monthly'
       settings.merge!(
-        defaultDate: Date.today.beginning_of_month.to_s,
+        defaultDate: default_date(repeat_type: repeat_type).to_s,
         dayCount: 31,
         columnHeaderFormat: { day: 'numeric' }
       )
-    elsif options[:repeat_type] == 'weekly'
+    when 'weekly'
       settings.merge!(
-        defaultDate: Date.today.beginning_of_week.to_s,
+        defaultDate: default_date(repeat_type: repeat_type).to_s,
         dayCount: 7,
         columnHeaderFormat: { weekday: 'short' }
       )
     end
     settings
+  end
+
+  def default_date(repeat_type: 'once')
+    case repeat_type
+    when 'once'
+      Date.today.beginning_of_week
+    when 'weekly'
+      Date.today.beginning_of_year.beginning_of_week
+    when 'monthly'
+      Date.today.beginning_of_year
+    end
   end
 
 
