@@ -29,7 +29,7 @@ class Booking::TimePlansController < Booking::BaseController
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
-        format.js { render :index }
+        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       else
         format.html.phone { render :new }
