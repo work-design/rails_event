@@ -13,6 +13,7 @@ class TimePlan < ApplicationRecord
   belongs_to :room, optional: true
   belongs_to :plan, polymorphic: true
   belongs_to :time_list, optional: true
+  has_many :time_items, through: :time_list
 
   default_scope -> { order(begin_on: :asc) }
 
@@ -59,7 +60,7 @@ class TimePlan < ApplicationRecord
     when 'monthly'
       Array(self.repeat_days[(index + 1).to_s])
     when 'weekly'
-      Array(self.repeat_days[(index + 1).to_s])
+      Array(self.repeat_days[(index).to_s])
     end
   end
 
