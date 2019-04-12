@@ -17,8 +17,15 @@ module TimePlanRecurrence
   end
 
   def next_occurrence(now: Time.current)
-    ts = time_items.select { |i| i.start_at.to_s(:time) > now.to_s(:time) }
-
+    ti = time_items.find { |i| i.start_at.to_s(:time) > now.to_s(:time) }
+    if ti
+      date = next_occurred_days(limit: 1).first
+      hour, min = ti.start_at.split(':')
+      date.to_datetime.change(hour: hour.to_i, min: min.to_i)
+    else
+      t2 = time_items.first
+      date = next_occurred_days(limit: 2).first
+    end
   end
 
   def next_occurrences(start: Time.current, finish: start + 14.days)
