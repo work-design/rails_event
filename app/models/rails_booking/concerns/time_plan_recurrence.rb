@@ -30,19 +30,42 @@ module TimePlanRecurrence
     r = []
     case self.repeat_type
     when 'weekly'
-      first_days = days.select { |day| day >= now.days_to_week_start }
+      first_days = days.select { |day| day.to_i >= now.days_to_week_start }
       first_days.each do |day|
-        r << now.beginning_of_week.days_since(day)
+        r << now.beginning_of_week.days_since(day.to_i)
         limit -= 1
         return r if limit.zero?
       end
-      now.weeks_since(1).beginning_of_week.days_since days
-
+      (1..).each do |week|
+        days.each do |day|
+          r << now.weeks_since(week).beginning_of_week.days_since(day.to_i)
+          limit -= 1
+          return r if limit.zero?
+        end
+      end
     when 'monthly'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.day) }
+      first_days = days.select { |day| day.to_i >= now.day }
+      first_days.each do |day|
+        r << now.beginning_of_month.days_since(day.to_i)
+        limit -= 1
+        return r if limit.zero?
+      end
+      (1..).each do |month|
+        days.each do |day|
+          r << now.weeks_since(month).beginning_of_month.days_since(day.to_i)
+          limit -= 1
+          return r if limit.zero?
+        end
+      end
     when 'once'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.to_s) }
+      first_days = days.select { |day| day.to_date >= now.to_date }
+      first_days.each do |date|
+        r << date
+        limit -= 1
+        return r if limit.zero?
+      end
     end
+    r
   end
 
   def next_days(start: Time.current, finish: start + 14.days)
@@ -50,9 +73,9 @@ module TimePlanRecurrence
 
     case self.repeat_type
     when 'weekly'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.days_to_week_start) }
+      (start.to_date .. finish.to_date).select { |date| days.include?(date.days_to_week_start.to_s) }
     when 'monthly'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.day) }
+      (start.to_date .. finish.to_date).select { |date| days.include?(date.day.to_s) }
     when 'once'
       (start.to_date .. finish.to_date).select { |date| days.include?(date.to_s) }
     end
