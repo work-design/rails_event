@@ -25,13 +25,18 @@ module TimePlanRecurrence
 
   end
 
-  def next_occurred_days(now: Time.current)
+  def next_occurred_days(now: Time.current, limit: 1)
     days = self.repeat_days.keys
-
+    r = []
     case self.repeat_type
     when 'weekly'
-      r1 = days.select { |day| day >= now.days_to_week_start }
-      days.min
+      first_days = days.select { |day| day >= now.days_to_week_start }
+      first_days.each do |day|
+        r << now.beginning_of_week.days_since(day)
+        limit -= 1
+        return r if limit.zero?
+      end
+      now.weeks_since(1).beginning_of_week.days_since days
 
     when 'monthly'
       (start.to_date .. finish.to_date).select { |date| days.include?(date.day) }
