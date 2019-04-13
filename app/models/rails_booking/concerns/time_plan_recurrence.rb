@@ -20,16 +20,14 @@ module TimePlanRecurrence
     ti = time_items.find { |i| i.start_at.to_s(:time) > now.to_s(:time) }
     if ti
       date = next_occurred_days(limit: 1).first
-      hour, min = ti.start_at.split(':')
+      hour, min = ti.start_at.to_s(:time).split(':')
       date.to_datetime.change(hour: hour.to_i, min: min.to_i)
     else
+      date = next_occurred_days(limit: 2).last
       t2 = time_items.first
-      date = next_occurred_days(limit: 2).first
+      hour, min = t2.start_at.to_s(:time).split(':')
+      date.to_datetime.change(hour: hour.to_i, min: min.to_i)
     end
-  end
-
-  def next_occurrences(start: Time.current, finish: start + 14.days)
-
   end
 
   def next_occurred_days(now: Time.current, limit: 1)
@@ -85,6 +83,20 @@ module TimePlanRecurrence
       (start.to_date .. finish.to_date).select { |date| days.include?(date.day.to_s) }
     when 'once'
       (start.to_date .. finish.to_date).select { |date| days.include?(date.to_s) }
+    end
+  end
+
+  def next_occurrences(start: Time.current, finish: start + 14.days)
+    case self.repeat_type
+    when 'weekly'
+      (start.to_date .. finish.to_date).map do |date|
+        span = date.days_to_week_start.to_s
+        if repeat_days.key?(span)
+          {
+            date.to_s => time_items.map { |i| { start_at: i.start_at.to_s(:time), finish_at: i.finish_at.to_s(:time) } if Array(repeat_days[span]).include?(i.id) }.compact
+          }
+        end
+      end.compact
     end
   end
 
