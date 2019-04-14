@@ -4,8 +4,8 @@ class TimeBooking < ApplicationRecord
 
   belongs_to :time_item
   belongs_to :time_list
-  belongs_to :booked, polymorphic: true
-  belongs_to :entity, polymorphic: true, optional: true
+  belongs_to :booker, polymorphic: true
+  belongs_to :booked, polymorphic: true, optional: true
   belongs_to :room, optional: true
 
   has_many :time_plans, ->(o){ where(plan_type: o.booked_type) }, foreign_key: :booking_id, primary_key: :plan_id
