@@ -1,39 +1,36 @@
-<div class="ui top attached borderless menu">
-  <div class="header item">Booking Time Bookings</div>
-  <div class="right menu">
-    <div class="item">
-      <%= link_to 'New Booking Time Booking', new_time_booking_path(params[:booker_type], params[:booker_id]), class: 'ui teal button', remote: true %>
-    </div>
-  </div>
-</div>
-
 <%= render 'filter' %>
 
 <table class="ui bottom attached table">
   <thead>
     <tr>
       <th><%= TimeBooking.human_attribute_name(:id) %></th>
-      <th><%= TimeBooking.human_attribute_name(:time_list_id) %></th>
+      <th><%= TimeBooking.human_attribute_name(:booking_on) %></th>
       <th><%= TimeBooking.human_attribute_name(:time_item_id) %></th>
       <th><%= TimeBooking.human_attribute_name(:room_id) %></th>
-      <th><%= TimeBooking.human_attribute_name(:booking_on) %></th>
-      <th>Actions</th>
+      <th>
+        <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'ui mini primary button', remote: true do %>
+          <i class="plus icon"></i><%= t('.new') %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
   <% @time_bookings.each do |time_booking| %>
     <tr>
       <td><%= time_booking.id %></td>
-      <td><%= time_booking.time_list_id %></td>
-      <td><%= time_booking.time_item_id %></td>
-      <td><%= time_booking.room_id %></td>
       <td><%= time_booking.booking_on %></td>
-      <td class="ui labels">
-        <%= link_to edit_time_booking_path(params[:booker_type], params[:booker_id], time_booking), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button', remote: true do %>
+      <td>
+        <span class="ui label"><%= time_booking.time_item.start_at.to_s(:time) %></span>
+        <i class="yellow arrow right icon"></i>
+        <span class="ui label"><%= time_booking.time_item.finish_at.to_s(:time) %></span>
+      </td>
+      <td><%= time_booking.room_id %></td>
+      <td>
+        <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
           <i class="pencil alternate icon"></i>
         <% end %>
-        <%= link_to time_booking_path(params[:booker_type], params[:booker_id], time_booking), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
-          <i class="times icon"></i>
+        <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui mini circular icon button' do %>
+          <i class="trash alternate icon"></i>
         <% end %>
       </td>
     </tr>

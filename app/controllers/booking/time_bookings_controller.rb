@@ -2,7 +2,10 @@ class Booking::TimeBookingsController < Booking::BaseController
   before_action :set_time_booking, only: [:show, :edit, :update, :destroy]
 
   def index
-    @time_bookings = TimeBooking.page(params[:page])
+    q_params = {
+    }
+    q_params.merge! params.permit(:booked_type, :booked_id)
+    @time_bookings = TimeBooking.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -62,7 +65,7 @@ class Booking::TimeBookingsController < Booking::BaseController
   end
 
   def booking_params
-    params.permit(:booker_type, :booker_id)
+    params.permit(:booked_type, :booked_id)
   end
 
   def time_booking_params
