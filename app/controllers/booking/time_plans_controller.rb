@@ -29,7 +29,8 @@ class Booking::TimePlansController < Booking::BaseController
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
     @time_plan.assign_attributes time_plan_params
-    set_repeat_days
+    dt = params[:time_item_start].to_s.to_datetime
+    @time_plan.toggle(dt, params[:time_item_id].to_i) if dt
     set_settings
 
     respond_to do |format|
@@ -50,7 +51,8 @@ class Booking::TimePlansController < Booking::BaseController
   def update
     @time_plan = @plan.time_plans.find params[:id]
     @time_plan.assign_attributes time_plan_params
-    set_repeat_days
+    dt = params[:time_item_start].to_s.to_datetime
+    @time_plan.toggle(dt, params[:time_item_id].to_i) if dt
     set_settings
 
     respond_to do |format|
@@ -128,23 +130,6 @@ class Booking::TimePlansController < Booking::BaseController
       )
       repeat_settings = FullCalendarHelper.repeat_settings(repeat_type: @time_plan.repeat_type)
       @settings.merge! repeat_settings
-    end
-  end
-
-  def set_repeat_days
-    dt = params[:time_item_start].to_s.to_datetime
-    if @time_plan.repeat_type_changed?
-      @time_plan.repeat_days = {}
-    end
-    if dt
-      case @time_plan.repeat_type
-      when 'weekly'
-        @time_plan.repeat_days.toggle! dt.days_to_week_start.to_s => params[:time_item_id].to_i
-      when 'monthly'
-        @time_plan.repeat_days.toggle! dt.day.to_s => params[:time_item_id].to_i
-      when 'once'
-        @time_plan.repeat_days.toggle! dt.to_s(:date) => params[:time_item_id].to_i
-      end
     end
   end
 

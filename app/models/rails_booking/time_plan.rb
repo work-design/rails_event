@@ -53,6 +53,21 @@ class TimePlan < ApplicationRecord
     )
   end
 
+  def toggle(dt, time_item_id)
+    if repeat_type_changed? || time_list_id_changed?
+      self.repeat_days = {}
+    end
+
+    case repeat_type
+    when 'weekly'
+      repeat_days.toggle! dt.days_to_week_start.to_s => time_item_id
+    when 'monthly'
+      repeat_days.toggle! dt.day.to_s => time_item_id
+    when 'once'
+      repeat_days.toggle! dt.to_s(:date) => time_item_id
+    end
+  end
+
   def selected_ids(date, index)
     case repeat_type
     when 'once'
