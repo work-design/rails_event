@@ -93,7 +93,7 @@ module TimePlanRecurrence
         span = date.days_to_week_start.to_s
         {
           date: date.to_s,
-          occurrences: xx(span, options: filter_options)
+          occurrences: xx(span, options: filter_options.merge(booking_on: date))
         } if repeat_days.key?(span)
       end.compact
     when 'monthly'
@@ -101,7 +101,7 @@ module TimePlanRecurrence
         span = date.day.to_s
         {
           date: date.to_s,
-          occurrences: xx(span, options: filter_options)
+          occurrences: xx(span, options: filter_options.merge(booking_on: date))
         } if repeat_days.key?(span)
       end.compact
     when 'weekly'
@@ -109,7 +109,7 @@ module TimePlanRecurrence
         span = date.to_s
         {
           date: date.to_s,
-          occurrences: xx(span, options: filter_options)
+          occurrences: xx(span, options: filter_options.merge(booking_on: date))
         } if repeat_days.key?(span)
       end.compact
     end
