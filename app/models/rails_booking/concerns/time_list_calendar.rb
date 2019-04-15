@@ -33,10 +33,10 @@ module TimeListCalendar
     end.flatten
   end
 
-  def item_events(date, selected_ids: [])
+  def item_events(date, selected_ids: [], selected_options: {})
     time_items.map do |time_item|
       if selected_ids.include?(time_item.id)
-        time_item.event(date, selected: true)
+        time_item.event(date, selected: true, selected_options: selected_options)
       else
         time_item.event(date)
       end

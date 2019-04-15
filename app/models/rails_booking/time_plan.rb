@@ -67,7 +67,7 @@ class TimePlan < ApplicationRecord
   def events
     day_count = REPEAT[self.repeat_type]
     (default_date .. default_date + day_count).map.with_index do |date, index|
-      time_list.item_events(date, selected_ids: selected_ids(date, index))
+      time_list.item_events(date, selected_ids: selected_ids(date, index), selected_options: { title: room.name })
     end.flatten
   end
 

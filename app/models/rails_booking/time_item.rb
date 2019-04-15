@@ -35,7 +35,7 @@ class TimeItem < ApplicationRecord
     end
   end
 
-  def event(date, selected: false)
+  def event(date, selected: false, selected_options: {})
     r = {
       id: id,
       start: start_at.change(date.parts).strftime('%FT%T'),
@@ -44,7 +44,11 @@ class TimeItem < ApplicationRecord
       color: '#ff9f89'
     }
     if selected
-      r.merge! color: '#2A92CA'
+      r.merge!(
+        color: '#2A92CA',
+        rendering: nil,
+        **selected_options
+      )
     else
       r
     end

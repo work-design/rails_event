@@ -43,9 +43,9 @@
     <%= form_tag time_plans_path(params[:plan_type], params[:plan_id]), method: :post, id: 'time_plan_form' do %><% end %>
   <% end %>
   
-  <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]) } %>
+  <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name, @time_plan.room_id), form: 'time_plan_form', data: { remote: true, url: time_plans_path(params[:plan_type], params[:plan_id]) } %>
   <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form' } %>
-  <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name), form: 'time_plan_form' %>
+  <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @time_plan.time_list_id), form: 'time_plan_form' %>
  
   <div class="ui divider"></div>
   <div id="calendar"></div>
