@@ -8,7 +8,7 @@ class TimeBooking < ApplicationRecord
   belongs_to :booked, polymorphic: true, optional: true
   belongs_to :room, optional: true
 
-  has_many :time_plans, ->(o){ where(plan_type: o.booked_type) }, foreign_key: :booking_id, primary_key: :plan_id
+  has_many :time_plans, ->(o){ where(plan_type: o.booked_type) }, foreign_key: :plan_id, primary_key: :booked_id
 
   delegate :start_at, :finish_at, to: :time_item, allow_nil: true
 

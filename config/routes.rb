@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         get :calendar, on: :collection
       end
     end
-    scope ':booked_type/:booked_id' do
+    scope ':booker_type/:booker_id' do
       resources :time_bookings
     end
     resources :time_items, only: [:index] do

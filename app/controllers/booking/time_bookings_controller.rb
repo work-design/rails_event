@@ -4,7 +4,7 @@ class Booking::TimeBookingsController < Booking::BaseController
   def index
     q_params = {
     }
-    q_params.merge! params.permit(:booked_type, :booked_id)
+    q_params.merge! params.permit(:booker_type, :booker_id)
     @time_bookings = TimeBooking.default_where(q_params).page(params[:page])
   end
 
@@ -65,7 +65,7 @@ class Booking::TimeBookingsController < Booking::BaseController
   end
 
   def booking_params
-    params.permit(:booked_type, :booked_id)
+    params.permit(:booker_type, :booker_id)
   end
 
   def time_booking_params
@@ -73,7 +73,9 @@ class Booking::TimeBookingsController < Booking::BaseController
       :time_list_id,
       :time_item_id,
       :room_id,
-      :booking_on
+      :booking_on,
+      :booked_type,
+      :booked_id
     )
     p.merge! booking_params
   end

@@ -14,6 +14,7 @@ class TimePlan < ApplicationRecord
   belongs_to :plan, polymorphic: true
   belongs_to :time_list, optional: true
   has_many :time_items, through: :time_list
+  has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
 
   default_scope -> { order(begin_on: :asc) }
 

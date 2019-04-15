@@ -107,7 +107,14 @@ module TimePlanRecurrence
   end
 
   def xx(span)
-    time_items.map { |i| { start_at: i.start_at.to_s(:time), finish_at: i.finish_at.to_s(:time) } if Array(repeat_days[span]).include?(i.id) }.compact
+    time_items.map do |i|
+      {
+        id: i.id,
+        start_at: i.start_at.to_s(:time),
+        finish_at: i.finish_at.to_s(:time),
+        time_bookings: self.time_bookings.where(time_item_id: i.id)
+      } if Array(repeat_days[span]).include?(i.id)
+    end.compact
   end
 
 
