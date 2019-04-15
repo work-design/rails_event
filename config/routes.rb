@@ -27,5 +27,9 @@ Rails.application.routes.draw do
     resources :rooms
   end
 
+  scope :my, module: 'booking/my', as: :my do
+    resources :time_plans
+  end
+
 
 end
