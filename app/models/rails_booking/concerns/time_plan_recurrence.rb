@@ -112,9 +112,15 @@ module TimePlanRecurrence
         id: i.id,
         start_at: i.start_at.to_s(:time),
         finish_at: i.finish_at.to_s(:time),
-        time_bookings: self.time_bookings.where(time_item_id: i.id)
+        limit: self.plan.limit_people,
+        room: self.room.as_json(only: [:id], methods: [:name]),
+        time_bookings: bookings(time_item_id: i.id)
       } if Array(repeat_days[span]).include?(i.id)
     end.compact
+  end
+
+  def bookings(q = {})
+    self.time_bookings.default_where(q).as_json(only: [:id, :booker_type, :booker_id])
   end
 
 
