@@ -4,14 +4,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   locale: 'zh-cn',
   plugins: [ 'timeGrid' ],
   header: {
-    left: 'prev,next',
-    center: '',
+    left: 'prev,today,next',
+    center: 'title',
     right: ''
   },
-  defaultView: 'timeGrid',
-  defaultDate: '<%= @settings[:defaultDate] %>',
+  defaultView: 'timeGridWeek',
   columnHeaderFormat: <%= raw @settings[:columnHeaderFormat].to_json %>,
-  dayCount: <%= @settings[:dayCount] %>,
   allDaySlot: false,
   minTime: '<%= @settings[:minTime] %>',
   maxTime: '<%= @settings[:maxTime] %>',
