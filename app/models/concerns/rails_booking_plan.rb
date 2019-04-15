@@ -14,10 +14,10 @@ module RailsBookingPlan
     )
   end
 
-  def next_occurrences(start: Time.current, finish: start + 14.days)
+  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
     r = []
     time_plans.each do |time_plan|
-      r += time_plan.next_occurrences(start: start, finish: finish)
+      r += time_plan.next_occurrences(start: start, finish: finish, filter_options: filter_options)
     end
     r
   end

@@ -86,27 +86,27 @@ module TimePlanRecurrence
     end
   end
 
-  def next_occurrences(start: Time.current, finish: start + 14.days)
+  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
     case self.repeat_type
     when 'weekly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.days_to_week_start.to_s
-        { date.to_s => xx(span) } if repeat_days.key?(span)
+        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
       end.compact
     when 'monthly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.day.to_s
-        { date.to_s => xx(span) } if repeat_days.key?(span)
+        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
       end.compact
     when 'weekly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.to_s
-        { date.to_s => xx(span) } if repeat_days.key?(span)
+        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
       end.compact
     end
   end
 
-  def xx(span)
+  def xx(span, options: {})
     time_items.map do |i|
       {
         id: i.id,
@@ -114,7 +114,7 @@ module TimePlanRecurrence
         finish_at: i.finish_at.to_s(:time),
         limit: self.plan.limit_people,
         room: self.room.as_json(only: [:id], methods: [:name]),
-        time_bookings: bookings(time_item_id: i.id)
+        booked: time_bookings.default_where(options.merge(time_item_id: i.id)).exists?
       } if Array(repeat_days[span]).include?(i.id)
     end.compact
   end
