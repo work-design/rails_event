@@ -91,17 +91,26 @@ module TimePlanRecurrence
     when 'weekly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.days_to_week_start.to_s
-        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
+        {
+          date: date.to_s,
+          occurrences: xx(span, options: filter_options)
+        } if repeat_days.key?(span)
       end.compact
     when 'monthly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.day.to_s
-        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
+        {
+          date: date.to_s,
+          occurrences: xx(span, options: filter_options)
+        } if repeat_days.key?(span)
       end.compact
     when 'weekly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.to_s
-        { date.to_s => xx(span, options: filter_options) } if repeat_days.key?(span)
+        {
+          date: date.to_s,
+          occurrences: xx(span, options: filter_options)
+        } if repeat_days.key?(span)
       end.compact
     end
   end
