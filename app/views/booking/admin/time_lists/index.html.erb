@@ -4,15 +4,6 @@
   <thead>
     <tr>
       <th>
-        <%= link_to new_admin_time_list_path, class: 'ui green icon button', remote: true do %>
-          <i class="plus icon"></i>添加
-        <% end %>
-      </th>
-      <th colspan="4"></th>
-      <th></th>
-    </tr>
-    <tr>
-      <th>
         <%= TimeList.human_attribute_name(:id) %>
       </th>
       <th>
@@ -24,7 +15,11 @@
       </th>
       <th><%= TimeList.human_attribute_name(:default) %></th>
       <th><%= TimeList.human_attribute_name(:time_items) %></th>
-      <th>Actions</th>
+      <th>
+        <%= link_to new_admin_time_list_path, class: 'ui mini primary button', remote: true do %>
+          <i class="plus icon"></i><%= t('.new') %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -44,10 +39,7 @@
       <td>
         <%= render partial: 'time_items', locals: { time_list: time_list } %>
       </td>
-      <td class="ui labels">
-        <%= link_to admin_time_list_time_items_path(time_list), data: { tooltip: t('.show') }, class: 'ui mini circular icon button' do %>
-          <i class="location arrow icon"></i>
-        <% end %>
+      <td>
         <%= link_to edit_admin_time_list_path(time_list), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
           <i class="pencil alternate icon"></i>
         <% end %>

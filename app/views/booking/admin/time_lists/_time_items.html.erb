@@ -9,7 +9,7 @@
           <i class="pencil alternate icon"></i>
         <% end %>
         <%= link_to admin_time_list_time_item_path(time_list, time_item), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui mini circular icon button' do %>
-          <i class="times icon"></i>
+          <i class="trash alternate icon"></i>
         <% end %>
       </td>
     </tr>
@@ -18,7 +18,9 @@
   <tfoot>
     <tr>
       <td>
-        <%= link_to 'add', new_admin_time_list_time_item_path(time_list), class: 'ui teal button', remote: true %>
+        <%= link_to new_admin_time_list_time_item_path(time_list), class: 'ui mini teal button', remote: true do %>
+          <i class="plus icon"></i><%= t('.new') %>
+        <% end %>
       </td>
     </tr>
   </tfoot>
