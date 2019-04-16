@@ -75,35 +75,35 @@ module TimePlanRecurrence
 
   def next_days(start: Time.current, finish: start + 14.days)
     days = self.repeat_days.keys
-
-    case self.repeat_type
-    when 'weekly'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.days_to_week_start.to_s) }
-    when 'monthly'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.day.to_s) }
-    when 'once'
-      (start.to_date .. finish.to_date).select { |date| days.include?(date.to_s) }
+    (start.to_date .. finish.to_date).select do
+      case self.repeat_type
+      when 'weekly'
+        span = date.days_to_week_start.to_s
+      when 'monthly'
+        span = date.day.to_s
+      when 'once'
+        span = date.to_s
+      else
+        span = ''
+      end
+      days.include?(span)
     end
   end
 
   def next_occurring(start: Time.current, finish: start + 14.days)
-    case self.repeat_type
-    when 'weekly'
-      (start.to_date .. finish.to_date).map do |date|
+    (start.to_date .. finish.to_date).map do |date|
+      case self.repeat_type
+      when 'weekly'
         span = date.days_to_week_start.to_s
         yield(span, date)
-      end.compact
-    when 'monthly'
-      (start.to_date .. finish.to_date).map do |date|
+      when 'monthly'
         span = date.day.to_s
         yield(span, date)
-      end.compact
-    when 'once'
-      (start.to_date .. finish.to_date).map do |date|
+      when 'once'
         span = date.to_s
         yield(span, date)
-      end.compact
-    end
+      end
+    end.compact
   end
 
   def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
