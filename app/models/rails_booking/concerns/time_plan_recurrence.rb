@@ -116,7 +116,8 @@ module TimePlanRecurrence
             date: date.to_s,
             start_at: i.start_at.to_s(:time),
             finish_at: i.finish_at.to_s(:time),
-            limit: self.plan.limit_people,
+            present_number: self.plan.present_number,
+            limit_number: self.plan.limit_number,
             room: self.room.as_json(only: [:id], methods: [:name]),
             booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
           } if Array(repeat_days[span]).include?(i.id)
