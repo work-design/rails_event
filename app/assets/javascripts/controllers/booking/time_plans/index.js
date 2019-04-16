@@ -21,6 +21,6 @@ $('#time_plan_repeat_type').dropdown({
   }
 });
 
-remote_js_load([window.location.href]);
+remote_js_load(window.location.href);
 
 $('.ui.floating.dropdown.labeled').dropdown();
