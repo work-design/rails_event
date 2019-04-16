@@ -1,0 +1,42 @@
+<div class="ui top attached fluid borderless menu">
+  <%= link_to time_plans_path(plan.class.name, plan.id), class: 'icon item' do %>
+    <i class="caret left icon"></i>
+  <% end %>
+  <div class="item">
+    <div class="ui right labeled left labeled input">
+      <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(plan.class.name, plan.id) } %>
+      <div class="ui label">
+        <i class="arrow circle right icon"></i>
+      </div>
+      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, max: '2019-04-20', form: 'time_plan_form', data: { remote: true, url: time_plans_path(plan.class.name, plan.id) } %>
+    </div>
+  </div>
+  <div class="ui simple dropdown item">
+    <i class="dropdown icon"></i>
+    <div class="left menu">
+      <% @time_plans.each do |time_plan| %>
+        <%= link_to time_plan_path(plan.class.name, plan.id, time_plan.id), class: active_assert(time_plan.id == @time_plan.id) do %>
+          <span><%= time_plan.begin_on %>~<%= time_plan.end_on %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to time_plans_path(plan.class.name, plan.id), class: 'icon item' do %>
+    <i class="caret right icon"></i>
+  <% end %>
+</div>
+
+<div class="ui bottom attached segment">
+  <% if @time_plan.id %>
+    <%= form_tag time_plan_path(plan.class.name, plan.id, @time_plan), method: :patch, id: 'time_plan_form' do %><% end %>
+  <% else %>
+    <%= form_tag time_plans_path(plan.class.name, plan.id), method: :post, id: 'time_plan_form' do %><% end %>
+  <% end %>
+  
+  <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name, @time_plan.room_id), form: 'time_plan_form', data: { remote: true, url: time_plans_path(plan.class.name, plan.id) } %>
+  <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form' } %>
+  <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @time_plan.time_list_id), form: 'time_plan_form' %>
+ 
+  <div class="ui divider"></div>
+  <div id="calendar"></div>
+</div>
