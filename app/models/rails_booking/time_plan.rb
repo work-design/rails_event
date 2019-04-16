@@ -87,14 +87,14 @@ class TimePlan < ApplicationRecord
     end.flatten
   end
 
-  def next_events(start: Time.current, finish: start + 14.days)
+  def next_events(start: Time.current, finish: start + 7.days)
     next_occurring(start: start, finish: finish) do |span, date|
       time_items.map do |i|
         {
           id: i.id,
           start: i.start_at.change(date.parts).strftime('%FT%T'),
-          finish: i.finish_at.change(date.parts).strftime('%FT%T'),
-          title: self.room.name,
+          end: i.finish_at.change(date.parts).strftime('%FT%T'),
+          title: "#{self.room.name} #{self.plan.title}",
         } if Array(repeat_days[span]).include?(i.id)
       end.compact if repeat_days.key?(span)
     end.flatten

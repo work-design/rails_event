@@ -6,12 +6,15 @@ class Booking::My::TimePlansController < Booking::My::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:room_id)
     @time_plans = TimePlan.default_where(q_params)
+    @events = @time_plans.map do |time_plan|
+      time_plan.next_events
+    end.flatten
     set_settings
 
     respond_to do |format|
       format.html
       format.js
-      format.json
+      format.json { render json: { events: @events } }
     end
   end
 
