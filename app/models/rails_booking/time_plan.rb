@@ -18,6 +18,8 @@ class TimePlan < ApplicationRecord
 
   default_scope -> { order(begin_on: :asc) }
 
+  after_update_commit :plan_sync
+
   validates :begin_on, presence: true
   validate :validate_end_on
 
@@ -98,6 +100,10 @@ class TimePlan < ApplicationRecord
         } if Array(repeat_days[span]).include?(i.id)
       end.compact if repeat_days.key?(span)
     end.flatten
+  end
+
+  def plan_sync
+    plan.sync
   end
 
 end

@@ -22,4 +22,8 @@ module RailsBookingPlan
     r
   end
 
+  def sync
+    p 'should implement in class'
+  end
+
 end
