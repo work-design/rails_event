@@ -1,6 +1,6 @@
 class Booking::TimeItemsController < Booking::BaseController
   before_action :set_time_list
-  skip_before_action :verify_authenticity_token, only: [:select, :add_event]
+  skip_before_action :verify_authenticity_token, only: [:select]
 
   def index
     @time_items = @time_list.time_items

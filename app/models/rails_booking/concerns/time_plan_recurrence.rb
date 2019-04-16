@@ -108,18 +108,21 @@ module TimePlanRecurrence
 
   def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
     next_occurring(start: start, finish: finish) do |span, date|
-      time_items.map do |i|
-        {
-          id: i.id,
-          date: date.to_s,
-          start_at: i.start_at.to_s(:time),
-          finish_at: i.finish_at.to_s(:time),
-          limit: self.plan.limit_people,
-          room: self.room.as_json(only: [:id], methods: [:name]),
-          booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
-        } if Array(repeat_days[span]).include?(i.id)
-      end.compact if repeat_days.key?(span)
-    end.flatten
+      {
+        date: date.to_s,
+        occurrences: time_items.map do |i|
+          {
+            id: i.id,
+            date: date.to_s,
+            start_at: i.start_at.to_s(:time),
+            finish_at: i.finish_at.to_s(:time),
+            limit: self.plan.limit_people,
+            room: self.room.as_json(only: [:id], methods: [:name]),
+            booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
+          } if Array(repeat_days[span]).include?(i.id)
+        end.compact
+      } if repeat_days.key?(span)
+    end
   end
 
   def bookings(q = {})
