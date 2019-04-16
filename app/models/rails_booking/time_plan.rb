@@ -83,7 +83,20 @@ class TimePlan < ApplicationRecord
   def events
     day_count = REPEAT[self.repeat_type]
     (default_date .. default_date + day_count).map.with_index do |date, index|
-      time_list.item_events(date, selected_ids: selected_ids(date, index), selected_options: { title: room.name })
+      time_list.item_events(date, selected_ids: selected_ids(date, index), selected_options: { title: room&.name })
+    end.flatten
+  end
+
+  def next_events(start: Time.current, finish: start + 14.days)
+    next_occurring(start: start, finish: finish) do |span, date|
+      time_items.map do |i|
+        {
+          id: i.id,
+          start: i.start_at.change(date.parts).strftime('%FT%T'),
+          finish: i.finish_at.change(date.parts).strftime('%FT%T'),
+          title: self.room.name,
+        } if Array(repeat_days[span]).include?(i.id)
+      end.compact if repeat_days.key?(span)
     end.flatten
   end
 

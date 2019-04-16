@@ -4,7 +4,7 @@ class Booking::My::TimePlansController < Booking::My::BaseController
 
   def index
     q_params = {}.with_indifferent_access
-    q_params.merge! time_plan_params.permit(:room_id)
+    q_params.merge! params.permit(:room_id)
     @time_plans = TimePlan.default_where(q_params)
     set_settings
 
@@ -34,7 +34,6 @@ class Booking::My::TimePlansController < Booking::My::BaseController
   end
 
   private
-
   def set_time_plan
     @time_plan = TimePlan.find(params[:id])
   end

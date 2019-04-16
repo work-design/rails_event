@@ -86,46 +86,40 @@ module TimePlanRecurrence
     end
   end
 
-  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
+  def next_occurring(start: Time.current, finish: start + 14.days)
     case self.repeat_type
     when 'weekly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.days_to_week_start.to_s
-        {
-          date: date.to_s,
-          occurrences: xx(span, options: filter_options.merge(booking_on: date))
-        } if repeat_days.key?(span)
+        yield(span, date)
       end.compact
     when 'monthly'
       (start.to_date .. finish.to_date).map do |date|
         span = date.day.to_s
-        {
-          date: date.to_s,
-          occurrences: xx(span, options: filter_options.merge(booking_on: date))
-        } if repeat_days.key?(span)
+        yield(span, date)
       end.compact
-    when 'weekly'
+    when 'once'
       (start.to_date .. finish.to_date).map do |date|
         span = date.to_s
-        {
-          date: date.to_s,
-          occurrences: xx(span, options: filter_options.merge(booking_on: date))
-        } if repeat_days.key?(span)
+        yield(span, date)
       end.compact
     end
   end
 
-  def xx(span, options: {})
-    time_items.map do |i|
-      {
-        id: i.id,
-        start_at: i.start_at.to_s(:time),
-        finish_at: i.finish_at.to_s(:time),
-        limit: self.plan.limit_people,
-        room: self.room.as_json(only: [:id], methods: [:name]),
-        booked: time_bookings.default_where(options.merge(time_item_id: i.id)).exists?
-      } if Array(repeat_days[span]).include?(i.id)
-    end.compact
+  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
+    next_occurring(start: start, finish: finish) do |span, date|
+      time_items.map do |i|
+        {
+          id: i.id,
+          date: date.to_s,
+          start_at: i.start_at.to_s(:time),
+          finish_at: i.finish_at.to_s(:time),
+          limit: self.plan.limit_people,
+          room: self.room.as_json(only: [:id], methods: [:name]),
+          booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
+        } if Array(repeat_days[span]).include?(i.id)
+      end.compact if repeat_days.key?(span)
+    end.flatten
   end
 
   def bookings(q = {})
