@@ -22,6 +22,14 @@ module RailsBookingPlan
     r
   end
 
+  def next_days(start: Time.current, finish: start + 14.days)
+    r = []
+    time_plans.each do |time_plan|
+      r << time_plan.next_days(start: start, finish: finish)
+    end
+    r.to_combine_h
+  end
+
   def sync
     p 'should implement in class'
   end

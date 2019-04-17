@@ -18,7 +18,7 @@ class TimePlan < ApplicationRecord
 
   default_scope -> { order(begin_on: :asc) }
 
-  after_update_commit :plan_sync
+  after_commit :plan_sync
 
   validates :begin_on, presence: true
   validate :validate_end_on
@@ -86,19 +86,6 @@ class TimePlan < ApplicationRecord
     day_count = REPEAT[self.repeat_type]
     (default_date .. default_date + day_count).map.with_index do |date, index|
       time_list.item_events(date, selected_ids: selected_ids(date, index), selected_options: { title: room&.name })
-    end.flatten
-  end
-
-  def next_events(start: Time.current, finish: start + 7.days)
-    next_occurring(start: start, finish: finish) do |span, date|
-      time_items.map do |i|
-        {
-          id: i.id,
-          start: i.start_at.change(date.parts).strftime('%FT%T'),
-          end: i.finish_at.change(date.parts).strftime('%FT%T'),
-          title: "#{self.room.name} #{self.plan.title}",
-        } if Array(repeat_days[span]).include?(i.id)
-      end.compact if repeat_days.key?(span)
     end.flatten
   end
 

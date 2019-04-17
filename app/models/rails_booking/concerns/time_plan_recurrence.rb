@@ -73,23 +73,6 @@ module TimePlanRecurrence
     r
   end
 
-  def next_days(start: Time.current, finish: start + 14.days)
-    days = self.repeat_days.keys
-    (start.to_date .. finish.to_date).select do
-      case self.repeat_type
-      when 'weekly'
-        span = date.days_to_week_start.to_s
-      when 'monthly'
-        span = date.day.to_s
-      when 'once'
-        span = date.to_s
-      else
-        span = ''
-      end
-      days.include?(span)
-    end
-  end
-
   def next_occurring(start: Time.current, finish: start + 14.days)
     (start.to_date .. finish.to_date).map do |date|
       case self.repeat_type
@@ -104,6 +87,14 @@ module TimePlanRecurrence
         yield(span, date)
       end
     end.compact
+  end
+
+  def next_days(start: Time.current, finish: start + 14.days)
+    next_occurring(start: start, finish: finish) do |span, date|
+      {
+        date.to_s => repeat_days[span]
+      } if repeat_days.key?(span)
+    end.to_combine_h
   end
 
   def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
@@ -126,9 +117,17 @@ module TimePlanRecurrence
     end
   end
 
-  def bookings(q = {})
-    self.time_bookings.default_where(q).as_json(only: [:id, :booker_type, :booker_id])
+  def next_events(start: Time.current, finish: start + 7.days)
+    next_occurring(start: start, finish: finish) do |span, date|
+      time_items.map do |i|
+        {
+          id: i.id,
+          start: i.start_at.change(date.parts).strftime('%FT%T'),
+          end: i.finish_at.change(date.parts).strftime('%FT%T'),
+          title: "#{self.room.name} #{self.plan.title}",
+        } if Array(repeat_days[span]).include?(i.id)
+      end.compact if repeat_days.key?(span)
+    end.flatten
   end
-
 
 end
