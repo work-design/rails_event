@@ -120,11 +120,18 @@ module TimePlanRecurrence
   def next_events(start: Time.current, finish: start + 7.days)
     next_occurring(start: start, finish: finish) do |span, date|
       time_items.map do |i|
+        ext = {
+          title: self.plan.title,
+          room: self.room.as_json(only: [:id], methods: [:name])
+        }
+        ext.merge! crowd: self.plan.crowd.as_json(only: [:id, :name]) if self.plan.respond_to?(:crowd)
+
         {
           id: i.id,
           start: i.start_at.change(date.parts).strftime('%FT%T'),
           end: i.finish_at.change(date.parts).strftime('%FT%T'),
           title: "#{self.room.name} #{self.plan.title}",
+          extendedProps: ext
         } if Array(repeat_days[span]).include?(i.id)
       end.compact if repeat_days.key?(span)
     end.flatten
