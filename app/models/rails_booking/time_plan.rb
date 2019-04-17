@@ -90,7 +90,7 @@ class TimePlan < ApplicationRecord
   end
 
   def plan_sync
-    plan.sync
+    plan.sync(self)
   end
 
 end

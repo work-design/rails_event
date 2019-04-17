@@ -30,7 +30,7 @@ module RailsBookingPlan
     r.to_combine_h
   end
 
-  def sync
+  def sync(time_plan)
     p 'should implement in class'
   end
 
