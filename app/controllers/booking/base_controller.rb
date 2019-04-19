@@ -1,4 +1,4 @@
-class Booking::BaseController < RailsBooking.config.app_class.constantize
+class Booking::BaseController < RailsBooking.config.app_controller.constantize
 
 
 
