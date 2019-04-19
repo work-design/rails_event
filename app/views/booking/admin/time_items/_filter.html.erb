@@ -1,11 +1,9 @@
-<div class="ui attached segment">
-
-<%= search_form_with model: TimeItem.new do |f| %>
-  <div class="fields">
-    <%= f.text_field :name %>
-    <%= f.submit 'Search' %>
-  </div>
-<% end %>
-
+<div class="ui top attached segment">
+  <%= search_form_with model: TimeItem.new do |f| %>
+    <div class="fields">
+      <%= f.text_field :name %>
+      <%= f.submit %>
+    </div>
+  <% end %>
 </div>
 
