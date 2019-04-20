@@ -9,7 +9,7 @@
       <th><%= TimeBooking.human_attribute_name(:room_id) %></th>
       <th>
         <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'ui mini primary button', remote: true do %>
-          <i class="plus icon"></i><%= t('.new') %>
+          <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
     </tr>
