@@ -18,7 +18,7 @@ class Booking::TimeBookingsController < Booking::BaseController
     respond_to do |format|
       if @time_booking.save
         format.html.phone
-        format.html { redirect_to booking_time_bookings_url, notice: 'Time booking was successfully created.' }
+        format.html { redirect_to booking_time_bookings_url }
         format.js { redirect_back fallback_location: booking_time_bookings_url }
         format.json { render :show }
       else
@@ -42,7 +42,7 @@ class Booking::TimeBookingsController < Booking::BaseController
     respond_to do |format|
       if @time_booking.save
         format.html.phone
-        format.html { redirect_to booking_time_bookings_url, notice: 'Time booking was successfully updated.' }
+        format.html { redirect_to booking_time_bookings_url }
         format.js { redirect_back fallback_location: booking_time_bookings_url }
         format.json { render :show }
       else
@@ -56,7 +56,7 @@ class Booking::TimeBookingsController < Booking::BaseController
 
   def destroy
     @time_booking.destroy
-    redirect_to booking_time_bookings_url, notice: 'Time booking was successfully destroyed.'
+    redirect_to booking_time_bookings_url
   end
 
   private

@@ -16,7 +16,7 @@ class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
     respond_to do |format|
       if @time_item.save
         format.html.phone
-        format.html { redirect_to admin_time_list_time_items_url(@time_list), notice: 'Time item was successfully created.' }
+        format.html { redirect_to admin_time_list_time_items_url(@time_list) }
         format.js { redirect_to admin_time_lists_url(id: @time_list) }
         format.json { render :show }
       else
@@ -40,7 +40,7 @@ class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
     respond_to do |format|
       if @time_item.save
         format.html.phone
-        format.html { redirect_to admin_time_list_time_items_url(@time_list), notice: 'Time item was successfully updated.' }
+        format.html { redirect_to admin_time_list_time_items_url(@time_list) }
         format.js { redirect_back fallback_location: admin_time_list_time_items_url(@time_list) }
         format.json { render :show }
       else
@@ -54,7 +54,7 @@ class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
 
   def destroy
     @time_item.destroy
-    redirect_to admin_time_lists_url, notice: 'Time item was successfully destroyed.'
+    redirect_to admin_time_lists_url
   end
 
   private

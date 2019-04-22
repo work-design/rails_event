@@ -36,7 +36,7 @@ class Booking::TimePlansController < Booking::BaseController
     respond_to do |format|
       if @time_plan.save
         format.html.phone
-        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
+        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.js { render :index }
         format.json { render :show }
       else
@@ -58,7 +58,7 @@ class Booking::TimePlansController < Booking::BaseController
     respond_to do |format|
       if @time_plan.save
         format.html.phone
-        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully created.' }
+        format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.js { render :show }
         format.json { render :show }
       else
@@ -83,7 +83,7 @@ class Booking::TimePlansController < Booking::BaseController
 
   def destroy
     @time_plan.destroy
-    redirect_to time_plans_url(params[:plan_type], params[:plan_id]), notice: 'Time plan was successfully destroyed.'
+    redirect_to time_plans_url(params[:plan_type], params[:plan_id])
   end
 
   private
