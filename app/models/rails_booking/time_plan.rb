@@ -1,28 +1,31 @@
-class TimePlan < ApplicationRecord
-  include TimePlanRecurrence
-  REPEAT = {
-    'once' => 7,
-    'weekly' => 7,
-    'monthly' => 31
-  }
-
-  attribute :room_id, :integer
-  attribute :begin_on, :date, default: -> { Date.today }
-  attribute :end_on, :date
-
-  belongs_to :room, optional: true
-  belongs_to :plan, polymorphic: true
-  belongs_to :time_list, optional: true
-  has_many :time_items, through: :time_list
-  has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
-
-  default_scope -> { order(begin_on: :asc) }
-
-  after_commit :plan_sync
-
-  validates :begin_on, presence: true
-  validate :validate_end_on
-
+class RailsBooking::TimePlan
+  extend ActiveSupport::Concern
+  included do
+    include TimePlanRecurrence
+    REPEAT = {
+      'once' => 7,
+      'weekly' => 7,
+      'monthly' => 31
+    }
+  
+    attribute :room_id, :integer
+    attribute :begin_on, :date, default: -> { Date.today }
+    attribute :end_on, :date
+  
+    belongs_to :room, optional: true
+    belongs_to :plan, polymorphic: true
+    belongs_to :time_list, optional: true
+    has_many :time_items, through: :time_list
+    has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
+  
+    default_scope -> { order(begin_on: :asc) }
+  
+    after_commit :plan_sync
+  
+    validates :begin_on, presence: true
+    validate :validate_end_on
+  end
+  
   def validate_end_on
     return if end_on.nil?
     r1 = same_scopes.default_where('begin_on-lte': self.begin_on, 'end_on-gte': self.begin_on).exists?

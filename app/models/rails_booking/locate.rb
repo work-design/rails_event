@@ -1,4 +1,4 @@
-module RailsBookingLocate
+module RailsBooking::Locate
   extend ActiveSupport::Concern
 
   included do

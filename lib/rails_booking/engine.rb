@@ -3,7 +3,6 @@ module RailsBooking
   class Engine < ::Rails::Engine
 
     config.autoload_paths += Dir[
-      "#{config.root}/app/models/rails_booking",
       "#{config.root}/app/models/rails_booking/concerns"
     ]
 

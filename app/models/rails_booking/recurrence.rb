@@ -1,4 +1,4 @@
-module RailsBookingRecurrence
+module RailsBooking::Recurrence
   extend ActiveSupport::Concern
 
   included do

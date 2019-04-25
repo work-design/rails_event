@@ -1,4 +1,4 @@
-module RailsBookingBooker
+module RailsBooking::Booker
   extend ActiveSupport::Concern
 
   included do

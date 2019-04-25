@@ -1,13 +1,16 @@
-class TimeItem < ApplicationRecord
-  acts_as_list scope: :time_list_id
-
-  attribute :start_at, :time
-  attribute :finish_at, :time
-
-  belongs_to :time_list
-  has_one :last_item, -> { order(finish_at: :desc) }, class_name: self.name, foreign_key: :time_list_id, primary_key: :time_list_id
-  validate :validate_finish_at
-
+module RailsBooking::TimeItem
+  extend ActiveSupport::Concern
+  included do
+    acts_as_list scope: :time_list_id
+  
+    attribute :start_at, :time
+    attribute :finish_at, :time
+  
+    belongs_to :time_list
+    has_one :last_item, -> { order(finish_at: :desc) }, class_name: self.name, foreign_key: :time_list_id, primary_key: :time_list_id
+    validate :validate_finish_at
+  end
+  
   def validate_finish_at
     return if finish_at.nil? && start_at.nil?
     unless finish_at > start_at
