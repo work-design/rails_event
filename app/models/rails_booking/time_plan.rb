@@ -1,4 +1,4 @@
-class RailsBooking::TimePlan
+module RailsBooking::TimePlan
   extend ActiveSupport::Concern
   included do
     include TimePlanRecurrence
