@@ -1,0 +1,23 @@
+<tr id="time_plan_<%= time_plan.id %>">
+  <td><%= time_plan.id %></td>
+  <td>
+    <%= time_plan.begin_on %>
+  </td>
+  <td>
+    <%= time_plan.end_on %>
+  </td>
+  <td>
+    <%= time_plan.repeat_type_i18n %>
+  </td>
+  <td>
+    <%= time_plan.time_list&.name %>
+  </td>
+  <td>
+    <%= link_to edit_time_plan_path(time_plan.plan_type, time_plan.plan_id, time_plan.id), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+    <%= link_to time_plan_path(time_plan.plan_type, time_plan.plan_id, time_plan.id), class: active_assert(time_plan.id == @time_plan.id) do %>
+      <i class="fas fa-hand-point-right"></i>
+    <% end %>
+  </td>
+</tr>

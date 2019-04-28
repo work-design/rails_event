@@ -1,6 +1,6 @@
 class Booking::TimePlansController < Booking::BaseController
   before_action :set_plan, :set_time_lists
-  before_action :set_time_plan, only: [:show, :destroy]
+  before_action :set_time_plan, only: [:show, :edit, :update, :destroy]
 
   def index
     q_params = {}.with_indifferent_access
@@ -23,6 +23,9 @@ class Booking::TimePlansController < Booking::BaseController
     set_settings
     @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
+  end
+  
+  def edit
   end
 
   def create

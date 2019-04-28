@@ -18,7 +18,3 @@ $('#time_plan_repeat_type').dropdown({
     Rails.ajax({url: repeat_url, type: 'GET', dataType: 'script'});
   }
 });
-
-remote_js_load(window.location.href);
-
-$('.ui.floating.dropdown.labeled').dropdown();

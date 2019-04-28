@@ -84,7 +84,7 @@ module RailsBooking::TimePlan
   end
 
   def plan_sync
-    plan&.sync(self)
+    plan.sync
   end
 
 end
