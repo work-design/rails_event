@@ -20,7 +20,6 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :time_plans do |t|
-      t.references :room
       t.references :time_list
       t.references :plan, polymorphic: true
       t.date :begin_on

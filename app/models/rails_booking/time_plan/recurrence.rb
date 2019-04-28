@@ -1,4 +1,4 @@
-module TimePlanRecurrence
+module RailsBooking::TimePlan::Recurrence
   extend ActiveSupport::Concern
 
   included do
@@ -109,7 +109,7 @@ module TimePlanRecurrence
             finish_at: i.finish_at.to_s(:time),
             present_number: self.plan.present_number,
             limit_number: self.plan.limit_number,
-            room: self.room.as_json(only: [:id], methods: [:name]),
+            room: self.plan.as_json(only: [:id], methods: [:name]),
             booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
           } if Array(repeat_days[span]).include?(i.id)
         end.compact
@@ -122,7 +122,7 @@ module TimePlanRecurrence
       time_items.map do |i|
         ext = {
           title: self.plan.title,
-          room: self.room.as_json(only: [:id], methods: [:name])
+          room: self.plan.room.as_json(only: [:id], methods: [:name])
         }
         ext.merge! crowd: self.plan.crowd.as_json(only: [:id, :name]) if self.plan.respond_to?(:crowd)
 
@@ -130,7 +130,7 @@ module TimePlanRecurrence
           id: i.id,
           start: i.start_at.change(date.parts).strftime('%FT%T'),
           end: i.finish_at.change(date.parts).strftime('%FT%T'),
-          title: "#{self.room.name} #{self.plan.title}",
+          title: "#{plan.room.name} #{self.plan.title}",
           extendedProps: ext
         } if Array(repeat_days[span]).include?(i.id)
       end.compact if repeat_days.key?(span)

@@ -1,18 +1,16 @@
 module RailsBooking::TimePlan
   extend ActiveSupport::Concern
   included do
-    include TimePlanRecurrence
+    include RailsBooking::TimePlan::Recurrence
     REPEAT = {
       'once' => 7,
       'weekly' => 7,
       'monthly' => 31
     }
   
-    attribute :room_id, :integer
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
   
-    belongs_to :room, optional: true
     belongs_to :plan, polymorphic: true
     belongs_to :time_list, optional: true
     has_many :time_items, through: :time_list
@@ -49,14 +47,7 @@ module RailsBooking::TimePlan
   end
 
   def same_scopes
-    self.class.where.not(id: self.id).default_where(
-      {
-        plan_type: self.plan_type,
-        plan_id: self.plan_id,
-        room_id: self.room_id
-      },
-      { room_id: { allow: nil } }
-    )
+    self.class.where.not(id: self.id).default_where(plan_type: self.plan_type, plan_id: self.plan_id)
   end
 
   def toggle(dt, time_item_id)
@@ -88,7 +79,7 @@ module RailsBooking::TimePlan
   def events
     day_count = REPEAT[self.repeat_type]
     (default_date .. default_date + day_count).map.with_index do |date, index|
-      time_list.item_events(date, selected_ids: selected_ids(date, index), selected_options: { title: room&.name })
+      time_list.item_events(date, selected_ids: selected_ids(date, index))
     end.flatten
   end
 
