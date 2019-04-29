@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     scope ':plan_type/:plan_id' do
       resources :time_plans do
         get :calendar, on: :collection
+        get 'calendar' => :show_calendar, on: :member
       end
     end
     scope ':booker_type/:booker_id' do

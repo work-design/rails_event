@@ -1,6 +1,6 @@
 class Booking::TimePlansController < Booking::BaseController
   before_action :set_plan, :set_time_lists
-  before_action :set_time_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_plan, only: [:show, :show_calendar, :edit, :update, :destroy]
 
   def index
     q_params = {}.with_indifferent_access
@@ -25,9 +25,6 @@ class Booking::TimePlansController < Booking::BaseController
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
   
-  def edit
-  end
-
   def create
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
@@ -51,6 +48,29 @@ class Booking::TimePlansController < Booking::BaseController
     end
   end
 
+  def show
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:plan_type, :plan_id)
+    @time_plans = TimePlan.default_where(q_params)
+  
+    respond_to do |format|
+      format.html { render :index }
+      format.js { render :index }
+    end
+  end
+
+  def show_calendar
+    @time_list = TimeList.find params[:time_list_id]
+    set_settings
+    @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
+    @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
+    
+    render :calendar
+  end
+
+  def edit
+  end
+
   def update
     @time_plan = @plan.time_plans.find params[:id]
     @time_plan.assign_attributes time_plan_params
@@ -62,7 +82,7 @@ class Booking::TimePlansController < Booking::BaseController
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
-        format.js { render :show }
+        format.js
         format.json { render :show }
       else
         format.html.phone { render :new }
@@ -73,16 +93,7 @@ class Booking::TimePlansController < Booking::BaseController
     end
   end
 
-  def show
-    q_params = {}.with_indifferent_access
-    q_params.merge! params.permit(:plan_type, :plan_id)
-    @time_plans = TimePlan.default_where(q_params)
 
-    respond_to do |format|
-      format.html { render :index }
-      format.js { render :index }
-    end
-  end
 
   def destroy
     @time_plan.destroy

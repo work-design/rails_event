@@ -1,6 +1,6 @@
 <tr id="time_plan_<%= @time_plan.id %>">
   <td>
-    <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, id: 'time_plan_form' do %><% end %>
+    <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
   </td>
   <td>
     <div class="ui input">
@@ -19,7 +19,7 @@
     <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @time_plan.time_list_id), form: 'time_plan_form' %>
   </td>
   <td>
-    <%= submit_tag t('.confirm'), class: 'ui mini primary button', from: 'time_plan_form' %>
+    <%= submit_tag t('.confirm'), class: 'ui mini primary button', form: 'time_plan_form' %>
   </td>
 </tr>
 

@@ -1,2 +1,2 @@
-$('#time_plan_<%= @time_plan.id %>').replaceWith('<%= j(render 'edit_item') %>');
+$('#time_plan_<%= @time_plan.id %>').replaceWith('<%= j(render partial: 'show_item', locals: { time_plan: @time_plan }) %>');
 remote_js_load(<%= raw remote_js_load %>)
