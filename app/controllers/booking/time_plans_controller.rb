@@ -25,6 +25,15 @@ class Booking::TimePlansController < Booking::BaseController
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
   
+  def new
+    last_plan = @plan.time_plans.last
+    @time_plan = @plan.time_plans.build
+    if last_plan
+      @time_plan.begin_on = last_plan.end_on + 1
+    end
+    @time_plan.time_list ||= @time_lists.default
+  end
+  
   def create
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
@@ -37,7 +46,7 @@ class Booking::TimePlansController < Booking::BaseController
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
-        format.js { render :index }
+        format.js
         format.json { render :show }
       else
         format.html.phone { render :new }
@@ -92,8 +101,6 @@ class Booking::TimePlansController < Booking::BaseController
       end
     end
   end
-
-
 
   def destroy
     @time_plan.destroy

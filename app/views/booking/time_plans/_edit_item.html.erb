@@ -1,6 +1,10 @@
 <tr id="time_plan_<%= @time_plan.id %>">
   <td>
-    <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
+    <% if @time_plan.id %>
+      <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
+    <% else %>
+      <%= form_tag time_plans_path(@time_plan.plan_type, @time_plan.plan_id), remote: true, id: 'time_plan_form' do %><% end %>
+    <% end %>
   </td>
   <td>
     <div class="ui input">
@@ -9,7 +13,7 @@
   </td>
   <td>
     <div class="ui input">
-      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, max: '2019-04-20', form: 'time_plan_form', data: { remote: true, url: time_plans_path(@time_plan.plan_type, @time_plan.plan_id) } %>
+      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, min: @time_plan.begin_on.to_s, form: 'time_plan_form', data: { remote: true, url: time_plans_path(@time_plan.plan_type, @time_plan.plan_id) } %>
     </div>
   </td>
   <td>
@@ -22,6 +26,4 @@
     <%= submit_tag t('.confirm'), class: 'ui mini primary button', form: 'time_plan_form' %>
   </td>
 </tr>
-
-
 

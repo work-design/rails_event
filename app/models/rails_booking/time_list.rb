@@ -14,9 +14,11 @@ module RailsBooking::TimeList
   def set_default
     self.class.where.not(id: self.id).where(organ_id: self.organ_id).update_all(default: false)
   end
-
-  def self.default
-    self.find_by(default: true)
+  
+  class_methods do
+    def default
+      self.find_by(default: true)
+    end
   end
 
 end
