@@ -61,11 +61,6 @@ class Booking::TimePlansController < Booking::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:plan_type, :plan_id)
     @time_plans = TimePlan.default_where(q_params)
-  
-    respond_to do |format|
-      format.html { render :index }
-      format.js { render :index }
-    end
   end
 
   def show_calendar
