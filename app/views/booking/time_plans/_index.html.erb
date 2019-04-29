@@ -14,7 +14,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="time_plan_tbody">
   <% @time_plans.each do |time_plan| %>
     <%= render partial: 'booking/time_plans/show_item', locals: { time_plan: time_plan } %>
   <% end %>

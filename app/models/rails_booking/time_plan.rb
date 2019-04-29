@@ -109,6 +109,26 @@ module RailsBooking::TimePlan
   def plan_sync
     plan.sync
   end
+  
+  class_methods do
+    
+    def recent(date = Date.today)
+      r1 = find do |i|
+        (i.begin_on <= date) &&
+        (i.end_on.blank? ? true : i.end_on >= date)
+      end
+      return r1 if r1
+      
+      r2 = find do |i|
+        i.begin_on > date
+      end
+      return r1 if r2
+      
+      r3 = last
+      return r3 if r3
+    end
+    
+  end
 
 end
 

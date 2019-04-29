@@ -10,3 +10,10 @@ calendar.setOption('<%= key %>', <%= value %>)
 calendar.changeView('timeGrid', '<%= @settings[:defaultDate] %>')
 calendar.removeAllEvents()
 calendar.addEventSource(<%= raw @time_plan.events.to_json %>)
+
+var tbody = document.getElementById('time_plan_tbody')
+tbody.querySelectorAll('tr').forEach(function(el){
+  el.classList.remove('active')
+})
+
+document.getElementById('time_plan_<%= @time_plan.id %>').classList = 'active';

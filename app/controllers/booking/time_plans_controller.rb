@@ -3,11 +3,11 @@ class Booking::TimePlansController < Booking::BaseController
   before_action :set_time_plan, only: [:show, :show_calendar, :edit, :update, :destroy]
 
   def index
-    q_params = {}.with_indifferent_access
-    q_params.merge! time_plan_params.permit(:room_id)
+    q_params = {
+    
+    }
     @time_plans = @plan.time_plans.default_where(q_params)
-
-    @time_plan = @plan.time_plans.find_or_initialize_by(q_params.slice(:room_id))
+    @time_plan = @plan.time_plans.recent || @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
     set_settings
 
@@ -58,9 +58,9 @@ class Booking::TimePlansController < Booking::BaseController
   end
 
   def show
-    q_params = {}.with_indifferent_access
+    q_params = {}
     q_params.merge! params.permit(:plan_type, :plan_id)
-    @time_plans = TimePlan.default_where(q_params)
+    set_settings
   end
 
   def show_calendar
