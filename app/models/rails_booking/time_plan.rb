@@ -82,7 +82,7 @@ module RailsBooking::TimePlan
       time_plan_id: self.id
     }
     (default_date .. default_date + day_count).map.with_index do |date, index|
-      time_list.item_events(date, selected_ids: selected_ids(date, index), common_options: { extendedProps: ext })
+      time_list.item_events(date, selected_ids: selected_ids(date, index), common_options: ext)
     end.flatten
   end
 

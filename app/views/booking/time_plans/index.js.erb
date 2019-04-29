@@ -27,7 +27,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   eventClick: function(info) {
     var form = document.getElementById('time_plan_form_' + info.event.extendedProps.time_plan_id)
     var data = new FormData(form);
-    data.set('time_item_id', info.event.id);
+    data.set('time_item_id', info.event.extendedProps.time_item_id);
     data.set('time_item_start', info.event.start.toISOString());
 
     Rails.ajax({url: form.action, type: 'POST', data: data, dataType: 'script'});

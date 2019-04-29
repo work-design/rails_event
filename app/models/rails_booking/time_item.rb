@@ -39,11 +39,13 @@ module RailsBooking::TimeItem
   end
 
   def event(date, selected: false, common_options: {}, selected_options: {})
+    ext = common_options.merge time_item_id: self.id
+    
     r = {
-      id: id,
+      id: "#{date}_#{self.id}",
       start: start_at.change(date.parts).strftime('%FT%T'),
       end: finish_at.change(date.parts).strftime('%FT%T'),
-      **common_options
+      extendedProps: ext
     }
     if selected
       r.merge!(
