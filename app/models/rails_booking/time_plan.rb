@@ -3,9 +3,9 @@ module RailsBooking::TimePlan
   included do
     include RailsBooking::TimePlan::Recurrence
     REPEAT = {
-      'once' => 7,
-      'weekly' => 7,
-      'monthly' => 31
+      'once' => 0..7,
+      'weekly' => 0..7,
+      'monthly' => 0..30
     }
   
     attribute :begin_on, :date, default: -> { Date.today }
@@ -45,23 +45,15 @@ module RailsBooking::TimePlan
       FullCalendarHelper.default_date(repeat_type: repeat_type)
     end
   end
-
-  def same_scopes
-    self.class.where.not(id: self.id).default_where(plan_type: self.plan_type, plan_id: self.plan_id)
-  end
-
-  def toggle(dt, time_item_id)
-    if repeat_type_changed? || time_list_id_changed?
-      self.repeat_days = {}
-    end
-
+  
+  def repeat_index(date)
     case repeat_type
     when 'weekly'
-      repeat_days.toggle! dt.days_to_week_start.to_s => time_item_id
+      date.days_to_week_start.to_s
     when 'monthly'
-      repeat_days.toggle! dt.day.to_s => time_item_id
+      (date.day - 1).to_s
     when 'once'
-      repeat_days.toggle! dt.to_s(:date) => time_item_id
+      date.to_s(:date)
     end
   end
 
@@ -70,20 +62,48 @@ module RailsBooking::TimePlan
     when 'once'
       Array(self.repeat_days[date.to_s])
     when 'monthly'
-      Array(self.repeat_days[(index + 1).to_s])
+      Array(self.repeat_days[index.to_s])
     when 'weekly'
-      Array(self.repeat_days[(index).to_s])
+      Array(self.repeat_days[index.to_s])
     end
   end
 
+  def same_scopes
+    self.class.where.not(id: self.id).default_where(plan_type: self.plan_type, plan_id: self.plan_id)
+  end
+
+  def toggle(date, time_item_id)
+    if repeat_type_changed? || time_list_id_changed?
+      self.repeat_days = {}
+    end
+    
+    repeat_days.toggle! repeat_index(date) => time_item_id
+  end
+
+  def diff_toggle(date, time_item_id)
+    if repeat_type_changed? || time_list_id_changed?
+      self.repeat_days = {}
+    end
+    
+    repeat_days.diff_toggle repeat_index(date) => time_item_id
+  end
+
   def events
-    day_count = REPEAT[self.repeat_type]
-    ext = {
-      time_plan_id: self.id
-    }
-    (default_date .. default_date + day_count).map.with_index do |date, index|
-      time_list.item_events(date, selected_ids: selected_ids(date, index), common_options: ext)
+    day_range = REPEAT[self.repeat_type]
+   
+    day_range.map.with_index do |padding|
+      event(default_date + padding, padding)
     end.flatten
+  end
+  
+  def event(date, padding)
+    time_list.item_events(date, selected_ids: selected_ids(date, padding), common_options: { time_plan_id: self.id })
+  end
+  
+  def item_event(time_item_id, index)
+    time_item = TimeItem.find time_item_id
+    date = default_date + index
+    time_item.event(date, selected: true, common_options: { time_plan_id: self.id })
   end
 
   def plan_sync

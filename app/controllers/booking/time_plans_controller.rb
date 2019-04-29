@@ -79,7 +79,16 @@ class Booking::TimePlansController < Booking::BaseController
     @time_plan = @plan.time_plans.find params[:id]
     @time_plan.assign_attributes time_plan_params
     dt = params[:time_item_start].to_s.to_datetime
-    @time_plan.toggle(dt, params[:time_item_id].to_i) if dt
+    if dt
+      diffs = @time_plan.diff_toggle(dt, params[:time_item_id].to_i)
+      @time_plan.toggle(dt, params[:time_item_id].to_i)
+      @remove_events = diffs[0].map do |index, time_item_id|
+        "#{@time_plan.default_date + index.to_i}_#{time_item_id}"
+      end
+      @add_events = diffs[1].map do |index, time_item_id|
+        @time_plan.item_event(time_item_id, index.to_i)
+      end
+    end
     set_settings
 
     respond_to do |format|
