@@ -100,10 +100,10 @@ module RailsBooking::TimePlan
     time_list.item_events(date, selected_ids: selected_ids(date, padding), common_options: { time_plan_id: self.id })
   end
   
-  def item_event(time_item_id, index)
+  def item_event(time_item_id, index, selected: true)
     time_item = TimeItem.find time_item_id
     date = default_date + index
-    time_item.event(date, selected: true, common_options: { time_plan_id: self.id })
+    time_item.event(date, selected: selected, common_options: { time_plan_id: self.id })
   end
 
   def plan_sync

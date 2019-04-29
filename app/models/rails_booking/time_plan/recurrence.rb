@@ -75,17 +75,8 @@ module RailsBooking::TimePlan::Recurrence
 
   def next_occurring(start: Time.current, finish: start + 14.days)
     (start.to_date .. finish.to_date).map do |date|
-      case self.repeat_type
-      when 'weekly'
-        span = date.days_to_week_start.to_s
-        yield(span, date)
-      when 'monthly'
-        span = date.day.to_s
-        yield(span, date)
-      when 'once'
-        span = date.to_s
-        yield(span, date)
-      end
+      span = repeat_index(date)
+      yield(span, date)
     end.compact
   end
 
