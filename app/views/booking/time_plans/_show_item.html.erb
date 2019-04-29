@@ -1,5 +1,8 @@
 <tr id="time_plan_<%= time_plan.id %>">
-  <td><%= time_plan.id %></td>
+  <td>
+    <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, remote: true, id: "time_plan_form_#{@time_plan.id}" do %><% end %>
+    <%= time_plan.id %>
+  </td>
   <td>
     <%= time_plan.begin_on %>
   </td>

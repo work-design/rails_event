@@ -38,22 +38,23 @@ module RailsBooking::TimeItem
     end
   end
 
-  def event(date, selected: false, selected_options: {})
+  def event(date, selected: false, common_options: {}, selected_options: {})
     r = {
       id: id,
       start: start_at.change(date.parts).strftime('%FT%T'),
       end: finish_at.change(date.parts).strftime('%FT%T'),
-      rendering: 'background',
-      color: '#ff9f89'
+      **common_options
     }
     if selected
       r.merge!(
         color: '#2A92CA',
-        rendering: nil,
         **selected_options
       )
     else
-      r
+      r.merge!(
+        rendering: 'background',
+        color: '#ff9f89'
+      )
     end
   end
 
