@@ -5,7 +5,12 @@
       <th class="three wide"><%= TimePlan.human_attribute_name(:begin_on) %></th>
       <th class="three wide"><%= TimePlan.human_attribute_name(:end_on) %></th>
       <th class="three wide"><%= TimePlan.human_attribute_name(:repeat_type) %></th>
-      <th class="three wide"><%= TimePlan.human_attribute_name(:time_list_id) %></th>
+      <th class="three wide">
+        <%= TimePlan.human_attribute_name(:time_list_id) %>
+        <%= link_to admin_time_lists_path, data: { tooltip: '设置' }, target: '_blank' do %>
+          <i class="fas fa-cog"></i>
+        <% end %>
+      </th>
       <th></th>
     </tr>
   </thead>

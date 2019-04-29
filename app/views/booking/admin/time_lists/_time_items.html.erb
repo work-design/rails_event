@@ -1,4 +1,4 @@
-<table class="ui basic table">
+<table class="ui very basic table">
   <tbody>
   <% time_list.time_items.each do |time_item| %>
     <tr>
@@ -17,7 +17,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td>
+      <td colspan="3">
         <%= link_to new_admin_time_list_time_item_path(time_list), class: 'ui mini teal button', remote: true do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>

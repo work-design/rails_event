@@ -4,6 +4,8 @@ zh:
       time_plan:
         begin_on: 开始日期
         end_on: 截止日期
+        repeat_type: 重复类型
+        time_list_id: 时间方案
       time_list:
         name: 名称
         code: 代码

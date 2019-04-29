@@ -36,7 +36,7 @@
           <%= check_box_tag '[time_list]default', nil, time_list.default, data: { method: :patch, remote: true, url: admin_time_list_path(time_list), submit: true }, id: nil %>
         </div>
       </td>
-      <td>
+      <td class="selectable">
         <%= render partial: 'time_items', locals: { time_list: time_list } %>
       </td>
       <td>
