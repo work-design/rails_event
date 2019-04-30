@@ -100,7 +100,8 @@ module RailsBooking::TimePlan::Recurrence
             finish_at: i.finish_at.to_s(:time),
             present_number: self.plan.present_number,
             limit_number: self.plan.limit_number,
-            room: self.plan.as_json(only: [:id], methods: [:name]),
+            room: self.plan.room&.as_json(only: [:id], methods: [:name]),
+            crowd: self.plan.crowd.as_json(only: [:id, :name]),
             booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
           } if Array(repeat_days[span]).include?(i.id)
         end.compact
