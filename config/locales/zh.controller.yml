@@ -1,0 +1,10 @@
+zh:
+  booking:
+    my:
+      time_plans:
+        index:
+          title:
+    admin:
+      time_lists:
+        index:
+          title: 课节次设置
