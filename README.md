@@ -5,21 +5,15 @@ Short description and motivation.
 How to use my plugin.
 
 ## Installation
-Add this line to your application's Gemfile:
 
-```ruby
-gem 'rails_booking'
+```
+yarn add moment
+yarn add moment-timezone
+yarn add @fullcalendar/core
+yarn add @fullcalendar/daygrid
+yarn add @fullcalendar/timegrid
 ```
 
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install rails_booking
-```
 
 ## Contributing
 Contribution directions go here.
