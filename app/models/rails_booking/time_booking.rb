@@ -15,10 +15,15 @@ module RailsBooking::TimeBooking
     delegate :start_at, :finish_at, to: :time_item, allow_nil: true
   
     before_validation :sync_time_list_id
+    after_create :sync_to_booker
   end
   
   def sync_time_list_id
     self.time_list_id = self.time_item.time_list_id
+  end
+  
+  def sync_to_booker
+    booker.confirm_booker_time!(self)
   end
 
 end
