@@ -1,3 +1,4 @@
+<% if rails_role_user.any_role?('booking/admin') %>
 <div class="item">
   <a class="<%= active_helper(controllers: ['time_lists'], active_class: 'title active', item_class: 'title') %>">
     <i class="fas fa-cog"></i>
@@ -8,3 +9,4 @@
     <%= link_to '课节次设置', admin_time_lists_path, class: active_helper(controllers: ['time_lists']) %>
   </div>
 </div>
+<% end %>
