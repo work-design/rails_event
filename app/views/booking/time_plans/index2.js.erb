@@ -1,0 +1,19 @@
+var calendarEl = document.getElementById('calendar');
+var calendar = new FullCalendar.Calendar(calendarEl, {
+  schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+  locale: 'zh-cn',
+  plugins: [ 'dayGrid', 'resourceTimeGrid', 'resourceDayGrid' ],
+  header: {
+    left: '',
+    center: '',
+    right: 'resourceDayGridDay, resourceDayGridWeek, resourceDayGridMonth'
+  },
+  defaultView: 'resourceDayGridWeek',
+  resourceLabelText: 'Rooms',
+  resources: [
+    { id: 'a', title: 'Room A' },
+    { id: 'b', title: 'Room B' }
+  ]
+});
+
+calendar.render();
