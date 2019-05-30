@@ -1,13 +1,13 @@
 module RailsBooking::TimePlan
+  REPEAT = {
+    'once' => 0..7,
+    'weekly' => 0..7,
+    'monthly' => 0..30
+  }
   extend ActiveSupport::Concern
   included do
     include RailsBooking::TimePlan::Recurrence
-    REPEAT = {
-      'once' => 0..7,
-      'weekly' => 0..7,
-      'monthly' => 0..30
-    }
-  
+    
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
   
