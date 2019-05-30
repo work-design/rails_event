@@ -3,11 +3,7 @@ module RailsBooking::TimePlan::Recurrence
 
   included do
     attribute :repeat_type, :string, default: 'weekly'
-    if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
-      attribute :repeat_days, :json, default: {}
-    else
-      serialize :repeat_days, Hash
-    end
+    attribute :repeat_days, :json, default: {}
 
     enum repeat_type: {
       once: 'once',
