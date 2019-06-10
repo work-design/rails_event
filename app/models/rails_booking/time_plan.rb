@@ -82,21 +82,6 @@ module RailsBooking::TimePlan
     REPEAT[self.repeat_type]
   end
   
-  def events
-    day_range = REPEAT[self.repeat_type]
-   
-    day_range.map.with_index do |padding|
-      event(default_date + padding, padding)
-    end.flatten
-  end
-  
-  def event(date, padding)
-    index = repeat_index(date)
-    s_ids = Array(self.repeat_days[index.to_s])
-    
-    time_list.item_events(date, selected_ids: s_ids, common_options: { time_plan_id: self.id })
-  end
-  
   def item_event(time_item_id, index, selected: true)
     time_item = TimeItem.find time_item_id
     date = default_date + index
