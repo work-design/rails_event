@@ -3,7 +3,7 @@
     <tr>
       <th class="one wide"></th>
       <% @time_plan.xx.each do |index| %>
-        <th><%= index %></th>
+        <th class="two wide"><%= index %></th>
       <% end %>
     </tr>
   </thead>
@@ -18,8 +18,10 @@
         <% @time_plan.xx.each do |index| %>
         <td class="<%= active_assert(Array(@time_plan.repeat_days[index.to_s]).include?(time_item.id), expected: 'orange selectable', unexpected: 'blue selectable') %>">
           <%= link_to time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, data: { params: "index=#{index}&time_item_id=#{time_item.id}" }, remote: true do %>
-            <div>
-              <%= @time_plan.plan_items.where(time_item_id: time_item.id, repeat_index: index).pluck(:plan_on).join("\n") %>
+            <div class="ui labels">
+              <% @time_plan.plan_items.where(time_item_id: time_item.id, repeat_index: index).each do |plan_item| %>
+              <span class="ui label"><%= plan_item.plan_on %></span>
+              <% end %>
             </div>
           <% end %>
         </td>
