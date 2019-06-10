@@ -1,88 +1,128 @@
-module RailsBooking::Recurrence
+module RailsBooking::TimePlan::Recurrence
   extend ActiveSupport::Concern
 
   included do
-    attribute :repeat_type, :string, default: ''
-    if defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) && connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
-      attribute :repeat_days, :integer, array: true, default: []
-    else
-      serialize :repeat_days, Array
-    end
+    attribute :repeat_type, :string, default: 'weekly'
+    attribute :repeat_days, :json, default: {}
 
     enum repeat_type: {
       once: 'once',
       weekly: 'weekly',
       monthly: 'monthly'
     }
-
-    before_save :deal_repeat_days, if: -> { repeat_days_changed? }
   end
 
-  def deal_repeat_days
-    self.repeat_days = self.repeat_days.map(&:to_i)
-  end
-
-
-  def next_start_at
-    return if start_at.nil?
-    _next_day = self.next_day
-    _next_day.change(hour: start_at.hour, min: start_at.min, sec: start_at.sec)
-  end
-
-  def next_finish_at
-    return if finish_at.nil?
-    _next_day = self.next_day
-    _next_day.change(hour: finish_at.hour, min: finish_at.min, sec: finish_at.sec)
-  end
-
-  def next_day(datetime = Time.now)
-    if self.repeat_type == 'weekly'
-      next_weekly_day(datetime)
-    elsif self.repeat_type == 'monthly'
-      next_monthly_day(datetime)
+  def next_occurrence(now: Time.current)
+    ti = time_items.find { |i| i.start_at.to_s(:time) > now.to_s(:time) }
+    if ti
+      date = next_occurred_days(limit: 1).first
+      hour, min = ti.start_at.to_s(:time).split(':')
+      date.to_datetime.change(hour: hour.to_i, min: min.to_i)
     else
-      datetime
+      date = next_occurred_days(limit: 2).last
+      t2 = time_items.first
+      hour, min = t2.start_at.to_s(:time).split(':')
+      date.to_datetime.change(hour: hour.to_i, min: min.to_i)
     end
   end
 
-  def next_weekly_day(datetime = Time.now)
-    start_at_date = self.start_at.change(year: datetime.year, month: datetime.month, day: datetime.day)
-
-    if start_at_date > datetime
-      next_days = self.repeat_days.select { |day| day >= datetime.days_to_week_start(:sunday) }
-    else
-      next_days = self.repeat_days.select { |day| day > datetime.days_to_week_start(:sunday) }
+  def next_occurred_days(now: Time.current, limit: 1)
+    days = self.repeat_days.keys
+    r = []
+    case self.repeat_type
+    when 'weekly'
+      first_days = days.select { |day| day.to_i >= now.days_to_week_start }
+      first_days.each do |day|
+        r << now.beginning_of_week.days_since(day.to_i)
+        limit -= 1
+        return r if limit.zero?
+      end
+      (1..).each do |week|
+        days.each do |day|
+          r << now.weeks_since(week).beginning_of_week.days_since(day.to_i)
+          limit -= 1
+          return r if limit.zero?
+        end
+      end
+    when 'monthly'
+      first_days = days.select { |day| day.to_i >= now.day }
+      first_days.each do |day|
+        r << now.beginning_of_month.days_since(day.to_i)
+        limit -= 1
+        return r if limit.zero?
+      end
+      (1..).each do |month|
+        days.each do |day|
+          r << now.weeks_since(month).beginning_of_month.days_since(day.to_i)
+          limit -= 1
+          return r if limit.zero?
+        end
+      end
+    when 'once'
+      first_days = days.select { |day| day.to_date >= now.to_date }
+      first_days.each do |date|
+        r << date
+        limit -= 1
+        return r if limit.zero?
+      end
     end
-
-    if next_days.size > 0
-      next_day = next_days.min
-    else
-      next_day = self.repeat_days.min
-    end
-
-    str = Date::DAYS_INTO_WEEK.key(next_day)
-    day = datetime.next_occurring(str)
-    datetime.change(month: day.month, day: day.day)
+    r
   end
 
-  def next_monthly_day(datetime = Time.now)
-    start_at_date = self.start_at.change(year: datetime.year, month: datetime.month, day: datetime.day)
+  def next_occurring(start: Time.current, finish: start + 14.days)
+    (start.to_date .. finish.to_date).map do |date|
+      span = repeat_index(date)
+      yield(span, date)
+    end.compact
+  end
 
-    if start_at_date > datetime
-      next_days = self.repeat_days.select { |day| day >= datetime.day }
-    else
-      next_days = self.repeat_days.select { |day| day > datetime.day }
+  def next_days(start: Time.current, finish: start + 14.days)
+    next_occurring(start: start, finish: finish) do |span, date|
+      {
+        date.to_s => repeat_days[span]
+      } if repeat_days.key?(span)
+    end.to_combine_h
+  end
+
+  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
+    next_occurring(start: start, finish: finish) do |span, date|
+      {
+        date: date.to_s,
+        occurrences: time_items.map do |i|
+          {
+            id: i.id,
+            date: date.to_s,
+            start_at: i.start_at.to_s(:time),
+            finish_at: i.finish_at.to_s(:time),
+            present_number: self.plan.present_number,
+            limit_number: self.plan.limit_number,
+            room: self.plan.room&.as_json(only: [:id], methods: [:name]),
+            crowd: self.plan.crowd.as_json(only: [:id, :name]),
+            booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
+          } if Array(repeat_days[span]).include?(i.id)
+        end.compact
+      } if repeat_days.key?(span)
     end
+  end
 
-    if next_days.size > 0
-      next_day = next_days.min
-      month = datetime.month
-    else
-      next_day = self.repeat_days.min
-      month = datetime.next_month.month
-    end
+  def next_events(start: Time.current, finish: start + 7.days)
+    next_occurring(start: start, finish: finish) do |span, date|
+      time_items.map do |i|
+        ext = {
+          title: self.plan.title,
+          room: self.plan.room.as_json(only: [:id], methods: [:name])
+        }
+        ext.merge! crowd: self.plan.crowd.as_json(only: [:id, :name]) if self.plan.respond_to?(:crowd)
 
-    datetime.change(month: month, day: next_day)
+        {
+          id: i.id,
+          start: i.start_at.change(date.parts).strftime('%FT%T'),
+          end: i.finish_at.change(date.parts).strftime('%FT%T'),
+          title: "#{plan.room.name} #{self.plan.title}",
+          extendedProps: ext
+        } if Array(repeat_days[span]).include?(i.id)
+      end.compact if repeat_days.key?(span)
+    end.flatten
   end
 
 end

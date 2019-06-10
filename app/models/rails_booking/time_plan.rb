@@ -6,7 +6,6 @@ module RailsBooking::TimePlan
   }
   extend ActiveSupport::Concern
   included do
-    include RailsBooking::TimePlan::Recurrence
     
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
