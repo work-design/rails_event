@@ -59,8 +59,7 @@ class Booking::TimePlansController < Booking::BaseController
 
   def show
     q_params = {}
-    q_params.merge! params.permit(:plan_type, :plan_id)
-    set_settings
+    @time_plans = @plan.time_plans.default_where(q_params)
   end
 
   def show_calendar
@@ -82,13 +81,12 @@ class Booking::TimePlansController < Booking::BaseController
     if dt
       @time_plan.toggle(dt, params[:time_item_id].to_i)
     end
-    set_settings
 
     respond_to do |format|
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
-        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
+        format.js { redirect_to time_plan_url(@time_plan.plan_type, @time_plan.plan_id, @time_plan) }
         format.json { render :show }
       else
         format.html.phone { render :new }

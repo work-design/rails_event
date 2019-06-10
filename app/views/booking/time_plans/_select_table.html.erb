@@ -16,7 +16,7 @@
           <time data-format="HH:mm"><%= time_item.finish_at.to_s(:rfc822) %></time>
         </td>
         <% @time_plan.xx.each do |index| %>
-        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange selectable', unexpected: 'blue selectable') %>">
+        <td class="<%= active_assert(Array(@time_plan.repeat_days[index.to_s]).include?(time_item.id), expected: 'orange selectable', unexpected: 'blue selectable') %>">
           <%= link_to '', time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, data: { params: "index=#{index}&time_item_id=#{time_item.id}" }, remote: true %>
         </td>
         <% end %>
