@@ -39,24 +39,7 @@ module RailsBooking::TimeList
       '18:00'
     end
   end
-
-  def events(date, day_count = 7)
-    default_date = date.to_date
-    (default_date .. default_date + day_count).map do |date|
-      item_events(date)
-    end.flatten
-  end
-
-  def item_events(date, selected_ids: [], common_options: {}, selected_options: {})
-    time_items.map do |time_item|
-      if selected_ids.include?(time_item.id)
-        time_item.event(date, selected: true, common_options: common_options, selected_options: selected_options)
-      else
-        time_item.event(date, common_options: common_options)
-      end
-    end
-  end
-
+  
   class_methods do
     def default
       self.find_by(default: true)
