@@ -7,6 +7,7 @@ module RailsBooking::PlanItem
   
     belongs_to :plan, polymorphic: true
     belongs_to :time_item
+    belongs_to :time_plan
     
     validates :plan_on, presence: true
   
@@ -17,6 +18,11 @@ module RailsBooking::PlanItem
         self.assign_attributes plan.as_json(only: [:room_id])
       end
     end
+    before_save :sync_repeat_index
+  end
+  
+  def sync_repeat_index
+    self.repeat_index = self.time_plan.repeat_index(plan_on)
   end
   
   def start_at

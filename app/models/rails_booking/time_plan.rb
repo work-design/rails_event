@@ -93,8 +93,8 @@ module RailsBooking::TimePlan
   
     adds.each do |date, time_item_ids|
       Array(time_item_ids).each do |time_item_id|
-        cp = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
-        cp.save
+        pi = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
+        pi.save
       end
     end
   

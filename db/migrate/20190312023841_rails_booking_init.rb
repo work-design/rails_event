@@ -34,6 +34,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :plan, polymorphic: true
       t.references :time_item
       t.date :plan_on
+      t.string :repeat_index
       t.integer :time_bookings_count, default: 0
       t.timestamps
     end

@@ -11,8 +11,6 @@ module RailsBooking::Recurrence
       monthly: 'monthly'
     }
   end
-  
-
 
   def repeat_index(date)
     case repeat_type
