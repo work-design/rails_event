@@ -81,12 +81,6 @@ module RailsBooking::TimePlan
   def xx
     REPEAT[self.repeat_type]
   end
-  
-  def item_event(time_item_id, index, selected: true)
-    time_item = TimeItem.find time_item_id
-    date = default_date + index
-    time_item.event(date, selected: selected, common_options: { time_plan_id: self.id })
-  end
 
   def sync(start: Date.today, finish: Date.today + 14.days)
     removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)

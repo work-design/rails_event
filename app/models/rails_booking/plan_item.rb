@@ -14,7 +14,7 @@ module RailsBooking::PlanItem
   
     after_initialize if: :new_record? do
       if plan
-        self.assign_attributes plan.extra_columns
+        self.assign_attributes plan.as_json(only: [:room_id])
       end
     end
   end

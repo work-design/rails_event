@@ -1,12 +1,1 @@
-$('#time_plan_<%= @time_plan.id %>').replaceWith('<%= j(render partial: 'show_item', locals: { time_plan: @time_plan }) %>');
-remote_js_load(<%= raw remote_js_load %>)
 
-<% Array(@remove_events).each do |event| %>
-var e = calendar.getEventById('<%= event %>')
-if (e) {
-  e.remove()
-}
-<% end %>
-<% Array(@add_events).each do |event| %>
-calendar.addEvent(<%= raw event.to_json %>)
-<% end %>

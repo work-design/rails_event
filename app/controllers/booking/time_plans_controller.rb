@@ -80,18 +80,7 @@ class Booking::TimePlansController < Booking::BaseController
     @time_plan.assign_attributes time_plan_params
     dt = params[:index].to_s
     if dt
-      diffs = @time_plan.diff_toggle(dt, params[:time_item_id].to_i)
       @time_plan.toggle(dt, params[:time_item_id].to_i)
-      @remove_events = []
-      @add_events = []
-      diffs[0].map do |index, time_item_id|
-        @remove_events << "#{@time_plan.default_date + index.to_i}_#{time_item_id}"
-        @add_events << @time_plan.item_event(time_item_id, index.to_i, selected: false)
-      end
-      diffs[1].map do |index, time_item_id|
-        @remove_events << "#{@time_plan.default_date + index.to_i}_#{time_item_id}_unselected"
-        @add_events << @time_plan.item_event(time_item_id, index.to_i)
-      end
     end
     set_settings
 
@@ -99,7 +88,7 @@ class Booking::TimePlansController < Booking::BaseController
       if @time_plan.save
         format.html.phone
         format.html { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
-        format.js
+        format.js { redirect_to time_plans_url(params[:plan_type], params[:plan_id]) }
         format.json { render :show }
       else
         format.html.phone { render :new }
