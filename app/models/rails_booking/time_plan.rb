@@ -3,10 +3,9 @@ module RailsBooking::TimePlan
     'once' => 0..7,
     'weekly' => 0..7,
     'monthly' => 0..30
-  }
+  }.freeze
   extend ActiveSupport::Concern
   included do
-    
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
   
@@ -46,16 +45,7 @@ module RailsBooking::TimePlan
     end
   end
   
-  def repeat_index(date)
-    case repeat_type
-    when 'weekly'
-      date.days_to_week_start.to_s
-    when 'monthly'
-      (date.day - 1).to_s
-    when 'once'
-      date.to_s(:date)
-    end
-  end
+ 
 
   def selected_ids(date, index)
     case repeat_type
@@ -88,6 +78,10 @@ module RailsBooking::TimePlan
     repeat_days.diff_toggle repeat_index(date) => time_item_id
   end
 
+  def xx
+    REPEAT[self.repeat_type]
+  end
+  
   def events
     day_range = REPEAT[self.repeat_type]
    
@@ -97,7 +91,10 @@ module RailsBooking::TimePlan
   end
   
   def event(date, padding)
-    time_list.item_events(date, selected_ids: selected_ids(date, padding), common_options: { time_plan_id: self.id })
+    index = repeat_index(date)
+    s_ids = Array(self.repeat_days[index.to_s])
+    
+    time_list.item_events(date, selected_ids: s_ids, common_options: { time_plan_id: self.id })
   end
   
   def item_event(time_item_id, index, selected: true)

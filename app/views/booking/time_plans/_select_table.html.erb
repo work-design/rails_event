@@ -1,0 +1,20 @@
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <% @time_plan.xx.each do |index| %>
+        <th><%= index %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @time_plan.time_items.each do |time_item| %>
+      <tr>
+        <% @time_plan.xx.each do |index| %>
+        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange', unexpected: 'red') %>">
+        
+        </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
