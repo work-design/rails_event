@@ -2,7 +2,10 @@ module RailsBooking::Plan
   extend ActiveSupport::Concern
 
   included do
+    attribute :title, :string
+    
     has_many :time_plans, as: :plan
+    has_many :plan_items, as: :plan
   end
 
   def default_time_plan(params)
@@ -25,8 +28,29 @@ module RailsBooking::Plan
     end.to_combine_h
   end
 
-  def sync
-    p 'should implement in class'
+  def sync(start: Date.today, finish: Date.today + 14.days)
+    removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)
+  
+    removes.each do |date, time_item_ids|
+      Array(time_item_ids).each do |time_item_id|
+        self.plan_items.where(plan_on: date, time_item_id: time_item_id).delete_all
+      end
+    end
+  
+    adds.each do |date, time_item_ids|
+      Array(time_item_ids).each do |time_item_id|
+        cp = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
+        cp.save
+      end
+    end
+  
+    self
+  end
+
+  def present_days
+    self.plan_items.order(plan_on: :asc).group_by(&->(i){i.plan_on.to_s}).transform_values! do |v|
+      v.map(&:time_item_id)
+    end
   end
 
 end

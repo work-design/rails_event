@@ -1,49 +1,49 @@
-class Edu::Admin::CoursePlansController < Edu::Admin::BaseController
-  before_action :set_course_crowd
-  before_action :set_course_plan, only: [:show, :edit, :update, :qrcode, :destroy]
+class Booking::CoursePlansController < Booking::BaseController
+  before_action :set_plan
+  before_action :set_plan_item, only: [:show, :edit, :update, :qrcode, :destroy]
 
   def index
     q_params = {
       'booking_on-gte': Date.today
     }
     q_params.merge! params.permit('booking_on-gte', 'booking_on-lte')
-    @course_crowd.sync(start: q_params['booking_on-gte'], finish: q_params['booking_on-lte']) if q_params['booking_on-gte'] && q_params['booking_on-lte']
-    @course_plans = @course_crowd.course_plans.includes(:wechat_response).default_where(q_params).order(booking_on: :asc).page(params[:page])
+    @plan.sync(start: q_params['booking_on-gte'], finish: q_params['booking_on-lte']) if q_params['booking_on-gte'] && q_params['booking_on-lte']
+    @plan_items = @plan.plan_items.includes(:wechat_response).default_where(q_params).order(booking_on: :asc).page(params[:page])
   end
 
   def plan
     set_time_lists
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:room_id)
-    @time_plans = @course_crowd.time_plans.default_where(q_params)
+    @time_plans = @plan.time_plans.default_where(q_params)
 
-    @time_plan = @course_crowd.time_plans.recent || @course_crowd.time_plans.build
+    @time_plan = @plan.time_plans.recent || @plan.time_plans.build
     @time_plan.time_list ||= TimeList.default
   end
 
   def sync
-    @course_crowd.sync
+    @plan.sync
 
-    redirect_to admin_course_crowd_plans_url(@course_crowd)
+    redirect_to admin_course_crowd_plans_url(@plan)
   end
 
   def new
-    @course_plan = @course_crowd.course_plans.build
+    @plan_item = @plan.plan_items.build
   end
 
   def create
-    @course_plan = @course_crowd.course_plans.build(course_plan_params)
+    @plan_item = @plan.plan_items.build(course_plan_params)
 
     respond_to do |format|
-      if @course_plan.save
+      if @plan_item.save
         format.html.phone
-        format.html { redirect_to admin_course_crowd_plans_url(@course_crowd) }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.html { redirect_to admin_course_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
         format.json { render :show }
       end
     end
@@ -57,18 +57,18 @@ class Edu::Admin::CoursePlansController < Edu::Admin::BaseController
   end
 
   def update
-    @course_plan.assign_attributes(course_plan_params)
+    @plan_item.assign_attributes(course_plan_params)
 
     respond_to do |format|
-      if @course_plan.save
+      if @plan_item.save
         format.html.phone
-        format.html { redirect_to admin_course_crowd_plans_url(@course_crowd) }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.html { redirect_to admin_course_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
         format.json { render :show }
       end
     end
@@ -76,28 +76,28 @@ class Edu::Admin::CoursePlansController < Edu::Admin::BaseController
   
   def qrcode
     wechat_config = current_organ.wechat_configs.first
-    unless @course_plan.wechat_response
-      @course_plan.create_wechat_response(type: 'TempScanResponse', valid_response: '签到成功', wechat_config_id: wechat_config.id) if wechat_config
+    unless @plan_item.wechat_response
+      @plan_item.create_wechat_response(type: 'TempScanResponse', valid_response: '签到成功', wechat_config_id: wechat_config.id) if wechat_config
     end
-    redirect_to admin_course_crowd_plans_url(@course_crowd)
+    redirect_to admin_course_crowd_plans_url(@plan)
   end
 
   def destroy
-    @course_plan.destroy
-    redirect_to admin_course_crowd_plans_url(@course_crowd)
+    @plan_item.destroy
+    redirect_to admin_course_crowd_plans_url(@plan)
   end
 
   private
-  def set_course_crowd
-    @course_crowd = CourseCrowd.find params[:course_crowd_id]
+  def set_plan
+    @plan = params[:plan_type].constantize.find params[:plan_id]
   end
 
   def set_course_plan
-    @course_plan = CoursePlan.find(params[:id])
+    @plan_item = PlanItem.find(params[:id])
   end
 
   def course_plan_params
-    params.fetch(:course_plan, {}).permit(
+    params.fetch(:plan_item, {}).permit(
       :lesson_id,
       :room_id,
       :teacher_id

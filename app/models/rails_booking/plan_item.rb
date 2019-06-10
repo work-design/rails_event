@@ -32,7 +32,7 @@ module RailsBooking::PlanItem
       id: id,
       start: start_at.strftime('%FT%T'),
       end: finish_at.strftime('%FT%T'),
-      title: "#{room.name} #{course.title}",
+      title: "#{room.name} #{plan.title}",
       extendedProps: {
         title: course.title,
         time_item_id: time_item_id,
