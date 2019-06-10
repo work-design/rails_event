@@ -1,6 +1,7 @@
 <table class="ui celled table">
   <thead>
     <tr>
+      <th class="one wide"></th>
       <% @time_plan.xx.each do |index| %>
         <th><%= index %></th>
       <% end %>
@@ -9,9 +10,10 @@
   <tbody>
     <% @time_plan.time_items.each do |time_item| %>
       <tr>
+        <td><%= time_item.start_at %></td>
         <% @time_plan.xx.each do |index| %>
-        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange', unexpected: 'red') %>">
-        
+        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange selectable', unexpected: 'red selectable') %>">
+          <%= link_to '', time_plans_path %>
         </td>
         <% end %>
       </tr>
