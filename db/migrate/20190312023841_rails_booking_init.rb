@@ -28,6 +28,15 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.integer :repeat_days, array: true
       t.timestamps
     end
+    
+    create_table :plan_items do |t|
+      t.references :time_plan
+      t.references :plan, polymorphic: true
+      t.references :time_item
+      t.date :plan_on
+      t.integer :time_bookings_count, default: 0
+      t.timestamps
+    end
 
     create_table :time_bookings do |t|
       t.references :room

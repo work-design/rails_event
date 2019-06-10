@@ -10,6 +10,13 @@ Rails.application.routes.draw do
         get :calendar, on: :collection
         get 'calendar' => :show_calendar, on: :member
       end
+      resources :plan_items do
+        patch :qrcode, on: :member
+        collection do
+          get :plan
+          post :sync
+        end
+      end
     end
     scope ':booker_type/:booker_id' do
       resources :time_bookings
