@@ -34,9 +34,9 @@ module RailsBooking::PlanItem
       end: finish_at.strftime('%FT%T'),
       title: "#{room.name} #{plan.title}",
       extendedProps: {
-        title: course.title,
+        title: plan.title,
         time_item_id: time_item_id,
-        booking_on: booking_on,
+        plan: plan_on,
         course_crowd_id: course_crowd_id,
         room: room.as_json(only: [:id], methods: [:name]),
         crowd: course_crowd.crowd.as_json(only: [:id, :name])

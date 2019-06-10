@@ -15,10 +15,11 @@ module RailsBooking::TimePlan
     belongs_to :time_list, optional: true
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
-  
+    has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
+    
     default_scope -> { order(begin_on: :asc) }
   
-    after_commit :plan_sync
+    after_commit :sync
   
     validates :begin_on, presence: true
     validate :validate_end_on
@@ -106,8 +107,29 @@ module RailsBooking::TimePlan
     time_item.event(date, selected: selected, common_options: { time_plan_id: self.id })
   end
 
-  def plan_sync
-    plan.sync
+  def sync(start: Date.today, finish: Date.today + 14.days)
+    removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)
+  
+    removes.each do |date, time_item_ids|
+      Array(time_item_ids).each do |time_item_id|
+        self.plan_items.where(plan_on: date, time_item_id: time_item_id).delete_all
+      end
+    end
+  
+    adds.each do |date, time_item_ids|
+      Array(time_item_ids).each do |time_item_id|
+        cp = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
+        cp.save
+      end
+    end
+  
+    self
+  end
+
+  def present_days
+    self.plan_items.order(plan_on: :asc).group_by(&->(i){i.plan_on.to_s}).transform_values! do |v|
+      v.map(&:time_item_id)
+    end
   end
   
   class_methods do
