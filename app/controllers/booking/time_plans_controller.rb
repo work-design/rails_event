@@ -38,7 +38,7 @@ class Booking::TimePlansController < Booking::BaseController
     @time_plan = @plan.time_plans.build
     @time_plan.time_list ||= @time_lists.default
     @time_plan.assign_attributes time_plan_params
-    dt = params[:time_item_start].to_s.to_datetime
+    dt = params[:index].to_s
     @time_plan.toggle(dt, params[:time_item_id].to_i) if dt
     set_settings
 
@@ -78,7 +78,7 @@ class Booking::TimePlansController < Booking::BaseController
   def update
     @time_plan = @plan.time_plans.find params[:id]
     @time_plan.assign_attributes time_plan_params
-    dt = params[:time_item_start].to_s.to_datetime
+    dt = params[:index].to_s
     if dt
       diffs = @time_plan.diff_toggle(dt, params[:time_item_id].to_i)
       @time_plan.toggle(dt, params[:time_item_id].to_i)

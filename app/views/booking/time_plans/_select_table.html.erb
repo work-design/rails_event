@@ -10,10 +10,14 @@
   <tbody>
     <% @time_plan.time_items.each do |time_item| %>
       <tr>
-        <td><%= time_item.start_at %></td>
+        <td>
+          <time data-format="HH:mm"><%= time_item.start_at.to_s(:rfc822) %></time>
+          <span>~</span>
+          <time data-format="HH:mm"><%= time_item.finish_at.to_s(:rfc822) %></time>
+        </td>
         <% @time_plan.xx.each do |index| %>
-        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange selectable', unexpected: 'red selectable') %>">
-          <%= link_to '', time_plans_path %>
+        <td class="<%= active_assert(@time_plan.repeat_days[index.to_s] == time_item.id, expected: 'orange selectable', unexpected: 'blue selectable') %>">
+          <%= link_to '', time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, data: { params: "index=#{index}&time_item_id=#{time_item.id}" }, remote: true %>
         </td>
         <% end %>
       </tr>

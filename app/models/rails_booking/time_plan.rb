@@ -62,20 +62,20 @@ module RailsBooking::TimePlan
     self.class.where.not(id: self.id).default_where(plan_type: self.plan_type, plan_id: self.plan_id)
   end
 
-  def toggle(date, time_item_id)
+  def toggle(index, time_item_id)
     if repeat_type_changed? || time_list_id_changed?
       self.repeat_days = {}
     end
     
-    repeat_days.toggle! repeat_index(date) => time_item_id
+    repeat_days.toggle! index => time_item_id
   end
 
-  def diff_toggle(date, time_item_id)
+  def diff_toggle(index, time_item_id)
     if repeat_type_changed? || time_list_id_changed?
       self.repeat_days = {}
     end
     
-    repeat_days.diff_toggle repeat_index(date) => time_item_id
+    repeat_days.diff_toggle index => time_item_id
   end
 
   def xx
