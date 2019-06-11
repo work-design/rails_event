@@ -6,57 +6,50 @@ class Booking::PlanAttendersController < Booking::BaseController
     @course_students = @plan_item.course.course_students.page(params[:page])
   end
 
-  def new
-    @lesson_student = LessonStudent.new
-  end
-
   def create
-    @lesson_student = @course_plan.lesson_students.build(course_student_id: params[:course_student_id])
+    @plan_attender = @plan_item.plan_attenders.build(course_student_id: params[:course_student_id])
 
     respond_to do |format|
-      if @lesson_student.save
+      if @plan_attender.save
         format.html.phone
-        format.html { redirect_to admin_course_plan_lesson_students_url(@course_plan) }
-        format.js { redirect_to admin_course_plan_lesson_students_url(@course_plan) }
+        format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
+        format.js { redirect_to plan_item_plan_attenders_url(@plan_item) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_to admin_course_plan_lesson_students_url(@course_plan) }
+        format.js { redirect_to plan_item_plan_attenders_url(@plan_item) }
         format.json { render :show }
       end
     end
   end
-
-  def show
-  end
-
+  
   def edit
   end
 
   def update
-    @lesson_student.assign_attributes(lesson_student_params)
+    @plan_attender.assign_attributes(plan_attender_params)
 
     respond_to do |format|
-      if @lesson_student.save
+      if @plan_attender.save
         format.html.phone
-        format.html { redirect_to admin_lesson_students_url }
-        format.js { redirect_back fallback_location: admin_lesson_students_url }
+        format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
+        format.js { redirect_back fallback_location: plan_item_plan_attenders_url(@plan_item) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_lesson_students_url }
+        format.js { redirect_back fallback_location: plan_item_plan_attenders_url(@plan_item) }
         format.json { render :show }
       end
     end
   end
 
   def destroy
-    @lesson_student = @course_plan.lesson_students.find_by(course_student_id: params[:course_student_id])
-    @lesson_student.destroy
+    @plan_attender = @plan_item.plan_attenders.find_by(course_student_id: params[:course_student_id])
+    @plan_attender.destroy
     respond_to do |format|
-      format.html { redirect_to admin_course_plan_lesson_students_url(@course_plan) }
+      format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
       format.json { render :show }
     end
   end
@@ -70,7 +63,7 @@ class Booking::PlanAttendersController < Booking::BaseController
     @plan_attender = @plan_item.plan_attenders.find(params[:id])
   end
 
-  def lesson_student_params
+  def plan_attender_params
     params.fetch(:plan_attender, {}).permit(
       :state,
       :attended
