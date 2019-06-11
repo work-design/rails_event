@@ -16,16 +16,4 @@ module RailsBooking::Plan
     )
   end
 
-  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
-    time_plans.inject([]) do |memo, time_plan|
-      memo += time_plan.next_occurrences(start: start, finish: finish, filter_options: filter_options)
-    end
-  end
-
-  def next_days(start: Time.current, finish: start + 14.days)
-    time_plans.map do |time_plan|
-      time_plan.next_days(start: start, finish: finish)
-    end.to_combine_h
-  end
-
 end

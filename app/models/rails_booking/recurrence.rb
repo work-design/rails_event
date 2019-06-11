@@ -38,26 +38,7 @@ module RailsBooking::Recurrence
     end.to_combine_h
   end
 
-  def next_occurrences(start: Time.current, finish: start + 14.days, filter_options: {})
-    next_occurring(start: start, finish: finish) do |span, date|
-      {
-        date: date.to_s,
-        occurrences: time_items.map do |i|
-          {
-            id: i.id,
-            date: date.to_s,
-            start_at: i.start_at.to_s(:time),
-            finish_at: i.finish_at.to_s(:time),
-            present_number: self.plan.present_number,
-            limit_number: self.plan.limit_number,
-            room: self.plan.room&.as_json(only: [:id], methods: [:name]),
-            crowd: self.plan.crowd.as_json(only: [:id, :name]),
-            booked: time_bookings.default_where(filter_options.merge(booking_on: date, time_item_id: i.id)).exists?
-          } if Array(repeat_days[span]).include?(i.id)
-        end.compact
-      } if repeat_days.key?(span)
-    end
-  end
+  
 
   def next_events(start: Time.current, finish: start + 7.days)
     next_occurring(start: start, finish: finish) do |span, date|
