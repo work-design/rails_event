@@ -3,12 +3,9 @@ class Booking::TimePlansController < Booking::BaseController
   before_action :set_time_plan, only: [:show, :show_calendar, :edit, :update, :destroy]
 
   def index
-    q_params = {
-    
-    }
+    q_params = {}
     @time_plans = @plan.time_plans.default_where(q_params)
-    @time_plan = @plan.time_plans.recent || @plan.time_plans.build
-    @time_plan.time_list ||= @time_lists.default
+    @time_plan = @plan.time_plans.recent || @plan.time_plans.create(time_list_id: @time_lists.default&.id)
     set_settings
 
     respond_to do |format|
