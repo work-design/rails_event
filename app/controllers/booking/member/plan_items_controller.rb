@@ -11,7 +11,7 @@ class Booking::Member::PlanItemsController < Booking::Member::BaseController
 
     q_params.merge! params.permit(:room_id)
 
-    @plan_items = PlanItem.includes(:room, :teacher, :course, :time_item, course_crowd: :crowd).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
+    @plan_items = PlanItem.includes(:room, :teacher, :course, :time_item, :crowd).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html

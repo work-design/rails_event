@@ -45,9 +45,8 @@ module RailsBooking::PlanItem
         title: plan.title,
         time_item_id: time_item_id,
         plan: plan_on,
-        course_crowd_id: course_crowd_id,
         room: room.as_json(only: [:id], methods: [:name]),
-        crowd: course_crowd.crowd.as_json(only: [:id, :name])
+        crowd: crowd.as_json(only: [:id, :name])
       }
     }
   end
