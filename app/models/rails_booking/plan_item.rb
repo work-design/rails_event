@@ -9,14 +9,15 @@ module RailsBooking::PlanItem
     belongs_to :time_item
     belongs_to :time_plan
     has_many :time_bookings, dependent: :destroy
-
+    has_many :plan_attenders, dependent: :nullify
+    
     validates :plan_on, presence: true
   
     scope :valid, -> { default_where('plan_on-gte': Date.today) }
   
     after_initialize if: :new_record? do
       if plan
-        self.assign_attributes plan.as_json(only: [:room_id])
+        self.assign_attributes plan.as_json(only: [:course_id, :crowd_id, :room_id, :teacher_id])
       end
     end
     before_save :sync_repeat_index

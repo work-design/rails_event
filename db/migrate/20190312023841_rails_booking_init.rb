@@ -22,6 +22,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :time_plans do |t|
       t.references :time_list
       t.references :plan, polymorphic: true
+      t.references :room
       t.date :begin_on
       t.date :end_on
       t.string :repeat_type
@@ -33,6 +34,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :time_plan
       t.references :plan, polymorphic: true
       t.references :time_item
+      t.references :room
       t.date :plan_on
       t.string :repeat_index
       t.integer :time_bookings_count, default: 0
@@ -54,6 +56,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :plan_attenders do |t|
       t.references :plan_item
       t.references :attender, polymorphic: true
+      t.references :room
       t.boolean :attended
       t.string :state
       t.jsonb :extra

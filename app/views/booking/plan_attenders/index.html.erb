@@ -2,11 +2,11 @@
   <div class="ui basic segment breadcrumb">
     <%= link_to t('edu.admin.courses.index.title'), admin_courses_path, class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
-    <%= link_to @course_crowd.course.title, admin_course_path(@course_crowd.course_id), class: 'section' %>
+    <%= link_to @plan_item.course.title, admin_course_path(@plan_item.course_id), class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
-    <%= link_to @course_crowd.crowd.name, admin_course_course_crowds_path(@course_crowd.course_id) %>
+    <%= link_to @plan_item.crowd.name, admin_course_course_crowds_path(@plan_item.course_id) %>
     <i class="fas fa-angle-right divider"></i>
-    <%= link_to t('edu.admin.course_plans.index.title'), admin_course_crowd_plans_path(@course_crowd.id), class: 'section' %>
+    <%= link_to t('edu.admin.course_plans.index.title'), time_plans_path(@plan_item.plan_type, @plan_item.plan_id), class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
     <div class="section"><%= t('edu.admin.lesson_students.index.title') %></div>
   </div>
@@ -19,11 +19,11 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= LessonStudent.human_attribute_name(:student_id) %></th>
-      <th><%= LessonStudent.human_attribute_name(:state) %></th>
-      <th><%= LessonStudent.human_attribute_name(:created_at) %></th>
+      <th><%= PlanAttender.human_attribute_name(:attender_id) %></th>
+      <th><%= PlanAttender.human_attribute_name(:state) %></th>
+      <th><%= PlanAttender.human_attribute_name(:created_at) %></th>
       <th>
-        <%= LessonStudent.human_attribute_name(:attended) %>
+        <%= PlanAttender.human_attribute_name(:attended) %>
       </th>
     </tr>
   </thead>
@@ -36,9 +36,9 @@
       <td>
         <div class="ui toggle checkbox">
           <% if @plan_item.students.include?("#{course_student.student_type}_#{course_student.student_id}") %>
-            <%= check_box_tag :course_student_id, course_student.id, true, data: { method: :delete, remote: true, url: admin_course_plan_lesson_students_path(@course_plan), submit: true }, id: nil %>
+            <%= check_box_tag :course_student_id, course_student.id, true, data: { method: :delete, remote: true, url: plan_item_plan_attenders_path(@plan_item), submit: true }, id: nil %>
           <% else %>
-            <%= check_box_tag :course_student_id, course_student.id, false, data: { method: :post, remote: true, url: admin_course_plan_lesson_students_path(@course_plan), submit: true }, id: nil %>
+            <%= check_box_tag :course_student_id, course_student.id, false, data: { method: :post, remote: true, url: plan_item_plan_attenders_path(@plan_item), submit: true }, id: nil %>
           <% end %>
         </div>
       </td>

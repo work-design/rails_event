@@ -1,9 +1,9 @@
 class Booking::PlanAttendersController < Booking::BaseController
-  before_action :set_course_crowd
-  before_action :set_lesson_student, only: [:show, :edit, :update]
+  before_action :set_plan_item
+  before_action :set_plan_attender, only: [:show, :edit, :update]
 
   def index
-    @course_students = @course_crowd.course.course_students.page(params[:page])
+    @course_students = @plan_item.course.course_students.page(params[:page])
   end
 
   def new
@@ -62,20 +62,18 @@ class Booking::PlanAttendersController < Booking::BaseController
   end
 
   private
-  def set_course_crowd
-    @course_crowd = CourseCrowd.find params[:course_crowd_id]
+  def set_plan_item
+    @plan_item = PlanItem.find params[:plan_item_id]
   end
 
-  def set_lesson_student
-    @lesson_student = LessonStudent.find(params[:id])
+  def set_plan_attender
+    @plan_attender = @plan_item.plan_attenders.find(params[:id])
   end
 
   def lesson_student_params
-    params.fetch(:lesson_student, {}).permit(
-      :student,
+    params.fetch(:plan_attender, {}).permit(
       :state,
-      :attended,
-      :created_at
+      :attended
     )
   end
 
