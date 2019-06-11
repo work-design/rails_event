@@ -8,7 +8,8 @@ class Booking::PlanAttendersController < Booking::BaseController
 
   def create
     @plan_attender = @plan_item.plan_attenders.build(course_student_id: params[:course_student_id])
-
+    @plan_attender.attended = true
+    
     respond_to do |format|
       if @plan_attender.save
         format.html.phone
