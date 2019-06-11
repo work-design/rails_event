@@ -8,5 +8,5 @@ json.extract! time_booking,
               :finish_at,
               :booker_type,
               :booker_id,
-              :created_at,
+              :created_at
 json.booked time_booking.booked, :id, :title
