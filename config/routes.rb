@@ -36,5 +36,9 @@ Rails.application.routes.draw do
     resources :time_plans
   end
 
+  scope :member, module: 'booking/member', as: :member do
+    resources :plan_items
+  end
+
 
 end
