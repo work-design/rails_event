@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         patch :qrcode, on: :member
       end
     end
-    scope ':booker_type/:booker_id' do
+    resources :plan_items, only: [] do
       resources :time_bookings
     end
     resources :time_items, only: [:index] do

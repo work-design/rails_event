@@ -1,19 +1,20 @@
 class Booking::TimeBookingsController < Booking::BaseController
-  before_action :set_time_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_plan_item
+  before_action :set_time_booking, only: [:show, :destroy]
 
   def index
     q_params = {
     }
     q_params.merge! params.permit(:booker_type, :booker_id)
-    @time_bookings = TimeBooking.default_where(q_params).page(params[:page])
+    @time_bookings = @plan_item.time_bookings.default_where(q_params).page(params[:page])
   end
 
   def new
-    @time_booking = TimeBooking.new
+    @time_booking = @plan_item.time_bookings.build
   end
 
   def create
-    @time_booking = TimeBooking.new(time_booking_params)
+    @time_booking = @plan_item.time_bookings.find_or_initialize_by(booker_type: params[:booker_type], booker_id: params[:booker_id])
 
     respond_to do |format|
       if @time_booking.save
@@ -29,29 +30,8 @@ class Booking::TimeBookingsController < Booking::BaseController
       end
     end
   end
-
+  
   def show
-  end
-
-  def edit
-  end
-
-  def update
-    @time_booking.assign_attributes(time_booking_params)
-
-    respond_to do |format|
-      if @time_booking.save
-        format.html.phone
-        format.html { redirect_to booking_time_bookings_url }
-        format.js { redirect_back fallback_location: booking_time_bookings_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: booking_time_bookings_url }
-        format.json { render :show }
-      end
-    end
   end
 
   def destroy
@@ -60,24 +40,12 @@ class Booking::TimeBookingsController < Booking::BaseController
   end
 
   private
+  def set_plan_item
+    @plan_item = PlanItem.find params[:plan_item_id]
+  end
+  
   def set_time_booking
-    @time_booking = TimeBooking.find(params[:id])
+    @time_booking = @plan_item.time_bookings.find(params[:id])
   end
-
-  def booking_params
-    params.permit(:booker_type, :booker_id)
-  end
-
-  def time_booking_params
-    p = params.fetch(:time_booking, {}).permit(
-      :time_list_id,
-      :time_item_id,
-      :room_id,
-      :booking_on,
-      :booked_type,
-      :booked_id
-    )
-    p.merge! booking_params
-  end
-
+  
 end

@@ -38,8 +38,6 @@ module RailsBooking::Recurrence
     end.to_combine_h
   end
 
-  
-
   def next_events(start: Time.current, finish: start + 7.days)
     next_occurring(start: start, finish: finish) do |span, date|
       time_items.map do |i|

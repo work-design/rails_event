@@ -15,7 +15,7 @@ module RailsBooking::PlanItemize
             limit_number: i.plan.limit_number,
             room: i.plan.room&.as_json(only: [:id], methods: [:name]),
             crowd: i.plan.crowd.as_json(only: [:id, :name]),
-            booked: i.booked_times.default_where(filter_options.merge!(booking_on: date, time_item_id: i.id)).exists?
+            booked: i.time_bookings.default_where(filter_options).exists?
           }
         end
       }

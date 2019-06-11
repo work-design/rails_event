@@ -8,7 +8,8 @@ module RailsBooking::PlanItem
     belongs_to :plan, polymorphic: true
     belongs_to :time_item
     belongs_to :time_plan
-    
+    has_many :time_bookings, dependent: :destroy
+
     validates :plan_on, presence: true
   
     scope :valid, -> { default_where('plan_on-gte': Date.today) }

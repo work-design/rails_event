@@ -40,11 +40,12 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :time_bookings do |t|
-      t.references :room
-      t.references :booked, polymorphic: true
       t.references :booker, polymorphic: true
+      t.references :booked, polymorphic: true
+      t.references :plan_item
       t.references :time_item
       t.references :time_list
+      t.references :room
       t.date :booking_on
       t.timestamps
     end
