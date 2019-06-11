@@ -13,18 +13,12 @@ class Booking::CoursePlansController < Booking::BaseController
 
   def plan
     set_time_lists
-    q_params = {}.with_indifferent_access
+    q_params = {}
     q_params.merge! params.permit(:room_id)
     @time_plans = @plan.time_plans.default_where(q_params)
 
     @time_plan = @plan.time_plans.recent || @plan.time_plans.build
     @time_plan.time_list ||= TimeList.default
-  end
-
-  def sync
-    @plan.sync
-
-    redirect_to admin_course_crowd_plans_url(@plan)
   end
 
   def new

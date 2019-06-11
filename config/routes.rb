@@ -12,10 +12,6 @@ Rails.application.routes.draw do
       end
       resources :plan_items do
         patch :qrcode, on: :member
-        collection do
-          get :plan
-          post :sync
-        end
       end
     end
     scope ':booker_type/:booker_id' do

@@ -1,7 +1,7 @@
 module RailsBooking::TimePlan
   REPEAT = {
-    'once' => 0..7,
-    'weekly' => 0..7,
+    'once' => 0..6,
+    'weekly' => 0..6,
     'monthly' => 0..30
   }.freeze
   extend ActiveSupport::Concern
