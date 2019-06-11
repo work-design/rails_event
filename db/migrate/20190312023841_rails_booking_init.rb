@@ -36,6 +36,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.date :plan_on
       t.string :repeat_index
       t.integer :time_bookings_count, default: 0
+      t.jsonb :extra
       t.timestamps
     end
 
@@ -49,7 +50,16 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.date :booking_on
       t.timestamps
     end
-
+    
+    create_table :plan_attenders do |t|
+      t.references :plan_item
+      t.references :attender, polymorphic: true
+      t.boolean :attended
+      t.string :state
+      t.jsonb :extra
+      t.timestamps
+    end
+  
   end
 
 end

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       resources :time_bookings do
         delete '' => :destroy, on: :collection
       end
+      resources :plan_attenders do
+        delete '' => :destroy, on: :collection
+      end
     end
     resources :time_items, only: [:index] do
       collection do

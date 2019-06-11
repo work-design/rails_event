@@ -1,4 +1,4 @@
-class Booking::CoursePlansController < Booking::BaseController
+class Booking::PlanItemsController < Booking::BaseController
   before_action :set_plan
   before_action :set_plan_item, only: [:show, :edit, :update, :qrcode, :destroy]
 
