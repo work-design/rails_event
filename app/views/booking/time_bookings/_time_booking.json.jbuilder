@@ -4,6 +4,9 @@ json.extract! time_booking,
               :time_item_id,
               :room_id,
               :booking_on,
+              :start_at,
+              :finish_at,
+              :booker_type,
+              :booker_id,
               :created_at,
-              :updated_at
-json.time_item time_booking.time_item, :id, :start_at, :finish_at
+json.booked time_booking.booked, :id, :title
