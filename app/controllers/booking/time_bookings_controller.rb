@@ -1,6 +1,5 @@
 class Booking::TimeBookingsController < Booking::BaseController
   before_action :set_plan_item
-  before_action :set_time_booking, only: [:show, :destroy]
 
   def index
     q_params = {
@@ -30,13 +29,17 @@ class Booking::TimeBookingsController < Booking::BaseController
       end
     end
   end
-  
-  def show
-  end
 
   def destroy
-    @time_booking.destroy
-    redirect_to booking_time_bookings_url
+    if params[:id]
+      @time_booking = @plan_item.time_bookings.find(params[:id])
+    elsif params[:booker_type] && params[:booker_id]
+      @time_booking = @plan_item.time_bookings.find_by(booker_type: params[:booker_type], booker_id: params[:booker_id])
+    end
+    
+    @time_booking.destroy if @time_booking
+    
+    head :ok
   end
 
   private
@@ -45,7 +48,6 @@ class Booking::TimeBookingsController < Booking::BaseController
   end
   
   def set_time_booking
-    @time_booking = @plan_item.time_bookings.find(params[:id])
   end
   
 end
