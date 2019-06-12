@@ -69,11 +69,7 @@ class Booking::PlanItemsController < Booking::BaseController
   end
   
   def qrcode
-    wechat_config = current_organ.wechat_configs.first
-    unless @plan_item.wechat_response
-      @plan_item.create_wechat_response(type: 'TempScanResponse', valid_response: '签到成功', wechat_config_id: wechat_config.id) if wechat_config
-    end
-    redirect_to admin_course_crowd_plans_url(@plan)
+  
   end
 
   def destroy

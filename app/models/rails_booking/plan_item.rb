@@ -7,6 +7,7 @@ module RailsBooking::PlanItem
   
     belongs_to :plan, polymorphic: true
     belongs_to :time_item
+    belongs_to :time_list
     belongs_to :time_plan
     has_many :time_bookings, dependent: :destroy
     has_many :plan_attenders, dependent: :nullify
@@ -25,6 +26,7 @@ module RailsBooking::PlanItem
   
   def sync_repeat_index
     self.repeat_index = self.time_plan.repeat_index(plan_on)
+    self.time_list_id = self.time_plan.time_list_id
   end
   
   def start_at

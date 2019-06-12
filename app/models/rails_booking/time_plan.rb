@@ -10,7 +10,7 @@ module RailsBooking::TimePlan
     attribute :end_on, :date
   
     belongs_to :plan, polymorphic: true
-    belongs_to :time_list, optional: true
+    belongs_to :time_list
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
