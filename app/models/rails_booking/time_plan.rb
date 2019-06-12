@@ -45,8 +45,6 @@ module RailsBooking::TimePlan
     end
   end
   
- 
-
   def selected_ids(date, index)
     case repeat_type
     when 'once'

@@ -21,7 +21,7 @@ module RailsBooking::PlanItem
         self.assign_attributes plan.as_json(only: [:course_id, :crowd_id, :room_id, :teacher_id])
       end
     end
-    before_save :sync_repeat_index
+    before_validation :sync_repeat_index
   end
   
   def sync_repeat_index
