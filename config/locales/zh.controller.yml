@@ -8,3 +8,6 @@ zh:
       time_lists:
         index:
           title: 课节次设置
+    time_plans:
+      index:
+        title: 时间计划
