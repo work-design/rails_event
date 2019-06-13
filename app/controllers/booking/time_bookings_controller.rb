@@ -39,7 +39,7 @@ class Booking::TimeBookingsController < Booking::BaseController
     
     @time_booking.destroy if @time_booking
     
-    head :ok
+    render json: {}
   end
 
   private
