@@ -1,1 +1,1 @@
-json.lesson_student @lesson_student, partial: 'lesson_student', as: :lesson_student
+json.plan_attender @plan_attender, partial: 'plan_attender', as: :plan_attender
