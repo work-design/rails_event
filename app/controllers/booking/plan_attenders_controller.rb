@@ -4,6 +4,7 @@ class Booking::PlanAttendersController < Booking::BaseController
 
   def index
     @course_students = @plan_item.course.course_students.page(params[:page])
+    @time_bookings = @plan_item.time_bookings
   end
 
   def create
