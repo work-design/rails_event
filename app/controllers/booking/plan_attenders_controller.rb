@@ -3,7 +3,7 @@ class Booking::PlanAttendersController < Booking::BaseController
   before_action :set_plan_attender, only: [:show, :edit, :update]
 
   def index
-    @course_students = @plan_item.course.course_students.page(params[:page])
+    @course_students = @plan_item.course.course_students.where(course_crowd_id: @plan_item.plan_id).page(params[:page])
     @time_bookings = @plan_item.time_bookings
   end
 
