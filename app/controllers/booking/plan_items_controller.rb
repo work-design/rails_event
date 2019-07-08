@@ -69,7 +69,7 @@ class Booking::PlanItemsController < Booking::BaseController
   end
   
   def qrcode
-  
+    @plan_item.qrcode
   end
 
   def destroy
@@ -82,7 +82,7 @@ class Booking::PlanItemsController < Booking::BaseController
     @plan = params[:plan_type].constantize.find params[:plan_id]
   end
 
-  def set_course_plan
+  def set_plan_item
     @plan_item = PlanItem.find(params[:id])
   end
 

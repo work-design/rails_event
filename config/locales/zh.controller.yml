@@ -11,3 +11,6 @@ zh:
     time_plans:
       index:
         title: 时间计划
+    plan_attenders:
+      index:
+        qrcode: 二维码
