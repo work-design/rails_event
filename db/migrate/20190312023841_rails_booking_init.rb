@@ -3,6 +3,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
   def change
 
     create_table :time_lists do |t|
+      t.references :organ  # For SaaS
       t.string :name
       t.string :code
       t.integer :interval_minutes, default: 0

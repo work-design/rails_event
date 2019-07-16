@@ -109,7 +109,7 @@ class Booking::TimePlansController < Booking::BaseController
   end
 
   def set_time_lists
-    return super if super
+    return super if defined? super
     @rooms = Room.none
     @time_lists = TimeList.none
   end
