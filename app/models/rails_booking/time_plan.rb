@@ -77,17 +77,14 @@ module RailsBooking::TimePlan
   end
 
   def xx
-    r = REPEAT[self.repeat_type]
-    Date::DAYS_INTO_WEEK.reverse_each do |index, name|
+    Date::DAYS_INTO_WEEK.map do |name, index|
       if Date.beginning_of_week == :monday
-        i = (r - index) % 7
-      elsif Date.beginning_of_week == :sunday
-        i = r - index
+        i = (index - 1) % 7
       else
-        i = r -index
+        i = index
       end
-      [i, name]
-    end.to_h
+      [i, I18n.t("date.week_day.#{name}.name")]
+    end.sort.to_h
   end
 
   def sync(start: Date.today, finish: Date.today + 14.days)
