@@ -20,7 +20,7 @@
           <%= link_to time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, data: { params: "index=#{index}&time_item_id=#{time_item.id}" }, remote: true do %>
             <div class="ui labels">
               <% @time_plan.plan_items.where(time_item_id: time_item.id, repeat_index: index).each do |plan_item| %>
-              <span class="ui label"><%= link_to_if plan_item.plan_on, plan_item_plan_attenders_path(plan_item) %></span>
+              <span class="ui label"><%= link_to plan_item.plan_on, plan_item_plan_attenders_path(plan_item), text: true %></span>
               <% end %>
             </div>
           <% end %>
