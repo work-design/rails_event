@@ -70,7 +70,7 @@ class Booking::Admin::TimeListsController < Booking::Admin::BaseController
       :item_minutes,
       :default
     )
-    p.merge! default_params
+    p.merge! default_form_params
   end
 
 end
