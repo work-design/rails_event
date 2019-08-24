@@ -1,1 +1,1 @@
-//= require ./index-ready
+import './index-ready'
