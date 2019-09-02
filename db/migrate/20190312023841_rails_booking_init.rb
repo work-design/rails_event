@@ -6,8 +6,8 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :organ  # For SaaS
       t.string :name
       t.string :code
-      t.integer :interval_minutes, default: 0
-      t.integer :item_minutes, default: 45
+      t.integer :interval_minutes
+      t.integer :item_minutes
       t.boolean :default
       t.timestamps
     end
@@ -40,7 +40,11 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.date :plan_on
       t.string :repeat_index
       t.integer :time_bookings_count, default: 0
-      t.jsonb :extra
+      if connection.adapter_name == 'PostgreSQL'
+        t.jsonb :extra
+      else
+        t.json :extra
+      end
       t.timestamps
     end
 
@@ -61,7 +65,11 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :room
       t.boolean :attended
       t.string :state
-      t.jsonb :extra
+      if connection.adapter_name == 'PostgreSQL'
+        t.jsonb :extra
+      else
+        t.json :extra
+      end
       t.timestamps
     end
   
