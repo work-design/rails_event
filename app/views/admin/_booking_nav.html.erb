@@ -1,12 +1,13 @@
 <% if rails_role_user.any_role?('booking/admin') %>
 <div class="item">
-  <a class="<%= active_helper(controllers: ['time_lists'], active_class: 'title active', item_class: 'title') %>">
+  <a class="<%= active_helper(modules: 'booking/admin', active_class: 'title active', item_class: 'title') %>">
     <i class="fas fa-cog"></i>
     <span>设置</span>
     <i class="dropdown icon"></i>
   </a>
-  <div class="<%= active_helper(controllers: ['time_lists'], active_class: 'menu content active', item_class: 'menu content') %>">
-    <%= link_to '课节次设置', admin_time_lists_path, class: active_helper(controllers: ['time_lists']) %>
+  <div class="<%= active_helper(modules: 'booking/admin', active_class: 'menu content active', item_class: 'menu content') %>">
+    <%= link_to t('booking.admin.time_lists.index.title'), admin_time_lists_path, class: active_helper(controllers: ['time_lists']) %>
+    <%= link_to t('booking.admin.rooms.index.title'), admin_rooms_path, class: active_helper(controllers: ['rooms']) %>
   </div>
 </div>
 <% end %>

@@ -1,7 +1,16 @@
 class RailsBookingInit < ActiveRecord::Migration[5.0]
 
   def change
-
+  
+    create_table :rooms do |t|
+      t.references :organ
+      t.string :room_number
+      t.integer :limit_number
+      t.string :color
+      t.integer :time_plans_count, default: 0
+      t.timestamps
+    end
+  
     create_table :time_lists do |t|
       t.references :organ  # For SaaS
       t.string :name
