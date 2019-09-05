@@ -12,11 +12,6 @@
     </div>
   </td>
   <td>
-    <div class="ui input">
-      <%= date_field_tag :'time_plan[end_on]', @time_plan.end_on, min: @time_plan.begin_on.to_s, form: 'time_plan_form', data: { remote: true, url: time_plans_path(@time_plan.plan_type, @time_plan.plan_id) } %>
-    </div>
-  </td>
-  <td>
     <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form' } %>
   </td>
   <td>

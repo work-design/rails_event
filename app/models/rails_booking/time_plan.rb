@@ -97,19 +97,7 @@ module RailsBooking::TimePlan
   class_methods do
     
     def recent(date = Date.today)
-      r1 = find do |i|
-        (i.begin_on <= date) &&
-        (i.end_on.blank? ? true : i.end_on >= date)
-      end
-      return r1 if r1
-      
-      r2 = find do |i|
-        i.begin_on > date
-      end
-      return r1 if r2
-      
-      r3 = last
-      return r3 if r3
+      default_where('begin_on-lte': date).unscope(:order).order(begin_on: :desc).first
     end
     
   end

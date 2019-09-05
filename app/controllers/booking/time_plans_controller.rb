@@ -23,11 +23,7 @@ class Booking::TimePlansController < Booking::BaseController
   end
   
   def new
-    last_plan = @plan.time_plans.last
     @time_plan = @plan.time_plans.build
-    if last_plan
-      @time_plan.begin_on = last_plan.end_on + 1
-    end
     @time_plan.time_list ||= @time_lists.default
   end
   
