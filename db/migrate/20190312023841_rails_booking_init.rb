@@ -29,9 +29,9 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    create_table :time_plans do |t|
+    create_table :plan_events do |t|
       t.references :time_list
-      t.references :plan, polymorphic: true
+      t.references :event, polymorphic: true
       t.references :room
       t.date :begin_on
       t.string :repeat_type  # 日、周、月、天
@@ -42,13 +42,27 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     
     create_table :plan_items do |t|
       t.references :time_plan
-      t.references :plan, polymorphic: true
-      t.references :time_item
       t.references :time_list
+      t.references :time_item
       t.references :room
       t.date :plan_on
       t.string :repeat_index
       t.integer :time_bookings_count, default: 0
+      if connection.adapter_name == 'PostgreSQL'
+        t.jsonb :extra
+      else
+        t.json :extra
+      end
+      t.timestamps
+    end
+
+    create_table :plan_attenders do |t|
+      t.references :time_plan
+      t.references :plan_item
+      t.references :attender, polymorphic: true
+      t.references :room
+      t.boolean :attended
+      t.string :state
       if connection.adapter_name == 'PostgreSQL'
         t.jsonb :extra
       else
@@ -68,20 +82,6 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     
-    create_table :plan_attenders do |t|
-      t.references :plan_item
-      t.references :attender, polymorphic: true
-      t.references :room
-      t.boolean :attended
-      t.string :state
-      if connection.adapter_name == 'PostgreSQL'
-        t.jsonb :extra
-      else
-        t.json :extra
-      end
-      t.timestamps
-    end
-  
   end
 
 end
