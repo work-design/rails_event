@@ -2,7 +2,8 @@ class Booking::Admin::TimeListsController < Booking::Admin::BaseController
   before_action :set_time_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    q_params = default_params
+    q_params = {}
+    q_params.merge! default_params
     @time_lists = TimeList.default_where(q_params).order(id: :asc).page(params[:page])
   end
 

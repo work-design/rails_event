@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     resources :time_lists do
       resources :time_items
     end
+    resources :time_items, only: [] do
+      get :default, on: :collection
+    end
   end
 
   scope :my, module: 'booking/my', as: :my do

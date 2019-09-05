@@ -1,9 +1,20 @@
 class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
-  before_action :set_time_list
+  before_action :set_time_list, except: [:default]
   before_action :set_time_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @time_items = @time_list.time_items.page(params[:page])
+  end
+  
+  def default
+    q_params = {}
+    q_params.merge! default_params
+    time_list = TimeList.default_where(q_params).default
+    if time_list
+      @time_items = time_list.time_items
+    else
+      @time_items = TimeItem.none
+    end
   end
 
   def new
