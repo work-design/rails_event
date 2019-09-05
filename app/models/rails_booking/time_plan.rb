@@ -7,33 +7,15 @@ module RailsBooking::TimePlan
   extend ActiveSupport::Concern
   included do
     attribute :begin_on, :date, default: -> { Date.today }
-    attribute :end_on, :date
-  
+    
     belongs_to :plan, polymorphic: true
     belongs_to :time_list
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
-    
+
     default_scope -> { order(begin_on: :asc) }
-  
-    after_commit :sync
-  
     validates :begin_on, presence: true
-    validate :validate_end_on
-  end
-  
-  def validate_end_on
-    return if end_on.nil?
-    r1 = same_scopes.default_where('begin_on-lte': self.begin_on, 'end_on-gte': self.begin_on).exists?
-    r2 = same_scopes.default_where('begin_on-lte': self.end_on, 'end_on-gte': self.end_on).exists?
-    r3 = same_scopes.where(end_on: nil).exists?
-    if r1 || r2 || r3
-      self.errors.add :end_on, "date range is not valid, r1: #{r1}, r2: #{r2}, r3:#{r3}"
-    end
-    unless end_on > begin_on
-      self.errors.add :end_on, 'Finish At Should large then Start at time!'
-    end
   end
 
   def default_date

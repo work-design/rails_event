@@ -25,8 +25,8 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :plan, polymorphic: true
       t.references :room
       t.date :begin_on
-      t.date :end_on
-      t.string :repeat_type
+      t.string :repeat_type  # 日、周、月、天
+      t.integer :repeat_count # 每几周
       t.integer :repeat_days, array: true
       t.timestamps
     end

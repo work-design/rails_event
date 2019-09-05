@@ -1,8 +1,5 @@
 module RailsBooking::Occurrence
   
-  
-  
-  
   def next_occurrence(now: Time.current)
     ti = time_items.find { |i| i.start_at.to_s(:time) > now.to_s(:time) }
     if ti
