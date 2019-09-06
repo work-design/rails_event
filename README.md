@@ -6,9 +6,8 @@ Short description and motivation.
 预约模型由以下几部分组成：
 
 * 事件，对应model: Plan
-* 时间，对应model: PlanTime
+* 时间与地点，对应model: PlanTime
 * 人物，对应model: PlanParticipant(crowd)
-* 地点，对应model: PlanSpace
 
 当上述配置完成之后，会根据时间的配置信息（如何按每周、每月等重复），生成具体的数据如下：
 
