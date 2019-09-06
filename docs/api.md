@@ -26,7 +26,7 @@
 ```json5
 {
   "plan_participants": {
-    "participant_type": "Profile",  // 学生：Profile, 老师：Member
+    "participant_type": "Profile",  // 学生：Profile, 老师：Member，班级：Crowd
     "participant_id": 1 
   }
 }

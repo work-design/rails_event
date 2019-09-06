@@ -1,7 +1,7 @@
-<%= form_with model: [:admin, @organ, @place] do |f| %>
+<%= form_with model: [:admin, @place] do |f| %>
   <%= render 'shared/error_messages', target: @place %>
-  <%= f.text_field :place_number %>
+  <%= f.text_field :name %>
   <%= f.color_field :color %>
-  <%= f.number_field :limit_number %>
+  <%= f.number_field :max_members %>
   <%= f.submit %>
 <% end %>

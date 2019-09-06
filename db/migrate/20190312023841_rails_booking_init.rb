@@ -5,7 +5,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :places do |t|
       t.references :organ
       t.string :name
-      t.integer :limit_member
+      t.integer :max_members
       t.string :color
       t.integer :time_plans_count, default: 0
       t.timestamps
@@ -32,7 +32,8 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     create_table :plans do |t|
       t.references :time_list
       t.references :planned, polymorphic: true
-      t.references :place
+      t.date :begin_on
+      t.date :end_on
       t.timestamps
     end
     
@@ -70,6 +71,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :plan_attenders do |t|
+      t.references :plan_participant
       t.references :time_plan
       t.references :plan_item
       t.references :attender, polymorphic: true

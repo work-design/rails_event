@@ -1,8 +1,8 @@
-<%= search_form_with model: Place.new(params.permit(:place_number)) do |f| %>
+<%= search_form_with model: Place.new do |f| %>
   <div class="fields">
-    <%= f.text_field :place_number %>
+    <%= f.text_field :name %>
     <%= f.submit %>
-    <%= link_to t('.clear'), filter_params(except: [:place_number]), class: 'ui button' %>
+    <%= link_to t('.clear'), filter_params(except: [:name]), class: 'ui button' %>
   </div>
 <% end %>
 

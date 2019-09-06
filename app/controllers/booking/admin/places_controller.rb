@@ -4,7 +4,7 @@ class Booking::Admin::PlacesController < Booking::Admin::BaseController
   def index
     q_params = {}
     q_params.merge! default_params
-    q_params.merge! params.permit(:place_number)
+    q_params.merge! params.permit(:name, 'max_members-gte')
     @places = Place.default_where(q_params).page(params[:page])
   end
 
@@ -66,9 +66,9 @@ class Booking::Admin::PlacesController < Booking::Admin::BaseController
 
   def place_params
     p = params.fetch(:place, {}).permit(
-      :place_number,
+      :name,
       :color,
-      :limit_number
+      :max_members
     )
     p.merge! default_form_params
   end
