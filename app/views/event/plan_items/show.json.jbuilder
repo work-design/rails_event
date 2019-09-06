@@ -1,1 +1,1 @@
-json.partial! 'course_plan', course_plan: @course_plan
+json.partial! 'event_plan', event_plan: @event_plan

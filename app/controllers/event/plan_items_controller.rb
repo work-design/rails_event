@@ -26,18 +26,18 @@ class Booking::PlanItemsController < Booking::BaseController
   end
 
   def create
-    @plan_item = @plan.plan_items.build(course_plan_params)
+    @plan_item = @plan.plan_items.build(event_plan_params)
 
     respond_to do |format|
       if @plan_item.save
         format.html.phone
-        format.html { redirect_to admin_course_crowd_plans_url(@plan) }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
+        format.html { redirect_to admin_event_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
         format.json { render :show }
       end
     end
@@ -51,18 +51,18 @@ class Booking::PlanItemsController < Booking::BaseController
   end
 
   def update
-    @plan_item.assign_attributes(course_plan_params)
+    @plan_item.assign_attributes(event_plan_params)
 
     respond_to do |format|
       if @plan_item.save
         format.html.phone
-        format.html { redirect_to admin_course_crowd_plans_url(@plan) }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
+        format.html { redirect_to admin_event_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@plan) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
         format.json { render :show }
       end
     end
@@ -74,7 +74,7 @@ class Booking::PlanItemsController < Booking::BaseController
 
   def destroy
     @plan_item.destroy
-    redirect_to admin_course_crowd_plans_url(@plan)
+    redirect_to admin_event_crowd_plans_url(@plan)
   end
 
   private
@@ -86,9 +86,9 @@ class Booking::PlanItemsController < Booking::BaseController
     @plan_item = PlanItem.find(params[:id])
   end
 
-  def course_plan_params
+  def event_plan_params
     params.fetch(:plan_item, {}).permit(
-      :lesson_id,
+      :event_item_id,
       :place_id,
       :teacher_id
     )

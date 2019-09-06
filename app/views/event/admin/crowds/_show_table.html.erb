@@ -16,13 +16,13 @@
       <td class="right aligned">学生</td>
       <td>
         <table class="ui very basic table">
-          <% @crowd_students.each do |crowd_student| %>
+          <% @crowd_members.each do |crowd_member| %>
           <tr>
             <td>
-              <span class="ui label"><%= crowd_student.state_i18n %></span>
+              <span class="ui label"><%= crowd_member.state_i18n %></span>
             </td>
-            <td><%= crowd_student.student.real_name %></td>
-            <td><%= crowd_student.student.nick_name %></td>
+            <td><%= crowd_member.member.real_name %></td>
+            <td><%= crowd_member.member.nick_name %></td>
           </tr>
           <% end %>
         </table>

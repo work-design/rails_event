@@ -1,3 +1,3 @@
-class CourseGrant < ApplicationRecord
-  include RailsEdu::CourseGrant
-end unless defined? CourseGrant
+class EventGrant < ApplicationRecord
+  include RailsEdu::EventGrant
+end unless defined? EventGrant

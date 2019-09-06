@@ -3,7 +3,7 @@ module RailsBooking
   class Engine < ::Rails::Engine
 
     config.autoload_paths += Dir[
-      "#{config.root}/app/models/rails_booking/concerns"
+      "#{config.root}/app/models/rails_event/concerns"
     ]
 
     config.factory_bot.definition_file_paths += Dir["#{config.root}/test/factories"] if defined?(FactoryBotRails)
@@ -22,8 +22,8 @@ module RailsBooking
       g.templates.unshift File.expand_path('lib/templates', RailsCom::Engine.root)
     end
 
-    initializer 'rails_booking.assets.precompile' do |app|
-      app.config.assets.precompile += ['rails_booking_manifest.js']
+    initializer 'rails_event.assets.precompile' do |app|
+      app.config.assets.precompile += ['rails_event_manifest.js']
     end
 
   end

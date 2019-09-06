@@ -1,11 +1,11 @@
-json.extract! course_student,
+json.extract! event_member,
               :id,
               :state,
               :created_at
-json.student course_student.student,
+json.member event_member.member,
              :id,
              :real_name,
              :nick_name,
              :age,
              :birthday
-json.attended @plan_item.students.include?("#{course_student.student_type}_#{course_student.student_id}")
+json.attended @plan_item.members.include?("#{event_member.member_type}_#{event_member.member_id}")

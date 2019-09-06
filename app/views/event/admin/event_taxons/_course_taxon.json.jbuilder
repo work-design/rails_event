@@ -1,3 +1,3 @@
-json.extract! course_taxon,
+json.extract! event_taxon,
               :id,
               :name

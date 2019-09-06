@@ -5,7 +5,7 @@
   </div>
 
   <div class="content">
-    <%= form_with model: @course, url: admin_courses_path do |f| %>
+    <%= form_with model: @event, url: admin_events_path do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
     <% end %>
   </div>

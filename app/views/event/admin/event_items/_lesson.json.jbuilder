@@ -1,6 +1,6 @@
-json.extract! lesson,
+json.extract! event_item,
               :id,
               :title,
               :video_urls,
               :document_urls
-json.course lesson.course, :id, :title
+json.event event_item.event, :id, :title

@@ -1,22 +1,22 @@
-class Edu::Admin::CourseTaxonsController < Edu::Admin::BaseController
-  before_action :set_course_taxon, only: [:show, :edit, :update, :destroy]
+class Edu::Admin::EventTaxonsController < Edu::Admin::BaseController
+  before_action :set_event_taxon, only: [:show, :edit, :update, :destroy]
 
   def index
     q_params = {}
     q_params.merge! default_params
-    @course_taxons = CourseTaxon.default_where(q_params).order(id: :asc).page(params[:page])
+    @event_taxons = EventTaxon.default_where(q_params).order(id: :asc).page(params[:page])
   end
 
   def new
-    @course_taxon = CourseTaxon.new
+    @event_taxon = EventTaxon.new
   end
 
   def create
-    @course_taxon = CourseTaxon.new(course_taxon_params)
+    @event_taxon = EventTaxon.new(event_taxon_params)
     
     respond_to do |format|
-      if @course_taxon.save
-        format.html { redirect_to admin_course_taxons_url }
+      if @event_taxon.save
+        format.html { redirect_to admin_event_taxons_url }
         format.js
       else
         format.html { render :new }
@@ -32,25 +32,25 @@ class Edu::Admin::CourseTaxonsController < Edu::Admin::BaseController
   end
 
   def update
-    if @course_taxon.update(course_taxon_params)
-      redirect_to admin_course_taxons_url
+    if @event_taxon.update(event_taxon_params)
+      redirect_to admin_event_taxons_url
     else
       render :edit
     end
   end
 
   def destroy
-    @course_taxon.destroy
-    redirect_to admin_course_taxons_url
+    @event_taxon.destroy
+    redirect_to admin_event_taxons_url
   end
 
   private
-  def set_course_taxon
-    @course_taxon = CourseTaxon.find(params[:id])
+  def set_event_taxon
+    @event_taxon = EventTaxon.find(params[:id])
   end
 
-  def course_taxon_params
-    p = params.fetch(:course_taxon, {}).permit(
+  def event_taxon_params
+    p = params.fetch(:event_taxon, {}).permit(
       :name
     )
     p.merge! default_form_params

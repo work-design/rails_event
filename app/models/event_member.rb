@@ -1,3 +1,3 @@
-class CourseStudent < ApplicationRecord
-  include RailsEdu::CourseStudent
-end unless defined? CourseStudent
+class EventMember < ApplicationRecord
+  include RailsEdu::EventMember
+end unless defined? EventMember

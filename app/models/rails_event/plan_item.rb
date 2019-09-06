@@ -12,7 +12,7 @@ module RailsBooking::PlanItem
     has_many :plan_attenders, dependent: :nullify
 
     belongs_to :place, optional: true
-    belongs_to :course, optional: true
+    belongs_to :event, optional: true
     belongs_to :event_item, optional: true
     
     validates :plan_on, presence: true
@@ -21,7 +21,7 @@ module RailsBooking::PlanItem
   
     after_initialize if: :new_record? do
       if plan
-        self.assign_attributes plan.as_json(only: [:course_id, :crowd_id, :place_id, :teacher_id])
+        self.assign_attributes plan.as_json(only: [:event_id, :crowd_id, :place_id, :teacher_id])
       end
     end
     before_validation :sync_repeat_index

@@ -1,3 +1,3 @@
-class Lesson < ApplicationRecord
-  include RailsEdu::Lesson
-end unless defined? Lesson
+class EventItem < ApplicationRecord
+  include RailsEdu::EventItem
+end unless defined? EventItem

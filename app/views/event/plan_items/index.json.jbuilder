@@ -1,1 +1,1 @@
-json.array! @course_plans, partial: 'course_plan', as: :course_plan
+json.array! @event_plans, partial: 'event_plan', as: :event_plan

@@ -1,1 +1,1 @@
-import 'rails_booking/time_plan'
+import 'rails_event/time_plan'

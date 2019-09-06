@@ -5,9 +5,9 @@ module RailsEdu::Crowd
     attribute :member_type, :string
     
     has_many :crowd_members
-    has_many :students, through: :crowd_students, source_type: 'Profile'
-    has_many :course_crowds, dependent: :destroy
-    has_many :course_students, through: :course_crowds
+    has_many :members, through: :crowd_members, source_type: 'Profile'
+    has_many :event_crowds, dependent: :destroy
+    has_many :event_members, through: :event_crowds
   end
   
 end

@@ -1,4 +1,4 @@
-json.extract! course,
+json.extract! event,
               :id,
               :title
-json.course_taxon course.course_taxon, :id, :name
+json.event_taxon event.event_taxon, :id, :name

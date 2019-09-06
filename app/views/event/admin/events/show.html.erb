@@ -1,52 +1,52 @@
 <% content_for :breadcrumb do %>
   <div class="ui basic segment breadcrumb">
-    <%= link_to t('edu.admin.courses.index.title'), admin_courses_path, class: 'section' %>
+    <%= link_to t('edu.admin.events.index.title'), admin_events_path, class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= @course.title %></div>
+    <div class="section"><%= @event.title %></div>
     <i class="fas fa-angle-right divider"></i>
     <div class="active section"><%= t('.title') %></div>
   </div>
 <% end %>
 
-<%= render 'nav_course' %>
+<%= render 'nav_event' %>
 
 <table class="ui very basic segment bottom attached large table">
   <thead>
   <tr>
     <th class="three wide"></th>
     <th>
-      <%= link_to t('.edit'), edit_admin_course_path(@course), class: 'ui mini blue right floated button' %>
+      <%= link_to t('.edit'), edit_admin_event_path(@event), class: 'ui mini blue right floated button' %>
     </th>
   </tr>
   </thead>
   <tbody>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:course_taxon_id) %></td>
-    <td><%= @course.course_taxon&.name %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:event_taxon_id) %></td>
+    <td><%= @event.event_taxon&.name %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:title) %></td>
-    <td><%= @course.title %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:title) %></td>
+    <td><%= @event.title %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:type) %></td>
-    <td><%= @course.type_i18n %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:type) %></td>
+    <td><%= @event.type_i18n %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:description) %></td>
-    <td><%= simple_format(@course.description) %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:description) %></td>
+    <td><%= simple_format(@event.description) %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:limit_number) %></td>
-    <td><%= @course.limit_number %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:limit_number) %></td>
+    <td><%= @event.limit_number %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:teacher_id) %></td>
-    <td><%= @course.teacher&.name %></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:teacher_id) %></td>
+    <td><%= @event.teacher&.name %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Course.human_attribute_name(:created_at) %></td>
-    <td><time><%= @course.created_at.to_s(:rfc822) %></time></td>
+    <td class="right aligned"><%= Event.human_attribute_name(:created_at) %></td>
+    <td><time><%= @event.created_at.to_s(:rfc822) %></time></td>
   </tr>
   </tbody>
 </table>

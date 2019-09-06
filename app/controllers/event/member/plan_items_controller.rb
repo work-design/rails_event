@@ -1,5 +1,5 @@
 class Booking::Member::PlanItemsController < Booking::Member::BaseController
-  #before_action :set_course_plan, only: [:show, :edit, :update, :destroy]
+  #before_action :set_event_plan, only: [:show, :edit, :update, :destroy]
 
   def index
     q_params = {
@@ -11,7 +11,7 @@ class Booking::Member::PlanItemsController < Booking::Member::BaseController
 
     q_params.merge! params.permit(:place_id)
 
-    @plan_items = PlanItem.includes(:place, :teacher, :course, :time_item, :crowd).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
+    @plan_items = PlanItem.includes(:place, :teacher, :event, :time_item, :crowd).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html
@@ -24,9 +24,9 @@ class Booking::Member::PlanItemsController < Booking::Member::BaseController
     set_time_lists
     q_params = {}
     q_params.merge! params.permit(:place_id)
-    @time_plans = @course_crowd.time_plans.default_where(q_params)
+    @time_plans = @event_crowd.time_plans.default_where(q_params)
 
-    @time_plan = @course_crowd.time_plans.find_or_initialize_by(q_params.slice(:place_id))
+    @time_plan = @event_crowd.time_plans.find_or_initialize_by(q_params.slice(:place_id))
     @time_plan.time_list ||= TimeList.default
   end
 
@@ -37,36 +37,36 @@ class Booking::Member::PlanItemsController < Booking::Member::BaseController
   end
 
   def update
-    @course_plan.assign_attributes(course_plan_params)
+    @event_plan.assign_attributes(event_plan_params)
 
     respond_to do |format|
-      if @course_plan.save
+      if @event_plan.save
         format.html.phone
-        format.html { redirect_to admin_course_crowd_plans_url(@course_crowd) }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.html { redirect_to admin_event_crowd_plans_url(@event_crowd) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@event_crowd) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_course_crowd_plans_url(@course_crowd) }
+        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@event_crowd) }
         format.json { render :show }
       end
     end
   end
 
   def destroy
-    @course_plan.destroy
-    redirect_to admin_course_crowd_plans_url(@course_crowd)
+    @event_plan.destroy
+    redirect_to admin_event_crowd_plans_url(@event_crowd)
   end
 
   private
-  def set_course_plan
-    @course_plan = PlanItem.find(params[:id])
+  def set_event_plan
+    @event_plan = PlanItem.find(params[:id])
   end
 
-  def course_plan_params
-    params.fetch(:course_plan, {}).permit(
-      :lesson_id,
+  def event_plan_params
+    params.fetch(:event_plan, {}).permit(
+      :event_item_id,
       :place_id
     )
   end

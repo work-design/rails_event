@@ -1,7 +1,7 @@
-module RailsEdu::CourseGrant
+module RailsEdu::EventGrant
   extend ActiveSupport::Concern
   included do
-    belongs_to :course
+    belongs_to :event
   end
   
 end

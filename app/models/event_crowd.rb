@@ -1,3 +1,3 @@
-class CourseCrowd < ApplicationRecord
-  include RailsEdu::CourseCrowd
-end unless defined? CourseCrowd
+class EventCrowd < ApplicationRecord
+  include RailsEdu::EventCrowd
+end unless defined? EventCrowd

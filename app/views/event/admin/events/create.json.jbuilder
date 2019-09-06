@@ -1,1 +1,1 @@
-json.course @course, partial: 'course', as: :course
+json.event @event, partial: 'event', as: :event

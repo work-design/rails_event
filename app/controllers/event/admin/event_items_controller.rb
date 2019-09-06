@@ -1,23 +1,23 @@
-class Edu::Admin::LessonsController < Edu::Admin::BaseController
-  before_action :set_course
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+class Edu::Admin::EventItemsController < Edu::Admin::BaseController
+  before_action :set_event
+  before_action :set_event_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lessons = @course.lessons.page(params[:page])
+    @event_items = @event.event_items.page(params[:page])
   end
 
   def new
-    @lesson = @course.lessons.build
+    @event_item = @event.event_items.build
   end
 
   def create
-    @lesson = @course.lessons.build(lesson_params)
+    @event_item = @event.event_items.build(event_item_params)
 
     respond_to do |format|
-      if @lesson.save
+      if @event_item.save
         format.html.phone
-        format.html { redirect_to admin_lessons_url }
-        format.js { redirect_to admin_course_lessons_url(@course) }
+        format.html { redirect_to admin_event_items_url }
+        format.js { redirect_to admin_event_event_items_url(@event) }
         format.json { render :show }
       else
         format.html.phone { render :new }
@@ -35,13 +35,13 @@ class Edu::Admin::LessonsController < Edu::Admin::BaseController
   end
 
   def update
-    @lesson.assign_attributes(lesson_params)
+    @event_item.assign_attributes(event_item_params)
 
     respond_to do |format|
-      if @lesson.save
+      if @event_item.save
         format.html.phone
-        format.html { redirect_to admin_course_lessons_url(@course) }
-        format.js { redirect_to admin_course_lessons_url(@course) }
+        format.html { redirect_to admin_event_event_items_url(@event) }
+        format.js { redirect_to admin_event_event_items_url(@event) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
@@ -53,21 +53,21 @@ class Edu::Admin::LessonsController < Edu::Admin::BaseController
   end
 
   def destroy
-    @lesson.destroy
-    redirect_to admin_lessons_url
+    @event_item.destroy
+    redirect_to admin_event_items_url
   end
 
   private
-  def set_course
-    @course = Course.find params[:course_id]
+  def set_event
+    @event = Event.find params[:event_id]
   end
 
-  def set_lesson
-    @lesson = Lesson.find(params[:id])
+  def set_event_item
+    @event_item = EventItem.find(params[:id])
   end
 
-  def lesson_params
-    params.fetch(:lesson, {}).permit(
+  def event_item_params
+    params.fetch(:event_item, {}).permit(
       :title,
       videos: [],
       documents: []

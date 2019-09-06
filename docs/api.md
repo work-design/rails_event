@@ -2,7 +2,7 @@
 ```json5
 {
   "plan": {
-    "planned_type": "Course",
+    "planned_type": "Event",
     "planned_id": 1, 
     "begin_on": "2019-09-01",
     "plan_times_attributes": [] 

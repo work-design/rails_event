@@ -1,3 +1,3 @@
-$('#course_plan_lesson_id').dropdown();
-$('#course_plan_place_id').dropdown();
-$('#course_plan_teacher_id').dropdown();
+$('#event_plan_event_item_id').dropdown();
+$('#event_plan_place_id').dropdown();
+$('#event_plan_teacher_id').dropdown();

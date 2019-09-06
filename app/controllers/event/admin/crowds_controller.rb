@@ -30,7 +30,7 @@ class Edu::Admin::CrowdsController < Edu::Admin::BaseController
   end
 
   def show
-    @crowd_students = @crowd.crowd_students.includes(:student)
+    @crowd_members = @crowd.crowd_members.includes(:member)
   end
 
   def edit
@@ -68,7 +68,7 @@ class Edu::Admin::CrowdsController < Edu::Admin::BaseController
     p = params.fetch(:crowd, {}).permit(
       :name,
       :logo,
-      :student_type
+      :member_type
     )
     p.merge! default_form_params
   end

@@ -1,10 +1,10 @@
 <div class="ui modal" id="modal">
   <i class="close icon"></i>
   <div class="content">
-    <%= form_with model: @course_plan, url: admin_course_crowd_plan_path(@course_crowd, @course_plan) do |f| %>
-      <%= render 'shared/error_messages', target: @course_plan %>
-      <% if params[:item] == 'lesson' %>
-      <%= f.collection_select :lesson_id, @course_crowd.lessons, :id, :title %>
+    <%= form_with model: @event_plan, url: admin_event_crowd_plan_path(@event_crowd, @event_plan) do |f| %>
+      <%= render 'shared/error_messages', target: @event_plan %>
+      <% if params[:item] == 'event_item' %>
+      <%= f.collection_select :event_item_id, @event_crowd.event_items, :id, :title %>
       <% end %>
       <% if params[:item] == 'teacher' %>
         <%= f.collection_members_select :teacher_id, :id, :name, { include_blank: true } %>

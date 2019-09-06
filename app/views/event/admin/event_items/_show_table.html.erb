@@ -2,23 +2,23 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_edu_admin_lesson_path(@lesson), class: 'ui mini blue right floated button', remote: true %>
+        <%= link_to t('.edit'), edit_edu_admin_event_item_path(@event_item), class: 'ui mini blue right floated button', remote: true %>
       </th>
       <th class="ten wide"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= Lesson.human_attribute_name(:title) %></td>
-      <td><%= @lesson.title %></td>
+      <td class="right aligned"><%= EventItem.human_attribute_name(:title) %></td>
+      <td><%= @event_item.title %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Lesson.human_attribute_name(:videos) %></td>
-      <td><%= @lesson.videos %></td>
+      <td class="right aligned"><%= EventItem.human_attribute_name(:videos) %></td>
+      <td><%= @event_item.videos %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Lesson.human_attribute_name(:documents) %></td>
-      <td><%= @lesson.documents %></td>
+      <td class="right aligned"><%= EventItem.human_attribute_name(:documents) %></td>
+      <td><%= @event_item.documents %></td>
     </tr>
   </tbody>
 </table>

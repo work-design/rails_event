@@ -1,40 +1,40 @@
-class Edu::Admin::CourseStudentsController < Edu::Admin::BaseController
-  before_action :set_course
-  before_action :set_course_student, only: [:show, :edit, :update]
+class Edu::Admin::EventMembersController < Edu::Admin::BaseController
+  before_action :set_event
+  before_action :set_event_member, only: [:show, :edit, :update]
 
   def index
     q_params = {}
     q_params.merge! params.permit(:id, :state)
-    @course_students = @course.course_students.default_where(q_params).page(params[:page])
+    @event_members = @event.event_members.default_where(q_params).page(params[:page])
   end
 
   def new
-    @course_student = CourseStudent.new
+    @event_member = EventMember.new
   end
 
   def create
-    @course_student = @course.course_students.build(course_student_params)
+    @event_member = @event.event_members.build(event_member_params)
 
-    if @course_student.save
-      redirect_to admin_course_course_crowds_url(@course)
+    if @event_member.save
+      redirect_to admin_event_event_crowds_url(@event)
     else
       render :new
     end
   end
 
   def update
-    if @course_student.update(course_student_params)
-      redirect_to course_students_url
+    if @event_member.update(event_member_params)
+      redirect_to event_members_url
     else
       render :edit
     end
   end
 
   def destroy
-    @course_student = @course.course_students.find_by(crowd_student_id: params[:crowd_student_id])
-    @course_student.destroy
+    @event_member = @event.event_members.find_by(crowd_member_id: params[:crowd_member_id])
+    @event_member.destroy
 
-    redirect_to admin_course_course_crowds_url(@course)
+    redirect_to admin_event_event_crowds_url(@event)
   end
 
   def check
@@ -42,29 +42,29 @@ class Edu::Admin::CourseStudentsController < Edu::Admin::BaseController
     if add_ids.present?
       members = Member.where(id: add_ids)
       members.each do |member|
-        add = @course.course_students.find_or_initialize_by(member_id: member.id)
+        add = @event.event_members.find_or_initialize_by(member_id: member.id)
         add.save_with_remind
       end
     end
 
     remove_ids = params[:remove_ids].split(',')
     if remove_ids.present?
-      @course.course_students.where(member_id: remove_ids).each do |pl|
+      @event.event_members.where(member_id: remove_ids).each do |pl|
         pl.destroy
       end
     end
 
-    redirect_to admin_course_course_students_url(@course)
+    redirect_to admin_event_event_members_url(@event)
   end
 
   def attend
     if params[:add_ids].present?
-      adds = CourseStudent.where(id: params[:add_ids].split(','))
+      adds = EventMember.where(id: params[:add_ids].split(','))
       adds.update_all attended: true
     end
 
     if params[:remove_ids].present?
-      removes = CourseStudent.where(id: params[:remove_ids].split(','))
+      removes = EventMember.where(id: params[:remove_ids].split(','))
       removes.update_all attended: false
     end
 
@@ -72,34 +72,34 @@ class Edu::Admin::CourseStudentsController < Edu::Admin::BaseController
   end
 
   def show
-    @course_student = CourseStudent.find_by(id: params[:id])
-    @eduing_histories = @course_student.eduing_histories.order('id desc')
+    @event_member = EventMember.find_by(id: params[:id])
+    @eduing_histories = @event_member.eduing_histories.order('id desc')
   end
 
   def edit
-    @title = "Assign Courses"
+    @title = "Assign Events"
   end
 
   def quit
-    @course_student = CourseStudent.find params[:id]
-    @course_student.trigger_to! state: 'quitted'
-    redirect_to admin_course_course_students_url(member_id: @course_student.member_id)
+    @event_member = EventMember.find params[:id]
+    @event_member.trigger_to! state: 'quitted'
+    redirect_to admin_event_event_members_url(member_id: @event_member.member_id)
   end
 
   private
-  def set_course
-    @course = Course.find params[:course_id]
+  def set_event
+    @event = Event.find params[:event_id]
   end
 
-  def set_course_student
-    @course_student = CourseStudent.find(params[:id])
+  def set_event_member
+    @event_member = EventMember.find(params[:id])
   end
 
-  def course_student_params
-    p = params.fetch(:course_student, {}).permit(
+  def event_member_params
+    p = params.fetch(:event_member, {}).permit(
       :state
     )
-    p.merge! params.permit(:student_type, :student_id, :crowd_student_id, :course_crowd_id)
+    p.merge! params.permit(:member_type, :member_id, :crowd_member_id, :event_crowd_id)
   end
 
 end

@@ -1,1 +1,1 @@
-json.course_taxons @course_taxons, partial: 'course_taxon', as: :course_taxon
+json.event_taxons @event_taxons, partial: 'event_taxon', as: :event_taxon

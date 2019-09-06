@@ -13,7 +13,7 @@ module RailsBooking::PlanAttender
 
     after_initialize if: :new_record? do
       if plan_item
-        self.assign_attributes plan_item.as_json(only: [:course_id, :crowd_id, :place_id])
+        self.assign_attributes plan_item.as_json(only: [:event_id, :crowd_id, :place_id])
       end
     end
   end

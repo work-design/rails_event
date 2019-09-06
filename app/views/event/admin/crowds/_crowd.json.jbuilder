@@ -1,6 +1,6 @@
 json.extract! crowd,
               :id,
               :name
-json.students crowd.students do |student|
-  json.extract! student, :id, :name
+json.members crowd.members do |member|
+  json.extract! member, :id, :name
 end

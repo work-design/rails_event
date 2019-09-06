@@ -1,4 +1,4 @@
-module RailsEdu::CourseCrowd
+module RailsEdu::EventCrowd
   extend ActiveSupport::Concern
 
   included do
@@ -7,27 +7,27 @@ module RailsEdu::CourseCrowd
     belongs_to :event
     belongs_to :crowd
     
-    has_many :crowd_students, foreign_key: :crowd_id, primary_key: :crowd_id
+    has_many :crowd_members, foreign_key: :crowd_id, primary_key: :crowd_id
     has_many :plan_items, as: :plan, dependent: :destroy
-    has_many :course_students
-    has_many :events, foreign_key: :course_id, primary_key: :course_id
+    has_many :event_members
+    has_many :events, foreign_key: :event_id, primary_key: :event_id
   
-    after_create_commit :sync_to_course_students
-    after_destroy_commit :destroy_from_course_students
-    after_update_commit :sync_to_course_plans
+    after_create_commit :sync_to_event_members
+    after_destroy_commit :destroy_from_event_members
+    after_update_commit :sync_to_event_plans
   
-    delegate :title, to: :course
+    delegate :title, to: :event
     delegate :max_members, to: :place, allow_nil: true
   end
   
-  def sync_to_course_students
-    self.crowd_students.each do |i|
-      cs = self.course_students.build(crowd_student_id: i.id)
+  def sync_to_event_members
+    self.crowd_members.each do |i|
+      cs = self.event_members.build(crowd_member_id: i.id)
       cs.save
     end
   end
 
-  def sync_to_course_plans
+  def sync_to_event_plans
     if saved_change_to_teacher_id?
       self.plan_items.where(teacher_id: nil).update_all(teacher_id: self.teacher_id)
     end
@@ -37,14 +37,14 @@ module RailsEdu::CourseCrowd
   end
   
   def sync_to_plan_items
-    self.course_id ||= course_crowd.course_id
-    self.teacher_id ||= course_crowd.teacher_id
-    self.room_id ||= course_crowd.room_id
+    self.event_id ||= event_crowd.event_id
+    self.teacher_id ||= event_crowd.teacher_id
+    self.room_id ||= event_crowd.room_id
   end
 
-  def destroy_from_course_students
-    self.crowd.students.each do |i|
-      cs = i.course_students.find_by(student_id: i.id)
+  def destroy_from_event_members
+    self.crowd.members.each do |i|
+      cs = i.event_members.find_by(member_id: i.id)
       cs&.destroy
     end
   end

@@ -1,13 +1,12 @@
 $:.push File.expand_path('lib', __dir__)
-require 'rails_booking/version'
+require 'rails_event/version'
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name = 'rails_booking'
+  s.name = 'rails_event'
   s.version = RailsBooking::VERSION
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
-  s.homepage = 'https://github.com/work-design/rails_booking'
+  s.homepage = 'https://github.com/work-design/rails_event'
   s.summary = 'Summary of RailsBooking.'
   s.description = 'Description of RailsBooking.'
   s.license = 'LGPL-3.0'

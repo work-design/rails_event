@@ -1,11 +1,11 @@
 <div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_course_lessons_path(@course), class: 'section' %>
+  <%= link_to 'Back', admin_event_event_items_path(@event), class: 'section' %>
   <i class="fas fa-angle-right divider"></i>
   <div class="active section">Add</div>
 </div>
 
 <div class="ui segment">
-  <%= form_with model: @lesson, url: admin_course_lessons_path(@course) do |f| %>
+  <%= form_with model: @event_item, url: admin_event_event_items_path(@event) do |f| %>
     <%= render partial: 'form', locals: { f: f } %>
   <% end %>
 </div>
