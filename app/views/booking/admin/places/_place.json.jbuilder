@@ -1,3 +1,3 @@
-json.extract! room,
+json.extract! place,
               :id,
               :name

@@ -14,7 +14,7 @@ class Booking::PlanItemsController < Booking::BaseController
   def plan
     set_time_lists
     q_params = {}
-    q_params.merge! params.permit(:room_id)
+    q_params.merge! params.permit(:place_id)
     @time_plans = @plan.time_plans.default_where(q_params)
 
     @time_plan = @plan.time_plans.recent || @plan.time_plans.build
@@ -47,7 +47,7 @@ class Booking::PlanItemsController < Booking::BaseController
   end
 
   def edit
-    @rooms = Room.default_where(default_params)
+    @places = Place.default_where(default_params)
   end
 
   def update
@@ -89,7 +89,7 @@ class Booking::PlanItemsController < Booking::BaseController
   def course_plan_params
     params.fetch(:plan_item, {}).permit(
       :lesson_id,
-      :room_id,
+      :place_id,
       :teacher_id
     )
   end

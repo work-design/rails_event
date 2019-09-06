@@ -5,16 +5,12 @@ Rails.application.routes.draw do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
     end
-    scope ':plan_type/:plan_id' do
-      resources :time_plans do
-        get :calendar, on: :collection
-        get 'calendar' => :show_calendar, on: :member
-      end
-      resources :plan_items do
-        patch :qrcode, on: :member
-      end
+    resources :time_plans do
+      get :calendar, on: :collection
+      get 'calendar' => :show_calendar, on: :member
     end
-    resources :plan_items, only: [] do
+    resources :plan_items do
+      patch :qrcode, on: :member
       resources :time_bookings do
         delete '' => :destroy, on: :collection
       end
@@ -36,7 +32,8 @@ Rails.application.routes.draw do
     resources :time_items, only: [] do
       get :default, on: :collection
     end
-    resources :rooms
+    resources :places
+    resources :plans
   end
 
   scope :my, module: 'booking/my', as: :my do

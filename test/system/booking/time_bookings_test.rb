@@ -15,7 +15,7 @@ class TimeBookingsTest < ApplicationSystemTestCase
     click_on "New Time Booking"
 
     fill_in "Booking on", with: @booking_time_booking.booking_on
-    fill_in "Room", with: @booking_time_booking.room_id
+    fill_in "Place", with: @booking_time_booking.place_id
     fill_in "Time item", with: @booking_time_booking.time_item_id
     fill_in "Time list", with: @booking_time_booking.time_list_id
     click_on "Create Time booking"
@@ -29,7 +29,7 @@ class TimeBookingsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Booking on", with: @booking_time_booking.booking_on
-    fill_in "Room", with: @booking_time_booking.room_id
+    fill_in "Place", with: @booking_time_booking.place_id
     fill_in "Time item", with: @booking_time_booking.time_item_id
     fill_in "Time list", with: @booking_time_booking.time_list_id
     click_on "Update Time booking"

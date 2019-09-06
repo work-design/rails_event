@@ -13,7 +13,7 @@ module RailsBooking::PlanItemize
             finish_at: i.finish_at.to_s(:time),
             present_number: i.plan.present_number.to_i,
             limit_number: i.plan.limit_number.to_i,
-            room: i.plan.room&.as_json(only: [:id], methods: [:name]),
+            place: i.plan.place&.as_json(only: [:id], methods: [:name]),
             crowd: i.plan.crowd.as_json(only: [:id, :name]),
             booked: i.time_bookings.default_where(filter_options).exists?
           }

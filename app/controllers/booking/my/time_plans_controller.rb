@@ -4,7 +4,7 @@ class Booking::My::TimePlansController < Booking::My::BaseController
 
   def index
     q_params = {}.with_indifferent_access
-    q_params.merge! params.permit(:room_id)
+    q_params.merge! params.permit(:place_id)
     @time_plans = TimePlan.default_where(q_params)
     @events = @time_plans.map do |time_plan|
       time_plan.next_events
@@ -43,7 +43,7 @@ class Booking::My::TimePlansController < Booking::My::BaseController
 
   def set_time_lists
     #return super if super
-    @rooms = Room.none
+    @places = Place.none
     @time_lists = TimeList.none
   end
 

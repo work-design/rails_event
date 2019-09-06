@@ -18,7 +18,7 @@ module RailsBooking::PlanItem
   
     after_initialize if: :new_record? do
       if plan
-        self.assign_attributes plan.as_json(only: [:course_id, :crowd_id, :room_id, :teacher_id])
+        self.assign_attributes plan.as_json(only: [:course_id, :crowd_id, :place_id, :teacher_id])
       end
     end
     before_validation :sync_repeat_index
@@ -42,12 +42,12 @@ module RailsBooking::PlanItem
       id: id,
       start: start_at.strftime('%FT%T'),
       end: finish_at.strftime('%FT%T'),
-      title: "#{room&.name} #{plan.title}",
+      title: "#{place&.name} #{plan.title}",
       extendedProps: {
         title: plan.title,
         time_item_id: time_item_id,
         plan: plan_on,
-        room: room.as_json(only: [:id], methods: [:name]),
+        place: place.as_json(only: [:id], methods: [:name]),
         crowd: crowd.as_json(only: [:id, :name])
       }
     }

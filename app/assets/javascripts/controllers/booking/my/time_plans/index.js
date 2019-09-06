@@ -1,4 +1,4 @@
-$('#time_plan_room_id').dropdown();
+$('#time_plan_place_id').dropdown();
 
 $('#time_plan_time_list_id').dropdown({
   onChange: function(value, text, $selectedItem){

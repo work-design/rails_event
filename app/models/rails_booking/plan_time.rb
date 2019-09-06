@@ -1,4 +1,4 @@
-module RailsBooking::TimePlan
+module RailsBooking::PlanTime
   REPEAT = {
     'once' => 0..6,
     'weekly' => 0..6,
@@ -8,12 +8,15 @@ module RailsBooking::TimePlan
   included do
     attribute :begin_on, :date, default: -> { Date.today }
     
-    belongs_to :plan, polymorphic: true
     belongs_to :time_list
+    
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
 
+    has_many :plan_participants
+    accepts_nested_attributes_for :plan_participants
+    
     default_scope -> { order(begin_on: :asc) }
     validates :begin_on, presence: true
   end

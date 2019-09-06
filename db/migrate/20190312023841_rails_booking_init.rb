@@ -2,10 +2,10 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
 
   def change
   
-    create_table :rooms do |t|
+    create_table :places do |t|
       t.references :organ
-      t.string :room_number
-      t.integer :limit_number
+      t.string :name
+      t.integer :limit_member
       t.string :color
       t.integer :time_plans_count, default: 0
       t.timestamps
@@ -29,14 +29,27 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    create_table :plan_events do |t|
+    create_table :plans do |t|
       t.references :time_list
-      t.references :event, polymorphic: true
-      t.references :room
+      t.references :planned, polymorphic: true
+      t.references :place
+      t.timestamps
+    end
+    
+    create_table :plan_times do |t|
+      t.references :plan
+      t.references :place
       t.date :begin_on
+      t.date :end_on
       t.string :repeat_type  # 日、周、月、天
       t.integer :repeat_count # 每几周
       t.integer :repeat_days, array: true
+      t.timestamps
+    end
+    
+    create_table :plan_participants do |t|
+      t.references :plan_time
+      t.references :participant, polymorphic: true
       t.timestamps
     end
     
@@ -44,7 +57,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :time_plan
       t.references :time_list
       t.references :time_item
-      t.references :room
+      t.references :place
       t.date :plan_on
       t.string :repeat_index
       t.integer :time_bookings_count, default: 0
@@ -60,7 +73,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :time_plan
       t.references :plan_item
       t.references :attender, polymorphic: true
-      t.references :room
+      t.references :place
       t.boolean :attended
       t.string :state
       if connection.adapter_name == 'PostgreSQL'
@@ -77,7 +90,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :plan_item
       t.references :time_item
       t.references :time_list
-      t.references :room
+      t.references :place
       t.date :booking_on
       t.timestamps
     end

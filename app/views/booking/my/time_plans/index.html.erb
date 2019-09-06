@@ -19,7 +19,7 @@
 </div>
 
 <div class="ui bottom attached segment">
-  <%= select_tag :'time_plan[room_id]', options_from_collection_for_select(@rooms, :id, :name), form: 'time_plan_form', data: { remote: true, url: my_time_plans_path } %>
+  <%= select_tag :'time_plan[place_id]', options_from_collection_for_select(@places, :id, :name), form: 'time_plan_form', data: { remote: true, url: my_time_plans_path } %>
   <div class="ui divider"></div>
   <div id="calendar"></div>
 </div>

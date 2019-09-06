@@ -43,7 +43,7 @@ module RailsBooking::Recurrence
       time_items.map do |i|
         ext = {
           title: self.plan.title,
-          room: self.plan.room.as_json(only: [:id], methods: [:name])
+          place: self.plan.place.as_json(only: [:id], methods: [:name])
         }
         ext.merge! crowd: self.plan.crowd.as_json(only: [:id, :name]) if self.plan.respond_to?(:crowd)
 
@@ -51,7 +51,7 @@ module RailsBooking::Recurrence
           id: i.id,
           start: i.start_at.change(date.parts).strftime('%FT%T'),
           end: i.finish_at.change(date.parts).strftime('%FT%T'),
-          title: "#{plan.room.name} #{self.plan.title}",
+          title: "#{plan.place.name} #{self.plan.title}",
           extendedProps: ext
         } if Array(repeat_days[span]).include?(i.id)
       end.compact if repeat_days.key?(span)

@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th><%= TimePlan.human_attribute_name(:id) %></th>
-      <th><%= TimePlan.human_attribute_name(:room_id) %></th>
+      <th><%= TimePlan.human_attribute_name(:place_id) %></th>
       <th><%= TimePlan.human_attribute_name(:repeat_type) %></th>
       <th><%= TimePlan.human_attribute_name(:repeat_days) %></th>
       <th>
@@ -16,7 +16,7 @@
   <% @time_plans.each do |time_plan| %>
     <tr>
       <td><%= time_plan.id %></td>
-      <td><%= time_plan.room_id %></td>
+      <td><%= time_plan.place_id %></td>
       <td><%= time_plan.repeat_type %></td>
       <td><%= time_plan.repeat_days %></td>
       <td>

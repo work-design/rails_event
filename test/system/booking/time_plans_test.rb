@@ -16,7 +16,7 @@ class TimePlansTest < ApplicationSystemTestCase
 
     fill_in "Repeat days", with: @booking_time_plan.repeat_days
     fill_in "Repeat type", with: @booking_time_plan.repeat_type
-    fill_in "Room", with: @booking_time_plan.room_id
+    fill_in "Place", with: @booking_time_plan.place_id
     fill_in "Time item", with: @booking_time_plan.time_item_id
     fill_in "Time list", with: @booking_time_plan.time_list_id
     click_on "Create Time plan"
@@ -31,7 +31,7 @@ class TimePlansTest < ApplicationSystemTestCase
 
     fill_in "Repeat days", with: @booking_time_plan.repeat_days
     fill_in "Repeat type", with: @booking_time_plan.repeat_type
-    fill_in "Room", with: @booking_time_plan.room_id
+    fill_in "Place", with: @booking_time_plan.place_id
     fill_in "Time item", with: @booking_time_plan.time_item_id
     fill_in "Time list", with: @booking_time_plan.time_list_id
     click_on "Update Time plan"
