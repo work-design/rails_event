@@ -15,8 +15,10 @@ yarn add @fullcalendar/timegrid
 ```
 
 
-## Contributing
-Contribution directions go here.
+## 许可
+本项目采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0) 协议。
 
-## License
-The gem is available as open source under the terms of the [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
+基于本项目二次开发之后不允许闭源。
+
+如需商业使用，请联系作者单独授权。
+
