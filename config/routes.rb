@@ -34,6 +34,28 @@ Rails.application.routes.draw do
     end
     resources :places
     resources :plans
+    resources :crowds do
+      resources :crowd_members
+    end
+    resources :event_taxons
+    resources :events do
+      get :plan, on: :collection
+      resources :event_members do
+        post :check, on: :collection
+        post :attend, on: :collection
+        patch :quit, on: :member
+        delete '' => :destroy, on: :collection
+      end
+      resources :event_items do
+      end
+    end
+    resources :event_items, only: [] do
+      member do
+        get 'plan' => :edit_plan
+        patch 'plan' => :update_plan
+        delete 'plan' => :destroy_plan
+      end
+    end
   end
 
   scope :my, module: 'booking/my', as: :my do

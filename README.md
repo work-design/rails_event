@@ -1,5 +1,7 @@
-# RailsBooking
-Short description and motivation.
+# RailsEvent
+
+RailsEvent 用于处理基于事件、地点、参与人的业务，如：活动举办、课程。
+
 
 ## 说明
 

@@ -5,6 +5,7 @@ zh:
         index:
           title:
     admin:
+      title: 预约/排课配置
       time_lists:
         index:
           title: 课节次设置
