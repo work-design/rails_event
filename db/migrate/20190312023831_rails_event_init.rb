@@ -1,6 +1,7 @@
 class RailsEventInit < ActiveRecord::Migration[5.0]
 
   def change
+    
     create_table :event_taxons do |t|
       t.string :name
       t.timestamps
@@ -35,6 +36,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
     create_table :crowds do |t|
       t.references :organ  # For SaaS
       t.string :name
+      t.string :member_type
       t.integer :crowd_members_count, default: 0
       t.timestamps
     end
@@ -42,7 +44,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
     create_table :crowd_members do |t|
       t.references :crowd
       t.references :member, polymorphic: true
-      t.references :tutelage
+      t.references :agency
       t.string :state
       t.timestamps
     end
@@ -52,7 +54,6 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :member, polymorphic: true
       t.references :crowd
       t.string :state
-      t.string :watch_ids
       t.integer :score
       t.string :comment, limit: 4096
       t.string :quit_note

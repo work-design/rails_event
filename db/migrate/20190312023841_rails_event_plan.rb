@@ -42,7 +42,8 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
     
     create_table :plan_participants do |t|
-      t.references :plan_time
+      t.references :plan
+      t.references :event_member
       t.references :participant, polymorphic: true
       t.timestamps
     end
@@ -64,21 +65,10 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :plan_attenders do |t|
-      t.references :event
-      t.references :event_item
-      t.references :event_member
-      t.references :member, polymorphic: true
-      t.references :plan_item
-      t.string :state
-      t.boolean :attended, default: false
-      t.timestamps
-    end
-
-    create_table :plan_attenders do |t|
       t.references :plan_participant
       t.references :plan
       t.references :plan_item
-      t.references :attender, polymorphic: true
+      t.references :member, polymorphic: true
       t.references :place
       t.boolean :attended
       t.string :state
@@ -90,12 +80,11 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    create_table :time_bookings do |t|
+    create_table :bookings do |t|
       t.references :booker, polymorphic: true
       t.references :booked, polymorphic: true
       t.references :plan_item
       t.references :time_item
-      t.references :time_list
       t.references :place
       t.date :booking_on
       t.timestamps
