@@ -1,3 +1,3 @@
 class EventTaxon < ApplicationRecord
-  include RailsEdu::EventTaxon
+  include RailsEvent::EventTaxon
 end unless defined? EventTaxon

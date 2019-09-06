@@ -1,4 +1,4 @@
-module RailsEdu::EventItem
+module RailsEvent::EventItem
   extend ActiveSupport::Concern
   included do
     belongs_to :event

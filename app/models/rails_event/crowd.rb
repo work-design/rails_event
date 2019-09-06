@@ -1,4 +1,4 @@
-module RailsEdu::Crowd
+module RailsEvent::Crowd
   extend ActiveSupport::Concern
   
   included do

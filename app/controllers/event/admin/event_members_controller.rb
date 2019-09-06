@@ -1,4 +1,4 @@
-class Edu::Admin::EventMembersController < Edu::Admin::BaseController
+class Event::Admin::EventMembersController < Event::Admin::BaseController
   before_action :set_event
   before_action :set_event_member, only: [:show, :edit, :update]
 

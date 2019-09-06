@@ -1,4 +1,4 @@
-module RailsBooking::TimeList
+module RailsEvent::TimeList
   extend ActiveSupport::Concern
   included do
     attribute :kind, :string

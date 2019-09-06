@@ -1,3 +1,3 @@
 class PlanItem < ApplicationRecord
-  include RailsBooking::PlanItem
+  include RailsEvent::PlanItem
 end unless defined? PlanItem

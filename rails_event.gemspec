@@ -3,12 +3,12 @@ require 'rails_event/version'
 
 Gem::Specification.new do |s|
   s.name = 'rails_event'
-  s.version = RailsBooking::VERSION
+  s.version = RailsEvent::VERSION
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_event'
-  s.summary = 'Summary of RailsBooking.'
-  s.description = 'Description of RailsBooking.'
+  s.summary = 'Summary of RailsEvent.'
+  s.description = 'Description of RailsEvent.'
   s.license = 'LGPL-3.0'
 
   s.files = Dir[

@@ -3,16 +3,19 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
   def change
     
     create_table :event_taxons do |t|
+      t.references :organ  # For SaaS
       t.string :name
       t.timestamps
     end
     
     create_table :events do |t|
+      t.references :organ  # For SaaS
       t.references :event_taxon
       t.string :type
       t.string :title
       t.string :description, limit: 4096
       t.integer :position
+      t.decimal :price, precision: 10, scale: 2
       t.integer :event_members_count, default: 0
       t.integer :event_items_count, default: 0
       t.timestamps

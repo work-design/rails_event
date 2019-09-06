@@ -1,4 +1,4 @@
-module RailsBooking::PlanItemize
+module RailsEvent::PlanItemize
   
   
   def next_occurrences(filter_options: {})

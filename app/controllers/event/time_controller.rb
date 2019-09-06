@@ -1,4 +1,4 @@
-class Booking::TimeController < Booking::BaseController
+class Event::TimeController < Event::BaseController
   skip_before_action :verify_authenticity_token, only: [:repeat_form]
 
   def repeat_form

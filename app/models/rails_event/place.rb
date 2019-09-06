@@ -1,4 +1,4 @@
-module RailsBooking::Place
+module RailsEvent::Place
   extend ActiveSupport::Concern
   
   included do

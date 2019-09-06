@@ -1,20 +1,52 @@
 zh:
-  booking:
+  event:
     my:
       time_plans:
         index:
           title:
     admin:
-      title: 预约/排课配置
+      title: 教学管理
       time_lists:
         index:
           title: 课节次设置
       places:
         index:
           title: 教室
+      events:
+        index:
+          title: 课程列表
+        show:
+          title: 课程详情
+      crowds:
+        index:
+          title: 班级
+      event_plans:
+        index:
+          title: 计划
+          plan: 排课
+          qrcode: 获取二维码
+        plan:
+          title: 排课
+      event_members:
+        index:
+          title: 学生列表
+      event_taxons:
+        index:
+          title: 课程分类
+        new:
+          title: 添加课程分类
+      event_items:
+        index:
+          title: 课程内容
+      agencys:
+        index:
+          title: 园区学生
+        edit_crowd:
+          title: 分班
     time_plans:
       index:
         title: 时间计划
     plan_attenders:
       index:
+        title: 点名
         qrcode: 二维码

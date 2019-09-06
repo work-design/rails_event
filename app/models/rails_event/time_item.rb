@@ -1,4 +1,4 @@
-module RailsBooking::TimeItem
+module RailsEvent::TimeItem
   extend ActiveSupport::Concern
   included do
     acts_as_list scope: :time_list_id

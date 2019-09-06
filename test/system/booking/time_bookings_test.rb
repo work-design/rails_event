@@ -12,9 +12,9 @@ class TimeBookingsTest < ApplicationSystemTestCase
 
   test "creating a Time booking" do
     visit booking_time_bookings_url
-    click_on "New Time Booking"
+    click_on "New Time Event"
 
-    fill_in "Booking on", with: @booking_time_booking.booking_on
+    fill_in "Event on", with: @booking_time_booking.booking_on
     fill_in "Place", with: @booking_time_booking.place_id
     fill_in "Time item", with: @booking_time_booking.time_item_id
     fill_in "Time list", with: @booking_time_booking.time_list_id
@@ -28,7 +28,7 @@ class TimeBookingsTest < ApplicationSystemTestCase
     visit booking_time_bookings_url
     click_on "Edit", match: :first
 
-    fill_in "Booking on", with: @booking_time_booking.booking_on
+    fill_in "Event on", with: @booking_time_booking.booking_on
     fill_in "Place", with: @booking_time_booking.place_id
     fill_in "Time item", with: @booking_time_booking.time_item_id
     fill_in "Time list", with: @booking_time_booking.time_list_id

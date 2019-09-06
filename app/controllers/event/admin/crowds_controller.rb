@@ -1,4 +1,4 @@
-class Edu::Admin::CrowdsController < Edu::Admin::BaseController
+class Event::Admin::CrowdsController < Event::Admin::BaseController
   before_action :set_crowd, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -1,4 +1,4 @@
-class Booking::Member::BaseController < RailsBooking.config.member_controller.constantize
+class Event::Member::BaseController < RailsEvent.config.member_controller.constantize
 
 
 end

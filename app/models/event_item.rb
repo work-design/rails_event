@@ -1,3 +1,3 @@
 class EventItem < ApplicationRecord
-  include RailsEdu::EventItem
+  include RailsEvent::EventItem
 end unless defined? EventItem

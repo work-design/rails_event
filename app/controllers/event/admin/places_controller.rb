@@ -1,4 +1,4 @@
-class Booking::Admin::PlacesController < Booking::Admin::BaseController
+class Event::Admin::PlacesController < Event::Admin::BaseController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
 
   def index

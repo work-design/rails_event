@@ -1,4 +1,4 @@
-module RailsEdu::EventMember
+module RailsEvent::EventMember
   extend ActiveSupport::Concern
   include StateMachine
 

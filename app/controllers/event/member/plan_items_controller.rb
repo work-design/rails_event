@@ -1,4 +1,4 @@
-class Booking::Member::PlanItemsController < Booking::Member::BaseController
+class Event::Member::PlanItemsController < Event::Member::BaseController
   #before_action :set_event_plan, only: [:show, :edit, :update, :destroy]
 
   def index

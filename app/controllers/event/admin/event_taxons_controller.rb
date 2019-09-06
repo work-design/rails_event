@@ -1,4 +1,4 @@
-class Edu::Admin::EventTaxonsController < Edu::Admin::BaseController
+class Event::Admin::EventTaxonsController < Event::Admin::BaseController
   before_action :set_event_taxon, only: [:show, :edit, :update, :destroy]
 
   def index

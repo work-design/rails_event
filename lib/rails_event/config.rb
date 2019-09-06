@@ -1,6 +1,6 @@
 require 'active_support/configurable'
 
-module RailsBooking #:nodoc:
+module RailsEvent #:nodoc:
   include ActiveSupport::Configurable
 
   configure do |config|

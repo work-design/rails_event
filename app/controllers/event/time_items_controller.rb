@@ -1,4 +1,4 @@
-class Booking::TimeItemsController < Booking::BaseController
+class Event::TimeItemsController < Event::BaseController
   before_action :set_time_list
   skip_before_action :verify_authenticity_token, only: [:select]
 

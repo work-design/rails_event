@@ -1,4 +1,4 @@
-class Booking::Admin::TimeListsController < Booking::Admin::BaseController
+class Event::Admin::TimeListsController < Event::Admin::BaseController
   before_action :set_time_list, only: [:show, :edit, :update, :destroy]
 
   def index

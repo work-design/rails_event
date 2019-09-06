@@ -1,4 +1,4 @@
-class Booking::My::TimePlansController < Booking::My::BaseController
+class Event::My::TimePlansController < Event::My::BaseController
   before_action :set_time_lists
   before_action :set_time_plan, only: [:show]
 

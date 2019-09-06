@@ -1,4 +1,4 @@
-class Booking::Admin::PlansController < Booking::Admin::BaseController
+class Event::Admin::PlansController < Event::Admin::BaseController
   before_action :set_time_lists
   before_action :set_plan, only: [:show, :show_calendar, :edit, :update, :destroy]
 

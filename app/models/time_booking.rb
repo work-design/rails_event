@@ -1,3 +1,3 @@
-class TimeBooking < ApplicationRecord
-  include RailsBooking::TimeBooking
-end unless defined? TimeBooking
+class Booking < ApplicationRecord
+  include RailsEvent::Booking
+end unless defined? Booking

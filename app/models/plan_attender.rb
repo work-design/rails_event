@@ -1,3 +1,3 @@
 class PlanAttender < ApplicationRecord
-  include RailsBooking::PlanAttender
+  include RailsEvent::PlanAttender
 end unless defined? PlanAttender

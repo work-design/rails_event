@@ -1,5 +1,5 @@
 class TimePlan < ApplicationRecord
-  include RailsBooking::TimePlan
-  include RailsBooking::Recurrence
-  include RailsBooking::PlanItemize
+  include RailsEvent::TimePlan
+  include RailsEvent::Recurrence
+  include RailsEvent::PlanItemize
 end unless defined? TimePlan

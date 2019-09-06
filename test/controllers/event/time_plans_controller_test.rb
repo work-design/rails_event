@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Booking::TimePlansControllerTest < ActionDispatch::IntegrationTest
+class Event::TimePlansControllerTest < ActionDispatch::IntegrationTest
   setup do
     @booking_time_plan = create booking_time_plans
   end

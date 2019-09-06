@@ -3,10 +3,10 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= TimeBooking.human_attribute_name(:id) %></th>
-      <th><%= TimeBooking.human_attribute_name(:booking_on) %></th>
-      <th><%= TimeBooking.human_attribute_name(:time_item_id) %></th>
-      <th><%= TimeBooking.human_attribute_name(:place_id) %></th>
+      <th><%= Booking.human_attribute_name(:id) %></th>
+      <th><%= Booking.human_attribute_name(:booking_on) %></th>
+      <th><%= Booking.human_attribute_name(:time_item_id) %></th>
+      <th><%= Booking.human_attribute_name(:place_id) %></th>
       <th>
         <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'ui mini primary button', remote: true do %>
           <i class="fas fa-plus"></i><%= t('.new') %>

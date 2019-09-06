@@ -1,3 +1,3 @@
 class TimeItem < ApplicationRecord
-  include RailsBooking::TimeItem
+  include RailsEvent::TimeItem
 end unless defined? TimeItem

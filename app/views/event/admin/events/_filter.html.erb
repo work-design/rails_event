@@ -19,7 +19,7 @@
   <dt><%= link_to Event.human_attribute_name(:event_taxon_id), admin_event_taxons_path %></dt>
   <dd>
     <%= link_to t('.all'), filter_params(except: [:event_taxon_id]), class: active_params(event_taxon_id: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
-    <% EventTaxon.all.each do |taxon| %>
+    <% @event_taxons.each do |taxon| %>
       <%= link_to taxon.name, filter_params(event_taxon_id: taxon.id), class: active_params(event_taxon_id: taxon.id, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
     <% end %>
     <%= link_to new_admin_event_taxon_path, data: { tooltip: t('edu.admin.event_taxons.new.title') }, remote: true, class: 'ui mini circular icon button' do %>

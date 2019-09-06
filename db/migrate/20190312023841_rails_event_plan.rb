@@ -1,4 +1,4 @@
-class RailsBookingInit < ActiveRecord::Migration[5.0]
+class RailsEventInit < ActiveRecord::Migration[5.0]
 
   def change
   
@@ -25,7 +25,7 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.references :time_list
       t.time :start_at
       t.time :finish_at
-      t.integer :position, default: 1
+      t.integer :position
       t.timestamps
     end
 
@@ -41,16 +41,15 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     
-    create_table :plan_participants do |t|
+    create_table :plan_members do |t|
       t.references :plan
       t.references :event_member
-      t.references :participant, polymorphic: true
+      t.references :member, polymorphic: true
       t.timestamps
     end
     
     create_table :plan_items do |t|
-      t.references :time_plan
-      t.references :time_list
+      t.references :plan
       t.references :time_item
       t.references :place
       t.date :plan_on
@@ -65,10 +64,10 @@ class RailsBookingInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :plan_attenders do |t|
-      t.references :plan_participant
+      t.references :plan_member
       t.references :plan
       t.references :plan_item
-      t.references :member, polymorphic: true
+      t.references :attender, polymorphic: true
       t.references :place
       t.boolean :attended
       t.string :state

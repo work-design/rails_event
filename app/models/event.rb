@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
   include RailsEvent::Event
-  include RailsBooking::Planned
-  include RailsBooking::PlanItemize
+  include RailsEvent::Planned
+  include RailsEvent::PlanItemize
 end unless defined? Event

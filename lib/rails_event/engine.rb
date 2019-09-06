@@ -1,5 +1,5 @@
 require 'rails_com'
-module RailsBooking
+module RailsEvent
   class Engine < ::Rails::Engine
 
     config.autoload_paths += Dir[

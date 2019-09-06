@@ -1,8 +1,9 @@
-module RailsBooking::Recurrence
+module RailsEvent::Recurrence
   extend ActiveSupport::Concern
 
   included do
     attribute :repeat_type, :string, default: 'weekly'
+    attribute :repeat_count, :integer, default: 1
     attribute :repeat_days, :json, default: {}
 
     enum repeat_type: {

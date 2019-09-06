@@ -1,3 +1,3 @@
 class EventGrant < ApplicationRecord
-  include RailsEdu::EventGrant
+  include RailsEvent::EventGrant
 end unless defined? EventGrant

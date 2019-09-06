@@ -1,4 +1,4 @@
-module RailsBooking::TimeBooking
+module RailsEvent::Booking
   extend ActiveSupport::Concern
   included do
     attribute :booking_on, :date

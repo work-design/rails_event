@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Booking::Admin::TimeListsControllerTest < ActionDispatch::IntegrationTest
+class Event::Admin::TimeListsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @booking_admin_time_list = create booking_admin_time_lists
   end

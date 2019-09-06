@@ -1,4 +1,4 @@
-class Booking::TimeBookingsController < Booking::BaseController
+class Event::TimeBookingsController < Event::BaseController
   before_action :set_plan_item
 
   def index

@@ -1,4 +1,4 @@
-class Edu::Admin::EventItemsController < Edu::Admin::BaseController
+class Event::Admin::EventItemsController < Event::Admin::BaseController
   before_action :set_event
   before_action :set_event_item, only: [:show, :edit, :update, :destroy]
 

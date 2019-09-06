@@ -1,4 +1,4 @@
-class Edu::Admin::EventsController < Edu::Admin::BaseController
+class Event::Admin::EventsController < Event::Admin::BaseController
   before_action :set_event, only: [:show, :edit, :meet, :update, :destroy]
 
   def index
@@ -6,6 +6,7 @@ class Edu::Admin::EventsController < Edu::Admin::BaseController
     q_params.merge! default_params
     q_params.merge! params.permit(:type, :title, :event_taxon_id, 'id-desc', 'id-asc', 'title-asc')
     @events = Event.default_where(q_params).order(id: :desc).page(params[:page])
+    @event_taxons = EventTaxon.default_where(default_params)
   end
 
   def plan

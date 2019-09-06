@@ -1,4 +1,4 @@
-module RailsBooking::PlanTime
+module RailsEvent::PlanTime
   REPEAT = {
     'once' => 0..6,
     'weekly' => 0..6,
@@ -7,6 +7,13 @@ module RailsBooking::PlanTime
   extend ActiveSupport::Concern
   included do
     attribute :begin_on, :date, default: -> { Date.today }
+    attribute :end_on, :date
+    attribute :title, :string
+
+    belongs_to :planned, polymorphic: true
+
+    has_many :plan_times
+    accepts_nested_attributes_for :plan_times
     
     belongs_to :time_list
     

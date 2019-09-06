@@ -1,3 +1,3 @@
 class Place < ApplicationRecord
-  include RailsBooking::Place
+  include RailsEvent::Place
 end unless defined? Place

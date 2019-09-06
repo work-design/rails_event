@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-
-  scope module: :booking do
+  
+  scope module: :event do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
     end
@@ -25,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :admin, module: 'booking/admin', as: :admin do
+  scope :admin, module: 'event/admin', as: :admin do
     resources :time_lists do
       resources :time_items
     end
@@ -58,13 +57,12 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'booking/my', as: :my do
+  scope :my, module: 'event/my', as: :my do
     resources :time_plans
   end
 
-  scope :member, module: 'booking/member', as: :member do
+  scope :member, module: 'event/member', as: :member do
     resources :plan_items
   end
-
-
+  
 end

@@ -1,3 +1,3 @@
 class TimeList < ApplicationRecord
-  include RailsBooking::TimeList
+  include RailsEvent::TimeList
 end unless defined? TimeList

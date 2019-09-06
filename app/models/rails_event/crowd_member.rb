@@ -1,4 +1,4 @@
-module RailsEdu::CrowdMember
+module RailsEvent::CrowdMember
   extend ActiveSupport::Concern
   included do
     belongs_to :crowd, counter_cache: true

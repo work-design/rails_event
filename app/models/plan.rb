@@ -1,3 +1,5 @@
 class Plan < ApplicationRecord
-  include RailsBooking::Plan
+  include RailsEvent::Plan
+  include RailsEvent::Recurrence
+  include RailsEvent::PlanItemize
 end unless defined? Plan

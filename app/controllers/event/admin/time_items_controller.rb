@@ -1,4 +1,4 @@
-class Booking::Admin::TimeItemsController < Booking::Admin::BaseController
+class Event::Admin::TimeItemsController < Event::Admin::BaseController
   before_action :set_time_list, except: [:default]
   before_action :set_time_item, only: [:show, :edit, :update, :destroy]
 

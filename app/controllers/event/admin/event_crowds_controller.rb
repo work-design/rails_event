@@ -1,4 +1,4 @@
-class Edu::Admin::EventCrowdsController < Edu::Admin::BaseController
+class Event::Admin::EventCrowdsController < Event::Admin::BaseController
   before_action :set_event
   before_action :set_event_crowds
   before_action :set_event_crowd, only: [:edit, :update, :destroy]

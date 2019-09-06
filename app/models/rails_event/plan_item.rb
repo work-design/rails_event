@@ -1,4 +1,4 @@
-module RailsBooking::PlanItem
+module RailsEvent::PlanItem
   extend ActiveSupport::Concern
 
   included do

@@ -1,8 +1,8 @@
-module RailsBooking::Booker
+module RailsEvent::Booker
   extend ActiveSupport::Concern
 
   included do
-    has_many :booker_times, class_name: 'TimeBooking', as: :booker
+    has_many :booker_times, class_name: 'Booking', as: :booker
   end
   
   

@@ -1,3 +1,3 @@
 class EventCrowd < ApplicationRecord
-  include RailsEdu::EventCrowd
+  include RailsEvent::EventCrowd
 end unless defined? EventCrowd
