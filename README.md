@@ -7,8 +7,8 @@ RailsEvent 用于处理基于事件、地点、参与人的业务，如：活动
 
 预约模型由以下几部分组成：
 
-* 事件，对应model: Plan
-* 时间与地点，对应model: PlanTime
+* 事件，对应 model: Event
+* 时间与地点，对应 model: Plan
 * 人物，对应model: PlanParticipant(crowd)
 
 当上述配置完成之后，会根据时间的配置信息（如何按每周、每月等重复），生成具体的数据如下：
