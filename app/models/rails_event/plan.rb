@@ -1,4 +1,4 @@
-module RailsEvent::PlanTime
+module RailsEvent::Plan
   REPEAT = {
     'once' => 0..6,
     'weekly' => 0..6,
@@ -11,18 +11,14 @@ module RailsEvent::PlanTime
     attribute :title, :string
 
     belongs_to :planned, polymorphic: true
-
-    has_many :plan_times
-    accepts_nested_attributes_for :plan_times
-    
     belongs_to :time_list
     
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
 
-    has_many :plan_participants
-    accepts_nested_attributes_for :plan_participants
+    has_many :plan_members
+    accepts_nested_attributes_for :plan_members
     
     default_scope -> { order(begin_on: :asc) }
     validates :begin_on, presence: true

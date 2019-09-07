@@ -7,7 +7,6 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :max_members
       t.string :color
-      t.integer :time_plans_count, default: 0
       t.timestamps
     end
   

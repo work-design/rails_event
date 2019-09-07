@@ -6,7 +6,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     q_params = {}
     q_params.merge! params.permit(:planned_type, :planned_id)
     @plans = Plan.default_where(q_params)
-    @plan = @plans.first || @plans.create(time_list_id: @time_lists.default&.id)
   end
 
   def calendar
