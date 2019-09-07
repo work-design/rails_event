@@ -2,8 +2,8 @@ module RailsEvent::Member
   extend ActiveSupport::Concern
   
   included do
-    has_many :event_members, as: :member, dependent: :destroy
-    has_many :events, through: :event_members
+    has_many :event_participants, as: :member, dependent: :destroy
+    has_many :events, through: :event_participants
 
     has_many :crowd_members, as: :member, dependent: :destroy
     has_many :crowds, through: :crowd_members

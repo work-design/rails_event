@@ -44,9 +44,9 @@ module RailsEvent::EventParticipant
     return unless self.persisted?
 
     self.class.transaction do
-      EventMemberMailer.assign(self.id).deliver_later
+      EventParticipantMailer.assign(self.id).deliver_later
       if self.event.next_start_time
-        job = EventMemberMailer.remind(self.id).deliver_later(wait_until: self.event.next_start_time - 1.day)
+        job = EventParticipantMailer.remind(self.id).deliver_later(wait_until: self.event.next_start_time - 1.day)
         self.update(job_id: job.job_id)
       end
     end

@@ -3,12 +3,12 @@ class Event::PlanAttendersController < Event::BaseController
   before_action :set_plan_attender, only: [:show, :edit, :update]
 
   def index
-    @event_members = @plan_item.event.event_members.where(event_crowd_id: @plan_item.plan_id).page(params[:page])
+    @event_participants = @plan_item.event.event_participants.where(event_crowd_id: @plan_item.plan_id).page(params[:page])
     @time_bookings = @plan_item.time_bookings
   end
 
   def create
-    @plan_attender = @plan_item.plan_attenders.build(event_member_id: params[:event_member_id])
+    @plan_attender = @plan_item.plan_attenders.build(event_participant_id: params[:event_participant_id])
     @plan_attender.attended = true
     
     respond_to do |format|
@@ -48,7 +48,7 @@ class Event::PlanAttendersController < Event::BaseController
   end
 
   def destroy
-    @plan_attender = @plan_item.plan_attenders.find_by(event_member_id: params[:event_member_id])
+    @plan_attender = @plan_item.plan_attenders.find_by(event_participant_id: params[:event_participant_id])
     @plan_attender.destroy
     respond_to do |format|
       format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }

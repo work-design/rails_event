@@ -16,7 +16,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.string :description, limit: 4096
       t.integer :position
       t.decimal :price, precision: 10, scale: 2
-      t.integer :event_members_count, default: 0
+      t.integer :event_participants_count, default: 0
       t.integer :event_items_count, default: 0
       t.timestamps
     end

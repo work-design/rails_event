@@ -27,7 +27,7 @@ zh:
           qrcode: 获取二维码
         plan:
           title: 排课
-      event_members:
+      event_participants:
         index:
           title: 学生列表
       event_taxons:

@@ -17,7 +17,7 @@ zh:
         max_members: 限制人数
       event:
         event_taxon_id: 课程分类
-        event_members_count: 报名人数
+        event_participants_count: 报名人数
         price: 消耗课时
       event_crowd:
         teacher: 老师
@@ -25,7 +25,7 @@ zh:
         crowd_id: 班级
         teacher_id: 老师
         room_id: 教室
-      event_member:
+      event_participant:
         state: 状态
         score: 分数
       event_plan:

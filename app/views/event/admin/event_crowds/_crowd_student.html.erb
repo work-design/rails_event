@@ -6,10 +6,10 @@
     </td>
     <td class="eight wide">
       <div class="ui toggle checkbox">
-        <% if @event.event_members.pluck(:member_id).include?(crowd_member.member_id) %>
-          <%= check_box_tag :crowd_member_id, crowd_member.id, true, data: { method: :delete, remote: true, url: admin_event_event_members_path(@event), submit: true }, id: nil %>
+        <% if @event.event_participants.pluck(:member_id).include?(crowd_member.member_id) %>
+          <%= check_box_tag :crowd_member_id, crowd_member.id, true, data: { method: :delete, remote: true, url: admin_event_event_participants_path(@event), submit: true }, id: nil %>
         <% else %>
-          <%= check_box_tag :crowd_member_id, crowd_member.id, false, data: { method: :post, remote: true, url: admin_event_event_members_path(@event, event_crowd_id: event_crowd.id), submit: true }, id: nil %>
+          <%= check_box_tag :crowd_member_id, crowd_member.id, false, data: { method: :post, remote: true, url: admin_event_event_participants_path(@event, event_crowd_id: event_crowd.id), submit: true }, id: nil %>
         <% end %>
       </div>
     </td>

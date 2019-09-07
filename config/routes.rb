@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :event_taxons
     resources :events do
       get :plan, on: :collection
-      resources :event_members do
+      resources :event_participants do
         post :check, on: :collection
         post :attend, on: :collection
         patch :quit, on: :member

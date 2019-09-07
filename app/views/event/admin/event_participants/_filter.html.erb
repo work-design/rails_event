@@ -7,10 +7,10 @@
 <% end %>
 
 <dl>
-  <dt><%= EventMember.human_attribute_name(:state) %></dt>
+  <dt><%= EventParticipant.human_attribute_name(:state) %></dt>
   <dd>
     <%= link_to t('.all'), filter_params(except: ['state']), class: active_params(state: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
-    <% EventMember.options_i18n(:state).each do |text, state| %>
+    <% EventParticipant.options_i18n(:state).each do |text, state| %>
       <%= link_to text, filter_params(state: state), class: active_params(state: state, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
     <% end %>
   </dd>

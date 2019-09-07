@@ -14,7 +14,6 @@
       <th><%= Place.human_attribute_name(:name) %></th>
       <th><%= Place.human_attribute_name(:color) %></th>
       <th><%= Place.human_attribute_name(:max_members) %></th>
-      <th><%= Place.human_attribute_name(:plan_times_count) %></th>
       <th>
         <%= link_to new_admin_place_path, class: 'ui mini primary button', remote: true do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
@@ -30,7 +29,6 @@
         <span class="ui label" style="background-color: <%= place.color %>;"><%= place.color %></span>
       </td>
       <td><%= place.max_members %></td>
-      <td><%= place.plan_times_count %></td>
       <td>
         <%= link_to edit_admin_place_path(place), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
           <i class="fas fa-pencil-alt"></i>

@@ -9,20 +9,20 @@ module RailsEvent::EventCrowd
     
     has_many :crowd_members, foreign_key: :crowd_id, primary_key: :crowd_id
     has_many :plan_items, as: :plan, dependent: :destroy
-    has_many :event_members
+    has_many :event_participants
     has_many :events, foreign_key: :event_id, primary_key: :event_id
   
-    after_create_commit :sync_to_event_members
-    after_destroy_commit :destroy_from_event_members
+    after_create_commit :sync_to_event_participants
+    after_destroy_commit :destroy_from_event_participants
     after_update_commit :sync_to_event_plans
   
     delegate :title, to: :event
     delegate :max_members, to: :place, allow_nil: true
   end
   
-  def sync_to_event_members
+  def sync_to_event_participants
     self.crowd_members.each do |i|
-      cs = self.event_members.build(crowd_member_id: i.id)
+      cs = self.event_participants.build(crowd_member_id: i.id)
       cs.save
     end
   end
@@ -42,9 +42,9 @@ module RailsEvent::EventCrowd
     self.room_id ||= event_crowd.room_id
   end
 
-  def destroy_from_event_members
+  def destroy_from_event_participants
     self.crowd.members.each do |i|
-      cs = i.event_members.find_by(member_id: i.id)
+      cs = i.event_participants.find_by(member_id: i.id)
       cs&.destroy
     end
   end

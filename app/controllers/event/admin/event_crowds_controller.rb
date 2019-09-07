@@ -68,7 +68,7 @@ class Event::Admin::EventCrowdsController < Event::Admin::BaseController
     @event_crowds = @event.event_crowds
     @crowds = Crowd.includes(crowd_members: :member).default_where(q_params).page(params[:page])
 
-    @event_members = @event.event_members.page(params[:page])
+    @event_participants = @event.event_participants.page(params[:page])
   end
 
   def set_event
