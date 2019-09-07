@@ -40,10 +40,10 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     
-    create_table :plan_members do |t|
+    create_table :plan_participants do |t|
       t.references :plan
-      t.references :event_member
-      t.references :member, polymorphic: true
+      t.references :event_participant
+      t.references :participant, polymorphic: true
       t.timestamps
     end
     
@@ -53,7 +53,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :place
       t.date :plan_on
       t.string :repeat_index
-      t.integer :time_bookings_count, default: 0
+      t.integer :bookings_count, default: 0
       if connection.adapter_name == 'PostgreSQL'
         t.jsonb :extra
       else
@@ -63,7 +63,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
     end
 
     create_table :plan_attenders do |t|
-      t.references :plan_member
+      t.references :plan_participant
       t.references :plan
       t.references :plan_item
       t.references :attender, polymorphic: true

@@ -52,10 +52,9 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    create_table :event_members do |t|
+    create_table :event_participants do |t|
       t.references :event
-      t.references :member, polymorphic: true
-      t.references :crowd
+      t.references :participant, polymorphic: true
       t.string :state
       t.integer :score
       t.string :comment, limit: 4096

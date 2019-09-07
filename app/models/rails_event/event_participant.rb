@@ -1,4 +1,4 @@
-module RailsEvent::EventMember
+module RailsEvent::EventParticipant
   extend ActiveSupport::Concern
   include StateMachine
 
@@ -9,7 +9,7 @@ module RailsEvent::EventMember
     belongs_to :event_crowd, optional: true
     belongs_to :event, counter_cache: true
     belongs_to :crowd_member, optional: true
-    belongs_to :member, polymorphic: true
+    belongs_to :participant, polymorphic: true
   
     validates :member_id, uniqueness: { scope: [:member_type, :event_id] }
   

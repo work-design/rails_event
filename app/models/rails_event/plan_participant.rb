@@ -2,10 +2,10 @@ module RailsEvent::PlanMember
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :plan_time
+    belongs_to :plan
     
-    belongs_to :event_member
-    belongs_to :member, polymorphic: true
+    belongs_to :event_participant
+    belongs_to :participant, polymorphic: true
     
     after_initialize do
       if self.event_member
