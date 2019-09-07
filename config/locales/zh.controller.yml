@@ -43,10 +43,10 @@ zh:
           title: 园区学生
         edit_crowd:
           title: 分班
-    time_plans:
-      index:
-        title: 时间计划
-    plan_attenders:
-      index:
-        title: 点名
-        qrcode: 二维码
+      plans:
+        index:
+          title: 时间计划
+      plan_attenders:
+        index:
+          title: 点名
+          qrcode: 二维码

@@ -4,18 +4,9 @@ Rails.application.routes.draw do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
     end
-    resources :time_plans do
+    resources :plans do
       get :calendar, on: :collection
       get 'calendar' => :show_calendar, on: :member
-    end
-    resources :plan_items do
-      patch :qrcode, on: :member
-      resources :time_bookings do
-        delete '' => :destroy, on: :collection
-      end
-      resources :plan_attenders do
-        delete '' => :destroy, on: :collection
-      end
     end
     resources :time_items, only: [:index] do
       collection do
@@ -33,6 +24,15 @@ Rails.application.routes.draw do
     end
     resources :places
     resources :plans
+    resources :plan_items do
+      patch :qrcode, on: :member
+      resources :time_bookings do
+        delete '' => :destroy, on: :collection
+      end
+      resources :plan_attenders do
+        delete '' => :destroy, on: :collection
+      end
+    end
     resources :crowds do
       resources :crowd_members
     end

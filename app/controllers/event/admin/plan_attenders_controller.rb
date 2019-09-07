@@ -1,4 +1,4 @@
-class Event::PlanAttendersController < Event::BaseController
+class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   before_action :set_plan_item
   before_action :set_plan_attender, only: [:show, :edit, :update]
 

@@ -1,4 +1,4 @@
-class Event::PlanItemsController < Event::BaseController
+class Event::Admin::PlanItemsController < Event::Admin::BaseController
   before_action :set_plan
   before_action :set_plan_item, only: [:show, :edit, :update, :qrcode, :destroy]
 
