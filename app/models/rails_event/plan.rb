@@ -64,18 +64,7 @@ module RailsEvent::Plan
     repeat_days.diff_toggle index => time_item_id
   end
 
-  def xx
-    Date::DAYS_INTO_WEEK.map do |name, index|
-      if Date.beginning_of_week == :monday
-        i = (index - 1) % 7
-      else
-        i = index
-      end
-      [i, I18n.t("date.week_day.#{name}.name")]
-    end.sort.to_h
-  end
-
-  def sync(start: Date.today, finish: Date.today + 14.days)
+  def sync(start: Date.today.beginning_of_week, finish: Date.today.end_of_week)
     removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)
   
     removes.each do |date, time_item_ids|
@@ -104,6 +93,17 @@ module RailsEvent::Plan
     
     def recent(date = Date.today)
       default_where('begin_on-lte': date).unscope(:order).order(begin_on: :desc).first
+    end
+
+    def xx
+      Date::DAYS_INTO_WEEK.map do |name, index|
+        if Date.beginning_of_week == :monday
+          i = (index - 1) % 7
+        else
+          i = index
+        end
+        [i, I18n.t("date.week_day.#{name}.name")]
+      end.sort.to_h
     end
     
   end

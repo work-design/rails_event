@@ -3,7 +3,8 @@ module RailsEvent::PlanAttender
   
   included do
     attribute :attended, :boolean, default: false
-
+    
+    belongs_to :plan_participant, optional: true
     belongs_to :attender, polymorphic: true
     belongs_to :plan_item
     

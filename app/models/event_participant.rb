@@ -1,3 +1,3 @@
-class EventMember < ApplicationRecord
-  include RailsEvent::EventMember
-end unless defined? EventMember
+class EventParticipant < ApplicationRecord
+  include RailsEvent::EventParticipant
+end unless defined? EventParticipant
