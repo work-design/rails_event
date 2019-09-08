@@ -21,8 +21,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     
     r = (filter_params[:start_on].to_date .. filter_params[:finish_on].to_date).map { |i| [i, []] }.to_h
     @plan_items.reverse_merge! r
-    
-    binding.pry
   end
 
   def calendar
