@@ -16,7 +16,8 @@ module RailsEvent::PlanItem
     belongs_to :event_item, optional: true
     
     validates :plan_on, presence: true
-  
+    
+    default_scope -> { order(plan_on: :asc) }
     scope :valid, -> { default_where('plan_on-gte': Date.today) }
   
     after_initialize if: :new_record? do
