@@ -12,13 +12,13 @@ module RailsEvent::Plan
 
     belongs_to :planned, polymorphic: true
     belongs_to :time_list
-    
+    belongs_to :place, optional: true
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, dependent: :delete_all
 
-    has_many :plan_members
-    accepts_nested_attributes_for :plan_members
+    has_many :plan_participants
+    accepts_nested_attributes_for :plan_participants
     
     default_scope -> { order(begin_on: :asc) }
     validates :begin_on, presence: true

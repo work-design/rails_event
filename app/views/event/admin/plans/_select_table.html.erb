@@ -19,7 +19,7 @@
         <td>
           <div class="ui labels">
             <% items.each do |plan_item| %>
-            <span class="ui label"><%= link_to plan_item.plan_on, plan_item_plan_attenders_path(plan_item), text: true %></span>
+            <span class="ui label"><%= link_to plan_item.plan_on, admin_plan_item_plan_attenders_path(plan_item), text: true %></span>
             <% end %>
           </div>
         </td>

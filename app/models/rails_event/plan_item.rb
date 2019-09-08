@@ -6,7 +6,6 @@ module RailsEvent::PlanItem
     attribute :time_bookings_count, :integer, default: 0
   
     belongs_to :time_item
-    belongs_to :time_list
     belongs_to :plan
     has_many :time_bookings, dependent: :destroy
     has_many :plan_attenders, dependent: :nullify
