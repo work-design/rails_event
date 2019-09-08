@@ -18,6 +18,9 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     @plans = Plan.default_where(q_params)
     @plans.each { |plan| plan.sync(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
     @plan_items = PlanItem.default_where(item_params).group_by(&:plan_on)
+    
+    r = (filter_params[:start_on].to_date .. filter_params[:finish_on].to_date).map { |i| [i, []] }.to_h
+    @plan_items.reverse_merge! r
   end
 
   def calendar

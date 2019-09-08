@@ -1,1 +1,1 @@
-json.time_plans @time_plans, partial: 'time_plan', as: :time_plan
+json.plan_items @plan_items, partial: 'plan_item', as: :plan_item
