@@ -1,18 +1,11 @@
 
 ```json5
 {
-  "plan": {
+  "plans": {
     "planned_type": "Event",
     "planned_id": 1, 
     "begin_on": "2019-09-01",
-    "plan_times_attributes": [] 
-  }
-}
-```
-
-```json5
-{
-  "plan_times": {
+    "end_on": "2019-09-07",
     "repeat_type": "weekly",
     "repeat_days": {
       "1": [1, 3]

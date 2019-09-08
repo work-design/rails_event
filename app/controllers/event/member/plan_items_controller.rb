@@ -26,8 +26,8 @@ class Event::Member::PlanItemsController < Event::Member::BaseController
     q_params.merge! params.permit(:place_id)
     @time_plans = @event_crowd.time_plans.default_where(q_params)
 
-    @time_plan = @event_crowd.time_plans.find_or_initialize_by(q_params.slice(:place_id))
-    @time_plan.time_list ||= TimeList.default
+    @plan = @event_crowd.time_plans.find_or_initialize_by(q_params.slice(:place_id))
+    @plan.time_list ||= TimeList.default
   end
 
   def show

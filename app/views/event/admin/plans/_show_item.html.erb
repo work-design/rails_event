@@ -1,21 +1,21 @@
-<tr id="time_plan_<%= time_plan.id %>" class="<%= active_assert(time_plan.id == @time_plan.id, expected: 'active', unexpected: '') %>">
+<tr id="time_plan_<%= plan.id %>" class="<%= active_assert(plan.id == @plan.id, expected: 'active', unexpected: '') %>">
   <td>
-    <%= form_tag time_plan_path(time_plan.plan_type, time_plan.plan_id, time_plan), method: :patch, remote: true, id: "time_plan_form_#{time_plan.id}" do %><% end %>
+    <%= form_tag time_plan_path(plan.plan_type, plan.plan_id, plan), method: :patch, remote: true, id: "time_plan_form_#{plan.id}" do %><% end %>
   </td>
   <td>
-    <%= time_plan.begin_on %>
+    <%= plan.begin_on %>
   </td>
   <td>
-    <%= time_plan.repeat_type_i18n %>
+    <%= plan.repeat_type_i18n %>
   </td>
   <td>
-    <%= time_plan.time_list&.name %>
+    <%= plan.time_list&.name %>
   </td>
   <td>
-    <%= link_to edit_time_plan_path(time_plan.plan_type, time_plan.plan_id, time_plan.id), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+    <%= link_to edit_time_plan_path(plan.plan_type, plan.plan_id, plan.id), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to time_plan_path(time_plan.plan_type, time_plan.plan_id, time_plan.id), data: { tooltip: '切换' }, class: 'ui mini circular icon button' do %>
+    <%= link_to time_plan_path(plan.plan_type, plan.plan_id, plan.id), data: { tooltip: '切换' }, class: 'ui mini circular icon button' do %>
       <i class="fas fa-hand-point-right"></i>
     <% end %>
   </td>

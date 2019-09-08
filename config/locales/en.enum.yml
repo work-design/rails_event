@@ -1,7 +1,7 @@
 en:
   activerecord:
     enum:
-      time_plan:
+      plan:
         repeat_type:
           once: Once
           weekly: Weekly

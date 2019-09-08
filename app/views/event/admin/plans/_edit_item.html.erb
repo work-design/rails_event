@@ -1,21 +1,21 @@
-<tr id="time_plan_<%= @time_plan.id %>">
+<tr id="time_plan_<%= @plan.id %>">
   <td>
-    <% if @time_plan.id %>
-      <%= form_tag time_plan_path(@time_plan.plan_type, @time_plan.plan_id, @time_plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
+    <% if @plan.id %>
+      <%= form_tag time_plan_path(@plan.plan_type, @plan.plan_id, @plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
     <% else %>
-      <%= form_tag time_plans_path(@time_plan.plan_type, @time_plan.plan_id), remote: true, id: 'time_plan_form' do %><% end %>
+      <%= form_tag time_plans_path(@plan.plan_type, @plan.plan_id), remote: true, id: 'time_plan_form' do %><% end %>
     <% end %>
   </td>
   <td>
     <div class="ui input">
-      <%= date_field_tag :'time_plan[begin_on]', @time_plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(@time_plan.plan_type, @time_plan.plan_id) } %>
+      <%= date_field_tag :'plan[begin_on]', @plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(@plan.plan_type, @plan.plan_id) } %>
     </div>
   </td>
   <td>
-    <%= select_tag :'time_plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @time_plan.repeat_type || 'once'), { form: 'time_plan_form' } %>
+    <%= select_tag :'plan[repeat_type]', options_for_select(TimePlan.options_i18n(:repeat_type), @plan.repeat_type || 'once'), { form: 'time_plan_form' } %>
   </td>
   <td>
-    <%= select_tag :'time_plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @time_plan.time_list_id), form: 'time_plan_form' %>
+    <%= select_tag :'plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @plan.time_list_id), form: 'time_plan_form' %>
   </td>
   <td>
     <%= submit_tag t('.confirm'), class: 'ui mini primary button', form: 'time_plan_form' %>

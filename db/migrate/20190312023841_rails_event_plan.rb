@@ -36,7 +36,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :place
       t.string :repeat_type  # 日、周、月、天
       t.integer :repeat_count # 每几周
-      t.integer :repeat_days, array: true
+      t.jsonb :repeat_days
       t.timestamps
     end
     

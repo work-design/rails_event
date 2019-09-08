@@ -1,4 +1,4 @@
-json.extract! time_plan,
+json.extract! plan,
               :id,
               :plan_type,
               :plan_id,

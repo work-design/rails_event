@@ -1,7 +1,7 @@
 zh:
   activerecord:
     enum:
-      time_plan:
+      plan:
         repeat_type:
           once: 一次
           weekly: 每周

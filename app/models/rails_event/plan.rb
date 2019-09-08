@@ -15,7 +15,7 @@ module RailsEvent::Plan
     
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
-    has_many :plan_items, ->(o){ where(plan_type: o.plan_type, plan_id: o.plan_id) }, dependent: :delete_all
+    has_many :plan_items, dependent: :delete_all
 
     has_many :plan_members
     accepts_nested_attributes_for :plan_members

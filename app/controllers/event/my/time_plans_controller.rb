@@ -6,8 +6,8 @@ class Event::My::TimePlansController < Event::My::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:place_id)
     @time_plans = TimePlan.default_where(q_params)
-    @events = @time_plans.map do |time_plan|
-      time_plan.next_events
+    @events = @time_plans.map do |plan|
+      plan.next_events
     end.flatten
     set_settings
 
@@ -38,7 +38,7 @@ class Event::My::TimePlansController < Event::My::BaseController
 
   private
   def set_time_plan
-    @time_plan = TimePlan.find(params[:id])
+    @plan = TimePlan.find(params[:id])
   end
 
   def set_time_lists

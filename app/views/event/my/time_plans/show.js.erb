@@ -9,4 +9,4 @@ calendar.setOption('<%= key %>', <%= value %>)
 <% end %>
 calendar.changeView('timeGrid', '<%= @settings[:defaultDate] %>')
 calendar.removeAllEvents()
-calendar.addEventSource(<%= raw @time_plan.events.to_json %>)
+calendar.addEventSource(<%= raw @plan.events.to_json %>)

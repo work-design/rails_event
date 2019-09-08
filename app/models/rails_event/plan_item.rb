@@ -33,8 +33,7 @@ module RailsEvent::PlanItem
   end
   
   def sync_repeat_index
-    self.repeat_index = self.time_plan.repeat_index(plan_on)
-    self.time_list_id = self.time_plan.time_list_id
+    self.repeat_index = self.plan.repeat_index(plan_on)
   end
   
   def start_at

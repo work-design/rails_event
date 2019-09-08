@@ -32,16 +32,15 @@ class Event::Admin::PlansController < Event::Admin::BaseController
   
   def new
     @plan = Plan.new
-    @plan.time_list ||= @time_lists.default
   end
   
   def create
     @plan = Plan.new
     @plan.time_list ||= @time_lists.default
     @plan.assign_attributes plan_params
-    dt = params[:index].to_s
-    @plan.toggle(dt, params[:time_item_id].to_i) if dt
-    set_settings
+    
+    #dt = params[:index].to_s
+    #@plan.toggle(dt, params[:time_item_id].to_i) if dt
 
     respond_to do |format|
       if @plan.save
@@ -153,8 +152,8 @@ class Event::Admin::PlansController < Event::Admin::BaseController
       :begin_on,
       :end_on,
       :repeat_type,
-      repeat_days: [],
-      time_items_ids: []
+      repeat_days: {},
+      plan_participants_attributes: {}
     )
     unless p[:planned_type] || p[:planned_id]
       p.merge! params.permit(:planned_type, :planned_id)

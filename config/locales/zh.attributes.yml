@@ -1,7 +1,7 @@
 zh:
   activerecord:
     attributes:
-      time_plan:
+      plan:
         begin_on: 开始日期
         end_on: 截止日期
         repeat_type: 重复类型

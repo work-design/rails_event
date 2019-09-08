@@ -17,8 +17,8 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     q_params.merge! params.permit(:place_id)
     @time_plans = @plan.time_plans.default_where(q_params)
 
-    @time_plan = @plan.time_plans.recent || @plan.time_plans.build
-    @time_plan.time_list ||= TimeList.default
+    @plan = @plan.time_plans.recent || @plan.time_plans.build
+    @plan.time_list ||= TimeList.default
   end
 
   def new

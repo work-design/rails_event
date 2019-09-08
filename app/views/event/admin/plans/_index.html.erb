@@ -14,18 +14,18 @@
     </tr>
   </thead>
   <tbody id="time_plan_tbody">
-  <% @time_plans.each do |time_plan| %>
-    <%= render partial: 'booking/time_plans/show_item', locals: { time_plan: time_plan } %>
+  <% @time_plans.each do |plan| %>
+    <%= render partial: 'booking/time_plans/show_item', locals: { plan: plan } %>
   <% end %>
   <tr id="time_plan_new">
     <td colspan="6">
-      <%= link_to new_time_plan_path(@time_plan.plan_type, @time_plan.plan_id), data: { tooltip: t('.new') }, remote: true, class: 'ui mini circular icon button' do %>
+      <%= link_to new_time_plan_path(@plan.plan_type, @plan.plan_id), data: { tooltip: t('.new') }, remote: true, class: 'ui mini circular icon button' do %>
         <i class="fas fa-plus"></i>
       <% end %>
     </td>
   </tr>
   <% if @time_plans.blank? %>
-    <%= render partial: 'booking/time_plans/edit_item', locals: { time_plan: @time_plan } %>
+    <%= render partial: 'booking/time_plans/edit_item', locals: { plan: @plan } %>
   <% end %>
   </tbody>
 </table>
