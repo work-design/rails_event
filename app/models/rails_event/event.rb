@@ -1,6 +1,7 @@
 module RailsEvent::Event
   extend ActiveSupport::Concern
   included do
+    attribute :members_count, :integer, default: 0
     
     belongs_to :event_taxon, optional: true
   

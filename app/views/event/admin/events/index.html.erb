@@ -14,7 +14,7 @@
       <th class="five wide">
         <%= link_to Event.human_attribute_name(:title), filter_params('title-asc': 2, except: ['title-asc']) %>
       </th>
-      <th class="one wide"><%= Event.human_attribute_name(:event_members_count) %></th>
+      <th class="one wide"><%= Event.human_attribute_name(:members_count) %></th>
       <th><%= Event.human_attribute_name(:price) %></th>
       <th class="one wide">
         <%= link_to Event.human_attribute_name(:created_at), filter_params('id-desc': 1, except: ['id-desc']) %>
@@ -33,7 +33,7 @@
       <td><%= event.type_i18n %></td>
       <td><%= event.event_taxon&.name %></td>
       <td><%= link_to event.title, admin_event_path(event) %></td>
-      <td><%= event.event_members_count %></td>
+      <td><%= event.members_count %></td>
       <td><%= event.price %></td>
       <td><time><%= event.created_at.to_s(:rfc822) %></time></td>
       <td>
