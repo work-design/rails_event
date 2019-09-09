@@ -2,5 +2,6 @@
   <%= render 'shared/error_messages', target: @crowd %>
   <%= f.text_field :name %>
   <%= f.file_field :logo %>
+  <%= f.select :member_type, options_for_select(Crowd.options_i18n(:member_type), @crowd.member_type) %>
   <%= f.submit %>
 <% end %>

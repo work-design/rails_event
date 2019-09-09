@@ -3,8 +3,8 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   before_action :set_plan_attender, only: [:show, :edit, :update]
 
   def index
-    @event_participants = @plan_item.event.event_participants.where(event_crowd_id: @plan_item.plan_id).page(params[:page])
-    @time_bookings = @plan_item.time_bookings
+    @plan_participants = @plan_item.plan.plan_participants.page(params[:page])
+    @bookings = @plan_item.bookings
   end
 
   def create

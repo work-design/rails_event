@@ -3,7 +3,7 @@ module RailsEvent::PlanItem
 
   included do
     attribute :plan_on, :date
-    attribute :time_bookings_count, :integer, default: 0
+    attribute :bookings_count, :integer, default: 0
   
     belongs_to :time_item
     belongs_to :plan
