@@ -74,16 +74,8 @@ class Event::Admin::EventsController < Event::Admin::BaseController
       :author_id,
       :teacher_id,
       :price,
-      :meeting_room,
-      :repeat_type,
-      :start_at,
-      :finish_at,
       :compulsory,
-      video: [],
-      en_video: [],
-      document: [],
-      repeat_days: [],
-      department_ids: []
+      event_item_attributes: {}
     )
     p.merge! default_form_params
     p
