@@ -35,7 +35,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.date :end_on
       t.references :place
       t.string :repeat_type  # 日、周、月、天
-      t.integer :repeat_count # 每几周
+      t.integer :repeat_count  # 每几周
       t.jsonb :repeat_days
       t.timestamps
     end
@@ -44,6 +44,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :plan
       t.references :event_participant
       t.references :participant, polymorphic: true
+      t.string :status  # 默认 event_participant 有效
       t.timestamps
     end
     

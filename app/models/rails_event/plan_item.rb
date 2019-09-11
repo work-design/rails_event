@@ -8,6 +8,7 @@ module RailsEvent::PlanItem
     belongs_to :time_item
     belongs_to :plan
     has_many :bookings, dependent: :destroy
+    has_many :plan_participants, foreign_key: :plan_id, primary_key: :plan_id
     has_many :plan_attenders, dependent: :nullify
 
     belongs_to :place, optional: true
@@ -18,21 +19,19 @@ module RailsEvent::PlanItem
     
     default_scope -> { order(plan_on: :asc) }
     scope :valid, -> { default_where('plan_on-gte': Date.today) }
-  
-    after_initialize if: :new_record? do
-      if plan
-        self.assign_attributes plan.as_json(only: [:event_id, :crowd_id, :place_id, :teacher_id])
-      end
-    end
-    before_validation :sync_repeat_index
+    
+    before_validation :sync_from_plan
   end
 
   def attenders
     plan_attenders.where(attended: true).pluck(:attender_type, :attender_id).map { |i| i.join('_') }
   end
   
-  def sync_repeat_index
-    self.repeat_index = self.plan.repeat_index(plan_on)
+  def sync_from_plan
+    if plan
+      self.place_id = plan.place_id
+      self.repeat_index = self.plan.repeat_index(plan_on)
+    end
   end
   
   def start_at
