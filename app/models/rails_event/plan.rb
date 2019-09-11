@@ -9,6 +9,7 @@ module RailsEvent::Plan
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
     attribute :title, :string
+    attribute :planned_type, :string, default: 'Event'
 
     belongs_to :planned, polymorphic: true
     belongs_to :time_list

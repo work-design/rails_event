@@ -7,7 +7,7 @@ module RailsEvent::PlanItem
   
     belongs_to :time_item
     belongs_to :plan
-    has_many :time_bookings, dependent: :destroy
+    has_many :bookings, dependent: :destroy
     has_many :plan_attenders, dependent: :nullify
 
     belongs_to :place, optional: true
@@ -42,7 +42,7 @@ module RailsEvent::PlanItem
   def finish_at
     time_item.finish_at.change(plan_on.parts)
   end
-  
+
   def to_event
     {
       id: id,
@@ -57,6 +57,20 @@ module RailsEvent::PlanItem
         crowd: crowd.as_json(only: [:id, :name])
       }
     }
+  end
+  
+  class_methods do
+    
+    def to_events(filter_params)
+      item_params = {}
+      item_params.merge! 'plan_on-gte': filter_params[:start_on], 'plan_on-lte': filter_params[:finish_on]
+
+      plan_items = PlanItem.default_where(item_params).group_by(&->(i){i.plan_on})
+    
+      r = (filter_params[:start_on].to_date .. filter_params[:finish_on].to_date).map { |i| [i, []] }.to_h
+      plan_items.reverse_merge! r
+    end
+    
   end
 
 end

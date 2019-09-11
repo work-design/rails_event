@@ -4,7 +4,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
 
   def index
     q_params = {}
-    item_params = {}
     filter_params = {
       start_on: Date.today.beginning_of_week,
       finish_on: Date.today.end_of_week
@@ -14,13 +13,9 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     q_params.merge! 'end_on-gte': filter_params[:start_on], 'begin_on-lte': filter_params[:finish_on]
     q_params.merge! params.permit(:planned_type, :planned_id, :place_id, 'plan_participants.event_participant_id')
     
-    item_params.merge! 'plan_on-gte': filter_params[:start_on], 'plan_on-lte': filter_params[:finish_on]
     @plans = Plan.default_where(q_params)
     @plans.each { |plan| plan.sync(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
-    @plan_items = PlanItem.default_where(item_params).group_by(&->(i){i.plan_on})
-    
-    r = (filter_params[:start_on].to_date .. filter_params[:finish_on].to_date).map { |i| [i, []] }.to_h
-    @plan_items.reverse_merge! r
+    @plan_items = PlanItem.to_events(filter_params)
   end
 
   def calendar
