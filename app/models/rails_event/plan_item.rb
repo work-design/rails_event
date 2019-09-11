@@ -63,9 +63,12 @@ module RailsEvent::PlanItem
     
     def to_events(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **options)
       options.merge! 'plan_on-gte': start_on, 'plan_on-lte': finish_on
-      plan_items = PlanItem.default_where(options).group_by(&->(i){i.plan_on})
-    
       r = (start_on.to_date .. finish_on.to_date).map { |i| [i, []] }.to_h
+
+      plan_items = PlanItem.includes(:time_item).default_where(options).group_by(&->(i){i.plan_on})
+      plan_items.each do |date, items|
+        plan_items[date] = items.group_by(&->(i){i.time_item})
+      end
       plan_items.reverse_merge! r
     end
     
