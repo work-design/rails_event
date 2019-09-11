@@ -18,9 +18,11 @@ class Event::Admin::EventTaxonsController < Event::Admin::BaseController
       if @event_taxon.save
         format.html { redirect_to admin_event_taxons_url }
         format.js
+        format.json { render :show }
       else
         format.html { render :new }
         format.js
+        format.json
       end
     end
   end
@@ -32,16 +34,25 @@ class Event::Admin::EventTaxonsController < Event::Admin::BaseController
   end
 
   def update
-    if @event_taxon.update(event_taxon_params)
-      redirect_to admin_event_taxons_url
-    else
-      render :edit
+    @event_taxon.assign_attributes(event_taxon_params)
+    
+    respond_to do |format|
+      if @event_taxon.save
+        format.js { redirect_to admin_event_taxons_url }
+        format.json { render :show }
+      else
+        render :edit
+      end
     end
   end
 
   def destroy
     @event_taxon.destroy
-    redirect_to admin_event_taxons_url
+    
+    respond_to do |format|
+      format.js { redirect_to admin_event_taxons_url }
+      format.json { head :no_content }
+    end
   end
 
   private
