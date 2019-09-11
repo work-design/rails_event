@@ -56,7 +56,11 @@ class Event::Admin::CrowdsController < Event::Admin::BaseController
 
   def destroy
     @crowd.destroy
-    redirect_to admin_crowds_url
+    
+    respond_to do |format|
+      format.html { redirect_to admin_crowds_url }
+      format.json { head :no_content }
+    end
   end
 
   private

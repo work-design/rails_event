@@ -56,7 +56,11 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
 
   def destroy
     @place.destroy
-    redirect_to admin_places_url
+    
+    respond_to do |format|
+      format.html { redirect_to admin_places_url }
+      format.json { head :no_content }
+    end
   end
 
   private
