@@ -61,13 +61,11 @@ module RailsEvent::PlanItem
   
   class_methods do
     
-    def to_events(filter_params)
-      item_params = {}
-      item_params.merge! 'plan_on-gte': filter_params[:start_on], 'plan_on-lte': filter_params[:finish_on]
-
-      plan_items = PlanItem.default_where(item_params).group_by(&->(i){i.plan_on})
+    def to_events(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **options)
+      options.merge! 'plan_on-gte': start_on, 'plan_on-lte': finish_on
+      plan_items = PlanItem.default_where(options).group_by(&->(i){i.plan_on})
     
-      r = (filter_params[:start_on].to_date .. filter_params[:finish_on].to_date).map { |i| [i, []] }.to_h
+      r = (start_on.to_date .. finish_on.to_date).map { |i| [i, []] }.to_h
       plan_items.reverse_merge! r
     end
     

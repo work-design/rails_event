@@ -15,7 +15,7 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     
     @plans = Plan.default_where(q_params)
     @plans.each { |plan| plan.sync(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
-    @plan_items = PlanItem.to_events(filter_params)
+    @plan_items = PlanItem.to_events(**filter_params)
   end
 
   def calendar
