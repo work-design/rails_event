@@ -6,6 +6,7 @@ module RailsEvent::PlanItem
     attribute :bookings_count, :integer, default: 0
 
     belongs_to :time_item
+    belongs_to :time_list
     belongs_to :plan
     has_many :bookings, dependent: :destroy
     has_many :plan_participants, foreign_key: :plan_id, primary_key: :plan_id
@@ -31,6 +32,9 @@ module RailsEvent::PlanItem
     if plan
       self.place_id = plan.place_id
       self.repeat_index = self.plan.repeat_index(plan_on)
+    end
+    if time_item
+      self.time_list_id = time_item.time_list_id
     end
   end
   
@@ -67,8 +71,10 @@ module RailsEvent::PlanItem
         time_list = TimeList.find options[:time_list_id]
       elsif options.key?(:organ_id)
         time_list = TimeList.where(organ_id: options[:organ_id]).default
+        options.merge! time_list_id: time_list&.id
       else
-        time_list = TimeList.default
+        time_list = TimeList.where(organ_id: nil).default
+        options.merge! time_list_id: time_list&.id
       end
       rows = time_list.time_items.map { |i| [i, []] }.to_h
   

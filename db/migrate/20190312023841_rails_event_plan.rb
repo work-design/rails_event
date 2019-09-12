@@ -51,6 +51,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
     create_table :plan_items do |t|
       t.references :plan
       t.references :time_item
+      t.references :time_list
       t.references :place
       t.date :plan_on
       t.string :repeat_index
