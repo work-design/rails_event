@@ -148,7 +148,7 @@ class Event::Admin::PlansController < Event::Admin::BaseController
       :end_on,
       :repeat_type,
       repeat_days: {},
-      plan_participants_attributes: [:participant_type, :participant_id]
+      plan_participants_attributes: [:participant_type, :participant_id, :event_participant_id]
     )
     unless p[:planned_type] || p[:planned_id]
       p.merge! params.permit(:planned_type, :planned_id)
