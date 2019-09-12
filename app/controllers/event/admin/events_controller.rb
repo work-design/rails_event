@@ -75,7 +75,7 @@ class Event::Admin::EventsController < Event::Admin::BaseController
       :teacher_id,
       :price,
       :compulsory,
-      event_item_attributes: {}
+      event_items_attributes: [:name, :videos, :documents]
     )
     p.merge! default_form_params
     p
