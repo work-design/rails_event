@@ -78,12 +78,11 @@ module RailsEvent::PlanItem
       end
       rows = time_list.time_items.map { |i| [i, []] }.to_h
   
-      plan_items = PlanItem.includes(:time_item).default_where(options).group_by(&->(i){i.plan_on})
-      plan_items.each do |date, items|
-        t_items = items.group_by(&->(i){i.time_item})
-        plan_items[date] = t_items.reverse_merge rows
+      cols.merge! PlanItem.includes(:time_item).default_where(options).group_by(&->(i){i.plan_on})
+      cols.each do |date, items|
+        cols[date] = rows.merge items.group_by(&->(i){i.time_item})
       end
-      plan_items.reverse_merge! cols
+      cols
     end
     
   end
