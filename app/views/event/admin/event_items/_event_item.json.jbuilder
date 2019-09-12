@@ -1,6 +1,6 @@
 json.extract! event_item,
               :id,
-              :title,
+              :name,
               :video_urls,
               :document_urls
-json.event event_item.event, :id, :title
+json.event event_item.event, :id, :name

@@ -68,7 +68,7 @@ class Event::Admin::EventItemsController < Event::Admin::BaseController
 
   def event_item_params
     params.fetch(:event_item, {}).permit(
-      :title,
+      :name,
       videos: [],
       documents: []
     )

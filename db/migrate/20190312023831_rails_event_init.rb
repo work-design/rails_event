@@ -12,7 +12,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :organ  # For SaaS
       t.references :event_taxon
       t.string :type
-      t.string :title
+      t.string :name
       t.string :description, limit: 4096
       t.integer :position
       t.decimal :price, precision: 10, scale: 2
@@ -23,7 +23,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
 
     create_table :event_items do |t|
       t.references :event
-      t.string :title
+      t.string :name
       t.references :author
       t.timestamps
     end

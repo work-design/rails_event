@@ -67,7 +67,7 @@ class Event::Admin::EventsController < Event::Admin::BaseController
   def event_params
     p = params.fetch(:event, {}).permit(
       :event_taxon_id,
-      :title,
+      :name,
       :description,
       :type,
       :position,
