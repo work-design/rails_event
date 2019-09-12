@@ -4,7 +4,7 @@ module RailsEvent::PlanParticipant
   included do
     belongs_to :plan
     
-    belongs_to :event_participant
+    belongs_to :event_participant, optional: true
     belongs_to :participant, polymorphic: true
     
     after_initialize do
