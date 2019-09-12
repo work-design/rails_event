@@ -4,7 +4,7 @@ module RailsEvent::PlanItem
   included do
     attribute :plan_on, :date
     attribute :bookings_count, :integer, default: 0
-  
+
     belongs_to :time_item
     belongs_to :plan
     has_many :bookings, dependent: :destroy
@@ -62,13 +62,22 @@ module RailsEvent::PlanItem
     
     def to_events(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **options)
       options.merge! 'plan_on-gte': start_on, 'plan_on-lte': finish_on
-      r = (start_on.to_date .. finish_on.to_date).map { |i| [i, []] }.to_h
-
+      cols = (start_on.to_date .. finish_on.to_date).map { |i| [i, []] }.to_h
+      if options[:time_list_id]
+        time_list = TimeList.find options[:time_list_id]
+      elsif options.key?(:organ_id)
+        time_list = TimeList.where(organ_id: options[:organ_id]).default
+      else
+        time_list = TimeList.default
+      end
+      rows = time_list.time_items.map { |i| [i, []] }.to_h
+  
       plan_items = PlanItem.includes(:time_item).default_where(options).group_by(&->(i){i.plan_on})
       plan_items.each do |date, items|
-        plan_items[date] = items.group_by(&->(i){i.time_item})
+        t_items = items.group_by(&->(i){i.time_item})
+        plan_items[date] = t_items.reverse_merge rows
       end
-      plan_items.reverse_merge! r
+      plan_items.reverse_merge! cols
     end
     
   end
