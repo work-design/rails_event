@@ -9,6 +9,7 @@ class Event::Admin::PlansController < Event::Admin::BaseController
       finish_on: Date.today.end_of_week
     }
     filter_params.merge! params.permit(:start_on, :finish_on)
+    filter_params.merge! default_params
     
     q_params.merge! 'end_on-gte': filter_params[:start_on], 'begin_on-lte': filter_params[:finish_on]
     q_params.merge! params.permit(:planned_type, :planned_id, :place_id, 'plan_participants.event_participant_id')
