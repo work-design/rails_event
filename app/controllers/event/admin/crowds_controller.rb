@@ -14,19 +14,7 @@ class Event::Admin::CrowdsController < Event::Admin::BaseController
   def create
     @crowd = Crowd.new(crowd_params)
 
-    respond_to do |format|
-      if @crowd.save
-        format.html.phone
-        format.html { redirect_to admin_crowds_url }
-        format.js { redirect_back fallback_location: admin_crowds_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_crowds_url }
-        format.json { render :show }
-      end
-    end
+    create_failed(@crowd) unless @crowd.save
   end
 
   def show

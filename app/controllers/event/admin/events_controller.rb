@@ -39,15 +39,8 @@ class Event::Admin::EventsController < Event::Admin::BaseController
   end
 
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to admin_event_url(@event) }
-        format.js { redirect_to admin_events_url }
-      else
-        format.html { render :edit }
-        format.js
-      end
-    end
+    @event.assign_attributes(event_params)
+    render :edit unless @event.save
   end
 
   def meet
@@ -56,7 +49,6 @@ class Event::Admin::EventsController < Event::Admin::BaseController
 
   def destroy
     @event.destroy
-    redirect_to admin_events_url
   end
 
   private
