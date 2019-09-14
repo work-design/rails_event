@@ -7,7 +7,7 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     filter_params = {
       start_on: Date.today.beginning_of_week,
       finish_on: Date.today.end_of_week
-    }
+    }.with_indifferent_access
     filter_params.merge! params.permit(:start_on, :finish_on)
     filter_params.merge! default_params
     
@@ -16,7 +16,8 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     
     @plans = Plan.default_where(q_params)
     @plans.each { |plan| plan.sync(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
-    @plan_items = PlanItem.to_events(**filter_params)
+    
+    @plan_items = PlanItem.to_events(**filter_params.symbolize_keys)
   end
 
   def calendar
