@@ -14,7 +14,9 @@ class Event::Admin::CrowdsController < Event::Admin::BaseController
   def create
     @crowd = Crowd.new(crowd_params)
 
-    create_failed(@crowd) unless @crowd.save
+    unless @crowd.save
+      render :new, status: :bad_request
+    end
   end
 
   def show
