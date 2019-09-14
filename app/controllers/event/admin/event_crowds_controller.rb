@@ -17,19 +17,9 @@ class Event::Admin::EventCrowdsController < Event::Admin::BaseController
   def create
     @event_crowd = @event.event_crowds.find_or_initialize_by(crowd_id: event_crowd_params[:crowd_id])
     @event_crowd.room_id = event_crowd_params[:room_id]
-    
-    respond_to do |format|
-      if @event_crowd.save
-        format.html.phone
-        format.html { redirect_to admin_event_event_crowds_url(@event) }
-        format.js { redirect_to admin_event_event_crowds_url(@event) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_to admin_event_event_crowds_url(@event) }
-        format.json { render :show }
-      end
+
+    unless @event_crowd.save
+      render :new, locals: { model: @event_crowd }, status: :unprocessable_entity
     end
   end
 
@@ -40,25 +30,13 @@ class Event::Admin::EventCrowdsController < Event::Admin::BaseController
   def update
     @event_crowd.assign_attributes(event_crowd_params)
 
-    respond_to do |format|
-      if @event_crowd.save
-        format.html.phone
-        format.html { redirect_to admin_event_event_crowds_url(@event) }
-        format.js { redirect_back fallback_location: admin_event_event_crowds_url(@event) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_event_event_crowds_url(@event) }
-        format.json { render :show }
-      end
+    unless @crowd.save
+      render :edit, locals: { model: @crowd }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @event_crowd.destroy
-
-    redirect_to admin_event_event_crowds_url(@event)
   end
 
   private

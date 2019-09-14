@@ -14,18 +14,8 @@ class Event::Admin::TimeListsController < Event::Admin::BaseController
   def create
     @time_list = TimeList.new(time_list_params)
 
-    respond_to do |format|
-      if @time_list.save
-        format.html.phone
-        format.html { redirect_to admin_time_lists_url }
-        format.js { redirect_back fallback_location: admin_time_lists_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js
-        format.json { render :show }
-      end
+    unless @time_list.save
+      render :new, locals: { model: @time_list }, status: :unprocessable_entity
     end
   end
 
@@ -38,24 +28,13 @@ class Event::Admin::TimeListsController < Event::Admin::BaseController
   def update
     @time_list.assign_attributes(time_list_params)
 
-    respond_to do |format|
-      if @time_list.save
-        format.html.phone
-        format.html { redirect_to admin_time_lists_url }
-        format.js { redirect_back fallback_location: admin_time_lists_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js
-        format.json { render :show }
-      end
+    unless @time_list.save
+      render :edit, locals: { model: @time_list }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @time_list.destroy
-    redirect_to admin_time_lists_url
   end
 
   private

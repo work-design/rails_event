@@ -15,18 +15,8 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
   def create
     @place = Place.new(place_params)
 
-    respond_to do |format|
-      if @place.save
-        format.html.phone
-        format.html { redirect_to admin_places_url }
-        format.js { redirect_back fallback_location: admin_places_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_places_url }
-        format.json { render :show }
-      end
+    unless @place.save
+      render :new, locals: { model: @place }, status: :unprocessable_entity
     end
   end
 
@@ -39,28 +29,13 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
   def update
     @place.assign_attributes(place_params)
 
-    respond_to do |format|
-      if @place.save
-        format.html.phone
-        format.html { redirect_to admin_places_url }
-        format.js { redirect_back fallback_location: admin_places_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_places_url }
-        format.json { render :show }
-      end
+    unless @place.save
+      render :edit, locals: { model: @place }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @place.destroy
-    
-    respond_to do |format|
-      format.html { redirect_to admin_places_url }
-      format.json { head :no_content }
-    end
   end
 
   private

@@ -24,18 +24,8 @@ class Event::Admin::TimeItemsController < Event::Admin::BaseController
   def create
     @time_item = @time_list.time_items.build(time_item_params)
 
-    respond_to do |format|
-      if @time_item.save
-        format.html.phone
-        format.html { redirect_to admin_time_list_time_items_url(@time_list) }
-        format.js { redirect_to admin_time_lists_url(id: @time_list) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_time_list_time_items_url(@time_list) }
-        format.json { render :show }
-      end
+    unless @time_item.save
+      render :new, locals: { model: @time_item }, status: :unprocessable_entity
     end
   end
 
@@ -48,24 +38,13 @@ class Event::Admin::TimeItemsController < Event::Admin::BaseController
   def update
     @time_item.assign_attributes(time_item_params)
 
-    respond_to do |format|
-      if @time_item.save
-        format.html.phone
-        format.html { redirect_to admin_time_list_time_items_url(@time_list) }
-        format.js { redirect_back fallback_location: admin_time_list_time_items_url(@time_list) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_time_list_time_items_url(@time_list) }
-        format.json { render :show }
-      end
+    unless @time_item.save
+      render :edit, locals: { model: @time_item }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @time_item.destroy
-    redirect_to admin_time_lists_url
   end
 
   private

@@ -15,26 +15,22 @@ class Event::Admin::EventParticipantsController < Event::Admin::BaseController
   def create
     @event_participant = @event.event_participants.build(event_participant_params)
 
-    if @event_participant.save
-      redirect_to admin_event_event_crowds_url(@event)
-    else
-      render :new
+    unless @event_participant.save
+      render :new, locals: { model: @event_participant }, status: :unprocessable_entity
     end
   end
 
   def update
-    if @event_participant.update(event_participant_params)
-      redirect_to event_participants_url
-    else
-      render :edit
+    @event_participant.assign_attributes(event_participant_params)
+
+    unless @event_participant.save
+      render :edit, locals: { model: @event_participant }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @event_participant = @event.event_participants.find_by(crowd_member_id: params[:crowd_member_id])
     @event_participant.destroy
-
-    redirect_to admin_event_event_crowds_url(@event)
   end
 
   def check

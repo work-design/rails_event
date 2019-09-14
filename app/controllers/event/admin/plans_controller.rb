@@ -39,18 +39,8 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     #dt = params[:index].to_s
     #@plan.toggle(dt, params[:time_item_id].to_i) if dt
 
-    respond_to do |format|
-      if @plan.save
-        format.html.phone
-        format.html { redirect_to plans_url(params[:plan_type], params[:plan_id]) }
-        format.js
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { render :index }
-        format.json { process_errors(@plan) }
-      end
+    unless @plan.save
+      render :new, locals: { model: @plan }, status: :unprocessable_entity
     end
   end
 
@@ -79,24 +69,13 @@ class Event::Admin::PlansController < Event::Admin::BaseController
       @plan.toggle(dt, params[:time_item_id].to_i)
     end
 
-    respond_to do |format|
-      if @plan.save
-        format.html.phone
-        format.html { redirect_to plans_url(params[:plan_type], params[:plan_id]) }
-        format.js { redirect_to plan_url(@plan.plan_type, @plan.plan_id, @plan) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { render :index }
-        format.json { process_errors(@plan) }
-      end
+    unless @plan.save
+      render :edit, locals: { model: @plan }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @plan.destroy
-    redirect_to plans_url(params[:plan_type], params[:plan_id])
   end
 
   private

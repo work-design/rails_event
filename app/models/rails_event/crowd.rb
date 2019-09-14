@@ -8,6 +8,8 @@ module RailsEvent::Crowd
     has_many :members, through: :crowd_members, source_type: 'Profile'
     has_many :event_participants
     
+    validates :name, presence: true
+    
     has_one_attached :logo
   end
   

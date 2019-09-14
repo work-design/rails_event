@@ -10,19 +10,9 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   def create
     @plan_attender = @plan_item.plan_attenders.build(event_participant_id: params[:event_participant_id])
     @plan_attender.attended = true
-    
-    respond_to do |format|
-      if @plan_attender.save
-        format.html.phone
-        format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
-        format.js { redirect_to plan_item_plan_attenders_url(@plan_item) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_to plan_item_plan_attenders_url(@plan_item) }
-        format.json { render :show }
-      end
+
+    unless @plan_attender.save
+      render :new, locals: { model: @plan_attender }, status: :unprocessable_entity
     end
   end
   
@@ -32,28 +22,14 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   def update
     @plan_attender.assign_attributes(plan_attender_params)
 
-    respond_to do |format|
-      if @plan_attender.save
-        format.html.phone
-        format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
-        format.js { redirect_back fallback_location: plan_item_plan_attenders_url(@plan_item) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: plan_item_plan_attenders_url(@plan_item) }
-        format.json { render :show }
-      end
+    unless @plan_attender.save
+      render :edit, locals: { model: @plan_attender }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @plan_attender = @plan_item.plan_attenders.find_by(event_participant_id: params[:event_participant_id])
     @plan_attender.destroy
-    respond_to do |format|
-      format.html { redirect_to plan_item_plan_attenders_url(@plan_item) }
-      format.json { render :show }
-    end
   end
 
   private

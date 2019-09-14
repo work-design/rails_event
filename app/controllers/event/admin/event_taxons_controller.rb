@@ -13,17 +13,9 @@ class Event::Admin::EventTaxonsController < Event::Admin::BaseController
 
   def create
     @event_taxon = EventTaxon.new(event_taxon_params)
-    
-    respond_to do |format|
-      if @event_taxon.save
-        format.html { redirect_to admin_event_taxons_url }
-        format.js
-        format.json { render :show }
-      else
-        format.html { render :new }
-        format.js
-        format.json
-      end
+
+    unless @event_taxon.save
+      render :new, locals: { model: @event_taxon }, status: :unprocessable_entity
     end
   end
 
@@ -35,24 +27,14 @@ class Event::Admin::EventTaxonsController < Event::Admin::BaseController
 
   def update
     @event_taxon.assign_attributes(event_taxon_params)
-    
-    respond_to do |format|
-      if @event_taxon.save
-        format.js { redirect_to admin_event_taxons_url }
-        format.json { render :show }
-      else
-        render :edit
-      end
+
+    unless @event_taxon.save
+      render :edit, locals: { model: @event_taxon }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @event_taxon.destroy
-    
-    respond_to do |format|
-      format.js { redirect_to admin_event_taxons_url }
-      format.json { head :no_content }
-    end
   end
 
   private

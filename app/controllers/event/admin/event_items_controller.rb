@@ -13,18 +13,8 @@ class Event::Admin::EventItemsController < Event::Admin::BaseController
   def create
     @event_item = @event.event_items.build(event_item_params)
 
-    respond_to do |format|
-      if @event_item.save
-        format.html.phone
-        format.html { redirect_to admin_event_items_url }
-        format.js { redirect_to admin_event_event_items_url(@event) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js
-        format.json { render :show }
-      end
+    unless @event_item.save
+      render :new, locals: { model: @event_item }, status: :unprocessable_entity
     end
   end
 
@@ -37,24 +27,13 @@ class Event::Admin::EventItemsController < Event::Admin::BaseController
   def update
     @event_item.assign_attributes(event_item_params)
 
-    respond_to do |format|
-      if @event_item.save
-        format.html.phone
-        format.html { redirect_to admin_event_event_items_url(@event) }
-        format.js { redirect_to admin_event_event_items_url(@event) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js
-        format.json { render :show }
-      end
+    unless @event_item.save
+      render :edit, locals: { model: @event_item }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @event_item.destroy
-    redirect_to admin_event_items_url
   end
 
   private

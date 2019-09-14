@@ -15,7 +15,7 @@ class Event::Admin::CrowdsController < Event::Admin::BaseController
     @crowd = Crowd.new(crowd_params)
 
     unless @crowd.save
-      render :new, status: :bad_request
+      render :new, locals: { model: @crowd }, status: :unprocessable_entity
     end
   end
 
@@ -29,28 +29,13 @@ class Event::Admin::CrowdsController < Event::Admin::BaseController
   def update
     @crowd.assign_attributes(crowd_params)
 
-    respond_to do |format|
-      if @crowd.save
-        format.html.phone
-        format.html { redirect_to admin_crowds_url }
-        format.js { redirect_back fallback_location: admin_crowds_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_crowds_url }
-        format.json { render :show }
-      end
+    unless @crowd.save
+      render :edit, locals: { model: @crowd }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @crowd.destroy
-    
-    respond_to do |format|
-      format.html { redirect_to admin_crowds_url }
-      format.json { head :no_content }
-    end
   end
 
   private

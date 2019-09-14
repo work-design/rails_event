@@ -24,11 +24,9 @@ class Event::Admin::EventsController < Event::Admin::BaseController
 
   def create
     @event = Event.new(event_params)
-    
-    if @event.save
-      render 'create'
-    else
-      render :new, status: :unprocessable_entity
+
+    unless @event.save
+      render :new, locals: { model: @event }, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +38,10 @@ class Event::Admin::EventsController < Event::Admin::BaseController
 
   def update
     @event.assign_attributes(event_params)
-    render :edit unless @event.save
+
+    unless @event.save
+      render :edit, locals: { model: @event }, status: :unprocessable_entity
+    end
   end
 
   def meet

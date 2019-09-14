@@ -28,18 +28,8 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
   def create
     @plan_item = @plan.plan_items.build(event_plan_params)
 
-    respond_to do |format|
-      if @plan_item.save
-        format.html.phone
-        format.html { redirect_to admin_event_crowd_plans_url(@plan) }
-        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
-        format.json { render :show }
-      end
+    unless @plan_item.save
+      render :new, locals: { model: @plan_item }, status: :unprocessable_entity
     end
   end
 
@@ -53,18 +43,8 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
   def update
     @plan_item.assign_attributes(event_plan_params)
 
-    respond_to do |format|
-      if @plan_item.save
-        format.html.phone
-        format.html { redirect_to admin_event_crowd_plans_url(@plan) }
-        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_event_crowd_plans_url(@plan) }
-        format.json { render :show }
-      end
+    unless @plan_item.save
+      render :edit, locals: { model: @plan_item }, status: :unprocessable_entity
     end
   end
   
@@ -74,7 +54,6 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
 
   def destroy
     @plan_item.destroy
-    redirect_to admin_event_crowd_plans_url(@plan)
   end
 
   private
