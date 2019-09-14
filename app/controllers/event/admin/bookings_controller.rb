@@ -15,7 +15,9 @@ class Event::Admin::BookingsController < Event::Admin::BaseController
   def create
     @booking = @plan_item.bookings.find_or_initialize_by(booker_type: params[:booker_type], booker_id: params[:booker_id])
 
-    render :new unless @booking.save
+    unless @booking.save
+      render :new, locals: { model: @booking }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -26,8 +28,6 @@ class Event::Admin::BookingsController < Event::Admin::BaseController
     end
     
     @booking.destroy if @booking
-    
-    render json: {}
   end
 
   private
