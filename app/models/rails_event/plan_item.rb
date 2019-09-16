@@ -9,16 +9,15 @@ module RailsEvent::PlanItem
     belongs_to :time_list
     belongs_to :plan, optional: true
     belongs_to :planned, polymorphic: true
+    belongs_to :place, optional: true
+    belongs_to :event, optional: true
+    belongs_to :event_item, optional: true
     has_many :bookings, dependent: :destroy
     has_many :proxy_plan_participants, foreign_key: :plan_id, primary_key: :planning_id
     has_many :plan_attenders, dependent: :nullify
     
     has_many :plan_participants, as: :planning
     accepts_nested_attributes_for :plan_participants
-
-    belongs_to :place, optional: true
-    belongs_to :event, optional: true
-    belongs_to :event_item, optional: true
     
     validates :plan_on, presence: true
     
