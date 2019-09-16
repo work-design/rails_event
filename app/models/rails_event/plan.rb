@@ -16,9 +16,9 @@ module RailsEvent::Plan
     belongs_to :place, optional: true
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
-    has_many :plan_items, dependent: :delete_all
+    has_many :plan_items, dependent: :destroy
 
-    has_many :plan_participants, as: :planning
+    has_many :plan_participants, as: :planning, dependent: :delete_all
     accepts_nested_attributes_for :plan_participants
     
     default_scope -> { order(begin_on: :asc) }

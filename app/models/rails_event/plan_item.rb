@@ -15,7 +15,7 @@ module RailsEvent::PlanItem
     has_many :bookings, dependent: :destroy
     has_many :plan_attenders, dependent: :nullify
     
-    has_many :plan_participants, as: :planning
+    has_many :plan_participants, as: :planning, dependent: :delete_all
     accepts_nested_attributes_for :plan_participants
     
     validates :plan_on, presence: true

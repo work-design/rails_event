@@ -1,1 +1,1 @@
-json.plan_item @plan_item, partial: 'plan_item', as: :plan_item
+json.plan_item @plan_item, partial: 'plan_item', locals: { date: @plan_item.plan_on, items: items }
