@@ -66,7 +66,7 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
       :time_item_id,
       :event_item_id,
       :place_id,
-      plan_attenders_attributes: [:attender_type, :attender_id]
+      plan_participants_attributes: [:participant_type, :participant_id]
     )
   end
 

@@ -1,6 +1,6 @@
 class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   before_action :set_plan_item
-  before_action :set_plan_attender, only: [:show, :edit, :update]
+  before_action :set_plan_attender, only: [:edit, :update]
 
   def index
     @plan_participants = @plan_item.plan.plan_participants.page(params[:page])
