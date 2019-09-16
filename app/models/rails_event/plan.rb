@@ -37,7 +37,7 @@ module RailsEvent::Plan
   end
 
   def same_scopes
-    self.class.where.not(id: self.id).default_where(plan_type: self.plan_type, plan_id: self.plan_id)
+    self.class.where.not(id: self.id).default_where(planned_type: self.plan_type, planned_id: self.plan_id)
   end
 
   def toggle(index, time_item_id)

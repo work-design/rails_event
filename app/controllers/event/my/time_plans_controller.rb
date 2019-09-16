@@ -21,7 +21,6 @@ class Event::My::TimePlansController < Event::My::BaseController
   def calendar
     @time_list = TimeList.find params[:time_list_id]
     set_settings
-    @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
 

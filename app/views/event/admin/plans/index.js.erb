@@ -10,7 +10,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   },
   defaultView: 'timeGrid',
   defaultDate: '<%= @settings[:defaultDate] %>',
-  columnHeaderFormat: <%= raw @settings[:columnHeaderFormat].to_json %>,
+  columnHeaderFormat: {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    weekday: 'short'
+  },
   dayCount: <%= @settings[:dayCount] %>,
   allDaySlot: false,
   minTime: '<%= @settings[:minTime] %>',

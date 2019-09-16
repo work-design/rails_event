@@ -13,7 +13,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
   def calendar
     @time_list = TimeList.find params[:time_list_id]
     set_settings
-    @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
   
@@ -37,7 +36,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
   def show_calendar
     @time_list = TimeList.find params[:time_list_id]
     set_settings
-    @settings.merge! FullCalendarHelper.repeat_settings(repeat_type: params[:repeat_type])
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
     
     render :calendar
@@ -101,7 +99,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
       @settings.merge!(
         defaultDate: @plan.default_date.to_s(:date)
       )
-      repeat_settings = FullCalendarHelper.repeat_settings(repeat_type: @plan.repeat_type)
       @settings.merge! repeat_settings
     end
   end
