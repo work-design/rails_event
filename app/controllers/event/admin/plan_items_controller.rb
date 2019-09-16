@@ -63,6 +63,7 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     params.fetch(:plan_item, {}).permit(
       :planned_type,
       :planned_id,
+      :plan_on,
       :time_item_id,
       :event_item_id,
       :place_id,
