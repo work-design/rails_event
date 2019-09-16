@@ -25,9 +25,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     @plan = Plan.new
     @plan.time_list ||= @time_lists.default
     @plan.assign_attributes plan_params
-    
-    #dt = params[:index].to_s
-    #@plan.toggle(dt, params[:time_item_id].to_i) if dt
 
     unless @plan.save
       render :new, locals: { model: @plan }, status: :unprocessable_entity
@@ -51,13 +48,16 @@ class Event::Admin::PlansController < Event::Admin::BaseController
 
   def update
     @plan.assign_attributes plan_params
-    dt = params[:index].to_s
-    # if dt
-    #   @plan.toggle(dt, params[:time_item_id].to_i)
-    # end
-
+    
     unless @plan.save
       render :edit, locals: { model: @plan }, status: :unprocessable_entity
+    end
+  end
+  
+  def xx
+    dt = params[:index].to_s
+    if dt
+      @plan.toggle(dt, params[:time_item_id].to_i)
     end
   end
 
