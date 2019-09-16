@@ -13,7 +13,6 @@ module RailsEvent::PlanItem
     belongs_to :event, optional: true
     belongs_to :event_item, optional: true
     has_many :bookings, dependent: :destroy
-    has_many :proxy_plan_participants, foreign_key: :plan_id, primary_key: :planning_id
     has_many :plan_attenders, dependent: :nullify
     
     has_many :plan_participants, as: :planning
@@ -29,17 +28,6 @@ module RailsEvent::PlanItem
 
   def attenders
     plan_attenders.where(attended: true).pluck(:attender_type, :attender_id).map { |i| i.join('_') }
-  end
-  
-  def sync_from_plan
-    if plan
-      self.place_id = plan.place_id
-      self.planned = plan.planned
-      self.repeat_index = self.plan.repeat_index(plan_on)
-    end
-    if time_item
-      self.time_list_id = time_item.time_list_id
-    end
   end
   
   def start_at
@@ -64,6 +52,20 @@ module RailsEvent::PlanItem
         crowd: crowd.as_json(only: [:id, :name])
       }
     }
+  end
+  
+  def sync_from_plan
+    if plan
+      self.place_id = plan.place_id
+      self.planned = plan.planned
+      self.repeat_index = self.plan.repeat_index(plan_on)
+      self.plan.plan_participants.each do |plan_participant|
+        self.plan_participants.build plan_participant.as_json(only: [:participant_type, :participant_id, :event_participant_id, :status])
+      end
+    end
+    if time_item
+      self.time_list_id = time_item.time_list_id
+    end
   end
   
   class_methods do
