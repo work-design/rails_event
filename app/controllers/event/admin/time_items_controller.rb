@@ -17,6 +17,19 @@ class Event::Admin::TimeItemsController < Event::Admin::BaseController
     end
   end
 
+  def select
+    @time_items = @time_list.time_items
+  
+    if @time_items
+      @results = @time_items.map { |x| { value: x.id, text: x.name, name: x.name } }
+    end
+  
+    respond_to do |format|
+      format.js
+      format.json { render json: { values: @results } }
+    end
+  end
+
   def new
     @time_item = @time_list.time_items.build
   end

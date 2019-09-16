@@ -56,12 +56,12 @@ module RailsEvent::Plan
     repeat_days.diff_toggle index => time_item_id
   end
 
-  def sync(start: Date.today.beginning_of_week, finish: Date.today.end_of_week)
+  def produce(start: Date.today.beginning_of_week, finish: Date.today.end_of_week)
     removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)
   
     removes.each do |date, time_item_ids|
       Array(time_item_ids).each do |time_item_id|
-        self.plan_items.where(plan_on: date, time_item_id: time_item_id).delete_all
+        self.plan_items.where(plan_on: date, time_item_id: time_item_id).each(&:destroy)
       end
     end
   

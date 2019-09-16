@@ -24,14 +24,14 @@ module RailsEvent::Recurrence
     end
   end
   
-  def next_occurring(start: Time.current, finish: start + 14.days)
+  def next_occurring(start: Time.current, finish: start + 7.days)
     (start.to_date .. finish.to_date).map do |date|
       span = repeat_index(date)
       yield(span, date)
     end.compact
   end
 
-  def next_days(start: Time.current, finish: start + 14.days)
+  def next_days(start: Time.current, finish: start + 7.days)
     next_occurring(start: start, finish: finish) do |span, date|
       {
         date.to_s => repeat_days[span]

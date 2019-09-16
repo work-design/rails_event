@@ -14,7 +14,7 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     q_params.merge! params.permit(:planned_type, :planned_id, :place_id, 'plan_participants.event_participant_id')
 
     @plans = Plan.default_where(q_params)
-    @plans.each { |plan| plan.sync(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
+    @plans.each { |plan| plan.produce(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
 
     @plan_items = PlanItem.to_events(**filter_params.symbolize_keys)
   end

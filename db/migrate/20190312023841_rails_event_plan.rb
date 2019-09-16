@@ -33,6 +33,9 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :planned, polymorphic: true
       t.date :begin_on
       t.date :end_on
+      t.date :produced_begin_on
+      t.date :produced_end_on
+      t.boolean :produce_done
       t.references :place
       t.string :repeat_type  # 日、周、月、天
       t.integer :repeat_count  # 每几周
