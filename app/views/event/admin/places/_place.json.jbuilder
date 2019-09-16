@@ -1,3 +1,4 @@
 json.extract! place,
               :id,
-              :name
+              :name,
+              :max_members

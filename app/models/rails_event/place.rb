@@ -3,7 +3,7 @@ module RailsEvent::Place
   
   included do
     attribute :name, :string
-    attribute :max_members, :integer
+    attribute :max_members, :integer, default: 0
     
     attribute :plans_count, :integer, default: 0
 

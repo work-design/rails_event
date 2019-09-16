@@ -4,5 +4,7 @@ json.extract! plan,
               :planned_id,
               :begin_on,
               :end_on,
-              :created_at,
+              :place_id,
+              :repeat_type,
+              :repeat_days,
               :updated_at

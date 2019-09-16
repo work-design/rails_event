@@ -1,1 +1,1 @@
-json.partial! 'event_plan', event_plan: @event_plan
+json.plan_item @plan_item, partial: 'plan_item', as: :plan_item
