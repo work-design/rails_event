@@ -27,8 +27,6 @@ module RailsEvent::Plan
 
   def default_date
     case self.repeat_type
-    when 'once'
-      self.begin_on
     when 'weekly', 'monthly'
       FullCalendarHelper.default_date(repeat_type: repeat_type)
     end
@@ -36,7 +34,7 @@ module RailsEvent::Plan
   
   def selected_ids(date, index)
     case repeat_type
-    when 'once'
+    when 'yearly'
       Array(self.repeat_days[date.to_s])
     when 'monthly'
       Array(self.repeat_days[index.to_s])
