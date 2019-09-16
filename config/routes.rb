@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :plans
     resources :plan_items do
       patch :qrcode, on: :member
-      resources :time_bookings do
+      resources :bookings do
         delete '' => :destroy, on: :collection
       end
       resources :plan_attenders do

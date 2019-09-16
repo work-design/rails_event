@@ -19,22 +19,12 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     @plan_items = PlanItem.to_events(**filter_params.symbolize_keys)
   end
 
-  def plan
-    set_time_lists
-    q_params = {}
-    q_params.merge! params.permit(:place_id)
-    @time_plans = @plan.time_plans.default_where(q_params)
-
-    @plan = @plan.time_plans.recent || @plan.time_plans.build
-    @plan.time_list ||= TimeList.default
-  end
-
   def new
-    @plan_item = @plan.plan_items.build
+    @plan_item = PlanItem.new
   end
 
   def create
-    @plan_item = @plan.plan_items.build(event_plan_params)
+    @plan_item = PlanItem.new(plan_item_params)
 
     unless @plan_item.save
       render :new, locals: { model: @plan_item }, status: :unprocessable_entity
@@ -49,7 +39,7 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
   end
 
   def update
-    @plan_item.assign_attributes(event_plan_params)
+    @plan_item.assign_attributes(plan_item_params)
 
     unless @plan_item.save
       render :edit, locals: { model: @plan_item }, status: :unprocessable_entity
@@ -69,7 +59,7 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     @plan_item = PlanItem.find(params[:id])
   end
 
-  def event_plan_params
+  def plan_item_params
     params.fetch(:plan_item, {}).permit(
       :planned_type,
       :planned_id,
