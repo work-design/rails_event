@@ -24,13 +24,6 @@ module RailsEvent::Plan
     default_scope -> { order(begin_on: :asc) }
     validates :begin_on, presence: true
   end
-
-  def default_date
-    case self.repeat_type
-    when 'weekly', 'monthly'
-      FullCalendarHelper.default_date(repeat_type: repeat_type)
-    end
-  end
   
   def selected_ids(date, index)
     case repeat_type

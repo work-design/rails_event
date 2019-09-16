@@ -31,16 +31,5 @@ module FullCalendarHelper
     settings
   end
 
-  def default_date(repeat_type: 'once')
-    case repeat_type
-    when 'once'
-      Date.today.beginning_of_week
-    when 'weekly'
-      Date.today.beginning_of_year.beginning_of_week
-    when 'monthly'
-      Date.today.beginning_of_year
-    end
-  end
-
 
 end
