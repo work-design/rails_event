@@ -6,5 +6,7 @@ json.extract! plan,
               :end_on,
               :place_id,
               :repeat_type,
-              :repeat_days,
-              :updated_at
+              :repeat_days
+json.plan_participants plan.plan_participants do |plan_participant|
+  json.extract! plan_participant, :id, :participant_type, :participant_id
+end

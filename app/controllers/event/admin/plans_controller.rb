@@ -50,7 +50,6 @@ class Event::Admin::PlansController < Event::Admin::BaseController
   end
 
   def update
-    @plan = @plan.plans.find params[:id]
     @plan.assign_attributes plan_params
     dt = params[:index].to_s
     if dt
