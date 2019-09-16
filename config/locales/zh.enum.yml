@@ -3,9 +3,9 @@ zh:
     enum:
       plan:
         repeat_type:
-          once: 一次
           weekly: 每周
           monthly: 每月
+          yearly: 每年
       crowd:
         member_type:
           Profile: 学生

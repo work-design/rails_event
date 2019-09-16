@@ -3,6 +3,6 @@ en:
     enum:
       plan:
         repeat_type:
-          once: Once
           weekly: Weekly
           monthly: Monthly
+          yearly: Yearly
