@@ -1,5 +1,4 @@
 class Event::Admin::PlanItemsController < Event::Admin::BaseController
-  before_action :set_plan
   before_action :set_plan_item, only: [:show, :edit, :update, :qrcode, :destroy]
 
   def index
@@ -66,19 +65,18 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
   end
 
   private
-  def set_plan
-    @plan = params[:plan_type].constantize.find params[:plan_id]
-  end
-
   def set_plan_item
     @plan_item = PlanItem.find(params[:id])
   end
 
   def event_plan_params
     params.fetch(:plan_item, {}).permit(
+      :planned_type,
+      :planned_id,
+      :time_item_id,
       :event_item_id,
       :place_id,
-      :teacher_id
+      plan_attenders_attributes: [:attender_type, :attender_id]
     )
   end
 

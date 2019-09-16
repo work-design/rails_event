@@ -7,7 +7,8 @@ module RailsEvent::PlanItem
 
     belongs_to :time_item
     belongs_to :time_list
-    belongs_to :plan
+    belongs_to :plan, optional: true
+    belongs_to :planned, polymorphic: true
     has_many :bookings, dependent: :destroy
     has_many :plan_participants, foreign_key: :plan_id, primary_key: :plan_id
     has_many :plan_attenders, dependent: :nullify
@@ -31,6 +32,7 @@ module RailsEvent::PlanItem
   def sync_from_plan
     if plan
       self.place_id = plan.place_id
+      self.planned = plan.planned
       self.repeat_index = self.plan.repeat_index(plan_on)
     end
     if time_item

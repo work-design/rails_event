@@ -49,6 +49,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
     end
     
     create_table :plan_items do |t|
+      t.references :planned, polymorphic: true
       t.references :plan
       t.references :time_item
       t.references :time_list

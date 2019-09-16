@@ -7,9 +7,9 @@ module RailsEvent::Recurrence
     attribute :repeat_days, :json, default: {}
 
     enum repeat_type: {
-      once: 'once',
       weekly: 'weekly',
-      monthly: 'monthly'
+      monthly: 'monthly',
+      yearly: 'yearly'
     }
   end
 
@@ -19,7 +19,7 @@ module RailsEvent::Recurrence
       date.days_to_week_start.to_s
     when 'monthly'
       (date.day - 1).to_s
-    when 'once'
+    when 'yearly'
       date.to_s(:date)
     end
   end
