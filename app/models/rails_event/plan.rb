@@ -56,22 +56,29 @@ module RailsEvent::Plan
     repeat_days.diff_toggle index => time_item_id
   end
 
-  def produce(start: Date.today.beginning_of_week, finish: Date.today.end_of_week)
-    removes, adds = self.present_days.diff_changes self.next_days(start: start, finish: finish)
-  
-    removes.each do |date, time_item_ids|
-      Array(time_item_ids).each do |time_item_id|
-        self.plan_items.where(plan_on: date, time_item_id: time_item_id).each(&:destroy)
+  def produce(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week)
+    removes, adds = self.present_days.diff_changes self.next_days(start: start_on, finish: finish_on)
+    
+    self.class.transaction do
+      self.produced_begin_on = start_on
+      self.produced_end_on = finish_on
+      
+      removes.each do |date, time_item_ids|
+        Array(time_item_ids).each do |time_item_id|
+          self.plan_items.where(plan_on: date, time_item_id: time_item_id).each(&:destroy!)
+        end
       end
-    end
-  
-    adds.each do |date, time_item_ids|
-      Array(time_item_ids).each do |time_item_id|
-        pi = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
-        pi.save
+    
+      adds.each do |date, time_item_ids|
+        Array(time_item_ids).each do |time_item_id|
+          pi = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
+          pi.save!
+        end
       end
+      
+      self.save!
     end
-  
+    
     self
   end
 
@@ -85,6 +92,20 @@ module RailsEvent::Plan
     
     def recent(date = Date.today)
       default_where('begin_on-lte': date).unscope(:order).order(begin_on: :desc).first
+    end
+    
+    def xxx(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **filter_params)
+      # 时间范围与时间参数存在重叠
+      q = { 'end_on-gte': start_on, 'begin_on-lte': finish_on }
+      r1 = { 'produced_begin_on-gt': start_on }.merge! filter_params
+      #r1.merge! q
+      
+      r2 = { 'produced_end_on-lt': finish_on }.merge! filter_params
+      #r2.merge! q
+      
+      r3 = { 'produced_end_on': nil }
+      
+      (Plan.default_where(q)).default_where(Plan.default_where(r1).or(Plan.default_where(r2)).or(Plan.where(r3)))
     end
 
     def xx

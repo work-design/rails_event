@@ -9,12 +9,11 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     }.with_indifferent_access
     filter_params.merge! params.permit(:start_on, :finish_on)
     filter_params.merge! default_params
-
-    q_params.merge! 'end_on-gte': filter_params[:start_on], 'begin_on-lte': filter_params[:finish_on]
+    
     q_params.merge! params.permit(:planned_type, :planned_id, :place_id, 'plan_participants.event_participant_id')
 
-    @plans = Plan.default_where(q_params)
-    @plans.each { |plan| plan.produce(start: filter_params[:start_on], finish: filter_params[:finish_on]) }
+    @plans = Plan.xxx(**filter_params.symbolize_keys)
+    @plans.each { |plan| plan.produce(start_on: filter_params[:start_on], finish_on: filter_params[:finish_on]) }
 
     @plan_items = PlanItem.to_events(**filter_params.symbolize_keys)
   end
