@@ -96,16 +96,25 @@ module RailsEvent::Plan
     
     def xxx(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **filter_params)
       # 时间范围与时间参数存在重叠
-      q = { 'end_on-gte': start_on, 'begin_on-lte': finish_on }
-      r1 = { 'produced_begin_on-gt': start_on }.merge! filter_params
-      #r1.merge! q
+      q = { 'end_on-gte': start_on, 'begin_on-lte': finish_on }.merge! filter_params
+      or_q = {
+        or: {
+          'produced_begin_on-gt': start_on,
+          'produced_end_on-lt': finish_on,
+          'begin_on': nil,
+          'end_on': nil,
+          'produced_begin_on': nil,
+          'produced_end_on': nil
+        },
+        allow: {
+          'begin_on': nil,
+          'end_on': nil,
+          'produced_begin_on': nil,
+          'produced_end_on': nil
+        }
+      }
       
-      r2 = { 'produced_end_on-lt': finish_on }.merge! filter_params
-      #r2.merge! q
-      
-      r3 = { 'produced_end_on': nil }
-      
-      (Plan.default_where(q)).default_where(Plan.default_where(r1).or(Plan.default_where(r2)).or(Plan.where(r3)))
+      Plan.default_where(q.merge!(or_q))
     end
 
     def xx
