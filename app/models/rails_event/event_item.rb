@@ -8,6 +8,8 @@ module RailsEvent::EventItem
   
     has_many_attached :videos
     has_many_attached :documents
+
+    accepts_nested_attributes_for :videos_attachments
   end
   
   
