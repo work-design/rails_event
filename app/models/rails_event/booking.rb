@@ -19,10 +19,9 @@ module RailsEvent::Booking
   
   def sync_from_plan_item
     if plan_item
-      self.booked_type = self.plan_item.plan_type
-      self.booked_id = self.plan_item.plan_id
-      self.booking_on = self.plan_item.plan_on
-      self.time_item_id = self.plan_item.time_item_id
+      self.booked = plan_item.planned
+      self.booking_on = plan_item.plan_on
+      self.time_item_id = plan_item.time_item_id
     end
   end
   
