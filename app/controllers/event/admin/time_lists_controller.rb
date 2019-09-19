@@ -48,7 +48,13 @@ class Event::Admin::TimeListsController < Event::Admin::BaseController
       :code,
       :interval_minutes,
       :item_minutes,
-      :default
+      :default,
+      time_items_attributes: [
+        :id,
+        :start_at,
+        :finish_at,
+        :_destroy
+      ]
     )
     p.merge! default_form_params
   end

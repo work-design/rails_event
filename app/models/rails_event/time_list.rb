@@ -7,6 +7,8 @@ module RailsEvent::TimeList
   
     belongs_to :organ, optional: true
     has_many :time_items, -> { order(start_at: :asc) }
+    accepts_nested_attributes_for :time_items, allow_destroy: true
+    
     after_update :set_default, if: -> { self.default? && saved_change_to_default? }
   end
   
