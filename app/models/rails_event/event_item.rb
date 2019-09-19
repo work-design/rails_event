@@ -9,7 +9,8 @@ module RailsEvent::EventItem
     has_many_attached :videos
     has_many_attached :documents
 
-    accepts_nested_attributes_for :videos_attachments
+    accepts_nested_attributes_for :videos_attachments, allow_destroy: true
+    accepts_nested_attributes_for :documents_attachments, allow_destroy: true
   end
   
   

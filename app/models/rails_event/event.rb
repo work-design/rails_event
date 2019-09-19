@@ -6,7 +6,7 @@ module RailsEvent::Event
     belongs_to :event_taxon, optional: true
   
     has_many :event_items, dependent: :nullify
-    accepts_nested_attributes_for :event_items
+    accepts_nested_attributes_for :event_items, allow_destroy: true
   
     has_many :event_participants, dependent: :destroy
     has_many :crowds, through: :event_participants
