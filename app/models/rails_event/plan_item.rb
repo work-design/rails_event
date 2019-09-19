@@ -37,22 +37,6 @@ module RailsEvent::PlanItem
   def finish_at
     time_item.finish_at.change(plan_on.parts)
   end
-
-  def to_event
-    {
-      id: id,
-      start: start_at.strftime('%FT%T'),
-      end: finish_at.strftime('%FT%T'),
-      title: "#{place&.name} #{plan.title}",
-      extendedProps: {
-        title: plan.title,
-        time_item_id: time_item_id,
-        plan: plan_on,
-        place: place.as_json(only: [:id], methods: [:name]),
-        crowd: crowd.as_json(only: [:id, :name])
-      }
-    }
-  end
   
   def sync_from_plan
     if plan

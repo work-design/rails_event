@@ -1,9 +1,9 @@
 json.extract! plan_item,
               :id,
-              :planned_type,
-              :planned_id,
+:planned_type,
+:planned_id,
               :plan_on,
-              :place_id,
+:place_id,
               :start_at,
               :finish_at,
               :qrcode_url

@@ -4,20 +4,13 @@ class Event::Member::PlanItemsController < Event::Member::BaseController
   def index
     q_params = {
       'plan_on-gte': Date.today,
-      teacher_id: current_member.id
+      'plan_participants.participant_id': current_member.id
     }
     q_params.merge! 'plan_on-gte': params[:start_date] if params[:start_date]
     q_params.merge! 'plan_on-lte': params[:end_date] if params[:end_date]
-
     q_params.merge! params.permit(:place_id)
 
-    @plan_items = PlanItem.includes(:place, :teacher, :event, :time_item, :crowd).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
-
-    respond_to do |format|
-      format.html
-      format.js
-      format.json { render json: { events: @plan_items.map(&:to_event) } }
-    end
+    @plan_items = PlanItem.includes(:place, :event, :time_item).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
   end
 
   def plan
