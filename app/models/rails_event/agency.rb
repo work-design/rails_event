@@ -3,7 +3,7 @@ module RailsEvent::Agency
   
   included do
     has_many :crowd_members
-    has_many :crowds, through: :crowd_students
+    has_many :crowds, through: :crowd_members
   end
 
   def join_crowd(crowd_id)
