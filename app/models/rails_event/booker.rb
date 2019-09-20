@@ -2,7 +2,7 @@ module RailsEvent::Booker
   extend ActiveSupport::Concern
 
   included do
-    has_many :booker_times, class_name: 'Booking', as: :booker
+    has_many :booker_bookings, class_name: 'Booking', as: :booker
   end
   
   
