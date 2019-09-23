@@ -16,6 +16,15 @@ class Event::Admin::PlanItemsController < Event::Admin::BaseController
     @plans.each { |plan| plan.produce(start_on: filter_params[:start_on], finish_on: filter_params[:finish_on]) }
 
     @plan_items = PlanItem.to_events(**filter_params.symbolize_keys)
+    
+    booking_params = {
+      booker_type: 'Maintain',
+      booker_id: params[:maintain_id],
+      'booking_on-gte': filter_params[:start_on],
+      'booking_on-lte': filter_params[:finish_on]
+    }
+    
+    @booked_ids = Booking.default_where(booking_params).pluck(:plan_item_id)
   end
 
   def new
