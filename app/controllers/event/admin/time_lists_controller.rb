@@ -4,6 +4,14 @@ class Event::Admin::TimeListsController < Event::Admin::BaseController
   def index
     q_params = {}
     q_params.merge! default_params
+    unless TimeList.default_where(q_params).exists?
+      p_params = {
+        default: true
+      }
+      p_params.merge! default_form_params
+      TimeList.create(p_params)
+    end
+
     @time_lists = TimeList.default_where(q_params).order(id: :asc).page(params[:page])
   end
 
