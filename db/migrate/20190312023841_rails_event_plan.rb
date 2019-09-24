@@ -47,6 +47,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :planning, polymorphic: true
       t.references :participant, polymorphic: true
       t.references :event_participant
+      t.string :type
       t.string :status  # 默认 event_participant 有效
       t.timestamps
     end

@@ -7,24 +7,18 @@ module RailsEvent::PlanParticipant
     belongs_to :event_participant, optional: true
     belongs_to :participant, polymorphic: true
     
-    after_initialize do
+    after_initialize if: :new_record? do
       if self.event_participant
         self.participant = event_participant.participant
+      end
+      if self.participant_type == 'Crowd'
+        self.type = 'CrowdParticipant'
+      else
+        self.type = 'NormalParticipant'
       end
     end
   end
   
-  class_methods do
-    
-    def participant_types
-      return @participant_types if defined? @participant_types
-      @participant_types = {}
-      PlanParticipant.distinct.pluck(:participant_type).each do |participant_type|
-        @participant_types[participant_type.tableize.to_sym] = participant_type
-      end
-      @participant_types
-    end
-    
-  end
+  
   
 end
