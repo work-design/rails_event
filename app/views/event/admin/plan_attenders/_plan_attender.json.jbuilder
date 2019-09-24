@@ -4,5 +4,6 @@ json.extract! plan_attender,
               :created_at
 json.attender plan_attender.attender,
              :id,
-             :name
+             :name,
+             :birthday
            
