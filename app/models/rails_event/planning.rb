@@ -10,15 +10,21 @@ module RailsEvent::Planning
   end
   
   def participant_types
-    PlanParticipant.participant_types do |participant, participant_type|
+    PlanParticipant.participant_types.map do |participant, participant_type|
       if participant == :crowds
-        plan_item.send(participant).each do |crowd|
+        send(participant).map do |crowd|
           {
             participant_type: participant_type,
             participant_name: crowd.name,
             members: crowd.members.as_json(only: [:id, :name])
           }
         end
+      else
+        {
+          participant_type: participant_type,
+          participant_name: PlanParticipant.enum_i18n(:participant_type, participant_type),
+          members: send(participant)
+        }
       end
     end
   end
