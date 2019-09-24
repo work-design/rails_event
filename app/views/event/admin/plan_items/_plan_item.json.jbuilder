@@ -7,4 +7,4 @@ json.extract! plan_item,
               :start_at,
               :finish_at,
               :qrcode_url
-json.participants plan_item.participant_types
+json.participants plan_item.all_members

@@ -1,10 +1,10 @@
 class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   before_action :set_plan_item
-  before_action :set_plan_attender, only: [:edit, :update]
+  before_action :set_plan_attender, only: [:edit, :update, :attend, :absent]
 
   def index
-    @plan_participants = @plan_item.plan.plan_participants.page(params[:page])
-    @bookings = @plan_item.bookings
+    @plan_item.plan_participants.each(&:sync)
+    @plan_attenders = @plan_item.plan_attenders
   end
 
   def create
@@ -17,6 +17,16 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   end
   
   def edit
+  end
+  
+  def attend
+    @plan_attender.attended = true
+    @plan_attender.save
+  end
+  
+  def absent
+    @plan_attender.attended = false
+    @plan_attender.save
   end
 
   def update
@@ -44,6 +54,8 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   def plan_attender_params
     params.fetch(:plan_attender, {}).permit(
       :state,
+      :attender_type,
+      :attender_id,
       :attended
     )
   end

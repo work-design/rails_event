@@ -19,6 +19,8 @@ module RailsEvent::PlanParticipant
     end
   end
   
-  
+  def sync
+    self.planning.plan_attenders.find_or_create_by(plan_participant_id: self.id)
+  end
   
 end

@@ -12,7 +12,7 @@ module RailsEvent::Planning
     crowd_participants.map do |crowd_participant|
       {
         id: crowd_participant.id,
-        participant_type: crowd_participant.participant_type,
+        participant_type: 'Profile',
         participant_name: crowd_participant.crowd.name,
         members: crowd_participant.crowd.members.as_json(only: [:id, :name])
       }
@@ -26,7 +26,7 @@ module RailsEvent::Planning
         participant_name: PlanParticipant.enum_i18n(:participant_type, participant_type),
         members: normal_participants.map do |normal_participant|
           {
-            id: normal_participant.id,
+            id: normal_participant.participant_id,
             name: normal_participant.participant.name
           }
         end

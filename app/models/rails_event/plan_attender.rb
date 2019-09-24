@@ -14,7 +14,10 @@ module RailsEvent::PlanAttender
 
     after_initialize if: :new_record? do
       if plan_item
-        self.assign_attributes plan_item.as_json(only: [:event_id, :crowd_id, :place_id])
+        self.assign_attributes plan_item.as_json(only: [:place_id])
+      end
+      if plan_participant
+        self.attender = plan_participant.participant
       end
     end
   end

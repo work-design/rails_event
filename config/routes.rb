@@ -31,6 +31,10 @@ Rails.application.routes.draw do
       end
       resources :plan_attenders do
         delete '' => :destroy, on: :collection
+        member do
+          put :attend
+          put :absent
+        end
       end
     end
     resources :crowds do
