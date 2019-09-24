@@ -7,6 +7,11 @@ json.extract! plan_item,
               :start_at,
               :finish_at,
               :qrcode_url
-json.plan_participants plan_item.plan_participants do |plan_participant|
-  json.extract! plan_participant, :id, :participant_type, :participant_id
+json.participants PlanParticipant.participant_types do |participant, participant_type|
+  if participant == :crowds
+    plan_item.send(participant).each do |crowd|
+      json.participant_type participant_type
+      json.participant_name crowd.name
+    end
+  end
 end
