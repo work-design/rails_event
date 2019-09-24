@@ -5,31 +5,37 @@ module RailsEvent::Planning
     accepts_nested_attributes_for :plan_participants
 
     has_many :crowd_participants, as: :planning
-    has_many :normal_participants, class_name: 'PlanParticipant', as: :planning
-    
-    NormalParticipant.participant_types.each do |participant, participant_type|
-      has_many participant, through: :normal_participants, source: :participant, source_type: participant_type
+    has_many :normal_participants, as: :planning
+  end
+  
+  def xx
+    crowd_participants.map do |crowd_participant|
+      {
+        id: crowd_participant.id,
+        participant_type: crowd_participant.participant_type,
+        participant_name: crowd_participant.crowd.name,
+        members: crowd_participant.crowd.members.as_json(only: [:id, :name])
+      }
     end
   end
   
   def participant_types
-  
-    crowd_participants.map do |crowd_participant|
-      {
-        id: crowd_participant.id,
-        participant_type: participant_type,
-        participant_name: crowd.name,
-        members: crowd.members.as_json(only: [:id, :name])
-      }
-    end
-    
-    NormalParticipant.participant_types.map do |participant, participant_type|
+    normal_participants.includes(:participant).group_by(&:participant_type).map do |participant_type, normal_participants|
       {
         participant_type: participant_type,
         participant_name: PlanParticipant.enum_i18n(:participant_type, participant_type),
-        members: send(participant)
+        members: normal_participants.map do |normal_participant|
+          {
+            id: normal_participant.id,
+            name: normal_participant.participant.name
+          }
+        end
       }
     end
+  end
+  
+  def all_members
+    xx + participant_types
   end
   
 end

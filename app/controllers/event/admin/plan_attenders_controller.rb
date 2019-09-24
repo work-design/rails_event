@@ -8,7 +8,7 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   end
 
   def create
-    @plan_attender = @plan_item.plan_attenders.build(event_participant_id: params[:event_participant_id])
+    @plan_attender = @plan_item.plan_attenders.build(plan_participant_id: params[:plan_participant_id])
     @plan_attender.attended = true
 
     unless @plan_attender.save
@@ -28,7 +28,7 @@ class Event::Admin::PlanAttendersController < Event::Admin::BaseController
   end
 
   def destroy
-    @plan_attender = @plan_item.plan_attenders.find_by(event_participant_id: params[:event_participant_id])
+    @plan_attender = @plan_item.plan_attenders.find_by(plan_participant_id: params[:plan_participant_id])
     @plan_attender.destroy
   end
 
