@@ -7,4 +7,6 @@ json.extract! plan_item,
               :start_at,
               :finish_at,
               :qrcode_url
-json.participants plan_item.all_members
+json.plan_participants plan_item.plan_participants do |plan_participant|
+  json.extract! plan_participant, :id, :participant_type, :participant_id
+end
