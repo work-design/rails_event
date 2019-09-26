@@ -38,7 +38,9 @@ Rails.application.routes.draw do
       end
     end
     resources :crowds do
-      resources :crowd_members
+      resources :crowd_members do
+        delete '' => :destroy, on: :collection
+      end
     end
     resources :event_taxons
     resources :events do
