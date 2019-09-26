@@ -7,6 +7,8 @@ module RailsEvent::Booking
     belongs_to :booked, polymorphic: true, optional: true
     belongs_to :plan_item, optional: true
     belongs_to :time_item
+    belongs_to :place, optional: true
+    belongs_to :seat, optional: true
   
     delegate :start_at, :finish_at, to: :plan_item, allow_nil: true
     

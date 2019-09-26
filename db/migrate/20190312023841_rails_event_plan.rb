@@ -4,9 +4,18 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
   
     create_table :places do |t|
       t.references :organ
+      t.references :area
+      t.references :place_taxon
       t.string :name
-      t.integer :max_members
+      t.string :description
+      t.integer :seats_count
       t.string :color
+      t.timestamps
+    end
+    
+    create_table :seats do |t|
+      t.references :place
+      t.string :name
       t.timestamps
     end
   
@@ -91,6 +100,7 @@ class RailsEventInit < ActiveRecord::Migration[5.0]
       t.references :plan_item
       t.references :time_item
       t.references :place
+      t.references :seat
       t.date :booking_on
       t.timestamps
     end

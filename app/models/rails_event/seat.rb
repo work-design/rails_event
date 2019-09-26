@@ -1,12 +1,10 @@
-module RailsEvent::Place
+module RailsEvent::Seat
   extend ActiveSupport::Concern
   
   included do
     attribute :name, :string
-    attribute :seats_count, :integer, default: 0
-    attribute :plans_count, :integer, default: 0
 
-    belongs_to :organ
+    belongs_to :place
     has_many :plans
     
     validates :name, presence: true

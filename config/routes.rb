@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get :select
       end
     end
+    resources :places
   end
 
   scope :admin, module: 'event/admin', as: :admin do
