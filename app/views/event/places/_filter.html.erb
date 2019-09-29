@@ -1,0 +1,12 @@
+<dl>
+  <dt></dt>
+  <dd>
+    <%= link_to '默认', filter_params(except: :place_taxon_id), class: active_helper(place_taxon_id: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <% @place_taxons.each do |place_taxon| %>
+      <%= link_to place_taxon.name, filter_params(place_taxon_id: place_taxon.id), class: active_helper(place_taxon_id: place_taxon.id, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <% end %>
+  </dd>
+</dl>
+
+
+

@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   scope :my, module: 'event/my', as: :my do
     resources :time_plans
+    resources :places
   end
 
   scope :member, module: 'event/member', as: :member do

@@ -3,6 +3,7 @@ module RailsEvent::Place
   
   included do
     attribute :name, :string
+    attribute :description, :string
     attribute :seats_count, :integer, default: 0
     attribute :plans_count, :integer, default: 0
 

@@ -1,20 +1,23 @@
-class Event::SpacesController < Event::BaseController
-  before_action :set_space, only: [:show]
+class Event::PlacesController < Event::BaseController
+  before_action :set_place, only: [:show]
 
   def index
-    @space_taxons = SpaceTaxon.all
-    @spaces = Space.default_where(params.permit!).page(params[:page])
+    q_params = {}
+    q_params.merge! params.permit(:place_taxon_id)
+    
+    @place_taxons = PlaceTaxon.default_where(default_params)
+    @places = Place.default_where(q_params).page(params[:page])
   end
 
   def show
   end
 
   private
-  def set_space
-    @space = Facilitate.find(params[:id])
+  def set_place
+    @place = Place.find(params[:id])
   end
 
-  def space_params
-    params.fetch(:space, {})
+  def place_params
+    params.fetch(:place, {})
   end
 end
