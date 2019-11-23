@@ -1,6 +1,5 @@
 module RailsEvent::EventParticipant
   extend ActiveSupport::Concern
-  include StateMachine
 
   included do
     attribute :state, :string, default: 'in_studying'
