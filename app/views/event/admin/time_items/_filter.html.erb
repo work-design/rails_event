@@ -1,5 +1,5 @@
 <div class="ui top attached segment">
-  <%= search_form_with model: TimeItem.new do |f| %>
+  <%= form_with theme: 'search', model: TimeItem.new do |f| %>
     <div class="fields">
       <%= f.text_field :name %>
       <%= f.submit %>

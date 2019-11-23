@@ -5,7 +5,7 @@
       <%= render 'shared/error_messages', target: @event_crowd %>
       <% if params[:item] == 'teacher' %>
         <div class="inline fields">
-          <%= f.collection_members_select :teacher_id, :id, :name, on: { wrapper_all: false } %>
+          <%= f.collection_members_select :teacher_id, :id, :name, on: { wrap_all: false } %>
           <%= link_to admin_department_grants_path('EventCrowd', 'teacher_id', return_to: request.url), data: { tooltip: '老师部门设置' }, remote: true, target: '_blank' do %>
             <i class="fas fa-cog"></i>
           <% end %>

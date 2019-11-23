@@ -1,5 +1,5 @@
 <div class="ui attached segment">
-  <%= search_form_with model: EventPlan.new(params.permit('booking_on')) do |f| %>
+  <%= form_with theme: 'search', model: EventPlan.new(params.permit('booking_on')) do |f| %>
     <div class="fields">
       <%= f.date_field 'booking_on-gte' %>
       <%= f.date_field 'booking_on-lte' %>

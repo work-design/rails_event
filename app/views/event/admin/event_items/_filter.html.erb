@@ -1,6 +1,6 @@
 <div class="ui attached segment">
 
-<%= search_form_with model: EventItem.new(params.permit(:title)) do |f| %>
+<%= form_with theme: 'search', model: EventItem.new(params.permit(:title)) do |f| %>
   <div class="fields">
     <%= f.text_field :title %>
     <%= f.submit %>

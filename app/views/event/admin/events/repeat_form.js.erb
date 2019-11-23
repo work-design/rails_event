@@ -1,4 +1,4 @@
-<% form_object = default_form_object(@event, on: { wrapper_id: true }) %>
+<% form_object = default_form_object(@event, on: { wrap_id: true }) %>
 <% if params[:repeat_type] == 'week' %>
   $('#event_repeat_days_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/week_checkboxes', locals: { f: form_object }) %>');
   $('#event_start_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/start_at', locals: { f: form_object }) %>');
