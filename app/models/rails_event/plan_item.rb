@@ -5,6 +5,10 @@ module RailsEvent::PlanItem
     attribute :plan_on, :date
     attribute :bookings_count, :integer, default: 0
     attribute :plan_participants_count, :integer, default: 0
+    attribute :plan_on, :date
+    attribute :repeat_index, :string
+    attribute :extra, :json
+    
     
     belongs_to :time_item
     belongs_to :time_list

@@ -2,8 +2,10 @@ module RailsEvent::PlanParticipant
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :planning, polymorphic: true
+    attribute :type, :string
+    attribute :status, :string, comment: '默认 event_participant 有效'
     
+    belongs_to :planning, polymorphic: true
     belongs_to :event_participant, optional: true
     belongs_to :participant, polymorphic: true
     

@@ -1,6 +1,9 @@
 module RailsEvent::EventItem
   extend ActiveSupport::Concern
+  
   included do
+    attribute :name, :string
+  
     belongs_to :event
     belongs_to :author, class_name: 'Member', optional: true
     has_many :event_item_members

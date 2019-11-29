@@ -4,6 +4,11 @@ module RailsEvent::EventParticipant
   included do
     attribute :state, :string, default: 'in_studying'
     attribute :crowd_member_id, :integer
+    attribute :score, :integer
+    attribute :comment, :string, limit: 4096
+    attribute :quit_note, :string
+    attribute :assigned_status, :string
+    attribute :job_id, :string
     
     belongs_to :event_crowd, optional: true
     belongs_to :event, counter_cache: true

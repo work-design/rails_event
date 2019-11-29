@@ -5,20 +5,29 @@ module RailsEvent::Plan
     'monthly' => 0..30
   }.freeze
   extend ActiveSupport::Concern
+  
   included do
-    attribute :begin_on, :date, default: -> { Date.today }
-    attribute :end_on, :date
     attribute :title, :string
     attribute :planned_type, :string, default: 'Event'
-
+    attribute :begin_on, :date, default: -> { Date.today }
+    attribute :end_on, :date
+    attribute :produced_begin_on, :date
+    attribute :produced_end_on, :date
+    attribute :produce_done, :boolean
+    attribute :repeat_type, :string, comment: '日、周、月、天'
+    attribute :repeat_count, :integer, comment: '每几周'
+    attribute :repeat_days, :json
+    
     belongs_to :planned, polymorphic: true
     belongs_to :time_list
     belongs_to :place, optional: true
+    
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, dependent: :destroy
     
     default_scope -> { order(begin_on: :asc) }
+    
     validates :begin_on, presence: true
   end
   

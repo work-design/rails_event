@@ -1,9 +1,12 @@
 module RailsEvent::TimeList
   extend ActiveSupport::Concern
   included do
+    attribute :name, :string
+    attribute :code, :string
     attribute :kind, :string
     attribute :item_minutes, :integer, default: 45
     attribute :interval_minutes, :integer, default: 15
+    attribute :default, :boolean
   
     belongs_to :organ, optional: true
     has_many :time_items, -> { order(start_at: :asc) }

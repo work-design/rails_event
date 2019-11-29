@@ -3,10 +3,14 @@ module RailsEvent::PlanAttender
   
   included do
     attribute :attended, :boolean, default: false
+    attribute :state, :string
+    attribute :extra, :json
     
     belongs_to :plan_participant, optional: true
     belongs_to :attender, polymorphic: true
     belongs_to :plan_item
+    belongs_to :plan
+    belongs_to :place
     
     enum state: {
       absent: 'absent'  # 请假

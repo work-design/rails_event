@@ -1,8 +1,17 @@
 module RailsEvent::Event
   extend ActiveSupport::Concern
+  
   included do
+    attribute :type, :string
+    attribute :name, :string
+    attribute :description, :string, limit: 4096
+    attribute :position, :integer
+    attribute :price, :decimal, precision: 10, scale: 2
+    attribute :event_participants_count, :integer, default: 0
+    attribute :event_items_count, :integer, default: 0
     attribute :members_count, :integer, default: 0
     
+    belongs_to :organ, optional: true
     belongs_to :event_taxon, optional: true
   
     has_many :event_items, dependent: :nullify
@@ -10,7 +19,6 @@ module RailsEvent::Event
   
     has_many :event_participants, dependent: :destroy
     has_many :crowds, through: :event_participants
-
     has_many :event_grants, dependent: :destroy
   end
   
