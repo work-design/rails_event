@@ -26,9 +26,5 @@ module RailsEvent
       g.templates.unshift File.expand_path('lib/templates', RailsCom::Engine.root)
     end
 
-    initializer 'rails_event.assets.precompile' do |app|
-      app.config.assets.precompile += ['rails_event_manifest.js']
-    end
-
   end
 end
