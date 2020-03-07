@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   scope module: :event do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
@@ -13,7 +13,9 @@ Rails.application.routes.draw do
         get :select
       end
     end
-    resources :places
+    resources :places do
+      resources :seats
+    end
   end
 
   scope :admin, module: 'event/admin', as: :admin do
@@ -23,7 +25,9 @@ Rails.application.routes.draw do
     resources :time_items, only: [] do
       get :default, on: :collection
     end
-    resources :places
+    resources :places do
+      resources :seats
+    end
     resources :plans
     resources :plan_items do
       patch :qrcode, on: :member
@@ -72,5 +76,5 @@ Rails.application.routes.draw do
   scope :member, module: 'event/member', as: :member do
     resources :plan_items
   end
-  
+
 end

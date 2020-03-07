@@ -12,6 +12,9 @@ zh:
       places:
         index:
           title: 教室
+      seats:
+        index:
+          title: 桌子
       events:
         index:
           title: 课程列表

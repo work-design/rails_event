@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
-gem 'rails', '6.0.0'
+gem 'rails'
 gem 'puma'
-#
+
 gem 'factory_bot_rails', require: false
 gem 'default_form', github: 'qinmingyuan/default_form'
 gem 'rails_com', github: 'work-design/rails_com'

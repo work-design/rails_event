@@ -14,7 +14,7 @@ zh:
         default: 默认选择
         time_items: 明细
       place:
-        max_members: 限制人数
+        seats_count: 座位数
       event:
         event_taxon_id: 课程分类
         event_participants_count: 报名人数

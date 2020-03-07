@@ -46,8 +46,7 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
   def place_params
     p = params.fetch(:place, {}).permit(
       :name,
-      :color,
-      :max_members
+      :color
     )
     p.merge! default_form_params
   end
