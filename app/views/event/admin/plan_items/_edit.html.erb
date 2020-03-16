@@ -1,5 +1,5 @@
 <div class="ui modal" id="modal">
-  <i class="close icon"></i>
+  <i class="fas fa-times close"></i>
   <div class="content">
     <%= form_with model: @event_plan, url: admin_event_crowd_plan_path(@event_crowd, @event_plan) do |f| %>
       <%= render 'shared/error_messages', target: @event_plan %>
