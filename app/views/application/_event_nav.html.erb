@@ -1,5 +1,4 @@
-<% if rails_role_user.any_role?('event/admin') %>
-<div class="item">
+<div class="item" data-controller="menu">
   <a class="<%= active_helper(modules: 'event/admin', active_class: 'title active', item_class: 'title') %>">
     <i class="fas fa-cog"></i>
     <span><%= t('event.admin.title') %></span>
@@ -13,4 +12,3 @@
     <%= link_to t('event.admin.plans.index.title'), admin_plans_path, class: active_helper(controllers: ['plans']) %>
   </div>
 </div>
-<% end %>
