@@ -33,10 +33,10 @@
       <td><%= time_item.finish_at.to_s(:time) %></td>
       <td><%= time_item.position %></td>
       <td class="ui labels">
-        <%= link_to edit_admin_time_list_time_item_path(@time_list, time_item), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
+        <%= link_to edit_admin_time_list_time_item_path(@time_list, time_item), aria: { label: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_time_list_time_item_path(@time_list, time_item), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_time_list_time_item_path(@time_list, time_item), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>

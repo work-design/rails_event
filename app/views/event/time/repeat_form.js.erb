@@ -1,4 +1,4 @@
-<% form_object = default_form_object(@booking, on: { wrap_all_id: true }) %>
+<% form_object = default_form_object(@booking, can: { wrap_all_id: true }) %>
 <% if params[:repeat_type] == 'weekly' %>
   $('#<%= @booking.class.base_class.name.underscore %>_repeat_days_wrapper').replaceWith('<%= j(render partial: 'booking/time/weekly_checkboxes', locals: { f: form_object }) %>');
   $('#<%= @booking.class.base_class.name.underscore %>_start_at_wrapper').replaceWith('<%= j(render partial: 'booking/time/start_at', locals: { f: form_object }) %>');

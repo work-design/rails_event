@@ -1,7 +1,7 @@
 <%= render 'shared/error_messages', target: @event %>
 <%= f.select :type, options_for_select(Event.options_i18n(:type), @event.type) %>
 <div class="inline fields">
-  <%= f.collection_select :event_taxon_id, EventTaxon.all, :id, :name, on: { wrap_all: false } %>
+  <%= f.collection_select :event_taxon_id, EventTaxon.all, :id, :name, can: { wrap_all: false } %>
   <%= link_to t('.new'), new_admin_event_taxon_path(return_to: request.path), class: 'ui button' %>
 </div>
 <%= f.text_field :name %>

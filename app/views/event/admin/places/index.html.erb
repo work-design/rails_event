@@ -30,13 +30,13 @@
       </td>
       <td><%= place.seats_count %></td>
       <td>
-        <%= link_to edit_admin_place_path(place), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_place_path(place), aria: { label: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_place_seats_path(place), data: { tooltip: t('event.admin.seats.index.title') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_place_seats_path(place), aria: { label: t('event.admin.seats.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-chair"></i>
         <% end %>
-        <%= link_to admin_place_path(place), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_place_path(place), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

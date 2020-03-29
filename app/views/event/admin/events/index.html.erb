@@ -38,13 +38,13 @@
       <td><time><%= event.created_at.to_s(:rfc822) %></time></td>
       <td>
         <%= link_to t('event.admin.event_participants.index.title'), admin_event_event_participants_path(event), class: 'ui mini circular icon button' %>
-        <%= link_to admin_event_event_items_path(event), data: { tooltip: '课程内容' }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_event_event_items_path(event), aria: { label: '课程内容' }, class: 'ui mini circular icon button' do %>
           <i class="list icon"></i>
         <% end %>
-        <%= link_to edit_admin_event_path(event), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_event_path(event), aria: { label: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_event_path(event), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_event_path(event), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

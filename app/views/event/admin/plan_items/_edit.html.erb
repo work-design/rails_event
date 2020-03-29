@@ -11,8 +11,8 @@
       <% end %>
       <% if params[:item] == 'place' %>
         <div class="inline fields">
-        <%= f.collection_select :place_id, @places, :id, :name, { include_blank: true, on: { wrap_all: false } } %>
-        <%= link_to admin_organ_places_path(default_params), data: { tooltip: '教室设置' }, target: '_blank' do %>
+        <%= f.collection_select :place_id, @places, :id, :name, { include_blank: true, can: { wrap_all: false } } %>
+        <%= link_to admin_organ_places_path(default_params), aria: { label: '教室设置' }, target: '_blank' do %>
           <i class="fas fa-cog"></i>
         <% end %>
         </div>

@@ -5,8 +5,8 @@
 <%= f.file_field :documents, multiple: true %>
 <%= render 'active_storage_ext/attachments/list_field', target: @event_item.documents %>
 <div class="inline fields">
-  <%= f.collection_members_select :author_id, :id, :name, on: { wrap_all: false } %>
-  <%= link_to admin_department_grants_path('EventItem', 'author_id', return_to: request.url), data: { tooltip: '老师部门设置' }, remote: true, target: '_blank' do %>
+  <%= f.collection_members_select :author_id, :id, :name, can: { wrap_all: false } %>
+  <%= link_to admin_department_grants_path('EventItem', 'author_id', return_to: request.url), aria: { label: '老师部门设置' }, remote: true, target: '_blank' do %>
     <i class="fas fa-cog"></i>
   <% end %>
 </div>

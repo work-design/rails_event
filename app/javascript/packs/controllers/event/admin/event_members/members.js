@@ -1,4 +1,4 @@
-import 'rails_com/checkbox'
+import 'stimulus_com/checkbox'
 
 $('#q_office_id').dropdown();
 
