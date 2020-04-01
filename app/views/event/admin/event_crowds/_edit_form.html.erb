@@ -1,0 +1,15 @@
+<%= form_with model: @event_crowd, url: admin_event_event_crowd_path(@event, @event_crowd), method: :patch do |f| %>
+  <%= render 'shared/error_messages', target: @event_crowd %>
+  <% if params[:item] == 'teacher' %>
+    <div class="inline fields">
+      <%= f.collection_members_select :teacher_id, :id, :name, can: { wrap_all: false } %>
+      <%= link_to admin_department_grants_path('EventCrowd', 'teacher_id', return_to: request.url), aria: { label: '老师部门设置' }, remote: true, target: '_blank' do %>
+        <i class="fas fa-cog"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <% if params[:item] == 'room' %>
+  <%= f.collection_select :room_id, @rooms, :id, :name, { include_blank: true } %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
