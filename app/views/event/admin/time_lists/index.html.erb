@@ -13,7 +13,7 @@
       <th><%= TimeList.human_attribute_name(:default) %></th>
       <th><%= TimeList.human_attribute_name(:time_items) %></th>
       <th>
-        <%= link_to new_admin_time_list_path, class: 'ui mini primary button', remote: true do %>
+        <%= link_to new_admin_time_list_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -36,10 +36,10 @@
         <%= render partial: 'time_items', locals: { time_list: time_list } %>
       </td>
       <td>
-        <%= link_to edit_admin_time_list_path(time_list), aria: { label: t('.edit') }, class: 'ui mini circular icon button', remote: true do %>
+        <%= link_to edit_admin_time_list_path(time_list), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light', remote: true do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_time_list_path(time_list), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_time_list_path(time_list), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

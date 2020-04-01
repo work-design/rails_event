@@ -23,7 +23,7 @@
         <% end %>
       </th>
       <th>
-        <%= link_to new_admin_event_event_crowd_path(@event), remote: true, class: 'ui mini primary button' do %>
+        <%= link_to new_admin_event_event_crowd_path(@event), remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -37,13 +37,13 @@
       <%= render partial: 'crowd_member', locals: { event_crowd: event_crowd } %>
     </td>
     <td>
-      <%= link_to edit_admin_event_event_crowd_path(@event, event_crowd, item: 'teacher'), aria: { label: '设置老师' }, remote: true, class: 'ui mini circular icon button' do %>
+      <%= link_to edit_admin_event_event_crowd_path(@event, event_crowd, item: 'teacher'), aria: { label: '设置老师' }, remote: true, class: 'button is-small is-rounded is-light' do %>
         <i class="green male icon"></i>
       <% end %>
       <%= event_crowd.teacher&.name %>
     </td>
     <td>
-      <%= link_to edit_admin_event_event_crowd_path(@event, event_crowd, item: 'room'), aria: { label: '设置教室' }, remote: true, class: 'ui mini circular icon button' do %>
+      <%= link_to edit_admin_event_event_crowd_path(@event, event_crowd, item: 'room'), aria: { label: '设置教室' }, remote: true, class: 'button is-small is-rounded is-light' do %>
         <i class="fas fa-building"></i>
       <% end %>
       <%= event_crowd.room&.name %>

@@ -18,7 +18,7 @@
     <%= select_tag :'plan[time_list_id]', options_from_collection_for_select(@time_lists, :id, :name, @plan.time_list_id), form: 'time_plan_form' %>
   </td>
   <td>
-    <%= submit_tag t('.confirm'), class: 'ui mini primary button', form: 'time_plan_form' %>
+    <%= submit_tag t('.confirm'), class: 'button is-link is-small', form: 'time_plan_form' %>
   </td>
 </tr>
 
