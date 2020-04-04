@@ -1,11 +1,8 @@
-<div class="ui attached segment">
-
 <%= form_with theme: 'search', model: TimePlan.new do |f| %>
-  <div class="fields">
+  <div class="field-body">
     <%= f.text_field :name %>
-    <%= f.submit %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+    </div>
   </div>
 <% end %>
-
-</div>
-
