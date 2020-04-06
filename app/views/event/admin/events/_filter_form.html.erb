@@ -1,0 +1,9 @@
+<%= form_with theme: 'search', model: Event.new(params.permit(:title)) do |f| %>
+  <div class="field-body">
+    <%= f.text_field :title %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: [:title]), class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>
