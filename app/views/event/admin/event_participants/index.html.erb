@@ -1,18 +1,13 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('event.admin.events.index.title'), admin_events_path, class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= @event.name %></div>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="active section"><%= t('.title') %></div>
-  </div>
+  <ul>
+    <li><%= link_to t('event.admin.events.index.title'), admin_events_path %></li>
+    <li><%= @event.name %></li>
+    <li class="is-active"><%= t('.title') %></li>
+  </ul>
 <% end %>
 
 <%= render 'nav_event' %>
-
-<div class="ui attached segment">
-  <%= render 'filter' %>
-</div>
+<%= render 'filter' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
