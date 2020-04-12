@@ -1,8 +1,11 @@
 <%= render 'shared/error_messages', target: @event %>
 <%= f.select :type, options_for_select(Event.options_i18n(:type), @event.type) %>
-<div class="inline fields">
-  <%= f.collection_select :event_taxon_id, EventTaxon.all, :id, :name, can: { wrap_all: false } %>
-  <%= link_to t('.new'), new_admin_event_taxon_path(return_to: request.path), class: 'ui button' %>
+<div class="field is-horizontal">
+  <%= f.label :event_taxon_id %>
+  <div class="field-body">
+    <%= f.collection_select :event_taxon_id, EventTaxon.all, :id, :name, can: { label: false, wrap_all: false } %>
+    <%= link_to t('.new'), new_admin_event_taxon_path(return_to: request.path), class: 'button is-light' %>
+  </div>
 </div>
 <%= f.text_field :name %>
 <%= f.number_field :price %>
