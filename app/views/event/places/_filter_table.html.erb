@@ -2,9 +2,9 @@
   <tr>
     <th></th>
     <td>
-      <%= link_to '默认', filter_params(except: :place_taxon_id), class: active_helper(place_taxon_id: '', active_class: 'button is-info', item_class: 'button is-light') %>
+      <%= link_to '默认', filter_params(except: :place_taxon_id), class: active_helper(place_taxon_id: '', active: 'button is-info', item: 'button is-light') %>
       <% @place_taxons.each do |place_taxon| %>
-        <%= link_to place_taxon.name, filter_params(place_taxon_id: place_taxon.id), class: active_helper(place_taxon_id: place_taxon.id, active_class: 'button is-info', item_class: 'button is-light') %>
+        <%= link_to place_taxon.name, filter_params(place_taxon_id: place_taxon.id), class: active_helper(place_taxon_id: place_taxon.id, active: 'button is-info', item: 'button is-light') %>
       <% end %>
     </td>
   </tr>
