@@ -15,6 +15,8 @@ module RailsEvent::Place
     has_many :seats, dependent: :delete_all
 
     validates :name, presence: true
+
+    has_taxons :place_taxon
   end
 
 end

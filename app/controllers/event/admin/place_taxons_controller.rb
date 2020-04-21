@@ -2,7 +2,9 @@ class Event::Admin::PlaceTaxonsController < Event::Admin::BaseController
   before_action :set_place_taxon, only: [:show, :edit, :update, :destroy]
 
   def index
-    @place_taxons = PlaceTaxon.page(params[:page])
+    q_params = {}
+    q_params.merge! default_params
+    @place_taxons = PlaceTaxon.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -41,11 +43,12 @@ class Event::Admin::PlaceTaxonsController < Event::Admin::BaseController
   end
 
   def place_taxon_params
-    params.fetch(:place_taxon, {}).permit(
+    p = params.fetch(:place_taxon, {}).permit(
       :name,
       :position,
       :places_count
     )
+    p.merge! default_form_params
   end
 
 end

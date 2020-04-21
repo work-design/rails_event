@@ -10,6 +10,7 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
 
   def new
     @place = Place.new
+    @place.place_taxon = PlaceTaxon.new(default_params)
   end
 
   def create
@@ -24,6 +25,7 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
   end
 
   def edit
+    @place.place_taxon ||= PlaceTaxon.new(default_params)
   end
 
   def update
@@ -46,7 +48,8 @@ class Event::Admin::PlacesController < Event::Admin::BaseController
   def place_params
     p = params.fetch(:place, {}).permit(
       :name,
-      :color
+      :color,
+      :place_taxon_ancestors
     )
     p.merge! default_form_params
   end
