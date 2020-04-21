@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :time_items, only: [] do
       get :default, on: :collection
     end
+    resources :place_taxons
     resources :places do
       resources :seats
     end

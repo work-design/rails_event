@@ -9,6 +9,9 @@ zh:
       time_lists:
         index:
           title: 课节次设置
+      place_taxons:
+        index:
+          title: 空间分类
       places:
         index:
           title: 空间

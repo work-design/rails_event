@@ -10,7 +10,7 @@ module RailsEvent::Place
 
     belongs_to :organ, optional: true
     belongs_to :area, optional: true
-    belongs_to :place_taxon, optional: true
+    belongs_to :place_taxon, counter_cache: true, optional: true
     has_many :plans
     has_many :seats, dependent: :delete_all
 

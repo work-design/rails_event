@@ -10,6 +10,12 @@
   <thead>
     <tr>
       <th><%= Place.human_attribute_name(:name) %></th>
+      <th>
+        <%= Place.human_attribute_name(:place_taxon) %>
+        <%= link_to admin_place_taxons_path, aria: { label: '分类设置' }, target: '_blank' do %>
+          <i class="fas fa-cog"></i>
+        <% end %>
+      </th>
       <th><%= Place.human_attribute_name(:color) %></th>
       <th><%= Place.human_attribute_name(:seats_count) %></th>
       <th>
@@ -23,8 +29,9 @@
   <% @places.each do |place| %>
     <tr>
       <td><%= place.name %></td>
+      <td><%= place.place_taxon&.name %></td>
       <td>
-        <span class="ui label" style="background-color: <%= place.color %>;"><%= place.color %></span>
+        <span class="button" style="background-color: <%= place.color %>;"><%= place.color %></span>
       </td>
       <td><%= place.seats_count %></td>
       <td>
