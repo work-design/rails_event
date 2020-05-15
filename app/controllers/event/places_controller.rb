@@ -21,4 +21,5 @@ class Event::PlacesController < Event::BaseController
   def place_params
     params.fetch(:place, {})
   end
+
 end
