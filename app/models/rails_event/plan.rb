@@ -5,10 +5,9 @@ module RailsEvent::Plan
     'monthly' => 0..30
   }.freeze
   extend ActiveSupport::Concern
-  
+
   included do
     attribute :title, :string
-    attribute :planned_type, :string, default: 'Event'
     attribute :begin_on, :date, default: -> { Date.today }
     attribute :end_on, :date
     attribute :produced_begin_on, :date
@@ -17,20 +16,23 @@ module RailsEvent::Plan
     attribute :repeat_type, :string, comment: '日、周、月、天'
     attribute :repeat_count, :integer, comment: '每几周'
     attribute :repeat_days, :json
-    
+
     belongs_to :planned, polymorphic: true
     belongs_to :time_list
     belongs_to :place, optional: true
-    
+
     has_many :time_items, through: :time_list
     has_many :time_bookings, ->(o){ where(booked_type: o.plan_type) }, foreign_key: :booked_id, primary_key: :plan_id
     has_many :plan_items, dependent: :destroy
-    
+
     default_scope -> { order(begin_on: :asc) }
-    
+
     validates :begin_on, presence: true
+    after_initialize if: :new_record? do
+      self.planned_type ||= 'Event'
+    end
   end
-  
+
   def selected_ids(date, index)
     case repeat_type
     when 'yearly'
@@ -50,7 +52,7 @@ module RailsEvent::Plan
     if repeat_type_changed? || time_list_id_changed?
       self.repeat_days = {}
     end
-    
+
     repeat_days.toggle! index => time_item_id
   end
 
@@ -58,33 +60,33 @@ module RailsEvent::Plan
     if repeat_type_changed? || time_list_id_changed?
       self.repeat_days = {}
     end
-    
+
     repeat_days.diff_toggle index => time_item_id
   end
 
   def produce(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week)
     removes, adds = self.present_days.diff_changes self.next_days(start: start_on, finish: finish_on)
-    
+
     self.class.transaction do
       self.produced_begin_on = start_on
       self.produced_end_on = finish_on
-      
+
       removes.each do |date, time_item_ids|
         Array(time_item_ids).each do |time_item_id|
           self.plan_items.where(plan_on: date, time_item_id: time_item_id).each(&:destroy!)
         end
       end
-    
+
       adds.each do |date, time_item_ids|
         Array(time_item_ids).each do |time_item_id|
           pi = self.plan_items.find_or_initialize_by(plan_on: date, time_item_id: time_item_id)
           pi.save!
         end
       end
-      
+
       self.save!
     end
-    
+
     self
   end
 
@@ -93,13 +95,13 @@ module RailsEvent::Plan
       v.map(&:time_item_id)
     end
   end
-  
+
   class_methods do
-    
+
     def recent(date = Date.today)
       default_where('begin_on-lte': date).unscope(:order).order(begin_on: :desc).first
     end
-    
+
     def xxx(start_on: Date.today.beginning_of_week, finish_on: Date.today.end_of_week, **filter_params)
       # 时间范围与时间参数存在重叠
       q = { 'end_on-gte': start_on, 'begin_on-lte': finish_on }.merge! filter_params
@@ -119,7 +121,7 @@ module RailsEvent::Plan
           'produced_end_on': nil
         }
       }
-      
+
       Plan.default_where(q.merge!(or_q))
     end
 
@@ -133,7 +135,7 @@ module RailsEvent::Plan
         [i, I18n.t("date.week_day.#{name}.name")]
       end.sort.to_h
     end
-    
+
   end
 
 end
