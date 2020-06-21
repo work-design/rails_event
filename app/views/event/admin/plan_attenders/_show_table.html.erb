@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,19 +9,19 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= EventItemMember.human_attribute_name(:member) %></td>
+      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:member) %></td>
       <td><%= @event_item_member.member %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= EventItemMember.human_attribute_name(:state) %></td>
+      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:state) %></td>
       <td><%= @event_item_member.state %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= EventItemMember.human_attribute_name(:attended) %></td>
+      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:attended) %></td>
       <td><%= @event_item_member.attended %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= EventItemMember.human_attribute_name(:created_at) %></td>
+      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:created_at) %></td>
       <td><%= @event_item_member.created_at %></td>
     </tr>
   </tbody>

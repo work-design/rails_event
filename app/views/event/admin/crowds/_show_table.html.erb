@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,11 +9,11 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= Crowd.human_attribute_name(:name) %></td>
+      <td class="has-text-right"><%= Crowd.human_attribute_name(:name) %></td>
       <td><%= @crowd.name %></td>
     </tr>
     <tr>
-      <td class="right aligned">学生</td>
+      <td class="has-text-right">学生</td>
       <td>
         <table class="ui very basic table">
           <% @crowd_members.each do |crowd_member| %>

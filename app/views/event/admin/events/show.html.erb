@@ -21,23 +21,23 @@
   </thead>
   <tbody>
   <tr>
-    <td class="right aligned"><%= Event.human_attribute_name(:event_taxon_id) %></td>
+    <td class="has-text-right"><%= Event.human_attribute_name(:event_taxon_id) %></td>
     <td><%= @event.event_taxon&.name %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Event.human_attribute_name(:title) %></td>
+    <td class="has-text-right"><%= Event.human_attribute_name(:title) %></td>
     <td><%= @event.name %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Event.human_attribute_name(:type) %></td>
+    <td class="has-text-right"><%= Event.human_attribute_name(:type) %></td>
     <td><%= @event.type_i18n %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Event.human_attribute_name(:description) %></td>
+    <td class="has-text-right"><%= Event.human_attribute_name(:description) %></td>
     <td><%= simple_format(@event.description) %></td>
   </tr>
   <tr>
-    <td class="right aligned"><%= Event.human_attribute_name(:created_at) %></td>
+    <td class="has-text-right"><%= Event.human_attribute_name(:created_at) %></td>
     <td><time><%= @event.created_at.to_s(:rfc822) %></time></td>
   </tr>
   </tbody>

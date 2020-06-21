@@ -12,9 +12,9 @@
   </div>
 <% end %>
 
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <tr>
-    <td class="right aligned"><%= PlanItem.human_attribute_name(:qrcode) %></td>
+    <td class="has-text-right"><%= PlanItem.human_attribute_name(:qrcode) %></td>
     <td>
       <% if @plan_item.wechat_response %>
         <%= image_tag @plan_item.qrcode_url, class: 'ui small image' %>

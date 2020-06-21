@@ -26,11 +26,12 @@
         <p><%= time_list.interval_minutes %></p>
       </td>
       <td>
-        <div class="ui toggle checkbox">
-          <%= check_box_tag '[time_list]default', nil, time_list.default, data: { method: :patch, remote: true, url: admin_time_list_path(time_list), submit: true }, id: nil %>
+        <div data-controller="input">
+          <%= check_box_tag '[time_list]default', nil, time_list.default, data: { method: :patch, remote: true, url: admin_time_list_path(time_list), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+          <label></label>
         </div>
       </td>
-      <td class="selectable">
+      <td>
         <%= render partial: 'time_items', locals: { time_list: time_list } %>
       </td>
       <td>

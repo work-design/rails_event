@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,15 +9,15 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= EventItem.human_attribute_name(:title) %></td>
+      <td class="has-text-right"><%= EventItem.human_attribute_name(:title) %></td>
       <td><%= @event_item.title %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= EventItem.human_attribute_name(:videos) %></td>
+      <td class="has-text-right"><%= EventItem.human_attribute_name(:videos) %></td>
       <td><%= @event_item.videos %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= EventItem.human_attribute_name(:documents) %></td>
+      <td class="has-text-right"><%= EventItem.human_attribute_name(:documents) %></td>
       <td><%= @event_item.documents %></td>
     </tr>
   </tbody>

@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,19 +9,19 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= Booking.human_attribute_name(:time_list_id) %></td>
+      <td class="has-text-right"><%= Booking.human_attribute_name(:time_list_id) %></td>
       <td><%= @time_booking.time_list_id %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Booking.human_attribute_name(:time_item_id) %></td>
+      <td class="has-text-right"><%= Booking.human_attribute_name(:time_item_id) %></td>
       <td><%= @time_booking.time_item_id %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Booking.human_attribute_name(:place_id) %></td>
+      <td class="has-text-right"><%= Booking.human_attribute_name(:place_id) %></td>
       <td><%= @time_booking.place_id %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Booking.human_attribute_name(:booking_on) %></td>
+      <td class="has-text-right"><%= Booking.human_attribute_name(:booking_on) %></td>
       <td><%= @time_booking.booking_on %></td>
     </tr>
   </tbody>

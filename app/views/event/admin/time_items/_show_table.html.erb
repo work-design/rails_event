@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,15 +9,15 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= TimeItem.human_attribute_name(:start_at) %></td>
+      <td class="has-text-right"><%= TimeItem.human_attribute_name(:start_at) %></td>
       <td><%= @time_item.start_at %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= TimeItem.human_attribute_name(:finish_at) %></td>
+      <td class="has-text-right"><%= TimeItem.human_attribute_name(:finish_at) %></td>
       <td><%= @time_item.finish_at %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= TimeItem.human_attribute_name(:position) %></td>
+      <td class="has-text-right"><%= TimeItem.human_attribute_name(:position) %></td>
       <td><%= @time_item.position %></td>
     </tr>
   </tbody>
