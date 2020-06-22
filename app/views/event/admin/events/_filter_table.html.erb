@@ -1,14 +1,5 @@
 <table class="as-search">
   <tr>
-    <th><%= Event.human_attribute_name(:type) %></th>
-    <td>
-      <%= link_to t('.all'), filter_params(except: [:type]), class: active_params(type: '', active: 'button is-info', item: 'button is-light') %>
-      <% Event.options_i18n(:type).each do |text, type| %>
-        <%= link_to text, filter_params(type: type), class: active_params(type: type, active: 'button is-info', item: 'button is-light') %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
     <th><%= link_to Event.human_attribute_name(:event_taxon_id), admin_event_taxons_path %></th>
     <td>
       <%= link_to t('.all'), filter_params(except: [:event_taxon_id]), class: active_params(event_taxon_id: '', active: 'button is-info', item: 'button is-light') %>

@@ -1,4 +1,4 @@
-<table class="ui celled table">
+<table class="table is-fullwidth">
   <thead>
     <tr>
       <th class="one wide"></th>
@@ -15,11 +15,11 @@
           <span>~</span>
           <time data-format="HH:mm"><%= time_item.finish_at.to_s(:rfc822) %></time>
         </td>
-        <% @plan_items.each do |index, items| %>
+        <% @plan_items.each do |items| %>
         <td>
-          <div class="ui labels">
-            <% items.each do |plan_item| %>
-            <span class="ui label"><%= link_to plan_item.plan_on, admin_plan_item_plan_attenders_path(plan_item), text: true %></span>
+          <div>
+            <% @plan_items.each do |plan_item| %>
+            <span class="button is-small"><%= link_to plan_item.plan_on, admin_plan_item_plan_attenders_path(plan_item), text: true %></span>
             <% end %>
           </div>
         </td>

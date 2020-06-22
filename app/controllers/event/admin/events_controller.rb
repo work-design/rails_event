@@ -64,7 +64,6 @@ class Event::Admin::EventsController < Event::Admin::BaseController
       :event_taxon_id,
       :name,
       :description,
-      :type,
       :position,
       :author_id,
       :teacher_id,

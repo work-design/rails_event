@@ -6,8 +6,9 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     q_params = {}
     q_params.merge! params.permit('end_on-gte', 'begin_on-lte', :planned_type, :planned_id, :place_id, 'plan_participants.event_participant_id')
     q_params.merge! default_params
-    
+
     @plans = Plan.default_where(q_params)
+    @plan_items = PlanItem.default_where(q_params)
   end
 
   def calendar
@@ -15,11 +16,11 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     set_settings
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
   end
-  
+
   def new
     @plan = Plan.new
   end
-  
+
   def create
     @plan = Plan.new
     @plan.time_list ||= @time_lists.default
@@ -37,7 +38,7 @@ class Event::Admin::PlansController < Event::Admin::BaseController
     @time_list = TimeList.find params[:time_list_id]
     set_settings
     @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
-    
+
     render :calendar
   end
 
@@ -46,12 +47,12 @@ class Event::Admin::PlansController < Event::Admin::BaseController
 
   def update
     @plan.assign_attributes plan_params
-    
+
     unless @plan.save
       render :edit, locals: { model: @plan }, status: :unprocessable_entity
     end
   end
-  
+
   def xx
     dt = params[:index].to_s
     if dt
