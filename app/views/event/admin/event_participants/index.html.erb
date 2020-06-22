@@ -18,7 +18,7 @@
       <th><%= EventParticipant.human_attribute_name(:state) %></th>
       <th><%= EventParticipant.human_attribute_name(:score) %></th>
       <th>
-        <%= link_to find_data_list_table_lists_path('EventParticipantExport', params.permit(:event_id).merge(timestamp: @event.timestamp)), class: 'button is-link is-small', remote: true do %>
+        <%= link_to find_data_list_table_lists_path('EventParticipantExport', params.permit(:event_id).merge(timestamp: @event.timestamp)), remote: true, class: 'button is-link is-small' do %>
           <i class="file excel icon"></i><%= t('.export') %>
         <% end %>
       </th>
