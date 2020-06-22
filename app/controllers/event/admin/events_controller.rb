@@ -20,6 +20,7 @@ class Event::Admin::EventsController < Event::Admin::BaseController
 
   def new
     @event = Event.new
+    @event_taxons = EventTaxon.default_where(default_params)
   end
 
   def create
@@ -34,6 +35,7 @@ class Event::Admin::EventsController < Event::Admin::BaseController
   end
 
   def edit
+    @event_taxons = EventTaxon.default_where(default_params)
   end
 
   def update

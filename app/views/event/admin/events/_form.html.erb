@@ -3,8 +3,8 @@
 <div class="field is-horizontal">
   <%= f.label :event_taxon_id %>
   <div class="field-body">
-    <%= f.collection_select :event_taxon_id, EventTaxon.all, :id, :name, can: { label: false, wrap_all: false } %>
-    <%= link_to t('.new'), new_admin_event_taxon_path(return_to: request.path), class: 'button is-light' %>
+    <%= f.collection_select :event_taxon_id, @event_taxons, :id, :name, label: false, wrap: { all: nil, select: 'field is-narrow > select is-fullwidth' } %>
+    <%= link_to t('.new'), new_admin_event_taxon_path(return_to: request.path), class: 'button' %>
   </div>
 </div>
 <%= f.text_field :name %>

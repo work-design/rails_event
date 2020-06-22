@@ -1,11 +1,11 @@
 <%= render 'shared/error_messages', target: @event_item %>
 <%= f.text_field :name %>
 <%= f.file_field :videos, multiple: true %>
-<%= render 'active_storage_ext/attachments/list_field', target: @event_item.videos %>
+<%= render 'com/attachments/list_field', target: @event_item.videos %>
 <%= f.file_field :documents, multiple: true %>
-<%= render 'active_storage_ext/attachments/list_field', target: @event_item.documents %>
-<div class="inline fields">
-  <%= f.collection_members_select :author_id, :id, :name, can: { wrap_all: false } %>
+<%= render 'com/attachments/list_field', target: @event_item.documents %>
+<div class="field is-horizontal">
+  <%= f.collection_members_select :author_id, :id, :name, wrap: { all: false } %>
   <%= link_to admin_department_grants_path('EventItem', 'author_id', return_to: request.url), aria: { label: '老师部门设置' }, remote: true, target: '_blank' do %>
     <i class="fas fa-cog"></i>
   <% end %>

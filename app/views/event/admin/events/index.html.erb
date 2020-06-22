@@ -38,7 +38,7 @@
       <td>
         <%= link_to t('event.admin.event_participants.index.title'), admin_event_event_participants_path(event), class: 'button is-small is-rounded is-light' %>
         <%= link_to admin_event_event_items_path(event), aria: { label: '课程内容' }, class: 'button is-small is-rounded is-light' do %>
-          <i class="list icon"></i>
+          <i class="fas fa-list"></i>
         <% end %>
         <%= link_to edit_admin_event_path(event), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
