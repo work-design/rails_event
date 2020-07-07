@@ -1,53 +1,56 @@
 class Event::My::PlanItemsController < Event::My::BaseController
-  before_action :set_time_lists
-  before_action :set_time_plan, only: [:show]
+  before_action :set_plan_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    q_params = {}
+    q_params = {
+      'plan_on-gte': Date.today,
+      'plan_participants.participant_id': current_member.id
+    }
+    q_params.merge! 'plan_on-gte': params[:start_date] if params[:start_date]
+    q_params.merge! 'plan_on-lte': params[:end_date] if params[:end_date]
     q_params.merge! params.permit(:place_id)
-    
-    @time_plans = TimePlan.default_where(q_params)
-    @events = @time_plans.map do |plan|
-      plan
-    end.flatten
+
+    @plan_items = PlanItem.includes(:place, :time_item).default_where(q_params).order(plan_on: :asc).page(params[:page]).per(params[:per])
   end
 
-  def calendar
-    @time_list = TimeList.find params[:time_list_id]
-    @events = @time_list.events(@settings[:defaultDate], @settings[:dayCount])
+  def plan
+    set_time_lists
+    q_params = {}
+    q_params.merge! params.permit(:place_id)
+    @time_plans = @event_crowd.time_plans.default_where(q_params)
+
+    @plan = @event_crowd.time_plans.find_or_initialize_by(q_params.slice(:place_id))
+    @plan.time_list ||= TimeList.default
   end
 
   def show
-    q_params = {}
-    q_params.merge! params.permit(:plan_type, :plan_id)
-    @time_plans = TimePlan.default_where(q_params)
+  end
 
-    respond_to do |format|
-      format.html { render :index }
-      format.js { render :index }
+  def edit
+  end
+
+  def update
+    @plan_item.assign_attributes(plan_item_params)
+
+    unless @plan_item.save
+      render :edit, locals: { model: @plan_item }, status: :unprocessable_entity
     end
   end
 
+  def destroy
+    @plan_item.destroy
+  end
+
   private
-  def set_time_plan
-    @plan = TimePlan.find(params[:id])
+  def set_plan_item
+    @plan_item = PlanItem.find(params[:id])
   end
 
-  def set_time_lists
-    #return super if super
-    @places = Place.none
-    @time_lists = TimeList.none
-  end
-
-  def set_settings
-    @settings = {
-      defaultDate: Date.today.to_s,
-      dayCount: 7,
-      minTime: '07:30:00',
-      maxTime: '18:30:00',
-      slotDuration: '00:10',
-      slotLabelInterval: '1:00'
-    }
+  def plan_item_params
+    params.fetch(:plan_item, {}).permit(
+      :event_item_id,
+      :place_id
+    )
   end
 
 end

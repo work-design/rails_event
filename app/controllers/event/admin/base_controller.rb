@@ -1,5 +1,3 @@
-class Event::Admin::BaseController < RailsEvent.config.admin_controller.constantize
+class Event::Admin::BaseController < AdminController
 
-
-
-end
+end unless defined? Event::Admin::BaseController

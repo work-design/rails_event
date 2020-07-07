@@ -1,5 +1,3 @@
-class Event::My::BaseController < RailsEvent.config.my_controller.constantize
+class Event::My::BaseController < MyController
 
-
-
-end
+end unless defined? Event::My::BaseController
