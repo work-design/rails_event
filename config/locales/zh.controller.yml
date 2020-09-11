@@ -20,9 +20,9 @@ zh:
           title: 桌子
       events:
         index:
-          title: 课程列表
+          title: 活动列表
         show:
-          title: 课程详情
+          title: 活动详情
       crowds:
         index:
           title: 班级
@@ -38,7 +38,7 @@ zh:
           title: 学生列表
       event_taxons:
         index:
-          title: 课程分类
+          title: 活动分类
         new:
           title: 添加课程分类
       event_items:
