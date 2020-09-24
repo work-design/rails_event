@@ -1,8 +1,10 @@
 <% content_for :breadcrumb do %>
+<div class="breadcrumb has-succeeds-separator">
   <ul>
     <li><%= link_to t('event.admin.events.index.title'), admin_events_path %></li>
     <li class="is-active"><%= t('event.admin.event_taxons.index.title') %></li>
   </ul>
+</div>
 <% end %>
 
 <%= render 'filter_form' %>

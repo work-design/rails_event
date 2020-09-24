@@ -1,15 +1,13 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('event.admin.events.index.title'), admin_events_path, class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to @plan_item.event.title, admin_event_path(@plan_item.event_id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to 'event.admin.plan_participants.index.title', admin_event_plan_participants_path(@plan_item.event_id) %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to t('event.admin.event_plans.index.title'), plans_path(@plan_item.plan_id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= t('event.admin.plan_attenders.index.title') %></div>
-  </div>
+<div class="breadcrumb has-succeeds-separator">
+  <ul>
+    <li><%= link_to t('event.admin.events.index.title'), admin_events_path %></li>
+    <li><%= link_to @plan_item.event.title, admin_event_path(@plan_item.event_id) %></li>
+    <li><%= link_to t('event.admin.plan_participants.index.title'), admin_event_plan_participants_path(@plan_item.event_id) %></li>
+    <li><%= link_to t('event.admin.event_plans.index.title'), plans_path(@plan_item.plan_id) %></li>
+    <li class="is-active"><%= t('event.admin.plan_attenders.index.title') %></li>
+  </ul>
+</div>
 <% end %>
 
 <table class="table is-hoverable is-fullwidth">

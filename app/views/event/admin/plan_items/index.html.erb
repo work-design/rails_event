@@ -1,13 +1,12 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('event.admin.events.index.title'), admin_events_path, class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= @event_crowd.event.title %></div>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to t('event.admin.event_crowds.index.title'), admin_event_event_crowds_path(@event_crowd.event_id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section active"><%= t('.title') %></div>
-  </div>
+<div class="breadcrumb has-succeeds-separator">
+  <ul>
+    <li><%= link_to t('event.admin.events.index.title'), admin_events_path %></li>
+    <li><%= @event_crowd.event.title %></li>
+    <li><%= link_to t('event.admin.event_crowds.index.title'), admin_event_event_crowds_path(@event_crowd.event_id) %></li>
+    <li class="is-active"><%= t('.title') %></li>
+  </ul>
+</div>
 <% end %>
 
 <%= render 'menu' %>
