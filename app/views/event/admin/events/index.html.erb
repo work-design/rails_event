@@ -4,17 +4,17 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th class="one wide"><%= Event.human_attribute_name(:type) %></th>
-      <th class="two wide"><%= Event.human_attribute_name(:event_taxon_id) %></th>
-      <th class="five wide">
+      <th><%= Event.human_attribute_name(:type) %></th>
+      <th><%= Event.human_attribute_name(:event_taxon_id) %></th>
+      <th>
         <%= link_to Event.human_attribute_name(:name), filter_params('name-asc': 2, except: ['name-asc']) %>
       </th>
-      <th class="one wide"><%= Event.human_attribute_name(:members_count) %></th>
+      <th><%= Event.human_attribute_name(:members_count) %></th>
       <th><%= Event.human_attribute_name(:price) %></th>
-      <th class="one wide">
+      <th>
         <%= link_to Event.human_attribute_name(:created_at), filter_params('id-desc': 1, except: ['id-desc']) %>
       </th>
-      <th class="two wide">
+      <th>
         <%= link_to new_admin_event_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>

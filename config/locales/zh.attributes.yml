@@ -14,9 +14,10 @@ zh:
         default: 默认选择
         time_items: 明细
       place:
+        place_taxon_id: 空间分类
         seats_count: 座位数
       event:
-        event_taxon_id: 课程分类
+        event_taxon_id: 活动分类
         event_participants_count: 报名人数
         price: 消耗课时
       event_crowd:

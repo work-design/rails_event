@@ -13,8 +13,8 @@
     <tr>
       <th><%= Place.human_attribute_name(:name) %></th>
       <th>
-        <%= Place.human_attribute_name(:place_taxon) %>
-        <%= link_to admin_place_taxons_path, aria: { label: '分类设置' }, target: '_blank' do %>
+        <%= Place.human_attribute_name(:place_taxon_id) %>
+        <%= link_to admin_place_taxons_path, aria: { label: '分类设置' } do %>
           <i class="fas fa-cog"></i>
         <% end %>
       </th>

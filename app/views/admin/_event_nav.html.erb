@@ -1,7 +1,7 @@
 <div class="<%= active_helper(modules: 'event/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
     <%= link_to t('event.admin.time_lists.index.title'), admin_time_lists_path, class: active_helper(controllers: ['time_lists'], active: 'is-active') %>
-    <%= link_to t('event.admin.places.index.title'), admin_places_path, class: active_helper(controllers: ['places'], active: 'is-active') %>
+    <%= link_to t('event.admin.places.index.title'), admin_places_path, class: active_helper(controllers: ['places', 'place_taxons'], active: 'is-active') %>
     <%= link_to t('event.admin.crowds.index.title'), admin_crowds_path, class: active_helper(controllers: ['crowds'], active: 'is-active') %>
     <%= link_to t('event.admin.events.index.title'), admin_events_path, class: active_helper(controllers: ['events'], active: 'is-active') %>
     <%= link_to t('event.admin.plans.index.title'), admin_plans_path, class: active_helper(controllers: ['plans'], active: 'is-active') -%>
