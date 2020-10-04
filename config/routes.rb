@@ -74,7 +74,7 @@ Rails.application.routes.draw do
     resources :places
   end
 
-  scope :member, module: 'event/member', as: :member do
+  scope :me, module: 'event/me', as: :me do
     resources :plan_items
   end
 
