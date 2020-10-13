@@ -5,8 +5,12 @@ Rails.application.routes.draw do
       get 'repeat_form', action: 'repeat_form'
     end
     resources :plans do
-      get :calendar, on: :collection
-      get 'calendar' => :show_calendar, on: :member
+      collection do
+        get :calendar
+      end
+      member do
+        get 'calendar' => :show_calendar
+      end
     end
     resources :time_items, only: [:index] do
       collection do
@@ -23,7 +27,9 @@ Rails.application.routes.draw do
       resources :time_items
     end
     resources :time_items, only: [] do
-      get :default, on: :collection
+      collection do
+        get :default
+      end
     end
     resources :place_taxons
     resources :places do
@@ -33,10 +39,14 @@ Rails.application.routes.draw do
     resources :plan_items do
       patch :qrcode, on: :member
       resources :bookings do
-        delete '' => :destroy, on: :collection
+        collection do
+          delete '' => :destroy
+        end
       end
       resources :plan_attenders do
-        delete '' => :destroy, on: :collection
+        collection do
+          delete '' => :destroy
+        end
         member do
           put :attend
           put :absent
@@ -45,20 +55,27 @@ Rails.application.routes.draw do
     end
     resources :crowds do
       resources :crowd_members do
-        delete '' => :destroy, on: :collection
+        collection do
+          delete '' => :destroy
+        end
       end
     end
     resources :event_taxons
     resources :events do
-      get :plan, on: :collection
+      collection do
+        get :plan
+      end
       resources :event_participants do
-        post :check, on: :collection
-        post :attend, on: :collection
-        patch :quit, on: :member
-        delete '' => :destroy, on: :collection
+        collection do
+          post :check
+          post :attend
+          delete '' => :destroy
+        end
+        member do
+          patch :quit
+        end
       end
-      resources :event_items do
-      end
+      resources :event_items
     end
     resources :event_items, only: [] do
       member do
