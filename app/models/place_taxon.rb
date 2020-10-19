@@ -1,4 +1,4 @@
 class PlaceTaxon < ApplicationRecord
   include RailsEvent::PlaceTaxon
-  include RailsTaxon::Node
+  include RailsCom::Taxon
 end unless defined? PlaceTaxon
