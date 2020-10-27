@@ -31,7 +31,7 @@
       <td>
         <%= link_to 'taxon', admin_taxon_items_path('PlaceTaxon', place_taxon.id) %>
         <%= link_to admin_place_taxon_path(place_taxon), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-eye"></i>
+          <i class="fas fa-info"></i>
         <% end %>
         <%= link_to edit_admin_place_taxon_path(place_taxon), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
