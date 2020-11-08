@@ -1,20 +1,8 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_booking_admin_time_list_path(@time_list), class: 'ui mini blue right floated button', remote: true %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= TimeList.human_attribute_name(:name) %></td>
-      <td><%= @time_list.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= TimeList.human_attribute_name(:code) %></td>
-      <td><%= @time_list.code %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= TimeList.human_attribute_name(:name) %></td>
+  <td><%= @time_list.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= TimeList.human_attribute_name(:code) %></td>
+  <td><%= @time_list.code %></td>
+</tr>
