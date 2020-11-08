@@ -1,28 +1,16 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_event_item_member_path(@event_item_member), class: 'ui mini blue right floated button', remote: true %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:member) %></td>
-      <td><%= @event_item_member.member %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:state) %></td>
-      <td><%= @event_item_member.state %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:attended) %></td>
-      <td><%= @event_item_member.attended %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= EventItemMember.human_attribute_name(:created_at) %></td>
-      <td><%= @event_item_member.created_at %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= PlanAttender.human_attribute_name(:member) %></td>
+  <td><%= @plan_attender.member %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= PlanAttender.human_attribute_name(:state) %></td>
+  <td><%= @plan_attender.state %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= PlanAttender.human_attribute_name(:attended) %></td>
+  <td><%= @plan_attender.attended %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= PlanAttender.human_attribute_name(:created_at) %></td>
+  <td><%= @plan_attender.created_at %></td>
+</tr>

@@ -1,6 +1,2 @@
-<%= form_with model: [:admin, @event_taxon] do |f| %>
-  <%= hidden_field_tag :return_to, params[:return_to] %>
-  <%= render 'shared/error_messages', target: @event_taxon %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: @event_taxon %>
+<%= f.text_field :name %>

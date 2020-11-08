@@ -1,0 +1,9 @@
+<div class="breadcrumb has-succeeds-separator">
+  <ul>
+    <li><%= link_to t('event.admin.events.index.title'), { controller: 'events' } %></li>
+    <li><%= link_to @plan_item.event.title, admin_event_path(@plan_item.event_id) %></li>
+    <li><%= link_to t('event.admin.plan_participants.index.title'), admin_event_plan_participants_path(@plan_item.event_id) %></li>
+    <li><%= link_to t('event.admin.event_plans.index.title'), plans_path(@plan_item.plan_id) %></li>
+    <li class="is-active"><%= t('event.admin.plan_attenders.index.title') %></li>
+  </ul>
+</div>

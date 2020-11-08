@@ -1,3 +1,5 @@
-json.extract! event_taxon,
-              :id,
-              :name
+json.extract!(
+  event_taxon,
+  :id,
+  :name
+)

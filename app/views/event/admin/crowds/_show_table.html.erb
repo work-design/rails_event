@@ -1,32 +1,20 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_crowd_path(@crowd), class: 'ui mini blue right floated button', remote: true %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Crowd.human_attribute_name(:name) %></td>
-      <td><%= @crowd.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right">学生</td>
-      <td>
-        <table class="ui very basic table">
-          <% @crowd_members.each do |crowd_member| %>
-          <tr>
-            <td>
-              <span class="ui label"><%= crowd_member.state_i18n %></span>
-            </td>
-            <td><%= crowd_member.member.real_name %></td>
-            <td><%= crowd_member.member.nick_name %></td>
-          </tr>
-          <% end %>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Crowd.human_attribute_name(:name) %></td>
+  <td><%= @crowd.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right">学生</td>
+  <td>
+    <table class="ui very basic table">
+      <% @crowd_members.each do |crowd_member| %>
+      <tr>
+        <td>
+          <span class="ui label"><%= crowd_member.state_i18n %></span>
+        </td>
+        <td><%= crowd_member.member.real_name %></td>
+        <td><%= crowd_member.member.nick_name %></td>
+      </tr>
+      <% end %>
+    </table>
+  </td>
+</tr>

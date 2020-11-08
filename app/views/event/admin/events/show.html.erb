@@ -1,13 +1,3 @@
-<% content_for :breadcrumb do %>
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li><%= link_to t('event.admin.events.index.title'), admin_events_path %></li>
-    <li><%= @event.name %></li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-</div>
-<% end %>
-
 <%= render 'nav_event' %>
 
 <table class="table is-fullwidth">
