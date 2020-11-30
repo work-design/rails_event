@@ -1,0 +1,5 @@
+<%= render layout: 'index_table', locals: { cache_key: PlaceTaxon.column_names.hash } do %>
+  <%= render partial: 'index_tbody', collection: @place_taxons, as: :place_taxon %>
+<% end %>
+
+<%= paginate @place_taxons %>

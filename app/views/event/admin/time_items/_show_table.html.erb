@@ -1,24 +1,12 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_booking_admin_time_item_path(@time_item), class: 'ui mini blue right floated button', remote: true %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= TimeItem.human_attribute_name(:start_at) %></td>
-      <td><%= @time_item.start_at %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= TimeItem.human_attribute_name(:finish_at) %></td>
-      <td><%= @time_item.finish_at %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= TimeItem.human_attribute_name(:position) %></td>
-      <td><%= @time_item.position %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= TimeItem.human_attribute_name(:start_at) %></td>
+  <td><%= @time_item.start_at %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= TimeItem.human_attribute_name(:finish_at) %></td>
+  <td><%= @time_item.finish_at %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= TimeItem.human_attribute_name(:position) %></td>
+  <td><%= @time_item.position %></td>
+</tr>
