@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :event, defaults: { business: 'event' } do
+  scope module: :event, defaults: { namespace: 'application', business: 'event' } do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
     end
