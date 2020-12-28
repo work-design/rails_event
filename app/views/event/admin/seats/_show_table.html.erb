@@ -1,24 +1,12 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_seat_path(@seat), class: 'ui mini blue right floated button' %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Seat.human_attribute_name(:name) %></td>
-      <td><%= @seat.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Seat.human_attribute_name(:max_members) %></td>
-      <td><%= @seat.max_members %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Seat.human_attribute_name(:min_members) %></td>
-      <td><%= @seat.min_members %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Seat.human_attribute_name(:name) %></td>
+  <td><%= @seat.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Seat.human_attribute_name(:max_members) %></td>
+  <td><%= @seat.max_members %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Seat.human_attribute_name(:min_members) %></td>
+  <td><%= @seat.min_members %></td>
+</tr>

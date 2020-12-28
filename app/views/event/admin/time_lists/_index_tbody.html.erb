@@ -1,23 +1,23 @@
 <tr>
-  <td><%= time_list.name %></td>
+  <td><%= model.name %></td>
   <td>
-    <p><%= time_list.item_minutes %></p>
-    <p><%= time_list.interval_minutes %></p>
+    <p><%= model.item_minutes %></p>
+    <p><%= model.interval_minutes %></p>
   </td>
   <td>
     <div data-controller="input">
-      <%= check_box_tag '[time_list]default', nil, time_list.default, data: { method: :patch, url: admin_time_list_path(time_list), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+      <%= check_box_tag '[model]default', nil, model.default, data: { method: :patch, url: admin_time_list_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
       <label></label>
     </div>
   </td>
   <td>
-    <%= render partial: 'time_items', locals: { time_list: time_list } %>
+    <%= render partial: 'time_items', locals: { model: model } %>
   </td>
   <td>
-    <%= link_to({ action: 'edit', id: time_list.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to({ action: 'destroy', id: time_list.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
   </td>
