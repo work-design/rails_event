@@ -1,6 +1,8 @@
-json.extract! event,
-              :id,
-              :name
+json.extract!(
+  event,
+  :id,
+  :name
+)
 if event.event_taxon
   json.event_taxon event.event_taxon, :id, :name
 end
