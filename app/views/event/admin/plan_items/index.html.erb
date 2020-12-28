@@ -30,19 +30,19 @@
         <span class="ui label"><%= event_plan.time_item.finish_at.to_s(:time) %></span>
       </td>
       <td>
-        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'place'), aria: { label: '设置教室' }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'place'), aria: { label: '设置教室' }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-building"></i>
         <% end %>
         <%= event_plan.place&.name %>
       </td>
       <td>
-        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'event_item'), aria: { label: '设置课节' }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'event_item'), aria: { label: '设置课节' }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-rss"></i>
         <% end %>
         <%= event_plan.event_item&.title %>
       </td>
       <td>
-        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'teacher'), aria: { label: '设置老师' }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'teacher'), aria: { label: '设置老师' }, class: 'button is-small is-rounded is-light' do %>
           <i class="green male icon"></i>
         <% end %>
         <%= event_plan.teacher&.name %>
@@ -51,7 +51,7 @@
         <% if event_plan.wechat_response %>
           <%= image_tag event_plan.wechat_response.qrcode_file, class: 'ui small image' if event_plan.wechat_response.qrcode_file.attached? %>
         <% else %>
-          <%= link_to qrcode_admin_event_crowd_plan_path(@event_crowd, event_plan), method: :patch, aria: { label: t('.qrcode') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <%= link_to qrcode_admin_event_crowd_plan_path(@event_crowd, event_plan), method: :patch, aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light' do %>
             <i class="fas fa-qrcode"></i>
           <% end %>
         <% end %>

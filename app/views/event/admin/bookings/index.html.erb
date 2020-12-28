@@ -10,7 +10,7 @@
       <th><%= Booking.human_attribute_name(:time_item_id) %></th>
       <th><%= Booking.human_attribute_name(:place_id) %></th>
       <th>
-        <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), remote: true, class: 'button is-link is-small' do %>
+        <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -28,7 +28,7 @@
       </td>
       <td><%= time_booking.place_id %></td>
       <td>
-        <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light', remote: true do %>
+        <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>

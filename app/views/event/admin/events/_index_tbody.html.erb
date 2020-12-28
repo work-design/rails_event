@@ -10,7 +10,7 @@
     <%= link_to admin_event_event_items_path(event), aria: { label: '课程内容' }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-list"></i>
     <% end %>
-    <%= link_to edit_admin_event_path(event), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to edit_admin_event_path(event), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
     <%= link_to admin_event_path(event), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>

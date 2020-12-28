@@ -7,7 +7,7 @@
       <th><%= Seat.human_attribute_name(:max_members) %></th>
       <th><%= Seat.human_attribute_name(:min_members) %></th>
       <th>
-        <%= link_to new_admin_place_seat_path(@place), remote: true, class: 'button is-link is-small' do %>
+        <%= link_to new_admin_place_seat_path(@place), class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -20,13 +20,13 @@
       <td><%= seat.max_members %></td>
       <td><%= seat.min_members %></td>
       <td>
-        <%= link_to admin_place_seat_path(@place, seat), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to admin_place_seat_path(@place, seat), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-info"></i>
         <% end %>
-        <%= link_to edit_admin_place_seat_path(@place, seat), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_place_seat_path(@place, seat), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_place_seat_path(@place, seat), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to admin_place_seat_path(@place, seat), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

@@ -1,5 +1,5 @@
 <%= render layout: 'index_table', locals: { cache_key: EventTaxon.column_names.hash } do %>
-  <%= render partial: 'index_tbody', collection: @event_taxons, as: :event_taxon %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @event_taxons, as: :event_taxon %>
 <% end %>
 
 <%= paginate @event_taxons %>

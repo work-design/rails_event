@@ -1,9 +1,9 @@
 <tr id="time_plan_<%= @plan.id %>">
   <td>
     <% if @plan.id %>
-      <%= form_tag time_plan_path(@plan.plan_type, @plan.plan_id, @plan), method: :patch, remote: true, id: 'time_plan_form' do %><% end %>
+      <%= form_tag time_plan_path(@plan.plan_type, @plan.plan_id, @plan), method: :patch, id: 'time_plan_form' do %><% end %>
     <% else %>
-      <%= form_tag time_plans_path(@plan.plan_type, @plan.plan_id), remote: true, id: 'time_plan_form' do %><% end %>
+      <%= form_tag time_plans_path(@plan.plan_type, @plan.plan_id), id: 'time_plan_form' do %><% end %>
     <% end %>
   </td>
   <td>

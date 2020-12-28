@@ -7,7 +7,7 @@
   <td><%= place.seats_count %></td>
   <td>
     <%= link_to 'entity', admin_entity_items_path('Place', place.id) %>
-    <%= link_to edit_admin_place_path(place), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to edit_admin_place_path(place), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
     <%= link_to admin_place_seats_path(place), aria: { label: t('event.admin.seats.index.title') }, class: 'button is-small is-rounded is-light' do %>
