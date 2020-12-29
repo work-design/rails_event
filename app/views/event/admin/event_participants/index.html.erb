@@ -30,7 +30,7 @@
   <% @event_participants.each do |event_participant| %>
     <tr>
       <td><%= event_participant.member.real_name %></td>
-      <td><time><%= event_participant.created_at.to_s(:rfc822) %></time></td>
+      <td><time data-controller="time"><%= event_participant.created_at.to_s(:rfc822) %></time></td>
       <td>
         <span><%= event_participant.state_i18n %></span>
         <% if event_participant.request_quit? %>

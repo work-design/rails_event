@@ -28,7 +28,7 @@
   </tr>
   <tr>
     <td class="has-text-right"><%= Event.human_attribute_name(:created_at) %></td>
-    <td><time><%= @event.created_at.to_s(:rfc822) %></time></td>
+    <td><time data-controller="time"><%= @event.created_at.to_s(:rfc822) %></time></td>
   </tr>
   </tbody>
 </table>

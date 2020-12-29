@@ -11,7 +11,7 @@
     </div>
   </td>
   <td>
-    <%= render partial: 'time_items', locals: { model: model } %>
+    <%= render partial: 'time_items', locals: { time_list: model } %>
   </td>
   <td>
     <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>

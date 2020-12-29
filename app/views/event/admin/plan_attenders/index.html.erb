@@ -33,7 +33,7 @@
     <tr>
       <td><%= plan_participant.member.real_name %></td>
       <td><%= plan_participant.state %></td>
-      <td><time><%= plan_participant.created_at.to_s(:rfc822) %></time></td>
+      <td><time data-controller="time"><%= plan_participant.created_at.to_s(:rfc822) %></time></td>
       <td>
         <div class="ui toggle checkbox">
           <% if @plan_item.attenders.include?("#{plan_participant.participant_type}_#{plan_participant.participant_id}") %>
