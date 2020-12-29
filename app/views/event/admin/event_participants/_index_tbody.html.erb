@@ -1,0 +1,15 @@
+<td><%= model.member.real_name %></td>
+<td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
+<td>
+  <span><%= model.state_i18n %></span>
+  <% if model.request_quit? %>
+    <%= link_to 'Approve', quit_admin_event_event_participant_path(@event, model), method: :patch %>
+  <% end %>
+  <% if ['request_quit', 'quit'].include? model.state %>
+    <span class="grey text">(<%= model.quit_note %>)</span>
+  <% end %>
+</td>
+<td>
+  <%= model.score %>
+</td>
+<td></td>

@@ -1,21 +1,8 @@
-<tr>
-  <td><%= event_item.name %></td>
-  <td>
-    <%= render 'active_storage_ext/attachments/list', target: event_item.videos %>
-  </td>
-  <td>
-    <%= render 'active_storage_ext/attachments/list', target: event_item.documents %>
-  </td>
-  <td><%= event_item.author&.name %></td>
-  <td>
-    <%= link_to admin_event_event_item_path(@event, event_item), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to edit_admin_event_event_item_path(@event, event_item), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to admin_event_event_item_path(@event, event_item), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.name %></td>
+<td>
+  <%= render 'active_storage_ext/attachments/list', target: model.videos %>
+</td>
+<td>
+  <%= render 'active_storage_ext/attachments/list', target: model.documents %>
+</td>
+<td><%= model.author&.name %></td>
