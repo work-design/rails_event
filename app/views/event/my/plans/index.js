@@ -9,7 +9,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     right: ''
   },
   defaultView: 'timeGridWeek',
-  columnHeaderFormat: <%= raw @settings[:columnHeaderFormat].to_json %>,
+  columnHeaderFormat: settings[columnHeaderFormat].to_json,
   allDaySlot: false,
   minTime: '<%= @settings[:minTime] %>',
   maxTime: '<%= @settings[:maxTime] %>',
@@ -21,7 +21,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     omitZeroMinute: true,
     hour12: false
   },
-  events: <%= raw @events.to_json %>,
+  events: events.to_json,
   eventClick: function(info) {
     var form = document.getElementById('time_plan_form')
     var data = new FormData(form);
@@ -32,4 +32,4 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   }
 });
 
-calendar.render();
+calendar.render()
