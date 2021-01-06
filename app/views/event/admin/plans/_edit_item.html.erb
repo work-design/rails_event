@@ -8,7 +8,7 @@
   </td>
   <td>
     <div class="ui input">
-      <%= date_field_tag :'plan[begin_on]', @plan.begin_on, form: 'time_plan_form', data: { remote: true, url: time_plans_path(@plan.plan_type, @plan.plan_id) } %>
+      <%= date_field_tag :'plan[begin_on]', @plan.begin_on, form: 'time_plan_form', data: { url: time_plans_path(@plan.plan_type, @plan.plan_id) } %>
     </div>
   </td>
   <td>
