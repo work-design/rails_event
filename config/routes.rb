@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :admin, module: 'event/admin', as: :admin, defaults: { business: 'event', namespace: 'admin' } do
+  scope :admin, module: 'eventual/admin', as: :admin, defaults: { business: 'event', namespace: 'admin' } do
     resources :time_lists do
       resources :time_items
     end
@@ -86,12 +86,12 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'event/my', as: :my, defaults: { business: 'event', namespace: 'my' } do
+  scope :my, module: 'eventual/my', as: :my, defaults: { business: 'event', namespace: 'my' } do
     resources :time_plans
     resources :places
   end
 
-  scope :me, module: 'event/me', as: :me, defaults: { business: 'event', namespace: 'me' } do
+  scope :me, module: 'eventual/me', as: :me, defaults: { business: 'event', namespace: 'me' } do
     resources :plan_items
   end
 
