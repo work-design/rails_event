@@ -1,4 +1,4 @@
 module Eventual
-  class Event::BaseController < BaseController
+  class BaseController < BaseController
   end
 end
