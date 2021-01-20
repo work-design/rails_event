@@ -1,4 +1,4 @@
-<%= form_with theme: 'search', model: EventItem.new(params.permit(:title)) do |f| %>
+<%= form_with theme: 'search', model: Eventual::EventItem.new(params.permit(:title)) do |f| %>
   <div class="field-body">
     <%= f.text_field :title %>
     <div class="field is-narrow">
