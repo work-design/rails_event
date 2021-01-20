@@ -1,11 +1,11 @@
 <th><%= Eventual::Event.human_attribute_name(:type) %></th>
 <th><%= Eventual::Event.human_attribute_name(:event_taxon_id) %></th>
 <th>
-  <%= link_to Event.human_attribute_name(:name), filter_params('name-asc': 2, except: ['name-asc']) %>
+  <%= link_to Eventual::Event.human_attribute_name(:name), filter_params('name-asc': 2, except: ['name-asc']) %>
 </th>
 <th><%= Eventual::Event.human_attribute_name(:members_count) %></th>
 <th><%= Eventual::Event.human_attribute_name(:price) %></th>
 <th>
-  <%= link_to Event.human_attribute_name(:created_at), filter_params('id-desc': 1, except: ['id-desc']) %>
+  <%= link_to Eventual::Event.human_attribute_name(:created_at), filter_params('id-desc': 1, except: ['id-desc']) %>
 </th>
 <th></th>

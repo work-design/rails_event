@@ -1,9 +1,9 @@
 <div class="tabs">
   <ul>
-    <li><%= link_to t('event.admin.events.show.title'), admin_event_path(@event), class: active_helper(id: @event.id) %></li>
-    <li><%= link_to t('event.admin.event_items.index.title'), admin_event_event_items_path(@event), class: active_helper(controllers: 'event_items') %></li>
+    <li><%= link_to t('eventual.admin.events.show.title'), admin_event_path(@event), class: active_helper(id: @event.id) %></li>
+    <li><%= link_to t('eventual.admin.event_items.index.title'), admin_event_event_items_path(@event), class: active_helper(controllers: 'event_items') %></li>
     <%# link_to 'Exam/Survey', admin_event_papers_path(event_id: @event.id), class: active_helper(controllers: 'event_papers') %>
     <%# link_to 'Finished Exams', admin_event_exams_path(@event), class: active_helper(controllers: 'exams') %>
-    <li><%= link_to t('event.admin.event_participants.index.title'), admin_event_event_participants_path(@event), class: active_helper(controllers: 'event_participants') %></li>
+    <li><%= link_to t('eventual.admin.event_participants.index.title'), admin_event_event_participants_path(@event), class: active_helper(controllers: 'event_participants') %></li>
   </ul>
 </div>
