@@ -1,6 +1,6 @@
 <table class="as-search">
   <tr>
-    <th><%= link_to Event.human_attribute_name(:event_taxon_id), admin_event_taxons_path %></th>
+    <th><%= link_to Eventual::Event.human_attribute_name(:event_taxon_id), admin_event_taxons_path %></th>
     <td>
       <%= link_to t('.all'), filter_params(except: [:event_taxon_id]), class: active_params(event_taxon_id: '', active: 'button is-info', item: 'button is-light') %>
       <% @event_taxons.each do |taxon| %>

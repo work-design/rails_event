@@ -1,10 +1,10 @@
-<th><%= Place.human_attribute_name(:name) %></th>
+<th><%= Eventual::Place.human_attribute_name(:name) %></th>
 <th>
   <%= Place.human_attribute_name(:place_taxon_id) %>
   <%= link_to({ controller: 'place_taxons' }, aria: { label: '分类设置' }) do %>
     <i class="fas fa-cog"></i>
   <% end %>
 </th>
-<th><%= Place.human_attribute_name(:color) %></th>
-<th><%= Place.human_attribute_name(:seats_count) %></th>
+<th><%= Eventual::Place.human_attribute_name(:color) %></th>
+<th><%= Eventual::Place.human_attribute_name(:seats_count) %></th>
 <th></th>

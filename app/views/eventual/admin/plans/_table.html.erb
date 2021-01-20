@@ -1,10 +1,10 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th><%= TimePlan.human_attribute_name(:id) %></th>
-      <th><%= TimePlan.human_attribute_name(:place_id) %></th>
-      <th><%= TimePlan.human_attribute_name(:repeat_type) %></th>
-      <th><%= TimePlan.human_attribute_name(:repeat_days) %></th>
+      <th><%= Eventual::TimePlan.human_attribute_name(:id) %></th>
+      <th><%= Eventual::TimePlan.human_attribute_name(:place_id) %></th>
+      <th><%= Eventual::TimePlan.human_attribute_name(:repeat_type) %></th>
+      <th><%= Eventual::TimePlan.human_attribute_name(:repeat_days) %></th>
       <th>
         <p><%= TimePlan.human_attribute_name(:next_start_time) %></p>
         <p><%= TimePlan.human_attribute_name(:next_finish_time) %></p>

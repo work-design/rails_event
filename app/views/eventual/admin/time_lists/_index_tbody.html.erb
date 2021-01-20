@@ -1,24 +1,14 @@
-<tr>
-  <td><%= model.name %></td>
-  <td>
-    <p><%= model.item_minutes %></p>
-    <p><%= model.interval_minutes %></p>
-  </td>
-  <td>
-    <div data-controller="input">
-      <%= check_box_tag '[model]default', nil, model.default, data: { method: :patch, url: admin_time_list_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-      <label></label>
-    </div>
-  </td>
-  <td>
-    <%= render partial: 'time_items', locals: { time_list: model } %>
-  </td>
-  <td>
-    <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.name %></td>
+<td>
+  <p><%= model.item_minutes %></p>
+  <p><%= model.interval_minutes %></p>
+</td>
+<td>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :default, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
+</td>
+<td>
+  <%= render partial: 'time_items', locals: { time_list: model } %>
+</td>
