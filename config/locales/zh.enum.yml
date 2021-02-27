@@ -1,12 +1,12 @@
 zh:
   activerecord:
     enum:
-      plan:
+      eventual/plan:
         repeat_type:
           weekly: 每周
           monthly: 每月
           yearly: 每年
-      crowd:
+      eventual/crowd:
         member_type:
           Profile: 学生
           Member: 老师
