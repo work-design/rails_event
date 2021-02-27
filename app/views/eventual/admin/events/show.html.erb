@@ -1,34 +1,16 @@
-<%= render 'nav_event' %>
-
-<table class="table is-fullwidth">
-  <thead>
-  <tr>
-    <th class="three wide"></th>
-    <th>
-      <%= link_to t('.edit'), edit_admin_event_path(@event), class: 'ui mini blue right floated button' %>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td class="has-text-right"><%= Event.human_attribute_name(:event_taxon_id) %></td>
-    <td><%= @event.event_taxon&.name %></td>
-  </tr>
-  <tr>
-    <td class="has-text-right"><%= Event.human_attribute_name(:title) %></td>
-    <td><%= @event.name %></td>
-  </tr>
-  <tr>
-    <td class="has-text-right"><%= Event.human_attribute_name(:type) %></td>
-    <td><%= @event.type_i18n %></td>
-  </tr>
-  <tr>
-    <td class="has-text-right"><%= Event.human_attribute_name(:description) %></td>
-    <td><%= simple_format(@event.description) %></td>
-  </tr>
-  <tr>
-    <td class="has-text-right"><%= Event.human_attribute_name(:created_at) %></td>
-    <td><time data-controller="time"><%= @event.created_at.to_s(:rfc822) %></time></td>
-  </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Eventual::Event.human_attribute_name(:event_taxon_id) %></td>
+  <td><%= @event.event_taxon&.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Eventual::Event.human_attribute_name(:title) %></td>
+  <td><%= @event.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Eventual::Event.human_attribute_name(:description) %></td>
+  <td><%= simple_format(@event.description) %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Eventual::Event.human_attribute_name(:created_at) %></td>
+  <td><time data-controller="time"><%= @event.created_at.to_s(:rfc822) %></time></td>
+</tr>
