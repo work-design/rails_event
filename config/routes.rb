@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :eventual, defaults: { namespace: 'application', business: 'event' } do
+  scope module: :eventual, defaults: { business: 'eventual', namespace: 'application' } do
     controller :time do
       get 'repeat_form', action: 'repeat_form'
     end
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :admin, module: 'eventual/admin', as: :admin, defaults: { business: 'event', namespace: 'admin' } do
+  scope :admin, module: 'eventual/admin', as: :admin, defaults: { business: 'eventual', namespace: 'admin' } do
     resources :time_lists do
       resources :time_items
     end
@@ -86,12 +86,12 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'eventual/my', as: :my, defaults: { business: 'event', namespace: 'my' } do
+  scope :my, module: 'eventual/my', as: :my, defaults: { business: 'eventual', namespace: 'my' } do
     resources :time_plans
     resources :places
   end
 
-  scope :me, module: 'eventual/me', as: :me, defaults: { business: 'event', namespace: 'me' } do
+  scope :me, module: 'eventual/me', as: :me, defaults: { business: 'eventual', namespace: 'me' } do
     resources :plan_items
   end
 
