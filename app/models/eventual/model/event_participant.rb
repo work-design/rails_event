@@ -3,10 +3,8 @@ module Eventual
     extend ActiveSupport::Concern
 
     included do
-      attribute :state, :string, default: 'in_studying'
-      attribute :crowd_member_id, :integer
       attribute :score, :integer
-      attribute :comment, :string, limit: 4096
+      attribute :comment, :string
       attribute :quit_note, :string
       attribute :assigned_status, :string
       attribute :job_id, :string
@@ -25,7 +23,7 @@ module Eventual
         in_evaluating: 'in_evaluating',
         passed: 'passed',
         failed: 'failed'
-      }
+      }, _default: 'in_studying'
 
       before_validation :sync_from_crowd_member
       after_destroy :delete_reminder_job
