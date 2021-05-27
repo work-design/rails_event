@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_event'
-  s.summary = 'Summary of RailsEvent.'
+  s.summary = '时间、地点、参与者管理系统'
   s.description = 'Description of RailsEvent.'
-  s.license = 'LGPL-3.0'
+  s.license = 'MIT'
 
   s.files = Dir[
     '{app,config,db,lib}/**/*',
