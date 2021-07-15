@@ -29,9 +29,4 @@ yarn add @fullcalendar/timegrid
 
 
 ## 许可
-本项目采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0) 协议。
-
-基于本项目二次开发之后不允许闭源。
-
-如需商业使用，请联系作者单独授权。
-
+本项目遵循 [MIT](https://opensource.org/licenses/MIT) 协议
