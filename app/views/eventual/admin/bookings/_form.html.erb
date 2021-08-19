@@ -1,5 +1,5 @@
 <%= form_with model: @time_booking do |f| %>
-  <%= render 'shared/error_messages', target: @time_booking %>
+  <%= render 'error_messages', target: f.object %>
   <%= f.text_field :time_list_id %>
   <%= f.text_field :time_item_id %>
   <%= f.text_field :place_id %>

@@ -1,4 +1,4 @@
-<%= render 'shared/error_messages', target: @event_item %>
+<%= render 'error_messages', target: @event_item %>
 <%= f.text_field :name %>
 <%= f.file_field :videos, multiple: true %>
 <%= render 'com/attachments/list_field', target: @event_item.videos %>

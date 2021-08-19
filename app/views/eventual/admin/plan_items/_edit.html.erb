@@ -2,7 +2,7 @@
   <i class="fas fa-times close"></i>
   <div class="content">
     <%= form_with model: @event_plan, url: admin_event_crowd_plan_path(@event_crowd, @event_plan) do |f| %>
-      <%= render 'shared/error_messages', target: @event_plan %>
+      <%= render 'error_messages', target: @event_plan %>
       <% if params[:item] == 'event_item' %>
       <%= f.collection_select :event_item_id, @event_crowd.event_items, :id, :title %>
       <% end %>
