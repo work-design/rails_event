@@ -1,5 +1,9 @@
 # RailsEvent
 
+[![测试](https://github.com/work-design/rails_event/actions/workflows/test.yml/badge.svg)](https://github.com/work-design/rails_event/actions/workflows/test.yml)
+[![Docker构建](https://github.com/work-design/rails_event/actions/workflows/cd.yml/badge.svg)](https://github.com/work-design/rails_event/actions/workflows/cd.yml)
+[![Gem](https://github.com/work-design/rails_event/actions/workflows/gempush.yml/badge.svg)](https://github.com/work-design/rails_event/actions/workflows/gempush.yml)
+
 RailsEvent 用于处理基于事件、地点、参与人的业务，如：活动举办、课程。
 
 

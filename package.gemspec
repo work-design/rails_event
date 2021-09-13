@@ -1,9 +1,6 @@
-$:.push File.expand_path('lib', __dir__)
-require 'rails_event/version'
-
 Gem::Specification.new do |s|
   s.name = 'rails_event'
-  s.version = RailsEvent::VERSION
+  s.version = '0.0.1'
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_event'
@@ -19,5 +16,4 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'rails_com', '~> 1.2'
-  s.add_development_dependency 'sqlite3', '~> 1.3'
 end

@@ -4,12 +4,16 @@ gemspec
 
 gem 'rails'
 gem 'puma'
-
-gem 'factory_bot_rails', require: false
-gem 'default_form', github: 'qinmingyuan/default_form'
-gem 'rails_com', github: 'work-design/rails_com'
 gem 'jbuilder'
 
-gem 'pry-rails'
-gem 'awesome_print'
-gem 'sdoc'
+gem 'viter', github: 'qinmingyuan/viter'
+gem 'rails_com', github: 'work-design/rails_com'
+gem 'rails_extend', github: 'work-design/rails_extend'
+gem 'rails_design', github: 'work-design/rails_design'
+
+gem 'amazing_print'
+group :development, :test do
+  gem 'debug'
+  gem 'minitest-hooks'
+  gem 'sdoc'
+end
