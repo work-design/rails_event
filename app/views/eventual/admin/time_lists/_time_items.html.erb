@@ -6,10 +6,10 @@
       <td><%= time_item.finish_at.to_s(:time) %></td>
       <td>
         <%= link_to edit_admin_time_list_time_item_path(time_list, time_item), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
+          <i class="fa-light fa-pencil"></i>
         <% end %>
         <%= link_to admin_time_list_time_item_path(time_list, time_item), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-trash-alt"></i>
+          <i class="fa-light fa-trash"></i>
         <% end %>
       </td>
     </tr>
@@ -19,7 +19,7 @@
     <tr>
       <td colspan="3">
         <%= link_to new_admin_time_list_time_item_path(time_list), class: 'ui mini teal button' do %>
-          <i class="fas fa-plus"></i><%= t('.new') %>
+          <i class="fa-light fa-plus"></i><%= t('.new') %>
         <% end %>
       </td>
     </tr>

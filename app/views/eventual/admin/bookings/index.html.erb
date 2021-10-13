@@ -11,7 +11,7 @@
       <th><%= Eventual::Booking.human_attribute_name(:place_id) %></th>
       <th>
         <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'button is-link is-small' do %>
-          <i class="fas fa-plus"></i><%= t('.new') %>
+          <i class="fa-light fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
     </tr>
@@ -29,10 +29,10 @@
       <td><%= time_booking.place_id %></td>
       <td>
         <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
+          <i class="fa-light fa-pencil"></i>
         <% end %>
         <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-trash-alt"></i>
+          <i class="fa-light fa-trash"></i>
         <% end %>
       </td>
     </tr>

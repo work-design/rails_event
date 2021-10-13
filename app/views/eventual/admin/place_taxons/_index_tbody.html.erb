@@ -5,13 +5,13 @@
   <td>
     <%= link_to 'taxon', admin_taxon_items_path('PlaceTaxon', place_taxon.id) %>
     <%= link_to admin_place_taxon_path(place_taxon), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-info"></i>
+      <i class="fa-light fa-circle-info"></i>
     <% end %>
     <%= link_to edit_admin_place_taxon_path(place_taxon), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-pencil-alt"></i>
+      <i class="fa-light fa-pencil"></i>
     <% end %>
     <%= link_to admin_place_taxon_path(place_taxon), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-trash-alt"></i>
+      <i class="fa-light fa-trash"></i>
     <% end %>
   </td>
 </tr>
