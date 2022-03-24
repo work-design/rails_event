@@ -2,8 +2,8 @@
   <tbody>
   <% time_list.time_items.each do |time_item| %>
     <tr>
-      <td><%= time_item.start_at.to_s(:time) %></td>
-      <td><%= time_item.finish_at.to_s(:time) %></td>
+      <td><%= time_item.start_at.to_fs(:time) %></td>
+      <td><%= time_item.finish_at.to_fs(:time) %></td>
       <td>
         <%= link_to edit_admin_time_list_time_item_path(time_list, time_item), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fa-light fa-pencil"></i>

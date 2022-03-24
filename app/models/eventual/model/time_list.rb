@@ -23,17 +23,17 @@ module Eventual
 
     def slot_duration
       g = item_minutes.gcd(interval_minutes)
-      (Time.current.beginning_of_day + g.minutes).to_s(:time)
+      (Time.current.beginning_of_day + g.minutes).to_fs(:time)
     end
 
     def slot_label_interval
       g = item_minutes + interval_minutes
-      (Time.current.beginning_of_day + g.minutes).to_s(:time)
+      (Time.current.beginning_of_day + g.minutes).to_fs(:time)
     end
 
     def min_time
       if time_items.size > 0
-        time_items[0].start_at.to_s(:time)
+        time_items[0].start_at.to_fs(:time)
       else
         '08:00'
       end
@@ -41,7 +41,7 @@ module Eventual
 
     def max_time
       if time_items.size > 0
-        time_items[-1].finish_at.to_s(:time)
+        time_items[-1].finish_at.to_fs(:time)
       else
         '18:00'
       end

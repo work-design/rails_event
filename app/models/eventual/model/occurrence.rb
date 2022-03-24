@@ -2,15 +2,15 @@ module Eventual
   module Model::Occurrence
 
     def next_occurrence(now: Time.current)
-      ti = time_items.find { |i| i.start_at.to_s(:time) > now.to_s(:time) }
+      ti = time_items.find { |i| i.start_at.to_fs(:time) > now.to_fs(:time) }
       if ti
         date = next_occurred_days(limit: 1).first
-        hour, min = ti.start_at.to_s(:time).split(':')
+        hour, min = ti.start_at.to_fs(:time).split(':')
         date.to_datetime.change(hour: hour.to_i, min: min.to_i)
       else
         date = next_occurred_days(limit: 2).last
         t2 = time_items.first
-        hour, min = t2.start_at.to_s(:time).split(':')
+        hour, min = t2.start_at.to_fs(:time).split(':')
         date.to_datetime.change(hour: hour.to_i, min: min.to_i)
       end
     end

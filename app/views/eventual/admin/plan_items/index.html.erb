@@ -26,8 +26,8 @@
         <span class="grey text">（<%= event_plan.booking_on.to_s(:week) %>）</span>
       </td>
       <td>
-        <span class="ui label"><%= event_plan.time_item.start_at.to_s(:time) %></span>
-        <span class="ui label"><%= event_plan.time_item.finish_at.to_s(:time) %></span>
+        <span class="ui label"><%= event_plan.time_item.start_at.to_fs(:time) %></span>
+        <span class="ui label"><%= event_plan.time_item.finish_at.to_fs(:time) %></span>
       </td>
       <td>
         <%= link_to edit_admin_event_crowd_plan_path(@event_crowd, event_plan, item: 'place'), aria: { label: '设置教室' }, class: 'button is-small is-rounded is-light' do %>

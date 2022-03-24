@@ -22,9 +22,9 @@
       <td><%= time_booking.id %></td>
       <td><%= time_booking.booking_on %></td>
       <td>
-        <span class="ui label"><%= time_booking.time_item.start_at.to_s(:time) %></span>
+        <span class="ui label"><%= time_booking.time_item.start_at.to_fs(:time) %></span>
         <i class="yellow arrow right icon"></i>
-        <span class="ui label"><%= time_booking.time_item.finish_at.to_s(:time) %></span>
+        <span class="ui label"><%= time_booking.time_item.finish_at.to_fs(:time) %></span>
       </td>
       <td><%= time_booking.place_id %></td>
       <td>

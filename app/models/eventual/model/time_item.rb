@@ -23,7 +23,7 @@ module Eventual
     end
 
     def name
-      "#{start_at.to_s(:time)} ~ #{finish_at.to_s(:time)}"
+      "#{start_at.to_fs(:time)} ~ #{finish_at.to_fs(:time)}"
     end
 
     def init_start_at

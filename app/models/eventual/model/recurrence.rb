@@ -21,7 +21,7 @@ module Eventual
       when 'monthly'
         (date.day - 1).to_s
       when 'yearly'
-        date.to_s(:date)
+        date.to_fs(:date)
       end
     end
 

@@ -99,7 +99,7 @@ module Eventual
       end
       if @plan
         @settings.merge!(
-          defaultDate: @plan.default_date.to_s(:date)
+          defaultDate: @plan.default_date.to_fs(:date)
         )
         @settings.merge! repeat_settings
       end
