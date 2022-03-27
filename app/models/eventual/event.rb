@@ -1,6 +1,6 @@
 module Eventual
   class Event < ApplicationRecord
     include Model::Event
-    include Model::Planned
+    include Ext::Planned
   end
 end
