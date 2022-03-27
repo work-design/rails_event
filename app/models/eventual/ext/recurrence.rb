@@ -19,7 +19,6 @@ module Eventual
       self.repeat_days = self.repeat_days.map(&:to_i)
     end
 
-
     def next_start_at
       return if start_at.nil?
       _next_day = self.next_day
