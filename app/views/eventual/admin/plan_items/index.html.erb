@@ -23,7 +23,7 @@
     <tr>
       <td>
         <%= event_plan.booking_on %>
-        <span class="grey text">（<%= event_plan.booking_on.to_s(:week) %>）</span>
+        <span class="grey text">（<%= event_plan.booking_on.to_fs(:week) %>）</span>
       </td>
       <td>
         <span class="ui label"><%= event_plan.time_item.start_at.to_fs(:time) %></span>
