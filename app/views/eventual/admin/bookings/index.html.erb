@@ -29,10 +29,10 @@
       <td><%= time_booking.place_id %></td>
       <td>
         <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-regular fa-pencil"></i>
+          <i class="fa-solid fa-pencil"></i>
         <% end %>
         <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-regular fa-trash"></i>
+          <i class="fa-solid fa-trash"></i>
         <% end %>
       </td>
     </tr>
