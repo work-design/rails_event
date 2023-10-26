@@ -11,7 +11,7 @@
       <th><%= Eventual::Booking.human_attribute_name(:place_id) %></th>
       <th>
         <%= link_to new_time_booking_path(params[:booked_type], params[:booked_id]), class: 'button is-link is-small' do %>
-          <i class="fa-solid fa-plus"></i><%= t('.new') %>
+          <i class="fa-solid fa-plus"></i><%= t('.new.title') %>
         <% end %>
       </th>
     </tr>
@@ -28,10 +28,10 @@
       </td>
       <td><%= time_booking.place_id %></td>
       <td>
-        <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_time_booking_path(params[:booked_type], params[:booked_id], time_booking), aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fa-solid fa-pencil"></i>
         <% end %>
-        <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to time_booking_path(params[:booked_type], params[:booked_id], time_booking), method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>
       </td>

@@ -24,7 +24,7 @@
         <p><time data-controller="time"><%= plan.next_finish_time&.to_s(:rfc822) %></time></p>
       </td>
       <td class="ui labels">
-        <%= link_to time_plan_path(params[:plan_type], params[:plan_id], plan), method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'ui red mini icon button' do %>
+        <%= link_to time_plan_path(params[:plan_type], params[:plan_id], plan), method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.confirm') }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>
