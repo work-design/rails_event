@@ -6,7 +6,7 @@
   <section data-controller="input" class="modal-card-body">
     <%= render 'error_messages', target: f.object if f.object.errors.present? %>
     <%= f.hidden_field :repeat_type, value: 'yearly' %>
-    <%= f.date_field :repeat_days %>
+    <%= f.date_select :repeat_days, discard_year: true %>
   </section>
   <footer class="modal-card-foot is-block">
     <%= f.submit %>
