@@ -1,5 +1,5 @@
 module Eventual
-  module Model::Planning
+  module Inner::Planning
     extend ActiveSupport::Concern
 
     included do

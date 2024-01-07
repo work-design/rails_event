@@ -1,5 +1,5 @@
 module Eventual
-  module Model::Recurrence
+  module Inner::Recurrence
     extend ActiveSupport::Concern
 
     included do

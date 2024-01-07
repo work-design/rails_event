@@ -1,6 +1,6 @@
 module Eventual
   class PlanItem < ApplicationRecord
     include Model::PlanItem
-    include Model::Planning
+    include Inner::Planning
   end
 end
