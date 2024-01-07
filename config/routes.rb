@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
 
       namespace :admin, defaults: { namespace: 'admin' } do
+        root 'home#index'
         resources :time_lists do
           resources :time_items
         end

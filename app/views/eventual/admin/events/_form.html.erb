@@ -3,7 +3,7 @@
   <%= f.label :event_taxon_id %>
   <div class="field-body">
     <%= f.collection_select :event_taxon_id, @event_taxons, :id, :name, label: false, wrap: { all: nil, select: 'field is-narrow > select is-fullwidth' } %>
-    <%= link_to t('.new.title'), new_admin_event_taxon_path(return_to: request.path), class: 'button' %>
+    <%= button_to t('.new.title'), { controller: 'event_taxons', action: 'new' }, class: 'button' %>
   </div>
 </div>
 <%= f.text_field :name %>
