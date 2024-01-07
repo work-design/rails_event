@@ -65,6 +65,9 @@ Rails.application.routes.draw do
           collection do
             get :plan
           end
+          member do
+            match :edit_plan, via: [:get, :post]
+          end
           resources :event_participants do
             collection do
               post :check

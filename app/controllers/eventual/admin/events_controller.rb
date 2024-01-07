@@ -1,6 +1,9 @@
 module Eventual
   class Admin::EventsController < Admin::BaseController
-    before_action :set_event, only: [:show, :edit, :meet, :update, :destroy]
+    before_action :set_event, only: [
+      :show, :edit, :meet, :update, :destroy, :actions,
+      :edit_plan
+    ]
 
     def index
       q_params = {}

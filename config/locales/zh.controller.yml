@@ -24,6 +24,8 @@ zh:
           title: 活动列表
         show:
           title: 活动详情
+        edit_plan:
+          title: Calendar
       crowds:
         index:
           title: 班级
