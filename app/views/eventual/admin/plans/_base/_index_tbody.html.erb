@@ -1,0 +1,8 @@
+<td><%= model.id %></td>
+<td><%= model.place_id %></td>
+<td><%= model.repeat_type %></td>
+<td><%= model.repeat_days %></td>
+<td>
+  <p><time data-controller="time"><%= model.next_start_time&.to_fs(:iso8601) %></time></p>
+  <p><time data-controller="time"><%= model.next_finish_time&.to_fs(:iso8601) %></time></p>
+</td>
