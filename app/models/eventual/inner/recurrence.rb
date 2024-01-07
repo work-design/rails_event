@@ -3,15 +3,15 @@ module Eventual
     extend ActiveSupport::Concern
 
     included do
-      attribute :repeat_type, :string, default: 'weekly'
-      attribute :repeat_count, :integer, default: 1
-      attribute :repeat_days, :json, default: {}
+      attribute :repeat_type, :string, comment: '日、周、月、天'
+      attribute :repeat_count, :integer, default: 1, comment: '每几周/天'
+      attribute :repeat_days, :json
 
       enum repeat_type: {
         weekly: 'weekly',
         monthly: 'monthly',
         yearly: 'yearly'
-      }
+      }, _default: 'weekly'
     end
 
     def repeat_index(date)

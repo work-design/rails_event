@@ -11,9 +11,9 @@ module Eventual
       attribute :event_items_count, :integer, default: 0
       attribute :members_count, :integer, default: 0
 
-      belongs_to :organ, optional: true
-      belongs_to :event_taxon, optional: true
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
 
+      belongs_to :event_taxon, optional: true
       has_many :event_items, dependent: :nullify
       accepts_nested_attributes_for :event_items, allow_destroy: true
 
