@@ -10,10 +10,8 @@ module Eventual
       attribute :repeat_index, :string
       attribute :extra, :json
 
-
       belongs_to :time_item
       belongs_to :time_list
-      belongs_to :plan, optional: true
       belongs_to :planned, polymorphic: true
       belongs_to :place, optional: true
       belongs_to :event, optional: true

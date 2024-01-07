@@ -1,5 +1,5 @@
 module Eventual
-  module Model::Plan
+  module Inner::Plan
     REPEAT = {
       'once' => 0..6,
       'weekly' => 0..6,
@@ -8,7 +8,6 @@ module Eventual
     extend ActiveSupport::Concern
 
     included do
-      attribute :title, :string
       attribute :begin_on, :date, default: -> { Date.today }
       attribute :end_on, :date
       attribute :produced_begin_on, :date
@@ -18,7 +17,6 @@ module Eventual
       attribute :repeat_count, :integer, comment: '每几周'
       attribute :repeat_days, :json
 
-      belongs_to :planned, polymorphic: true
       belongs_to :time_list
       belongs_to :place, optional: true
 
@@ -29,9 +27,12 @@ module Eventual
       default_scope -> { order(begin_on: :asc) }
 
       validates :begin_on, presence: true
-      after_initialize if: :new_record? do
-        self.planned_type ||= 'Event'
-      end
+
+      after_initialize if: :new_record?
+    end
+
+    def init_xx
+      self.planned_type ||= 'Event'
     end
 
     def selected_ids(date, index)
