@@ -2,8 +2,9 @@ module Eventual
   class Admin::EventsController < Admin::BaseController
     before_action :set_event, only: [
       :show, :edit, :meet, :update, :destroy, :actions,
-      :edit_plan
+      :edit_plan, :update_plan
     ]
+    before_action :set_event_taxons, only: [:new, :create, :edit, :update]
 
     def index
       q_params = {}
@@ -23,45 +24,24 @@ module Eventual
       render 'index'
     end
 
-    def new
-      @event = Event.new
-      @event_taxons = EventTaxon.default_where(default_params)
-    end
-
-    def create
-      @event = Event.new(event_params)
-
-      unless @event.save
-        render :new, locals: { model: @event }, status: :unprocessable_entity
-      end
-    end
-
-    def show
-    end
-
-    def edit
-      @event_taxons = EventTaxon.default_where(default_params)
-    end
-
-    def update
-      @event.assign_attributes(event_params)
-
-      unless @event.save
-        render :edit, locals: { model: @event }, status: :unprocessable_entity
-      end
+    def update_plan
+      @event.assign_attributes params.fetch(:event, {}).permit(:repeat_type)
     end
 
     def meet
-
-    end
-
-    def destroy
-      @event.destroy
     end
 
     private
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def set_new_event
+      @event = Event.new(event_params)
+    end
+
+    def set_event_taxons
+      @event_taxons = EventTaxon.default_where(default_params)
     end
 
     def event_params
