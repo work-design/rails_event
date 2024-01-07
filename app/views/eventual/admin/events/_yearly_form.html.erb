@@ -1,4 +1,4 @@
-<%= form_with model: model, url: { action: 'update_plan' }, class: 'modal-card' do |f| %>
+<%= form_with model: model, url: { action: 'update' }, class: 'modal-card' do |f| %>
   <header class="modal-card-head">
     <p class="modal-card-title"><%= t('.title') %></p>
     <button type="button" data-action="modal#close" class="delete"></button>
@@ -6,7 +6,7 @@
   <section data-controller="input" class="modal-card-body">
     <%= render 'error_messages', target: f.object if f.object.errors.present? %>
     <%= f.hidden_field :repeat_type, value: 'yearly' %>
-    <%= f.date_field  %>
+    <%= f.date_field :repeat_days %>
   </section>
   <footer class="modal-card-foot is-block">
     <%= f.submit %>

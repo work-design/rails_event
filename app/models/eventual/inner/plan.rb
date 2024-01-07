@@ -25,7 +25,7 @@ module Eventual
 
       validates :begin_on, presence: true
 
-      after_initialize if: :new_record?
+      #after_initialize if: :new_record?
     end
 
     def init_xx
