@@ -1,10 +1,5 @@
 module Eventual
   module Inner::Plan
-    REPEAT = {
-      'once' => 0..6,
-      'weekly' => 0..6,
-      'monthly' => 0..30
-    }.freeze
     extend ActiveSupport::Concern
 
     included do
@@ -14,7 +9,7 @@ module Eventual
       attribute :produced_end_on, :date
       attribute :produce_done, :boolean
 
-      belongs_to :time_list
+      belongs_to :time_list, optional: true
       belongs_to :place, optional: true
 
       has_many :time_items, through: :time_list
@@ -30,17 +25,6 @@ module Eventual
 
     def init_xx
       self.planned_type ||= 'Event'
-    end
-
-    def selected_ids(date, index)
-      case repeat_type
-      when 'yearly'
-        Array(self.repeat_days[date.to_s])
-      when 'monthly'
-        Array(self.repeat_days[index.to_s])
-      when 'weekly'
-        Array(self.repeat_days[index.to_s])
-      end
     end
 
     def same_scopes
@@ -121,7 +105,7 @@ module Eventual
           }
         }
 
-        Plan.default_where(q.merge!(or_q))
+        default_where(q.merge!(or_q))
       end
 
       def xx

@@ -5,13 +5,25 @@ module Eventual
     included do
       attribute :repeat_type, :string, comment: '日、周、月、天'
       attribute :repeat_count, :integer, default: 1, comment: '每几周/天'
-      attribute :repeat_days, :json
+      attribute :repeat_days, :string, index: true
 
       enum repeat_type: {
         weekly: 'weekly',
         monthly: 'monthly',
-        yearly: 'yearly'
+        yearly: 'yearly',
+        once: 'once'
       }, _default: 'weekly'
+    end
+
+    def selected_ids(date, index)
+      case repeat_type
+      when 'yearly'
+        Array(repeat_days[date.to_s])
+      when 'monthly'
+        Array(repeat_days[index.to_s])
+      when 'weekly'
+        Array(repeat_days[index.to_s])
+      end
     end
 
     def repeat_index(date)

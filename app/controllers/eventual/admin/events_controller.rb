@@ -54,6 +54,8 @@ module Eventual
         :teacher_id,
         :price,
         :compulsory,
+        :repeat_type,
+        :repeat_days,
         event_items_attributes: [
           :id,
           :name,
