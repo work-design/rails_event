@@ -1,11 +1,14 @@
-<%= form_with model: model, url: { action: 'update_plan' }, class: 'modal-card' do |f| %>
+<%= form_with model: model, url: { action: 'update' }, all: { select: nil, checkbox: nil, normal: nil }, class: 'modal-card' do |f| %>
   <header class="modal-card-head">
     <p class="modal-card-title"><%= t('.title') %></p>
     <button type="button" data-action="modal#close" class="delete"></button>
   </header>
-  <section data-controller="input" class="modal-card-body">
+  <section class="modal-card-body">
     <%= render 'error_messages', target: f.object if f.object.errors.present? %>
-    <%= f.select :repeat_type, options_for_select(Eventual::Event.options_i18n(:repeat_type), f.object.repeat_type), {}, data: { action: 'input#filter' } %>
+    <div data-controller="input" data-input-url-value="<%= url_for(action: 'update_plan') %>" class="field is-horizontal">
+      <%= f.select :repeat_type, options_for_select(Eventual::Event.options_i18n(:repeat_type), f.object.repeat_type), {}, data: { action: 'input#link' } %>
+    </div>
+    <%= render partial: 'repeat_days_form', locals: { model: model, f: f } %>
   </section>
   <footer class="modal-card-foot is-block">
     <%= f.submit %>

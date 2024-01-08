@@ -1,15 +1,1 @@
-<% if @event.repeat_type == 'yearly' %>
-  <%= turbo_stream.replace 'modal', partial: 'yearly_form', layout: 'modal_form', locals: { model: @event } %>
-<% elsif params[:repeat_type] == 'week' %>
-  $('#event_repeat_days_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/week_checkboxes', locals: { f: form_object }) %>');
-  $('#event_start_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/start_at', locals: { f: form_object }) %>');
-  $('#event_finish_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/finish_at', locals: { f: form_object }) %>');
-<% elsif params[:repeat_type] == 'month' %>
-  $('#event_repeat_days_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/month_checkboxes', locals: { f: form_object }) %>');
-  $('#event_start_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/start_at', locals: { f: form_object }) %>');
-  $('#event_finish_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/finish_at', locals: { f: form_object }) %>');
-<% elsif params[:repeat_type] == 'once' %>
-  $('#event_repeat_days_wrapper').html('');
-  $('#event_start_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/start_at_once', locals: { f: form_object }) %>');
-  $('#event_finish_at_wrapper').replaceWith('<%= j(render partial: 'rails_event/time/finish_at_once', locals: { f: form_object }) %>');
-<% end %>
+<%= turbo_stream.replace 'wrap_repeat_days', partial: 'repeat_days_form', locals: { model: @event, f: form_object(@event, all: { select: nil, checkbox: nil, normal: nil }) } %>

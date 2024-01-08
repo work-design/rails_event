@@ -5,7 +5,7 @@ module Eventual
     included do
       attribute :repeat_type, :string, comment: '日、周、月、天'
       attribute :repeat_count, :integer, default: 1, comment: '每几周/天'
-      attribute :repeat_days, :string, index: true
+      attribute :repeat_days, :string, array: true
 
       enum repeat_type: {
         weekly: 'weekly',
@@ -26,14 +26,16 @@ module Eventual
       end
     end
 
-    def repeat_index(date)
+    def repeat_index(datetime)
       case repeat_type
       when 'weekly'
-        date.days_to_week_start.to_s
+        datetime.days_to_week_start.to_s
       when 'monthly'
-        (date.day - 1).to_s
+        (datetime.day - 1).to_s
       when 'yearly'
-        date.to_fs(:date)
+        datetime.strftime('%m-%d')
+      when 'once'
+        datetime.to_fs(:date)
       end
     end
 

@@ -55,7 +55,7 @@ module Eventual
         :price,
         :compulsory,
         :repeat_type,
-        :repeat_days,
+        repeat_days: [],
         event_items_attributes: [
           :id,
           :name,
