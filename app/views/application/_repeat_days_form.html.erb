@@ -2,9 +2,9 @@
 <% if model.repeat_type == 'yearly' %>
   <%= f.date_select :repeat_days, order: [:month, :day] %>
 <% elsif model.repeat_type == 'monthly' %>
-  <%= f.collection_check_boxes :repeat_days, 1..31, :to_i, :ordinalize, { include_hidden: false } %>
+  <%= f.collection_check_boxes :repeat_days, '01'..'31', :to_s, ->(i){ i.to_i.ordinalize }, { include_hidden: false } %>
 <% elsif model.repeat_type == 'weekly' %>
-  <%= f.collection_check_boxes :repeat_days, Date::DAYS_INTO_WEEK, :second, :first, { include_hidden: false } %>
+  <%= f.collection_check_boxes :repeat_days, Date::DAYS_INTO_WEEK, ->(i) { i.second.to_s }, :first, { include_hidden: false } %>
 <% elsif model.repeat_type == 'once' %>
   <%= f.date_field :repeat_days %>
 <% end %>
