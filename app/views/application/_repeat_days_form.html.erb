@@ -1,6 +1,6 @@
 <div id="wrap_repeat_days" class="field is-horizontal">
 <% if model.repeat_type == 'yearly' %>
-  <%= f.date_select :repeat_days, order: [:month, :day] %>
+  <%= f.text_field :repeat_days, multiple: true %>
 <% elsif model.repeat_type == 'monthly' %>
   <%= f.collection_check_boxes :repeat_days, '01'..'31', :to_s, ->(i){ i.to_i.ordinalize }, { include_hidden: false } %>
 <% elsif model.repeat_type == 'weekly' %>

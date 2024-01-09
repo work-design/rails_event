@@ -26,7 +26,7 @@ module Eventual
 
     def update_plan
       @event.assign_attributes params.fetch(:event, {}).permit(:repeat_type)
-      @event.repeat_days = []
+      @event.repeat_days = nil
     end
 
     def meet
