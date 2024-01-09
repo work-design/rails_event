@@ -15,17 +15,6 @@ module Eventual
       }, _default: 'weekly'
     end
 
-    def selected_ids(date, index)
-      case repeat_type
-      when 'yearly'
-        Array(repeat_days[date.to_s])
-      when 'monthly'
-        Array(repeat_days[index.to_s])
-      when 'weekly'
-        Array(repeat_days[index.to_s])
-      end
-    end
-
     def repeat_index(datetime)
       case repeat_type
       when 'weekly'
