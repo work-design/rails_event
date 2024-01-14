@@ -6,7 +6,6 @@ module Eventual
       attribute :name, :string
       attribute :description, :string, limit: 4096
       attribute :position, :integer
-      attribute :price, :decimal
       attribute :event_participants_count, :integer, default: 0
       attribute :event_items_count, :integer, default: 0
       attribute :members_count, :integer, default: 0
