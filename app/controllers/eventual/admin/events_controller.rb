@@ -17,7 +17,12 @@ module Eventual
 
     def summary
       x = [
-        { start: Date.today.to_fs(:date), classNames: ['medal_kapi', 'sskdkdd'], display: 'background' }
+        {
+          start: Date.today.to_fs(:date),
+          classNames: ['medal_kapi', 'sskdkdd'],
+          display: 'background',
+          extendedProps: { img: 'red' }
+        }
       ]
 
       render json: x
@@ -64,6 +69,7 @@ module Eventual
         :price,
         :compulsory,
         :repeat_type,
+        :logo,
         repeat_days: [],
         event_items_attributes: [
           :id,

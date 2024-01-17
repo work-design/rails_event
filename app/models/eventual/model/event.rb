@@ -20,6 +20,8 @@ module Eventual
       has_many :crowds, through: :event_participants
       has_many :event_grants, dependent: :destroy
       has_many :plan_items, as: :planned, dependent: :delete_all
+
+      has_one_attached :logo
     end
 
     def member_type_ids
