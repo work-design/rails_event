@@ -15,6 +15,14 @@ module Eventual
       @event_taxons = EventTaxon.default_where(default_params)
     end
 
+    def summary
+      x = [
+        { start: Date.today.to_fs(:date), classNames: ['medal_kapi', 'sskdkdd'], display: 'background' }
+      ]
+
+      render json: x
+    end
+
     def plan
       q_params = {}
       q_params.merge! teacher_id: current_member.id if current_member

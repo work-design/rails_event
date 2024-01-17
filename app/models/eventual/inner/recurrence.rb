@@ -28,19 +28,15 @@ module Eventual
       end
     end
 
-    def next_occurring(start: Time.current, finish: start + 7.days)
-      (start.to_date .. finish.to_date).map do |date|
-        span = repeat_index(date)
-        yield(span, date)
-      end.compact
+    def next_repeat(start: Time.current, finish: start + 7.days)
+      case repeat_type
+      when 'yearly'
+
+      end
     end
 
     def next_days(start: Time.current, finish: start + 7.days)
-      next_occurring(start: start, finish: finish) do |span, date|
-        {
-          date.to_s => repeat_days[span]
-        } if repeat_days.key?(span)
-      end.to_combine_h
+      next_occurring(start: start, finish: finish).slice(*repeat_days).values
     end
 
     def next_events(start: Time.current, finish: start + 7.days)
@@ -61,6 +57,12 @@ module Eventual
           } if Array(repeat_days[span]).include?(i.id)
         end.compact if repeat_days.key?(span)
       end.flatten
+    end
+
+    def next_occurring(start: Time.current, finish: start + 7.days)
+      (start.to_date .. finish.to_date).map do |date|
+        { repeat_index(date) => date }
+      end.to_combine_h
     end
 
   end
