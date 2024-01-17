@@ -3,4 +3,9 @@
 <td>
   <span class="button" style="background-color: <%= model.color %>"><%= model.color %></span>
 </td>
-<td><%= model.seats_count %></td>
+<td>
+  <%= link_to({ controller: 'seats', place_id: model.id }, aria: { label: t('.seats.index.title') }) do %>
+    <span><%= model.seats_count %></span>
+    <i class="fa-solid fa-chair"></i>
+  <% end %>
+</td>
