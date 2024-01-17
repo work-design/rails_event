@@ -16,14 +16,20 @@ module Eventual
     end
 
     def summary
-      x = [
-        {
-          start: Date.today.to_fs(:date),
-          classNames: ['medal_kapi', 'sskdkdd'],
-          display: 'background',
-          extendedProps: { img: 'red' }
-        }
-      ]
+      @events = Event.default_where(default_params)
+      x = []
+      @events.each do |event|
+        event.next_days(start: params[:start], finish: params[:end]).each do |date|
+          puts date
+          x << {
+            start: date.to_fs(:date),
+            classNames: ['bg_kapi'],
+            display: 'background',
+            extendedProps: { img: event.logo.url }
+          }
+          puts x
+        end
+      end
 
       render json: x
     end

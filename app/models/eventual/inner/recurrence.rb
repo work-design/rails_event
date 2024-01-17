@@ -36,7 +36,7 @@ module Eventual
     end
 
     def next_days(start: Time.current, finish: start + 7.days)
-      next_occurring(start: start, finish: finish).slice(*repeat_days).values
+      next_occurring(start: start, finish: finish).slice(*repeat_days).values.flatten
     end
 
     def next_events(start: Time.current, finish: start + 7.days)
