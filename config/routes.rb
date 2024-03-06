@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       resources :places do
         resources :seats
       end
+      resources :events do
+        collection do
+          get :summary
+        end
+      end
 
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
