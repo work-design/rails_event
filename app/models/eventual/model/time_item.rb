@@ -12,7 +12,7 @@ module Eventual
 
       validate :validate_finish_at
 
-      acts_as_list scope: :time_list_id
+      positioned on: :time_list_id
     end
 
     def validate_finish_at

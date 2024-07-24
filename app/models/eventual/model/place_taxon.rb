@@ -11,7 +11,7 @@ module Eventual
       belongs_to :organ, optional: true
       has_many :places, dependent: :nullify
 
-      acts_as_list
+      positioned
     end
 
   end
