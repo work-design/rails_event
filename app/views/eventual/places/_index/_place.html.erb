@@ -1,0 +1,11 @@
+<div class="media">
+  <div class="media-left">
+  </div>
+  <div class="media-content">
+    <%= link_to place.name, { action: 'show', id: place.id } %>
+    <p><%= place.description %></p>
+  </div>
+  <div class="media-right">
+    <%= link_to '加入购物车', { controller: 'trade/my/items', action: 'create', good_id: place.id, good_type: place.class_name }, method: :post, class: 'button' %>
+  </div>
+</div>
