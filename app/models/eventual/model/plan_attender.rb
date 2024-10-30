@@ -13,7 +13,7 @@ module Eventual
       belongs_to :plan
       belongs_to :place
 
-      enum state: {
+      enum :state, {
         absent: 'absent'  # 请假
       }
 
