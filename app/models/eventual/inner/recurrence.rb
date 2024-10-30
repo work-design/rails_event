@@ -7,12 +7,12 @@ module Eventual
       attribute :repeat_count, :integer, default: 1, comment: '每几周/天'
       attribute :repeat_days, :string, array: true
 
-      enum repeat_type: {
+      enum :repeat_type, {
         weekly: 'weekly',
         monthly: 'monthly',
         yearly: 'yearly',
         once: 'once'
-      }, _default: 'weekly'
+      }, default: 'weekly'
     end
 
     def repeat_index(datetime)

@@ -1,9 +1,9 @@
 <tr>
-  <td class="has-text-right"><%= Crowd.human_attribute_name(:name) %></td>
+  <td class="text-right"><%= Crowd.human_attribute_name(:name) %></td>
   <td><%= @crowd.name %></td>
 </tr>
 <tr>
-  <td class="has-text-right">学生</td>
+  <td class="text-right">学生</td>
   <td>
     <table class="ui very basic table">
       <% @crowd_members.each do |crowd_member| %>
