@@ -16,14 +16,14 @@ module Eventual
 
       validates :member_id, uniqueness: { scope: [:member_type, :event_id] }
 
-      enum state: {
+      enum :state, {
         in_studying: 'in_studying',
         request_quit: 'request_quit',
         quit: 'quit',
         in_evaluating: 'in_evaluating',
         passed: 'passed',
         failed: 'failed'
-      }, _default: 'in_studying'
+      }, default: 'in_studying'
 
       before_validation :sync_from_crowd_member
       after_destroy :delete_reminder_job
