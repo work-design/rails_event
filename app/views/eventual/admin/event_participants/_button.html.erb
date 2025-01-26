@@ -1,3 +1,4 @@
-<%= link_to find_data_list_table_lists_path('EventParticipantExport', params.permit(:event_id).merge(timestamp: @event.timestamp)), class: 'button is-link is-small' do %>
-  <i class="file excel icon"></i><%= t('.export') %>
+<%= link_to find_data_list_table_lists_path('EventParticipantExport', params.permit(:event_id).merge(timestamp: @event.timestamp)), class: 'button is-link' do %>
+  <i class="fa-solid fa-file-excel"></i>
+  <span class="ml-1"><%= t('.export') %></span>
 <% end %>
