@@ -6,7 +6,7 @@ module Eventual
       attribute :repeat_type, :string, default: ''
       attribute :repeat_days, :integer, array: true, default: []
 
-      enum repeat_type: {
+      enum :repeat_type, {
         once: 'once',
         weekly: 'weekly',
         monthly: 'monthly'
