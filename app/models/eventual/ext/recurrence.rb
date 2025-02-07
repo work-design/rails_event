@@ -3,8 +3,8 @@ module Eventual
     extend ActiveSupport::Concern
 
     included do
-      attribute :repeat_type, :string, default: ''
-      attribute :repeat_days, :integer, array: true, default: []
+      attribute :repeat_type, :string
+      attribute :repeat_days, :json, default: []
 
       enum :repeat_type, {
         once: 'once',
